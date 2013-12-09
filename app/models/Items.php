@@ -1,0 +1,95 @@
+<?php
+
+class Items
+{
+  private static $database;
+
+  public static function get($id)
+  {
+    if(!isset(static::$database[$id])) 
+    {
+      return new Item(json_decode('{"id":"'.$id.'","name":"?'.$id.'?"}'));
+    }
+    return new Item(static::$database[$id]);
+  }
+
+  public static function search($text)
+  {
+    $return = array();
+    foreach(static::$database as $item)
+    {
+      if($text=="" || stristr($item->id, $text) || stristr($item->name, $text))
+        $return[] = new Item($item);
+    }
+    return $return;
+  }
+
+  public static function setup()
+  {
+    if(Cache::has('items'))  {
+      static::$database = Cache::get('items');
+      return;
+    }
+
+    static::$database = static::getItems();
+    Recipes::setup();
+    Cache::add('items', static::$database, 1);
+    error_log("Building item database..");
+  }
+
+  private static function getItems()
+  {
+    $items = array();
+
+    $path ="app/storage/json";
+    foreach(scandir("$path/items") as $file)
+    {
+      if($file[0]==".") continue;
+      $json = (array) json_decode(file_get_contents("$path/items/$file"));
+      foreach($json as $item)
+      {
+        $item->recipes = array();
+        $item->toolFor = array();
+        $item->componentFor = array();
+        $items[$item->id] = $item;
+      }
+    }
+    $json = (array) json_decode(file_get_contents("$path/vehicle_parts.json"));
+    foreach($json as $item)
+    {
+      $item->recipes = array();
+      $item->toolFor = array();
+      $item->componentFor = array();
+      $items[$item->item] = $item;
+    }
+    $json = (array) json_decode(file_get_contents("$path/bionics.json"));
+    foreach($json as $item)
+    {
+      $item->recipes = array();
+      $item->toolFor = array();
+      $item->componentFor = array();
+      $item->weight = 2000;
+      $item->volume = 10;
+      $item->bashing = 8;
+      $item->cutting = 0;
+      $item->to_hit = 0;
+      $items[$item->id] = $item;
+    }
+
+    $items["toolset"] = json_decode('{"id":"toolset","name":"integrated toolset"}');
+    $items["fire"] = json_decode('{"id":"fire","name":"nearby fire"}');
+    return $items;
+  }
+
+  public static function linkToRecipe($id, $type, $recipe)
+  {
+    if(!isset(static::$database[$id])) return;
+    $keys = array(
+        "result"=>"recipes",
+        "tool"=>"toolFor",
+        "component"=>"toolFor"
+    );
+    $key = $keys[$type];
+    static::$database[$id]->{$key}[] = $recipe;
+  }
+}

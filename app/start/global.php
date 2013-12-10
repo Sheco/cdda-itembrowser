@@ -83,3 +83,5 @@ App::down(function()
 require app_path().'/filters.php';
 
 Items::setup();
+Recipes::setup();
+Materials::setup();

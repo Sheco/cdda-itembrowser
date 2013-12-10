@@ -38,7 +38,6 @@ class Items
     }
 
     static::$database = static::getItems();
-    Recipes::setup();
     Cache::add('items', static::$database, 60);
     error_log("Building item database..");
   }

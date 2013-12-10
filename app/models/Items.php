@@ -65,10 +65,10 @@ class Items
     $json = (array) json_decode(file_get_contents("$path/vehicle_parts.json"));
     foreach($json as $item)
     {
-      $item->recipes = array();
-      $item->toolFor = array();
-      $item->componentFor = array();
-      $items[$item->item] = $item;
+      $item->recipes = [];
+      $item->toolFor = [];
+      $item->componentFor = [];
+      $items["$item->item"] = $item;
     }
     $json = (array) json_decode(file_get_contents("$path/bionics.json"));
     foreach($json as $item)
@@ -91,12 +91,11 @@ class Items
 
   public static function link($type, $id, $recipe_id)
   {
-    if(!isset(static::$database[$id])) return;
-    $keys = array(
+    $keys = [
         "result"=>"recipes",
         "tool"=>"toolFor",
         "component"=>"toolFor"
-    );
+    ];
     $key = $keys[$type];
     if(isset(static::$database[$id]))
     {

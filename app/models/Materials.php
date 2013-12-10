@@ -34,7 +34,7 @@ class Materials
   {
     $items = [];
 
-    $path ="app/storage/json/";
+    $path = Config::get("cataclysm.dataPath");
     $file = "materials.json";
     {
       if($file[0]==".") continue;

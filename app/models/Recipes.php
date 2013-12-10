@@ -14,7 +14,7 @@ class Recipes
   {
     $recipes = [];
 
-    $path ="app/storage/json/recipes";
+    $path = Config::get("cataclysm.dataPath")."/recipes";
     foreach(scandir($path) as $file)
     {
       if($file[0]==".") continue;

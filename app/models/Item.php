@@ -10,7 +10,7 @@ class Item
 
   public function __get($name)
   {
-    $method = "get".ucfirst($name);
+    $method = "get".str_replace(" ", "", ucwords(str_replace("_", " ", $name)));
     if(method_exists($this, $method))
     {
       return $this->$method();

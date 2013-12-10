@@ -1,7 +1,9 @@
 @section('content')
 <div class="row">
   <div class="col-xs-4">
-    {{ $item->name }} ({{$item->type}})<br>
+    {{$item->prettyName}}
+    ({{$item->type}})
+    <br>
     <br>
     Volume: {{ $item->volume }} Weight: {{ $item->weight }}<br>
       Bash: {{ $item->bashing }}

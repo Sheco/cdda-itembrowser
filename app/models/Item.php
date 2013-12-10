@@ -5,6 +5,9 @@ class Item
   private $data;
   public function __construct($data)
   {
+
+    if(isset($data->material) and !is_array($data->material))
+      $data->material = [$data->material, "null"];
     $this->data = $data;
   }
 

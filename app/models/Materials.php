@@ -6,20 +6,8 @@ class Materials
 
   public static function get($id)
   {
-    static::setup();
-    return static::$database[$id];
-  }
-
-  public static function search($text)
-  {
-    static::setup();
-    $return = array();
-    foreach(static::$database as $item)
-    {
-      if($text=="" || stristr($item->id, $text) || stristr($item->name, $text))
-        $return[] = $item;
-    }
-    return $return;
+    if(isset(static::$database[$id]))
+      return static::$database[$id];
   }
 
   public static function setup()

@@ -51,7 +51,7 @@
       </div>
     </div>
 
-    <div class="container">
+    <div class="container terminal">
 @yield('content')
 
     </div>

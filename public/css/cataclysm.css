@@ -1,4 +1,8 @@
-.unavailable
+.terminal
 {
-color: red;
+background: black;
+font-weight:bold;
+font-family: monospace;
+color: white;
 }
+

@@ -32,7 +32,7 @@ class Materials
 
   private static function getItems()
   {
-    $items = array();
+    $items = [];
 
     $path ="app/storage/json/";
     $file = "materials.json";

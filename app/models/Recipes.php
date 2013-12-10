@@ -12,7 +12,7 @@ class Recipes
 
   private static function getRecipes()
   {
-    $recipes = array();
+    $recipes = [];
 
     $path ="app/storage/json/recipes";
     foreach(scandir($path) as $file)

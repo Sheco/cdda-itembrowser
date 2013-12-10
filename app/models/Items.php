@@ -15,13 +15,14 @@ class Items
 
   public static function search($text)
   {
-    $return = array();
+    $results = [];
     foreach(static::$database as $item)
     {
       if($text=="" || stristr($item->id, $text) || stristr($item->name, $text))
-        $return[] = new Item($item);
+        $results[] = static::get($item->id);
     }
-    return $return;
+    Cache::add("search/$text", $results, 60);
+    return $results;
   }
 
   public static function setup()
@@ -39,7 +40,7 @@ class Items
 
   private static function getItems()
   {
-    $items = array();
+    $items = [];
 
     $path ="app/storage/json";
     foreach(scandir("$path/items") as $file)
@@ -48,9 +49,9 @@ class Items
       $json = (array) json_decode(file_get_contents("$path/items/$file"));
       foreach($json as $item)
       {
-        $item->recipes = array();
-        $item->toolFor = array();
-        $item->componentFor = array();
+        $item->recipes = [];
+        $item->toolFor = [];
+        $item->componentFor = [];
         $items[$item->id] = $item;
       }
     }
@@ -65,9 +66,9 @@ class Items
     $json = (array) json_decode(file_get_contents("$path/bionics.json"));
     foreach($json as $item)
     {
-      $item->recipes = array();
-      $item->toolFor = array();
-      $item->componentFor = array();
+      $item->recipes = [];
+      $item->toolFor = [];
+      $item->componentFor = [];
       $item->weight = 2000;
       $item->volume = 10;
       $item->bashing = 8;

@@ -8,10 +8,10 @@ class ComponentGroup
   {
     $this->data = $data;
     $this->items = array_map(function($i) { 
-        return array( 
+        return [
           "item"=>Items::get($i[0]), 
-          "amount"=>$i[1]>1? "$i[1]x  ": ""
-        );
+          "amount"=>"$i[1]x  "
+        ];
     }, $this->data);
   }
 }

@@ -6,11 +6,14 @@ class Items
 
   public static function get($id)
   {
-    if(!isset(static::$database[$id])) 
+    if(isset(static::$database[$id])) 
     {
-      return new Item(json_decode('{"id":"'.$id.'","name":"?'.$id.'?"}'));
+      return new Item(static::$database[$id]);
     }
-    return new Item(static::$database[$id]);
+
+    if(isset(static::$database["vehicle_parts/$id"]))
+      return new Item(static::$database["vehicle_parts/$id"]);
+    return new Item(json_decode('{"id":"'.$id.'","name":"?'.$id.'?"}'));
   }
 
   public static function search($text)

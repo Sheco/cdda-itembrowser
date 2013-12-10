@@ -22,12 +22,10 @@ class Item
     {
       return $this->$method();
     }
-    try {
+    if(isset($this->data->{$name}))
       return $this->data->{$name};
-    } catch(Exception $e)
-    {
-      return "N/A";
-    }
+    return "N/A";
+  }
   }
 
   public function getRecipes()
@@ -71,16 +69,35 @@ class Item
     }
   }
 
+  public function getVolume()
+  {
+    if(!isset($this->data->volume))
+      return "N/A";
+    return $this->data->volume;
+  }
+
   public function getWeight()
   {
+    if(!isset($this->data->weight))
+      return "N/A";
     $weight = $this->data->weight;
     return number_format($weight/1000, 2)."kg/".number_format($weight/453.6,2)."lbs";
   }
 
   public function getMovesPerAttack()
   {
+    if(!isset($this->data->weight) || !isset($this->data->volume))
+      return "N/A";
     return ceil(65 + 4 * $this->data->volume + $this->data->weight / 60);
   }
+
+  public function getToHit()
+  {
+    if(!isset($this->data->to_hit))
+      return "N/A";
+    return sprintf("%+d", $this->data->to_hit);
+  }
+
   public function getMaterial1()
   {
     return Materials::get($this->data->material[0]);

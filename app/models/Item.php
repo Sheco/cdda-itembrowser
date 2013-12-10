@@ -81,4 +81,13 @@ class Item
   {
     return ceil(65 + 4 * $this->data->volume + $this->data->weight / 60);
   }
+  public function getMaterial1()
+  {
+    return Materials::get($this->data->material[0]);
+  }
+
+  public function getMaterial2()
+  {
+    return Materials::get($this->data->material[1]);
+  }
 }

@@ -15,6 +15,11 @@ class Items
 
   public static function search($text)
   {
+    error_log("searching for $text...");
+    if(Cache::has("search/$text"))
+      return Cache::get("search/$text");
+    error_log("fetching data for $text...");
+
     $results = [];
     foreach(static::$database as $item)
     {
@@ -34,7 +39,7 @@ class Items
 
     static::$database = static::getItems();
     Recipes::setup();
-    Cache::add('items', static::$database, 1);
+    Cache::add('items', static::$database, 60);
     error_log("Building item database..");
   }
 

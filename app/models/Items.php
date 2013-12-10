@@ -87,7 +87,7 @@ class Items
     return $items;
   }
 
-  public static function linkToRecipe($id, $type, $recipe)
+  public static function link($type, $id, $recipe_id)
   {
     if(!isset(static::$database[$id])) return;
     $keys = array(
@@ -96,6 +96,16 @@ class Items
         "component"=>"toolFor"
     );
     $key = $keys[$type];
-    static::$database[$id]->{$key}[] = $recipe;
+    if(isset(static::$database[$id]))
+    {
+      static::$database[$id]->{$key}[] = $recipe_id;
+      return;
+    }
+    if(isset(static::$database["vehicle_parts/$id"]))
+    {
+      static::$database["vehicle_parts/$id"]->{$key}[] = $recipe_id;
+      return;
+    }
   }
+
 }

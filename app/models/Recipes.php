@@ -34,11 +34,11 @@ class Recipes
 
   private static function linkItems()
   {
-    foreach(static::$database as $recipe)
+    foreach(static::$database as $recipe_id=>$recipe)
     {
       if(isset($recipe->result))
       {
-        Items::linkToRecipe($recipe->result, "result", $recipe);
+        Items::link("result", $recipe->result, $recipe_id);
       }
       if(isset($recipe->tools))
       {
@@ -47,7 +47,7 @@ class Recipes
           foreach($group as $tool)
           {
             list($id, $amount) = $tool;
-            Items::linkToRecipe($id, "tool", $recipe);
+            Items::link("tool", $id, $recipe_id);
           }
         }
       }
@@ -58,7 +58,7 @@ class Recipes
           foreach($group as $component)
           {
             list($id, $amount) = $component;
-            Items::linkToRecipe($id, "component", $recipe);
+            Items::link("component", $id, $recipe_id);
           }
         }
       }

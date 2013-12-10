@@ -25,15 +25,20 @@ class Item
 
   public function getRecipes()
   {
+    if(!isset($this->data->recipes))
+      return [];
+
     return array_map(function($recipe)
-        { return new Recipe($recipe); }
+        { return Recipes::get($recipe); }
     , $this->data->recipes);
   }
 
   public function getToolFor()
   {
+    if(!isset($this->data->toolFor))
+      return [];
     return array_map(function($recipe)
-        { return new Recipe($recipe); }
+        { return Recipes::get($recipe); }
     , $this->data->toolFor);
   }
 

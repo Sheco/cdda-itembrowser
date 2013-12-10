@@ -12,6 +12,10 @@ class Recipes
 
   private static function getRecipes()
   {
+    if(Cache::has('recipes'))
+      return Cache::get('recipes');
+    error_log("Building recipes database...");
+
     $recipes = [];
 
     $path = Config::get("cataclysm.dataPath")."/recipes";
@@ -24,7 +28,7 @@ class Recipes
         $recipes[] = $recipe;
       }
     }
-    error_log("Building recipes database...");
+    Cache::add('recipes', $recipes, 60);
     return $recipes;
   }
 

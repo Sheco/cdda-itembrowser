@@ -8,6 +8,8 @@
       Stab: {{ $item->cutting }}
     To-hit bonus: {{ $item->to_hit }}<br>
     Moves per attack: {{ $item->movesPerAttack }}<br>
+    Materials: {{ $item->material1->name }}, 
+      {{ $item->material2->name }}<br>
     <br>
     @if ($item->isArmor) 
       Covers: {{ join(". ", $item->covers) }}<br>
@@ -21,7 +23,6 @@
       <li>Fire: {{  $item->protection('fire') }}
       <li>Elec: {{  $item->protection('elec') }}
       </ul>
-      Materials: {{ Materials::get($item->material[0])->name }}, {{ Materials::get($item->material[1])->name }}<br>
       Environmental protection: {{ $item->enviromental_protection }}<br>
       Warmth: {{ $item->warmth }}<br>
       Storage: {{ $item->storage }}<br>

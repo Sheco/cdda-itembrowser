@@ -32,8 +32,12 @@ class Materials
 
   private static function getItems()
   {
-    $items = [];
+    if(Cache::has('materials'))
+      return Cache::get('materials');
+    error_log("reading materials...");
 
+    $items = [];
+    
     $path = Config::get("cataclysm.dataPath");
     $file = "materials.json";
     {
@@ -45,6 +49,7 @@ class Materials
 
       }
     }
+    Cache::add('materials', $items, 60);
     return $items;
   }
 }

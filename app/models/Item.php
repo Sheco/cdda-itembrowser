@@ -5,9 +5,13 @@ class Item
   private $data;
   public function __construct($data)
   {
-
-    if(isset($data->material) and !is_array($data->material))
+    if(!isset($data->material))
+      $data->material = [ "null", "null" ];
+    if(!is_array($data->material))
       $data->material = [$data->material, "null"];
+    if(!isset($data->material[1]))
+      $data->material[1] = "null";
+
     $this->data = $data;
   }
 

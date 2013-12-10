@@ -16,13 +16,18 @@ class Recipe
     return $this->data->$name;
   }
 
-  public function getSkills_required ()
+  public function getSkillsRequired ()
   {
-    return isset($this->data->skills_required)? 
-      is_array($this->data->skills_required[0])? 
-        array_map(function($i) { return "$i[0]($i[1])"; }, $this->data->skills_required): 
-        array("{$this->data->skills_required[0]}({$this->data->skills_required[1]})"):
-      array("N/A");
+    if(!isset($this->data->skills_required))
+      return ["N/A"];
+
+    $skills = $this->data->skills_required;
+    if(!is_array($skills[0]))
+      return ["$skills[0]($skills[1])"];
+
+    return array_map(function($i) use ($skills) { 
+            return "$i[0]($i[1])"; 
+    }, $skills);
   }
 
   public function getTime()

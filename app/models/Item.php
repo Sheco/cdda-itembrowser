@@ -81,13 +81,4 @@ class Item
   {
     return ceil(65 + 4 * $this->data->volume + $this->data->weight / 60);
   }
-
-  public function getSkillsRequired()
-  {
-    return isset($recipe->skills_required)? 
-    is_array($recipe->skills_required[0])? 
-      array_map(function($i) { return "$i[0]($i[1])"; }, $recipe->skills_required): 
-      array("{$recipe->skills_required[0]}({$recipe->skills_required[1]})"):
-    array("N/A");
-  }
 }

@@ -26,7 +26,10 @@ class Items
     $results = [];
     foreach(static::$database as $item)
     {
-      if($text=="" || stristr($item->id, $text) || stristr($item->name, $text))
+      if($text=="" || 
+          (isset($item->symbol) && $item->symbol==$text) || 
+          stristr($item->id, $text) || 
+          stristr($item->name, $text))
         $results[] = static::get($item->id);
     }
     Cache::add("search/$text", $results, 60);

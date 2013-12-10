@@ -1,6 +1,6 @@
 @section('content')
 <h3>
-{{ link_to("/$item->id", $item->name) }}
+{{ link_to_route("item.view", $item->name, ["id"=>$item->id]) }}
 @if (count($item->recipes)>0)
  can be crafted with the following recipes<br>
 @else
@@ -20,7 +20,7 @@
   @foreach ($recipe->tools as $group)
     &gt; 
     @foreach ($group->items as $item)
-      {{ link_to("/{$item["item"]->id}", $item["item"]->name) }}
+      {{ link_to_route("item.view", $item["item"]->name, ["id"=>$item["item"]->id]) }}
       @if ($item != end($group->items)) 
         OR
       @endif
@@ -36,7 +36,7 @@
     &gt; 
     @foreach ($group->items as $item)
       {{ $item["amount"] }}
-      {{ link_to("/{$item["item"]->id}", $item["item"]->name) }}
+      {{ link_to_route("item.view", $item["item"]->name, ["id"=>$item["item"]->id]) }}
       @if ($item != end($group->items)) 
         OR
       @endif

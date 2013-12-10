@@ -32,8 +32,8 @@
   </div>
   <div class="col-xs-4">
     <div class="list-group">
-      {{ link_to("/craft/$item->id", "Craft", array("class"=>"list-group-item")) }}
-      {{ link_to("/recipes/$item->id", "Recipes", array("class"=>"list-group-item")) }}
+      {{ link_to_route("item.craft", "Craft", ["id"=>$item->id], ["class"=>"list-group-item"]) }}
+      {{ link_to_route("item.recipes", "Recipes", ["id"=>$item->id], ["class"=>"list-group-item"]) }}
     </div>
   </div>
 </div>

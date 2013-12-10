@@ -15,14 +15,26 @@ Route::group(array('after'=>'theme:layouts.bootstrap'), function()
 {
   Route::get('/', 'ItemsController@index');
 
-  Route::get('/search', 'ItemsController@search');
+  Route::get('/search', array(
+      'as'=>'item.search', 
+      'uses'=>'ItemsController@search')
+  );
 
-  Route::get('/craft/{id}', 'ItemsController@craft')
-    ->where('id', '[a-z0-9_]+');
+  Route::get('/{id}/craft', array(
+      'as'=>'item.craft',
+      'uses'=>'ItemsController@craft')
+  )
+    ->where('id', '[A-Za-z0-9_]+');
 
-  Route::get('/recipes/{id}', 'ItemsController@recipes')
-    ->where('id', '[a-z0-9_]+');
+  Route::get('/{id}/recipes', array(
+      'as'=>'item.recipes',
+      'uses'=>'ItemsController@recipes')
+  )
+    ->where('id', '[A-Za-z0-9_]+');
 
-  Route::get('/{id}', "ItemsController@view")
-    ->where('id', '[a-z0-9_]+');
+  Route::get('/{id}', array(
+        'as'=>'item.view',
+        'uses'=>"ItemsController@view")
+  )
+    ->where('id', '[A-Za-z0-9_]+');
 });

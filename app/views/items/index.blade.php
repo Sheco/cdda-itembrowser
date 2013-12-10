@@ -15,9 +15,22 @@ item's properties, then check how it can be crafted and even see what can craft 
 </p>
 
 <p>
-Try it, you can search for {{link_to('/search?q=hammer', 'Hammers') }}, {{ link_to('/search?q=bone', 'Bones') }}, {{ link_to('/search?q=kevlar', 'Kevlar') }}, 
-  or don't enter anything to see {{ link_to('/search?q=', 'every item') }}
+Try it, you can search for 
+{{link_to_route('item.search', 'Hammers', ["q"=>"hammer"]) }}, 
+{{link_to_route('item.search', 'Bones', ["q"=>"bone"]) }}, 
+{{link_to_route('item.search', 'Kevlar', ["q"=>"kevlar"]) }}.
+Some other useful items to look at are 
+{{link_to_route('item.recipes', 'nearby fire', ["id"=>"fire"]) }} 
+and 
+{{link_to_route('item.recipes', 'integrated toolset', ["id"=>"toolset"]) }}.
 </p>
+
+<p>
+You can also search by the item's symbol, for example 
+{{link_to_route('item.search', 'Food', ["q"=>"%"]) }}, 
+{{link_to_route('item.search', 'Books', ["q"=>"?"])}}
+</p>
+
 
 <p>
 Crafting could be as "simple" as looking at your hammer and being able to see what you can do with it.

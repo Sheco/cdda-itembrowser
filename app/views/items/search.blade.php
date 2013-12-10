@@ -8,7 +8,7 @@
 </tr>
 @foreach ($items as $item)
 <Tr>
-  <td>{{ link_to("/$item->id", "$item->name") }} </td>
+  <td><a href="{{ route("item.view", ["id"=>$item->id]) }}">{{$item->prettyName}}</a></td>
 </tr>
 @endforeach
 </table>

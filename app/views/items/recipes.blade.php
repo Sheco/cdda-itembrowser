@@ -1,6 +1,6 @@
 @section('content')
 <h3>
-{{ link_to("/$item->id", $item->name) }} 
+{{ link_to_route("item.view", $item->name, ["id"=>$item->id]) }} 
 @if (count($item->toolFor)>0) 
  can be used to craft following recipes:<br>
 @else
@@ -11,7 +11,7 @@
 <div class="row">
 <div class="col-xs-4">
 @foreach ($item->toolFor as $recipe)
-{{ link_to("/$recipe->result", Items::get($recipe->result)->name) }}<br>
+{{ link_to_route("item.view", Items::get($recipe->result)->name, ["id"=>$recipe->result]) }}<br>
   Required skills: {{ join(" ", $recipe->skills_required) }} <br>
   Difficulty: {{ $recipe->difficulty }}<br>
   Time to complete: {{ $recipe->time }}<br>
@@ -20,7 +20,7 @@
   @foreach ($recipe->tools as $group)
     &gt; 
     @foreach ($group->items as $item)
-      {{ link_to("/{$item["item"]->id}", $item["item"]->name) }}
+      {{ link_to_route("item.view", $item["item"]->name, ["id"=>$item["item"]->id]) }}
       {{ $item["amount"] }}
       @if ($item != end($group->items)) 
         OR
@@ -36,7 +36,7 @@
     &gt; 
     @foreach ($group->items as $item)
       {{ $item["amount"] }}
-      {{ link_to("/{$item["item"]->id}", $item["item"]->name) }}
+      {{ link_to_route("item.view", $item["item"]->name, ["id"=>$item["item"]->id]) }}
       @if ($item != end($group->items)) 
         OR
       @endif

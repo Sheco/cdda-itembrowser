@@ -4,6 +4,12 @@ class Recipes
 {
   private static $database;
 
+  public static function get($id)
+  {
+    if(isset(static::$database[$id])) 
+      return new Recipe(static::$database[$id]);
+  }
+
   public static function setup()
   {
     static::$database = static::getRecipes();

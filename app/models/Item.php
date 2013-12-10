@@ -56,8 +56,8 @@ class Item
 
   public function protection($type)
   {
-    $mat1 = Materials::get($this->material[0]);
-    $mat2 = Materials::get($this->material[1]);
+    $mat1 = $this->material1;
+    $mat2 = $this->material2;
 
     $variable = "{$type}_resist";
     $thickness = $this->material_thickness;

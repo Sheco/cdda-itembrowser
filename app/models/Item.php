@@ -26,6 +26,15 @@ class Item
       return $this->data->{$name};
     return "N/A";
   }
+
+
+  public function getPrettyName()
+  { 
+    return <<<EOF
+    <span style="color: $this->color">
+    $this->symbol $this->name
+    </span>
+EOF;
   }
 
   public function getRecipes()

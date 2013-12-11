@@ -24,7 +24,7 @@
     <![endif]-->
   </head>
 
-  <body>
+  <body class="terminal">
 
     <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
       <div class="container">
@@ -51,7 +51,7 @@
       </div>
     </div>
 
-    <div class="container terminal">
+    <div class="container">
 @yield('content')
 
     </div>

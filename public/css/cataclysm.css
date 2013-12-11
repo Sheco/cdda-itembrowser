@@ -6,3 +6,12 @@ font-family: monospace;
 color: white;
 }
 
+a.list-group-item {
+	background: black;
+	color: white;
+}
+
+a.list-group-item:hover {
+	background: blue;
+	color: yellow;
+}

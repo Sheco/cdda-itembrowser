@@ -15,6 +15,15 @@ class Item
     $this->data = $data;
   }
 
+  function getSymbol()
+  {
+    if(isset($this->data->symbol))
+      return $this->data->symbol;
+
+    return " ";
+
+  }
+
   public function __get($name)
   {
     $method = "get".str_replace(" ", "", ucwords(str_replace("_", " ", $name)));
@@ -30,9 +39,13 @@ class Item
 
   public function getPrettyName()
   { 
+    if($this->symbol==" ")
+      $symbol = "&nbsp;";
+    else
+      $symbol = htmlentities($this->symbol);
     return <<<EOF
     <span style="color: $this->color">
-    $this->symbol $this->name
+    $symbol $this->name
     </span>
 EOF;
   }

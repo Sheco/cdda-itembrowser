@@ -31,7 +31,6 @@ class Recipes
       $json = (array) json_decode(file_get_contents("$path/$file"));
       foreach($json as $recipe)
       {
-        $recipe->id = $id++;
         $recipes[] = $recipe;
       }
     }

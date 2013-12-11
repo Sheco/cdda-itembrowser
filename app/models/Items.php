@@ -61,6 +61,7 @@ class Items
       {
         $item->recipes = [];
         $item->toolFor = [];
+        $item->toolForCategory = [];
         $item->componentFor = [];
         $items[$item->id] = $item;
       }
@@ -70,6 +71,7 @@ class Items
     {
       $item->recipes = [];
       $item->toolFor = [];
+      $item->toolForCategory = [];      
       $item->componentFor = [];
       $items["$item->item"] = $item;
     }
@@ -78,6 +80,7 @@ class Items
     {
       $item->recipes = [];
       $item->toolFor = [];
+      $item->toolForCategory = [];
       $item->componentFor = [];
       $item->weight = 2000;
       $item->volume = 10;
@@ -102,6 +105,10 @@ class Items
     $key = $keys[$type];
     if(isset(static::$database[$id]))
     {
+      if($key=="toolFor")
+      {
+        static::$database[$id]->{"toolForCategory"}[$recipe->category][] = $recipe_id;
+      }
       static::$database[$id]->{$key}[] = $recipe_id;
       return;
     }

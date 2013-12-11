@@ -26,9 +26,10 @@ class ItemsController extends BaseController
     return View::make('items.craft', compact('item'));
   }
 
-  public function recipes($id)
+  public function recipes($id, $category="")
   {
     $item = Items::get($id);
-    return View::make('items.recipes', compact('item'));
+    $recipes = $item->getToolForCategory($category);
+    return View::make('items.recipes', compact('item', "category", "recipes"));
   }
 }

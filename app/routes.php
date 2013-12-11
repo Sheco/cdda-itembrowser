@@ -26,11 +26,12 @@ Route::group(array('after'=>'theme:layouts.bootstrap'), function()
   )
     ->where('id', '[A-Za-z0-9_-]+');
 
-  Route::get('/{id}/recipes', array(
+  Route::get('/{id}/recipes/{category?}', array(
       'as'=>'item.recipes',
       'uses'=>'ItemsController@recipes')
   )
-    ->where('id', '[A-Za-z0-9_-]+');
+    ->where('id', '[A-Za-z0-9_-]+')
+    ->where('category', '[A-Z_]+');
 
   Route::get('/{id}', array(
         'as'=>'item.view',

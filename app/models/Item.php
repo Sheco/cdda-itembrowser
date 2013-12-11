@@ -75,6 +75,20 @@ EOF;
     , $this->data->toolFor);
   }
 
+  public function getToolCategories()
+  {
+    return array_keys($this->data->toolForCategory);
+  }
+
+  public function getToolForCategory($category)
+  {
+    if(!isset($this->data->toolForCategory[$category]))
+      return [];
+    return array_map(function($recipe)
+        { return Recipes::get($recipe); }
+    , $this->data->toolForCategory[$category]);    
+  }
+
   public function getIsArmor()
   {
     return isset($this->data->covers);

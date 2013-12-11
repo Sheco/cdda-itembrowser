@@ -15,15 +15,6 @@ class Item
     $this->data = $data;
   }
 
-  function getSymbol()
-  {
-    if(isset($this->data->symbol))
-      return $this->data->symbol;
-
-    return " ";
-
-  }
-
   public function __get($name)
   {
     $method = "get".str_replace(" ", "", ucwords(str_replace("_", " ", $name)));
@@ -36,16 +27,31 @@ class Item
     return "N/A";
   }
 
+  function getHtmlSymbol()
+  {
+    if(isset($this->data->symbol))
+      return htmlentities($this->data->symbol);
+    return "&nbsp;";
+  }
+
+  function getColor()
+  {
+    if(!isset($this->data->color))
+      return "white";
+    $color = str_replace("_", "", $this->data->color);
+    $colorTable = array(
+      "lightred"=>"indianred"
+    );
+    if(isset($colorTable[$color]))
+      return $colorTable[$color];
+    return $color;
+  }
 
   public function getPrettyName()
   { 
-    if($this->symbol==" ")
-      $symbol = "&nbsp;";
-    else
-      $symbol = htmlentities($this->symbol);
     return <<<EOF
     <span style="color: $this->color">
-    $symbol $this->name
+    $this->htmlSymbol $this->name
     </span>
 EOF;
   }

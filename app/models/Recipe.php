@@ -18,6 +18,11 @@ class Recipe
     return "N/A";
   }
 
+  public function getResult()
+  {
+    return Items::get($this->data->result);
+  }
+
   public function getSkillsRequired ()
   {
     if(!isset($this->data->skills_required))

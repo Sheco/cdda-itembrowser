@@ -21,8 +21,10 @@ var show_recipe = function(id)
     <div class="navbar navbar-default">
       <ul class="nav navbar-nav">
 
-  @foreach ($item->toolCategories as $cat)
-      <li>{{ link_to_route("item.recipes", substr($cat, 3), ["id"=>$item->id, "category"=>$cat], ["class"=>"list-group-item"]) }}</li>
+  @foreach ($categories as $cat)
+      <li>{{ link_to_route("item.recipes", substr($cat, 3), 
+        ["id"=>$item->id, "category"=>$cat], 
+        ["class"=>"list-group-item".($cat==$category?" active": "")]) }}</li>
   @endforeach
       </ul>
     </div>

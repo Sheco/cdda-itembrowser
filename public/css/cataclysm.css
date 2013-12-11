@@ -15,3 +15,18 @@ a.list-group-item:hover {
 	background: blue;
 	color: yellow;
 }
+
+.navbar-default
+{
+	background: black;
+}
+
+.navbar-default .navbar-nav > li > a
+{
+	color: white;
+}
+.navbar-default .navbar-nav > li > a:hover
+{
+	background: blue;
+	color: yellow;
+}

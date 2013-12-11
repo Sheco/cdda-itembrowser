@@ -4,6 +4,7 @@ var show_recipe = function(id)
 {
   $('.recipes').hide();
   $('#recipe'+id).show();
+  return false;
 }
 </script>
 <h3>
@@ -31,7 +32,7 @@ var show_recipe = function(id)
 <div class="row">
 <div class="col-xs-4">
 @foreach ($recipes as $recipe_id=>$local_recipe)
-<a href="#" onclick="show_recipe('{{$recipe_id}}')">{{ $local_recipe->result->prettyName}}</a>
+<a href="#" onclick="return show_recipe('{{$recipe_id}}')">{{ $local_recipe->result->prettyName}}</a>
 <br>
 @endforeach
 </div>

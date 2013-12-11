@@ -1,20 +1,22 @@
 @section('content')
 <h3>
 {{ link_to_route("item.view", $item->name, ["id"=>$item->id]) }}
-@if (count($item->recipes)>0)
- can be obtained by disassembling the following items.<br>
+@if (count($item->disassembly)>0)
+ can be disassembled to obtain following items.<br>
 @else
- can't be obtain by disassembling items.
+ can't be disassembled.
 @endif
 </h3>
 <br>
 <div class="row">
 <div class="col-xs-4">
 @foreach ($item->disassembly as $recipe)
-  {{link_to_route("item.view", $recipe->result->name, ["id"=>$recipe->result->id])}}
+  {{link_to_route("item.view", $recipe->result->name, ["id"=>$recipe->result->id])}}<br>
   Skills used: {{ $recipe->skill_used }} <br>
   Required skills: {{ join(" ", $recipe->skills_required) }} <br>
   Difficulty: {{ $recipe->difficulty }}<br>
+  Reversible: {{ $recipe->reversible }}<br>
+  Learn Automatically: {{ $recipe->autolearn }}<br>
   Time to complete: {{ $recipe->time }}<br>
   @if ($recipe->hasTools)
   Tools required: <br>

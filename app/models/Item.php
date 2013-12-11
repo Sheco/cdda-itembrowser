@@ -50,9 +50,7 @@ class Item
   public function getPrettyName()
   { 
     return <<<EOF
-    <span style="color: $this->color">
-    $this->htmlSymbol $this->name
-    </span>
+    <span style="color: $this->color">$this->htmlSymbol $this->name</span>    
 EOF;
   }
 

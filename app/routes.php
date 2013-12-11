@@ -38,4 +38,12 @@ Route::group(array('after'=>'theme:layouts.bootstrap'), function()
         'uses'=>"ItemsController@view")
   )
     ->where('id', '[A-Za-z0-9_-]+');
+
+  Route::get('/{id}/disassemble', array(
+      'as'=>'item.disassemble',
+      'uses'=>'ItemsController@disassemble')
+  )
+    ->where('id', '[A-Za-z0-9_-]+');
+
+
 });

@@ -32,4 +32,11 @@ class ItemsController extends BaseController
     $recipes = $item->getToolForCategory($category);
     return View::make('items.recipes', compact('item', "category", "recipes"));
   }
+
+  public function disassemble($id)
+  {
+    $item = Items::get($id);
+    return View::make('items.disassemble', compact('item'));
+  }
+
 }

@@ -66,6 +66,16 @@ EOF;
     , $this->data->recipes);
   }
 
+  public function getDisassembly()
+  {
+    if(!isset($this->data->disassembly))
+      return [];
+
+    return array_map(function($recipe)
+        { return Recipes::get($recipe); }
+    , $this->data->disassembly);    
+  }
+
   public function getToolFor()
   {
     if(!isset($this->data->toolFor))

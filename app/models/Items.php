@@ -60,6 +60,7 @@ class Items
       foreach($json as $item)
       {
         $item->recipes = [];
+        $item->dissasembly = [];
         $item->toolFor = [];
         $item->toolForCategory = [];
         $item->componentFor = [];
@@ -70,6 +71,7 @@ class Items
     foreach($json as $item)
     {
       $item->recipes = [];
+      $item->dissasembly = [];
       $item->toolFor = [];
       $item->toolForCategory = [];      
       $item->componentFor = [];
@@ -79,6 +81,7 @@ class Items
     foreach($json as $item)
     {
       $item->recipes = [];
+      $item->disasembly = [];
       $item->toolFor = [];
       $item->toolForCategory = [];
       $item->componentFor = [];
@@ -105,6 +108,9 @@ class Items
     $key = $keys[$type];
     if(isset(static::$database[$id]))
     {
+      $recipe = Recipes::get($recipe_id);
+      if($recipe->category=="CC_NONCRAFT")
+        $key = "disassembly";
       if($key=="toolFor")
       {
         static::$database[$id]->{"toolForCategory"}[$recipe->category][] = $recipe_id;

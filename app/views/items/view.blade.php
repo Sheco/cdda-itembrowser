@@ -37,6 +37,7 @@
     <div class="list-group">
       {{ link_to_route("item.craft", "Craft", ["id"=>$item->id], ["class"=>"list-group-item"]) }}
       {{ link_to_route("item.recipes", "Recipes", ["id"=>$item->id], ["class"=>"list-group-item"]) }}
+      {{ link_to_route("item.disassemble", "Disassemble", ["id"=>$item->id], ["class"=>"list-group-item"]) }}
     </div>
   </div>
 </div>

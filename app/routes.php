@@ -24,17 +24,17 @@ Route::group(array('after'=>'theme:layouts.bootstrap'), function()
       'as'=>'item.craft',
       'uses'=>'ItemsController@craft')
   )
-    ->where('id', '[A-Za-z0-9_]+');
+    ->where('id', '[A-Za-z0-9_-]+');
 
   Route::get('/{id}/recipes', array(
       'as'=>'item.recipes',
       'uses'=>'ItemsController@recipes')
   )
-    ->where('id', '[A-Za-z0-9_]+');
+    ->where('id', '[A-Za-z0-9_-]+');
 
   Route::get('/{id}', array(
         'as'=>'item.view',
         'uses'=>"ItemsController@view")
   )
-    ->where('id', '[A-Za-z0-9_]+');
+    ->where('id', '[A-Za-z0-9_-]+');
 });

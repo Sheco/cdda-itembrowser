@@ -47,6 +47,11 @@ class Item
     return $color;
   }
 
+  public function getName()
+  {
+     return ($this->type=="bionic"?"CBM: ":"").$this->data->name;
+  }
+  
   public function getPrettyName()
   { 
     return <<<EOF

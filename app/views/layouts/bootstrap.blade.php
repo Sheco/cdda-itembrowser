@@ -38,9 +38,6 @@
           <a class="navbar-brand" href="/">Cataclysm DDA</a>
         </div>
         <div class="collapse navbar-collapse">
-          <ul class="nav navbar-nav">
-            <li class="active"><a href="/">Home</a></li>
-          </ul>
           <form class="navbar-form navbar-right" role="form" action="<?= action("ItemsController@search") ?>" >
             <div class="form-group">
               <input name="q" type="text" placeholder="Search..." class="form-control">

@@ -4,6 +4,10 @@ var show_recipe = function(id)
 {
   $('.recipes').hide();
   $('#recipe'+id).show();
+  var body = $("body");
+  $('hmtl, body').animate({
+    scrollTop: $("#recipe"+id).offset().top-$(".navbar").height()
+  }, 500);
   return false;
 }
 </script>

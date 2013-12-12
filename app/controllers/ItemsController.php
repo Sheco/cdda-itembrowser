@@ -10,6 +10,8 @@ class ItemsController extends BaseController
   public function search()
   {
     $search = Input::get('q');
+    if($search=="")
+      return Redirect::to("/");
     $items = Items::search($search);
     return View::make('items.search', compact('items', 'search'));
   }

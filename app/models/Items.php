@@ -26,8 +26,7 @@ class Items
     $results = [];
     foreach(static::$database as $item)
     {
-      if($text=="" || 
-          (isset($item->symbol) && $item->symbol==$text) || 
+      if((isset($item->symbol) && $item->symbol==$text) || 
           stristr($item->id, $text) || 
           stristr($item->name, $text))
         $results[] = static::get($item->id);

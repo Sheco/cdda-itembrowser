@@ -32,7 +32,7 @@ class ItemsController extends BaseController
   {
     $item = Items::get($id);
     $categories = $item->toolCategories;
-    if($category=="")
+    if($category=="" && $categories)
     {
       $category = $categories[0];
       error_log("use first category, $category");

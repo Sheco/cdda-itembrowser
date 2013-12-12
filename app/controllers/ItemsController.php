@@ -35,7 +35,6 @@ class ItemsController extends BaseController
     if($category=="" && $categories)
     {
       $category = $categories[0];
-      error_log("use first category, $category");
     }
     $recipes = $item->getToolForCategory($category);
 

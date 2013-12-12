@@ -41,6 +41,7 @@ var show_recipe = function(id)
 <a href="#" onclick="return show_recipe('{{$recipe_id}}')">{{ $local_recipe->result->prettyName}}</a>
 <br>
 @endforeach
+<br>
 </div>
 
 <div class="col-sm-4">

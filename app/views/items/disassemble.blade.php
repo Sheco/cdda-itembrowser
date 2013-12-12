@@ -9,7 +9,7 @@
 </h3>
 <br>
 <div class="row">
-<div class="col-xs-4">
+<div class="col-sm-4">
 @foreach ($item->disassembly as $recipe)
   {{link_to_route("item.view", $recipe->result->name, ["id"=>$recipe->result->id])}}<br>
   Skills used: {{ $recipe->skill_used }} <br>

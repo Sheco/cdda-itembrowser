@@ -9,7 +9,7 @@
 </h3>
 <br>
 <div class="row">
-<div class="col-xs-4">
+<div class="col-sm-4">
 @foreach ($item->recipes as $recipe)
   Skills used: {{ $recipe->skill_used }} <br>
   Required skills: {{ join(" ", $recipe->skills_required) }} <br>

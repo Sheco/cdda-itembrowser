@@ -1,6 +1,6 @@
 @section('content')
 <div class="row">
-  <div class="col-xs-4">
+  <div class="col-sm-4">
     {{$item->prettyName}}
     ({{$item->type}})
     <br>
@@ -33,7 +33,7 @@
     {{ $item->description }}
 
   </div>
-  <div class="col-xs-4">
+  <div class="col-sm-4">
     <div class="list-group">
       {{ link_to_route("item.craft", "Craft", ["id"=>$item->id], ["class"=>"list-group-item"]) }}
       {{ link_to_route("item.recipes", "Recipes", ["id"=>$item->id], ["class"=>"list-group-item"]) }}

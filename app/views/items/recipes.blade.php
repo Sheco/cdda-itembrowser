@@ -17,7 +17,7 @@ var show_recipe = function(id)
 </h3>
 <br>
 <div class="row">
-  <div class="col-xs-8">
+  <div class="col-sm-8">
     <div class="navbar navbar-default">
       <ul class="nav navbar-nav">
 
@@ -32,14 +32,14 @@ var show_recipe = function(id)
 </div>
 
 <div class="row">
-<div class="col-xs-4">
+<div class="col-sm-4">
 @foreach ($recipes as $recipe_id=>$local_recipe)
 <a href="#" onclick="return show_recipe('{{$recipe_id}}')">{{ $local_recipe->result->prettyName}}</a>
 <br>
 @endforeach
 </div>
 
-<div class="col-xs-4">
+<div class="col-sm-4">
 @foreach($recipes as $recipe_id=>$recipe)
 <div id="recipe{{$recipe_id}}" class="recipes" style="display: none">
 {{ link_to_route("item.view", 

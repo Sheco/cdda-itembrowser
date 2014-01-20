@@ -23,7 +23,7 @@ class Items
       return Cache::get("search/$text");
     error_log("fetching data for $text...");
 
-    $results = [];
+    $results = array();
     foreach(static::$database as $item)
     {
       if((isset($item->symbol) && $item->symbol==$text) || 
@@ -49,7 +49,7 @@ class Items
 
   private static function getItems()
   {
-    $items = [];
+    $items = array();
 
     $path = Config::get("cataclysm.dataPath");
     foreach(scandir("$path\items") as $file)
@@ -58,32 +58,33 @@ class Items
       $json = (array) json_decode(file_get_contents("$path/items/$file"));
       foreach($json as $item)
       {
-        $item->recipes = [];
-        $item->disassembly = [];
-        $item->toolFor = [];
-        $item->toolForCategory = [];
-        $item->componentFor = [];
+        $item->recipes = array();
+        $item->disassembly = array();
+        $item->toolFor = array();
+        $item->toolForCategory = array();
+        $item->componentFor = array();
         $items[$item->id] = $item;
       }
     }
     $json = (array) json_decode(file_get_contents("$path/vehicle_parts.json"));
     foreach($json as $item)
     {
-      $item->recipes = [];
-      $item->disassembly = [];
-      $item->toolFor = [];
-      $item->toolForCategory = [];      
-      $item->componentFor = [];
-      $items["$item->item"] = $item;
+      $item->recipes = array();
+      $item->disassembly = array();
+      $item->toolFor = array();
+      $item->toolForCategory = array();      
+      $item->componentFor = array();
+      $items["vehicle_parts/$item->item"] = $item;
+      $items[$item->id] = $item;
     }
     $json = (array) json_decode(file_get_contents("$path/bionics.json"));
     foreach($json as $item)
     {
-      $item->recipes = [];
-      $item->disassembly = [];
-      $item->toolFor = [];
-      $item->toolForCategory = [];
-      $item->componentFor = [];
+      $item->recipes = array();
+      $item->disassembly = array();
+      $item->toolFor = array();
+      $item->toolForCategory = array();
+      $item->componentFor = array();
       $item->weight = 2000;
       $item->volume = 10;
       $item->bashing = 8;
@@ -99,11 +100,11 @@ class Items
 
   public static function link($type, $id, $recipe_id)
   {
-    $keys = [
+    $keys = array(
         "result"=>"recipes",
         "tool"=>"toolFor",
         "component"=>"toolFor"
-    ];
+    );
     $key = $keys[$type];
     if(isset(static::$database[$id]))
     {

@@ -12,7 +12,7 @@ var show_recipe = function(id)
 }
 </script>
 <h3>
-{{ link_to_route("item.view", $item->name, ["id"=>$item->id]) }} 
+{{ link_to_route("item.view", $item->name, array("id"=>$item->id)) }} 
 @if (count($item->toolFor)>0) 
  can be used to craft following recipes:<br>
 @else
@@ -27,8 +27,8 @@ var show_recipe = function(id)
 
   @foreach ($categories as $cat)
       <li>{{ link_to_route("item.recipes", substr($cat, 3), 
-        ["id"=>$item->id, "category"=>$cat], 
-        ["class"=>"list-group-item".($cat==$category?" active": "")]) }}</li>
+        array("id"=>$item->id, "category"=>$cat), 
+        array("class"=>"list-group-item".($cat==$category?" active": ""))) }}</li>
   @endforeach
       </ul>
     </div>
@@ -49,7 +49,7 @@ var show_recipe = function(id)
 <div id="recipe{{$recipe_id}}" class="recipes" style="display: none">
 {{ link_to_route("item.view", 
 $recipe->result->name, 
-["id"=>$recipe->result->id]) }}<br>
+array("id"=>$recipe->result->id)) }}<br>
   Category: {{ $recipe->category }}<Br>
   SubCategory: {{ $recipe->subcategory }}<br>
   Required skills: {{ join(" ", $recipe->skills_required) }} <br>
@@ -60,7 +60,7 @@ $recipe->result->name,
   @foreach ($recipe->tools as $group)
     &gt; 
     @foreach ($group->items as $gi)
-      {{ link_to_route("item.view", $gi["item"]->name, ["id"=>$gi["item"]->id]) }}
+      {{ link_to_route("item.view", $gi["item"]->name, array("id"=>$gi["item"]->id)) }}
       {{ $gi["amount"] }}
       @if ($gi != end($group->items)) 
         OR
@@ -76,7 +76,7 @@ $recipe->result->name,
     &gt; 
     @foreach ($group->items as $gi)
       {{ $gi["amount"] }}
-      {{ link_to_route("item.view", $gi["item"]->name, ["id"=>$gi["item"]->id]) }}
+      {{ link_to_route("item.view", $gi["item"]->name, array("id"=>$gi["item"]->id)) }}
       @if ($gi != end($group->items)) 
         OR
       @endif

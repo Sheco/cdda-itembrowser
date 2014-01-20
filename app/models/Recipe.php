@@ -26,11 +26,11 @@ class Recipe
   public function getSkillsRequired ()
   {
     if(!isset($this->data->skills_required))
-      return ["N/A"];
+      return array("N/A");
 
     $skills = $this->data->skills_required;
     if(!is_array($skills[0]))
-      return ["$skills[0]($skills[1])"];
+      return array("$skills[0]($skills[1])");
 
     return array_map(function($i) use ($skills) { 
             return "$i[0]($i[1])"; 

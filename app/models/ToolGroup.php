@@ -8,10 +8,10 @@ class ToolGroup
   {
     $this->data = $data;
     $this->items = array_map(function($i) { 
-        return [ 
+        return array(
           "item"=>Items::get($i[0]), 
           "amount"=>$i[1]>1? " ($i[1] charges) ": ""
-        ];
+        );
     }, $this->data);
   }
 }

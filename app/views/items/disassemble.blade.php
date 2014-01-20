@@ -1,6 +1,6 @@
 @section('content')
 <h3>
-{{ link_to_route("item.view", $item->name, ["id"=>$item->id]) }}
+{{ link_to_route("item.view", $item->name, array("id"=>$item->id)) }}
 @if (count($item->disassembly)>0)
  can be disassembled to obtain following items.<br>
 @else
@@ -11,7 +11,7 @@
 <div class="row">
 <div class="col-sm-4">
 @foreach ($item->disassembly as $recipe)
-  {{link_to_route("item.view", $recipe->result->name, ["id"=>$recipe->result->id])}}<br>
+  {{link_to_route("item.view", $recipe->result->name, array("id"=>$recipe->result->id))}}<br>
   Skills used: {{ $recipe->skill_used }} <br>
   Required skills: {{ join(" ", $recipe->skills_required) }} <br>
   Difficulty: {{ $recipe->difficulty }}<br>
@@ -23,7 +23,7 @@
   @foreach ($recipe->tools as $group)
     &gt; 
     @foreach ($group->items as $item)
-      {{ link_to_route("item.view", $item["item"]->name, ["id"=>$item["item"]->id]) }}
+      {{ link_to_route("item.view", $item["item"]->name, array("id"=>$item["item"]->id)) }}
       @if ($item != end($group->items)) 
         OR
       @endif
@@ -39,7 +39,7 @@
     &gt; 
     @foreach ($group->items as $item)
       {{ $item["amount"] }}
-      {{ link_to_route("item.view", $item["item"]->name, ["id"=>$item["item"]->id]) }}
+      {{ link_to_route("item.view", $item["item"]->name, array("id"=>$item["item"]->id)) }}
       @if ($item != end($group->items)) 
         OR
       @endif

@@ -16,19 +16,19 @@ item's properties, then check how it can be crafted and even see what can craft 
 
 <p>
 Try it, you can search for 
-{{link_to_route('item.search', 'Hammers', ["q"=>"hammer"]) }}, 
-{{link_to_route('item.search', 'Bones', ["q"=>"bone"]) }}, 
-{{link_to_route('item.search', 'Kevlar', ["q"=>"kevlar"]) }}.
+{{link_to_route('item.search', 'Hammers', array("q"=>"hammer")) }}, 
+{{link_to_route('item.search', 'Bones', array("q"=>"bone")) }}, 
+{{link_to_route('item.search', 'Kevlar', array("q"=>"kevlar")) }}.
 Some other useful items to look at are 
-{{link_to_route('item.recipes', 'nearby fire', ["id"=>"fire"]) }} 
+{{link_to_route('item.recipes', 'nearby fire', array("id"=>"fire")) }} 
 and 
-{{link_to_route('item.recipes', 'integrated toolset', ["id"=>"toolset"]) }}.
+{{link_to_route('item.recipes', 'integrated toolset', array("id"=>"toolset")) }}.
 </p>
 
 <p>
 You can also search by the item's symbol, for example 
-{{link_to_route('item.search', 'Food', ["q"=>"%"]) }}, 
-{{link_to_route('item.search', 'Books', ["q"=>"?"])}}
+{{link_to_route('item.search', 'Food', array("q"=>"%")) }}, 
+{{link_to_route('item.search', 'Books', array("q"=>"?"))}}
 </p>
 
 

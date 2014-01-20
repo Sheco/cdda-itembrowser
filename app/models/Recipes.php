@@ -22,7 +22,7 @@ class Recipes
       return Cache::get('recipes');
     error_log("Building recipes database...");
 
-    $recipes = [];
+    $recipes = array();
 
     $path = Config::get("cataclysm.dataPath")."/recipes";
     foreach(scandir($path) as $file)

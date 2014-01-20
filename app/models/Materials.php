@@ -24,7 +24,7 @@ class Materials
       return Cache::get('materials');
     error_log("reading materials...");
 
-    $items = [];
+    $items = array();
     
     $path = Config::get("cataclysm.dataPath");
     $file = "materials.json";

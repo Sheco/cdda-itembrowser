@@ -6,9 +6,9 @@ class Item
   public function __construct($data)
   {
     if(!isset($data->material))
-      $data->material = [ "null", "null" ];
+      $data->material = array( "null", "null" );
     if(!is_array($data->material))
-      $data->material = [$data->material, "null"];
+      $data->material = array($data->material, "null");
     if(!isset($data->material[1]))
       $data->material[1] = "null";
 
@@ -62,7 +62,7 @@ EOF;
   public function getRecipes()
   {
     if(!isset($this->data->recipes))
-      return [];
+      return array();
 
     return array_map(function($recipe)
         { return Recipes::get($recipe); }
@@ -72,7 +72,7 @@ EOF;
   public function getDisassembly()
   {
     if(!isset($this->data->disassembly))
-      return [];
+      return array();
 
     return array_map(function($recipe)
         { return Recipes::get($recipe); }
@@ -82,7 +82,7 @@ EOF;
   public function getToolFor()
   {
     if(!isset($this->data->toolFor))
-      return [];
+      return array();
     return array_map(function($recipe)
         { return Recipes::get($recipe); }
     , $this->data->toolFor);
@@ -96,15 +96,27 @@ EOF;
   public function getToolForCategory($category)
   {
     if(!isset($this->data->toolForCategory[$category]))
-      return [];
+      return array();
     return array_map(function($recipe)
         { return Recipes::get($recipe); }
     , $this->data->toolForCategory[$category]);    
   }
 
+  public function getIsBook()
+  {
+    return count($this->learnBook)>0;
+  }
+
   public function getIsArmor()
   {
     return isset($this->data->covers);
+  }
+
+  public function getIsComestible()
+  {
+    if(!isset($this->data->type))
+      return false;
+    return $this->data->type=="COMESTIBLE";
   }
 
   public function protection($type)

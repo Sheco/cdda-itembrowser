@@ -52,7 +52,7 @@ class Items
     $items = array();
 
     $path = Config::get("cataclysm.dataPath");
-    foreach(scandir("$path\items") as $file)
+    foreach(scandir("$path/items") as $file)
     {
       if($file[0]==".") continue;
       $json = (array) json_decode(file_get_contents("$path/items/$file"));

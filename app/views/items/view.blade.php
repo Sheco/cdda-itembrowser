@@ -12,6 +12,14 @@
     Moves per attack: {{ $item->movesPerAttack }}<br>
     Materials: {{ $item->material1->name }}, 
       {{ $item->material2->name }}<br>
+    @if ($item->isComestible)
+      Phase: {{ $item->phase }}<br>
+      Nutrition: {{ $item->nutrition }}<br>
+      Quench: {{ $item->quench }}<br>
+      Enjoyability: {{ $item->fun }}<br>
+      Spoils in {{ $item->spoilsIn }}<br>
+      Heal: {{ $item->heal }} <br>
+    @endif
     <br>
     @if ($item->isArmor) 
       Covers: {{ join(". ", $item->covers) }}<br>

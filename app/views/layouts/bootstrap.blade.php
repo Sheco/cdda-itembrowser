@@ -51,6 +51,16 @@
     <div class="container">
 @yield('content')
 
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- cataclysm -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:728px;height:90px"
+     data-ad-client="ca-pub-2695962190082245"
+     data-ad-slot="9012422814"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+
     </div>
 
     <!-- Bootstrap core JavaScript

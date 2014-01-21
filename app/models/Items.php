@@ -28,7 +28,7 @@ class Items
     {
       if((isset($item->symbol) && $item->symbol==$text) || 
           stristr($item->id, $text) || 
-          stristr($item->name, $text))
+          (isset($item->name) && stristr($item->name, $text)))
         $results[] = static::get($item->id);
     }
     Cache::add("search/$text", $results, 60);

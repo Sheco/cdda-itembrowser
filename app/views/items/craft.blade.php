@@ -44,14 +44,14 @@
     <br>
   @endforeach
   @endif
-<br>
-@endforeach
 @if ($recipe->book_learn)
 This recipe can be learned reading the following books:<br>
 @foreach($recipe->book_learn as $book)
   <a href="{{ route('item.view', $book[0]) }}">{{ Items::get($book[0])->name }} ({{ $book[1] }})</a><br>
 @endforeach
 @endif
+<br>
+@endforeach
 </div>
 </div>
 @stop

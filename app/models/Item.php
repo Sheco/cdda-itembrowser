@@ -175,4 +175,12 @@ EOF;
   {
     return Materials::get($this->data->material[1]);
   }
+
+  public function matches($text)
+  {
+      return $this->symbol==$text || 
+          stristr($this->id, $text) || 
+          stristr($this->name, $text);
+
+  }
 }

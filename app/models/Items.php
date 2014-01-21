@@ -103,7 +103,8 @@ class Items
     $keys = array(
         "result"=>"recipes",
         "tool"=>"toolFor",
-        "component"=>"toolFor"
+        "component"=>"toolFor",
+        "learn"=>"learn"
     );
     $key = $keys[$type];
     if(isset(static::$database[$id]))

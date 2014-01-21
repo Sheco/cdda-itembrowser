@@ -38,6 +38,14 @@
       Storage: {{ $item->storage }}<br>
       <br>
     @endif
+    @if ($item->learn!="N/A")
+    This book contains {{ count($item->learn) }} crafting recipes:<br>
+    @foreach($item->learn as $recipe)
+    <a href="{{ route('item.view', Recipes::get($recipe)->result->id) }}">{{ Recipes::get($recipe)->result->name }}</a>,
+    @endforeach
+    <br>
+    @endif
+    <br>
     {{ $item->description }}
 
   </div>

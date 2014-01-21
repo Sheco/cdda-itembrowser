@@ -45,6 +45,13 @@ class Recipes
       if(isset($recipe->result))
       {
         Items::link("result", $recipe->result, $recipe_id);
+        if(isset($recipe->book_learn))
+        {
+          foreach($recipe->book_learn as $learn)
+          {
+            Items::link("learn", $learn[0], $recipe_id);
+          }
+        }
       }
       if(isset($recipe->tools))
       {

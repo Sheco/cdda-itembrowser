@@ -49,6 +49,7 @@ class Item
 
   public function getName()
   {
+     if(!isset($this->data->name)) return "N/A";
      return ($this->type=="bionic"?"CBM: ":"").$this->data->name;
   }
   

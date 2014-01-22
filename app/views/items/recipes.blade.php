@@ -89,6 +89,4 @@ array("id"=>$recipe->result->id)) }}<br>
 
 </div>
 </div>
-</div>
-
 @stop

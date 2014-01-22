@@ -1,6 +1,6 @@
-<?php
+<?php namespace Repositories;
 
-class Items
+class Item
 {
   private static $database;
 
@@ -8,19 +8,19 @@ class Items
   {
     if(isset(static::$database[$id])) 
     {
-      return new Item(static::$database[$id]);
+      return new \Item(static::$database[$id]);
     }
 
     if(isset(static::$database["vehicle_parts/$id"]))
-      return new Item(static::$database["vehicle_parts/$id"]);
-    return new Item(json_decode('{"id":"'.$id.'","name":"?'.$id.'?"}'));
+      return new \Item(static::$database["vehicle_parts/$id"]);
+    return new \Item(json_decode('{"id":"'.$id.'","name":"?'.$id.'?"}'));
   }
 
   public static function search($text)
   {
     error_log("searching for $text...");
-    if(Cache::has("search/$text"))
-      return Cache::get("search/$text");
+    if(\Cache::has("search/$text"))
+      return \Cache::get("search/$text");
     error_log("fetching data for $text...");
 
     $results = array();
@@ -32,19 +32,19 @@ class Items
         $results[] = static::get($item->id);
       }
     }
-    Cache::add("search/$text", $results, 60);
+    \Cache::add("search/$text", $results, 60);
     return $results;
   }
 
   public static function setup()
   {
-    if(Cache::has('items'))  {
-      static::$database = Cache::get('items');
+    if(\Cache::has('items'))  {
+      static::$database = \Cache::get('items');
       return;
     }
 
     static::$database = static::getItems();
-    Cache::add('items', static::$database, 60);
+    \Cache::add('items', static::$database, 60);
     error_log("Building item database..");
   }
 
@@ -52,7 +52,7 @@ class Items
   {
     $items = array();
 
-    $path = Config::get("cataclysm.dataPath");
+    $path = \Config::get("cataclysm.dataPath");
     foreach(scandir("$path/items") as $file)
     {
       if($file[0]==".") continue;
@@ -110,7 +110,7 @@ class Items
     $key = $keys[$type];
     if(isset(static::$database[$id]))
     {
-      $recipe = Recipes::get($recipe_id);
+      $recipe = Recipe::get($recipe_id);
       if($key=="recipes" and $recipe->category=="CC_NONCRAFT")
       {
         static::$database[$id]->disassembly[] = $recipe_id;

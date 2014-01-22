@@ -1,13 +1,13 @@
-<?php
+<?php namespace Repositories;
 
-class Recipes
+class Recipe
 {
   private static $database;
 
   public static function get($id)
   {
     if(isset(static::$database[$id])) 
-      return new Recipe(static::$database[$id]);
+      return new \Recipe(static::$database[$id]);
   }
 
   public static function setup()
@@ -18,13 +18,13 @@ class Recipes
 
   private static function getRecipes()
   {
-    if(Cache::has('recipes'))
-      return Cache::get('recipes');
+    if(\Cache::has('recipes'))
+      return \Cache::get('recipes');
     error_log("Building recipes database...");
 
     $recipes = array();
 
-    $path = Config::get("cataclysm.dataPath")."/recipes";
+    $path = \Config::get("cataclysm.dataPath")."/recipes";
     foreach(scandir($path) as $file)
     {
       if($file[0]==".") continue;
@@ -34,7 +34,7 @@ class Recipes
         $recipes[] = $recipe;
       }
     }
-    Cache::add('recipes', $recipes, 60);
+    \Cache::add('recipes', $recipes, 60);
     return $recipes;
   }
 
@@ -44,12 +44,12 @@ class Recipes
     {
       if(isset($recipe->result))
       {
-        Items::link("result", $recipe->result, $recipe_id);
+        Item::link("result", $recipe->result, $recipe_id);
         if(isset($recipe->book_learn))
         {
           foreach($recipe->book_learn as $learn)
           {
-            Items::link("learn", $learn[0], $recipe_id);
+            Item::link("learn", $learn[0], $recipe_id);
           }
         }
       }
@@ -60,7 +60,7 @@ class Recipes
           foreach($group as $tool)
           {
             list($id, $amount) = $tool;
-            Items::link("tool", $id, $recipe_id);
+            Item::link("tool", $id, $recipe_id);
           }
         }
       }
@@ -71,7 +71,7 @@ class Recipes
           foreach($group as $component)
           {
             list($id, $amount) = $component;
-            Items::link("component", $id, $recipe_id);
+            Item::link("component", $id, $recipe_id);
           }
         }
       }

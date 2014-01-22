@@ -1,6 +1,6 @@
-<?php
+<?php namespace Repositories;
 
-class Materials
+class Material
 {
   private static $database;
 
@@ -20,13 +20,13 @@ class Materials
 
   private static function getItems()
   {
-    if(Cache::has('materials'))
-      return Cache::get('materials');
+    if(\Cache::has('materials'))
+      return \Cache::get('materials');
     error_log("reading materials...");
 
     $items = array();
     
-    $path = Config::get("cataclysm.dataPath");
+    $path = \Config::get("cataclysm.dataPath");
     $file = "materials.json";
     {
       if($file[0]==".") continue;
@@ -37,7 +37,7 @@ class Materials
 
       }
     }
-    Cache::add('materials', $items, 60);
+    \Cache::add('materials', $items, 60);
     return $items;
   }
 }

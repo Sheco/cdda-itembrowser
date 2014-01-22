@@ -12,25 +12,25 @@ class ItemsController extends BaseController
     $search = Input::get('q');
     if($search=="")
       return Redirect::to("/");
-    $items = Items::search($search);
+    $items = Repositories\Item::search($search);
     return View::make('items.search', compact('items', 'search'));
   }
 
   public function view($id)
   {
-    $item = Items::get($id);
+    $item = Repositories\Item::get($id);
     return View::make('items.view', compact('item'));
   }
 
   public function craft($id)
   {
-    $item = Items::get($id);
+    $item = Repositories\Item::get($id);
     return View::make('items.craft', compact('item'));
   }
 
   public function recipes($id, $category="")
   {
-    $item = Items::get($id);
+    $item = Repositories\Item::get($id);
     $categories = $item->toolCategories;
     if($category=="" && $categories)
     {
@@ -43,7 +43,7 @@ class ItemsController extends BaseController
 
   public function disassemble($id)
   {
-    $item = Items::get($id);
+    $item = Repositories\Items::get($id);
     return View::make('items.disassemble', compact('item'));
   }
 

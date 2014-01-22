@@ -66,7 +66,7 @@ EOF;
       return array();
 
     return array_map(function($recipe)
-        { return Recipes::get($recipe); }
+        { return Repositories\Recipe::get($recipe); }
     , $this->data->recipes);
   }
 
@@ -76,7 +76,7 @@ EOF;
       return array();
 
     return array_map(function($recipe)
-        { return Recipes::get($recipe); }
+        { return Repositories\Recipe::get($recipe); }
     , $this->data->disassembly);    
   }
 
@@ -85,7 +85,7 @@ EOF;
     if(!isset($this->data->toolFor))
       return array();
     return array_map(function($recipe)
-        { return Recipes::get($recipe); }
+        { return Repositories\Recipe::get($recipe); }
     , $this->data->toolFor);
   }
 
@@ -99,7 +99,7 @@ EOF;
     if(!isset($this->data->toolForCategory[$category]))
       return array();
     return array_map(function($recipe)
-        { return Recipes::get($recipe); }
+        { return Repositories\Recipe::get($recipe); }
     , $this->data->toolForCategory[$category]);    
   }
 
@@ -168,12 +168,12 @@ EOF;
 
   public function getMaterial1()
   {
-    return Materials::get($this->data->material[0]);
+    return Repositories\Material::get($this->data->material[0]);
   }
 
   public function getMaterial2()
   {
-    return Materials::get($this->data->material[1]);
+    return Repositories\Material::get($this->data->material[1]);
   }
 
   public function matches($text)

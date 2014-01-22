@@ -20,7 +20,7 @@ class Recipe
 
   public function getResult()
   {
-    return Items::get($this->data->result);
+    return Repositories\Item::get($this->data->result);
   }
 
   public function getSkillsRequired ()

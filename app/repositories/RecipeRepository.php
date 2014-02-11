@@ -35,16 +35,17 @@ class RecipeRepository implements RecipeRepositoryInterface
 
     $recipes = array();
 
-    if(file_exists(\Config::get("cataclysm.dataPath")."recipes.json"))
+    if(file_exists(\Config::get("cataclysm.dataPath")."/recipes.json"))
     {
-      $path = "";
-      $files = "recipes.json";
-    } 
-    else 
+      $path = \Config::get("cataclysm.dataPath");
+      $files = array("recipes.json");
+    }
+    else
     {
       $path = \Config::get("cataclysm.dataPath")."/recipes";
       $files = scandir($path);
     }
+
     foreach($files as $file)
     {
       if($file[0]==".") continue;

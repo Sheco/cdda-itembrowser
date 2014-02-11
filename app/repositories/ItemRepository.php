@@ -48,6 +48,10 @@ class ItemRepository implements ItemRepositoryInterface
     $this->database = $this->read();
   }
 
+  protected function snapshot()
+  {
+  }
+
   protected function read()
   {
     $items = array();

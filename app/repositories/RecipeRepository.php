@@ -49,7 +49,7 @@ class RecipeRepository implements RecipeRepositoryInterface
     return $recipes;
   }
 
-  private function linkItems()
+  protected function linkItems()
   {
     foreach($this->database as $recipe_id=>$recipe)
     {

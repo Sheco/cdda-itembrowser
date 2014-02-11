@@ -2,13 +2,21 @@
 
 class RecipeRepositoryCache extends RecipeRepository
 {
-  public function read()
+  const CACHE_KEY = "recipeRepository";
+
+  public function parse()
   {
-    $key = "recipeRepository";
-    if(Cache::has($key))
-      return Cache::get($key);
-    $cache = parent::read();
-    Cache::put($key, $cache, 60);
-    return $cache;
+    if(Cache::has(self::CACHE_KEY))
+    {
+      $this->database = Cache::get(self::CACHE_KEY);
+      return;
+    }
+    $this->database = $this->read();
+
+    $this->linkItems();
+    $this->item->snapshot();
+
+    Cache::put(self::CACHE_KEY, $this->database, 60);
   }
+
 }

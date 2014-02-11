@@ -24,10 +24,10 @@ class MaterialRepository implements MaterialRepositoryInterface
 
   public function parse()
   {
-    $this->database = $this->getItems();
+    $this->database = $this->read();
   }
 
-  private function getItems()
+  protected function read()
   {
     error_log("reading materials...");
 

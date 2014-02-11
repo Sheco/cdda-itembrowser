@@ -25,11 +25,11 @@ class RecipeRepository implements RecipeRepositoryInterface
 
   public function parse()
   {
-    $this->database = $this->getRecipes();
+    $this->database = $this->read();
     $this->linkItems();
   }
 
-  private function getRecipes()
+  protected function read()
   {
     error_log("Building recipes database...");
 

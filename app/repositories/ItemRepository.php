@@ -45,10 +45,10 @@ class ItemRepository implements ItemRepositoryInterface
 
   public function parse()
   {
-    $this->database = $this->getItems();
+    $this->database = $this->read();
   }
 
-  private function getItems()
+  protected function read()
   {
     $items = array();
 

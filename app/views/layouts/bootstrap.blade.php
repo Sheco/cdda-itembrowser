@@ -39,6 +39,9 @@
         </div>
         <div class="collapse navbar-collapse">
           <form class="navbar-form navbar-right" role="form" action="<?= action("ItemsController@search") ?>" >
+            <a href="">[stable]</a>
+            <a href="http://cdda-trunk.estilofusion.com<?= $_SERVER["REQUEST_URI"] ?>">[trunk]</a>
+
             <div class="form-group">
               <input name="q" type="text" placeholder="Search..." class="form-control">
             </div>

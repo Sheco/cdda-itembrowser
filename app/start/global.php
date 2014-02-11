@@ -81,7 +81,4 @@ App::down(function()
 */
 
 require app_path().'/filters.php';
-
-Repositories\Item::setup();
-Repositories\Recipe::setup();
-Repositories\Material::setup();
+require app_path().'/services.php';

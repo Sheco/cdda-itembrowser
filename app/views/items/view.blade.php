@@ -41,7 +41,7 @@
     @if ($item->learn!="N/A")
     This book contains {{ count($item->learn) }} crafting recipes:<br>
     @foreach($item->learn as $recipe)
-    <a href="{{ route('item.view', Recipes::get($recipe)->result->id) }}">{{ Recipes::get($recipe)->result->name }}</a>,
+    <a href="{{ route('item.view', $recipeRepository->find($recipe)->result->id) }}">{{ $recipeRepository->find($recipe)->result->name }}</a>,
     @endforeach
     <br>
     @endif

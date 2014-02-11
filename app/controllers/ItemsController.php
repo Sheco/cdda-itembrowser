@@ -2,6 +2,15 @@
 
 class ItemsController extends BaseController 
 {
+  protected $item;
+  protected $recipe;
+  protected $material;
+  public function __construct(ItemRepositoryInterface $item, RecipeRepositoryInterface $recipe, MaterialRepositoryInterface $material)
+  {
+    $this->item = $item;
+    $this->recipe = $recipe;
+    $this->material= $material;
+  }
   public function index()
   {
     return View::make('items.index');
@@ -12,25 +21,27 @@ class ItemsController extends BaseController
     $search = Input::get('q');
     if($search=="")
       return Redirect::to("/");
-    $items = Repositories\Item::search($search);
+    $items = $this->item->where($search);
     return View::make('items.search', compact('items', 'search'));
   }
 
   public function view($id)
   {
-    $item = Repositories\Item::get($id);
-    return View::make('items.view', compact('item'));
+    $item = $this->item->find($id);
+    $recipeRepository = $this->recipe;
+    return View::make('items.view', compact('item', 'recipeRepository'));
   }
 
   public function craft($id)
   {
-    $item = Repositories\Item::get($id);
-    return View::make('items.craft', compact('item'));
+    $item = $this->item->find($id);
+    $itemRepository = $this->item;
+    return View::make('items.craft', compact('item', 'itemRepository'));
   }
 
   public function recipes($id, $category="")
   {
-    $item = Repositories\Item::get($id);
+    $item = $this->item->find($id);
     $categories = $item->toolCategories;
     if($category=="" && $categories)
     {
@@ -43,7 +54,7 @@ class ItemsController extends BaseController
 
   public function disassemble($id)
   {
-    $item = Repositories\Items::get($id);
+    $item = $this->item->find($id);
     return View::make('items.disassemble', compact('item'));
   }
 

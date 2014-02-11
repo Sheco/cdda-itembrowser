@@ -1,25 +1,36 @@
-<?php namespace Repositories;
+<?php
 
-class Recipe
+class RecipeRepository implements RecipeRepositoryInterface
 {
-  private static $database;
+  protected $database;
+  protected $item;
 
-  public static function get($id)
+  public function __construct(ItemRepositoryInterface $item)
   {
-    if(isset(static::$database[$id])) 
-      return new \Recipe(static::$database[$id]);
+    $this->item = $item;
+    $this->parse();
   }
 
-  public static function setup()
+  public function find($id)
   {
-    static::$database = static::getRecipes();
-    static::linkItems();
+    $recipe = App::make('Recipe');
+    $recipe->load($this->database[$id]);
+    return $recipe;  
   }
 
-  private static function getRecipes()
+  public function where($text)
   {
-    if(\Cache::has('recipes'))
-      return \Cache::get('recipes');
+    throw new Exception();
+  }
+
+  public function parse()
+  {
+    $this->database = $this->getRecipes();
+    $this->linkItems();
+  }
+
+  private function getRecipes()
+  {
     error_log("Building recipes database...");
 
     $recipes = array();
@@ -29,27 +40,27 @@ class Recipe
     {
       if($file[0]==".") continue;
       $json = (array) json_decode(file_get_contents("$path/$file"));
-      foreach($json as $recipe)
+      foreach($json as $id=>$recipe)
       {
+        $recipe->id = $id;
         $recipes[] = $recipe;
       }
     }
-    \Cache::add('recipes', $recipes, 60);
     return $recipes;
   }
 
-  private static function linkItems()
+  private function linkItems()
   {
-    foreach(static::$database as $recipe_id=>$recipe)
+    foreach($this->database as $recipe_id=>$recipe)
     {
       if(isset($recipe->result))
       {
-        Item::link("result", $recipe->result, $recipe_id);
+        $this->item->link("result", $recipe->result, $recipe);
         if(isset($recipe->book_learn))
         {
           foreach($recipe->book_learn as $learn)
           {
-            Item::link("learn", $learn[0], $recipe_id);
+            $this->item->link("learn", $learn[0], $recipe);
           }
         }
       }
@@ -60,7 +71,7 @@ class Recipe
           foreach($group as $tool)
           {
             list($id, $amount) = $tool;
-            Item::link("tool", $id, $recipe_id);
+            $this->item->link("tool", $id, $recipe);
           }
         }
       }
@@ -71,7 +82,7 @@ class Recipe
           foreach($group as $component)
           {
             list($id, $amount) = $component;
-            Item::link("component", $id, $recipe_id);
+            $this->item->link("component", $id, $recipe);
           }
         }
       }

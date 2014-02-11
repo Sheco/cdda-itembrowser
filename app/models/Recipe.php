@@ -2,8 +2,15 @@
 
 class Recipe
 {
-  private $data;
-  public function __construct($data)
+  protected $data;
+  protected $item;
+
+  public function __construct(ItemRepositoryInterface $item)
+  {
+    $this->item = $item;
+  }
+
+  public function load($data)
   {
     $this->data = $data;
   }
@@ -18,9 +25,10 @@ class Recipe
     return "N/A";
   }
 
+
   public function getResult()
   {
-    return Repositories\Item::get($this->data->result);
+    return $this->item->find($this->data->result);
   }
 
   public function getSkillsRequired ()

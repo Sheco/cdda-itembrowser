@@ -2,8 +2,17 @@
 
 class Item
 {
-  private $data;
-  public function __construct($data)
+  protected $data;
+  protected $recipe;
+  protected $material;
+
+  public function __construct(RecipeRepositoryInterface $recipe, MaterialRepositoryInterface $material)
+  {
+    $this->recipe = $recipe;
+    $this->material = $material;
+  }
+
+  public function load($data)
   {
     if(!isset($data->material))
       $data->material = array( "null", "null" );
@@ -66,7 +75,7 @@ EOF;
       return array();
 
     return array_map(function($recipe)
-        { return Repositories\Recipe::get($recipe); }
+        { return $this->recipe->find($recipe); }
     , $this->data->recipes);
   }
 
@@ -76,7 +85,7 @@ EOF;
       return array();
 
     return array_map(function($recipe)
-        { return Repositories\Recipe::get($recipe); }
+        { return $this->recipe->find($recipe); }
     , $this->data->disassembly);    
   }
 
@@ -85,7 +94,7 @@ EOF;
     if(!isset($this->data->toolFor))
       return array();
     return array_map(function($recipe)
-        { return Repositories\Recipe::get($recipe); }
+        { return $this->recipe->find($recipe); }
     , $this->data->toolFor);
   }
 
@@ -99,7 +108,7 @@ EOF;
     if(!isset($this->data->toolForCategory[$category]))
       return array();
     return array_map(function($recipe)
-        { return Repositories\Recipe::get($recipe); }
+        { return $this->recipe->find($recipe); }
     , $this->data->toolForCategory[$category]);    
   }
 
@@ -168,12 +177,12 @@ EOF;
 
   public function getMaterial1()
   {
-    return Repositories\Material::get($this->data->material[0]);
+    return $this->material->find($this->data->material[0]);
   }
 
   public function getMaterial2()
   {
-    return Repositories\Material::get($this->data->material[1]);
+    return $this->material->find($this->data->material[1]);
   }
 
   public function matches($text)

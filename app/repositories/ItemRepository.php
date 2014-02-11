@@ -1,57 +1,58 @@
-<?php namespace Repositories;
+<?php 
 
-class Item
+class ItemRepository implements ItemRepositoryInterface
 {
-  private static $database;
+  protected $database;
 
-  public static function get($id)
+  public function __construct()
   {
-    if(isset(static::$database[$id])) 
-    {
-      return new \Item(static::$database[$id]);
-    }
-
-    if(isset(static::$database["vehicle_parts/$id"]))
-      return new \Item(static::$database["vehicle_parts/$id"]);
-    return new \Item(json_decode('{"id":"'.$id.'","name":"?'.$id.'?"}'));
+    $this->parse();
   }
 
-  public static function search($text)
+  public function find($id)
+  {
+    $item = App::make('Item');
+    if(isset($this->database[$id])) 
+    {
+      $item->load($this->database[$id]);
+      return $item;  
+    }
+
+    if(isset($this->database["vehicle_parts/$id"]))
+    {
+      $item->load($this->database["vehicle_parts/$id"]);
+      return $item;
+    }
+    $item->load(json_decode('{"id":"'.$id.'","name":"?'.$id.'?"}'));
+    return $item;
+  }
+
+  public function where($text)
   {
     error_log("searching for $text...");
-    if(\Cache::has("search/$text"))
-      return \Cache::get("search/$text");
-    error_log("fetching data for $text...");
 
     $results = array();
-    foreach(static::$database as $item)
+    foreach($this->database as $item)
     {
-      $item = static::get($item->id);
+      $item = $this->find($item->id);
       if($item->matches($text))
       {
-        $results[] = static::get($item->id);
+        $results[] = $this->find($item->id);
       }
     }
-    \Cache::add("search/$text", $results, 60);
     return $results;
   }
 
-  public static function setup()
+  public function parse()
   {
-    if(\Cache::has('items'))  {
-      static::$database = \Cache::get('items');
-      return;
-    }
-
-    static::$database = static::getItems();
-    \Cache::add('items', static::$database, 60);
-    error_log("Building item database..");
+    $this->database = $this->getItems();
   }
 
-  private static function getItems()
+  private function getItems()
   {
     $items = array();
 
+    error_log("Building item database..");
     $path = \Config::get("cataclysm.dataPath");
     foreach(scandir("$path/items") as $file)
     {
@@ -99,7 +100,7 @@ class Item
     return $items;
   }
 
-  public static function link($type, $id, $recipe_id)
+  public function link($type, $id, $recipe)
   {
     $keys = array(
         "result"=>"recipes",
@@ -108,26 +109,24 @@ class Item
         "learn"=>"learn"
     );
     $key = $keys[$type];
-    if(isset(static::$database[$id]))
+    if(isset($this->database[$id]))
     {
-      $recipe = Recipe::get($recipe_id);
       if($key=="recipes" and $recipe->category=="CC_NONCRAFT")
       {
-        static::$database[$id]->disassembly[] = $recipe_id;
+        $this->database[$id]->disassembly[] = $recipe->id;
         return;
       }
       if($key=="toolFor")
       {
-        static::$database[$id]->{"toolForCategory"}[$recipe->category][] = $recipe_id;
+        $this->database[$id]->{"toolForCategory"}[$recipe->category][] = $recipe->id;
       }
-      static::$database[$id]->{$key}[] = $recipe_id;
+      $this->database[$id]->{$key}[] = $recipe->id;
       return;
     }
-    if(isset(static::$database["vehicle_parts/$id"]))
+    if(isset($this->database["vehicle_parts/$id"]))
     {
-      static::$database["vehicle_parts/$id"]->{$key}[] = $recipe_id;
+      $this->database["vehicle_parts/$id"]->{$key}[] = $recipe->id;
       return;
     }
   }
-
 }

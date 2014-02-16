@@ -1,5 +1,7 @@
 <?php
 
 return array(
-	"dataPath"=>'\path\to\Cataclysm-DDA\data\json'
+  "dataPath"=>storage_path().'\Cataclysm-DDA\data\json',
+  "release"=>"stable",
+
 );

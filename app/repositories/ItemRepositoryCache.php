@@ -17,7 +17,6 @@ class ItemRepositoryCache extends ItemRepository
       return;
     }
     $this->database = parent::read();
-    $this->snapshot();
   }
 
 

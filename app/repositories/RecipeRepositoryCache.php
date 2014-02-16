@@ -14,6 +14,11 @@ class RecipeRepositoryCache extends RecipeRepository
     $this->database = $this->read();
 
     $this->linkItems();
+    $this->snapshot();
+  }
+
+  public function snapshot()
+  {
     $this->item->snapshot();
 
     Cache::put(self::CACHE_KEY, $this->database, 60);

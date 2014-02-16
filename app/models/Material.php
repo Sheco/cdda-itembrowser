@@ -1,6 +1,6 @@
 <?php
 
-class Material extends MaterialRepository
+class Material
 {
   protected $data;
 

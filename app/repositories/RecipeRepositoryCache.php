@@ -4,7 +4,7 @@ class RecipeRepositoryCache extends RecipeRepository
 {
   const CACHE_KEY = "recipeRepository";
 
-  public function parse()
+  protected function parse()
   {
     if(Cache::has(self::CACHE_KEY))
     {

@@ -9,7 +9,7 @@ class ItemRepositoryCache extends ItemRepository
    * the first stage loads the file into memory
    * and the second stage is after the recipes are linked
    */
-  public function parse()
+  protected function parse()
   {
     if(Cache::has(self::CACHE_KEY))
     {

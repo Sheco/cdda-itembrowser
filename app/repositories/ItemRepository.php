@@ -43,7 +43,7 @@ class ItemRepository implements ItemRepositoryInterface
     return $results;
   }
 
-  public function parse()
+  protected function parse()
   {
     $this->database = $this->read();
   }

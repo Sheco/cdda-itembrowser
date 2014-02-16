@@ -3,7 +3,7 @@
 class MaterialRepositoryCache extends MaterialRepository
 {
   const CACHE_KEY = "materialRepository";
-  public function parse()
+  protected function parse()
   {
     if(Cache::has(self::CACHE_KEY))
     {

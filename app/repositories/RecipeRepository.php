@@ -23,7 +23,7 @@ class RecipeRepository implements RecipeRepositoryInterface
     throw new Exception();
   }
 
-  public function parse()
+  protected function parse()
   {
     $this->database = $this->read();
     $this->linkItems();

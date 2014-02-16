@@ -11,6 +11,11 @@ class MaterialRepositoryCache extends MaterialRepository
       return;
     }
     $this->database = parent::read();
+    $this->snapshot();
+  }
+
+  public function snapshot()
+  {
     Cache::put(self::CACHE_KEY, $this->database, 60);
   }
 

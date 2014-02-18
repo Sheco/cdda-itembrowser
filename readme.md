@@ -38,12 +38,11 @@ composer install
 
 * Make sure the webserver has read/write access to everything inside app/storage
 * Clone the https://github.com/CleverRaven/Cataclysm-DDA repository inside app/storage, or if you have it somewhere else, edit app/config/cataclysm.php and write the absolute path to the json data files.
-* If you can't install the php-apc package, edit app/services.php and replace the repository bindings without cache like this:
+* For performance, it's recommended to install php-apc and edit app/config/cache.php to change the following line. (Although a better way would be setting up the laravel environment in bootstrap/start.php and copying app/config/cache.php to the appropiate subdirectory)
+
 
 ```
-$app->singleton('ItemRepositoryInterface', 'ItemRepository');
-$app->singleton('RecipeRepositoryInterface', 'RecipeRepository');
-$app->singleton('MaterialRepositoryInterface', 'MaterialRepository');
+	'driver' => 'apc',
 ```
 
 ### License

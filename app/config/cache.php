@@ -15,7 +15,7 @@ return array(
 	|
 	*/
 
-	'driver' => 'apc',
+	'driver' => 'file',
 
 	/*
 	|--------------------------------------------------------------------------
@@ -84,6 +84,6 @@ return array(
 	|
 	*/
 
-	'prefix' => 'laravel',
+	'prefix' => 'cache',
 
 );

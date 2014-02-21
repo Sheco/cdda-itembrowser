@@ -5,6 +5,11 @@
 This is a simple tool to browse through the items and recipies available in Cataclysm: Dark Days Ahead.
 </p>
 
+<p class="alert alert-info">
+<b>Feb 2014: Update:</b> next to the search field on the top bar, there are two links, [stable] and [trunk], each one points to a copy of the database for the 0.9 stable rele
+ase and an up to date git master copy, respectively.
+</p>
+
 <p>
 Please use the search field on the top right corner of this page to look for an item. You can check the 
 item's properties, then check how it can be crafted and even see what can craft using that item.

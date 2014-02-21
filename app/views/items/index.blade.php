@@ -6,8 +6,7 @@ This is a simple tool to browse through the items and recipies available in Cata
 </p>
 
 <p class="alert alert-info">
-<b>Feb 2014: Update:</b> next to the search field on the top bar, there are two links, [stable] and [trunk], each one points to a copy of the database for the 0.9 stable rele
-ase and an up to date git master copy, respectively.
+<b>Feb 2014: Update:</b> next to the search field on the top bar, there are two links, [stable] and [trunk], each one points to a copy of the database for the 0.9 stable release and an up-to-date git master copy (updated nightly), respectively.
 </p>
 
 <p>

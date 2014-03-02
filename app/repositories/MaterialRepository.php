@@ -13,7 +13,7 @@ class MaterialRepository implements MaterialRepositoryInterface
 
   public function find($id)
   {
-    $material = new Material();
+    $material = App::make('Material');
     if(isset($this->database[$id]))
       $material->load($this->database[$id]);
     return $material;

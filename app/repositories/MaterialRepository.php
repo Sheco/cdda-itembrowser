@@ -3,10 +3,12 @@
 class MaterialRepository implements MaterialRepositoryInterface
 {
   protected $database;
+  protected $config;
 
-  public function __construct()
+  public function __construct(Config $config)
   {
     $this->parse();
+    $this->config = $config;
   }
 
   public function find($id)
@@ -33,7 +35,7 @@ class MaterialRepository implements MaterialRepositoryInterface
 
     $items = array();
     
-    $path = \Config::get("cataclysm.dataPath");
+    $path = $this->config->get("cataclysm.dataPath");
     $file = "materials.json";
     {
       if($file[0]==".") continue;

@@ -4,12 +4,10 @@ class RecipeRepository implements RecipeRepositoryInterface
 {
   protected $database;
   protected $item;
-  protected $config;
 
-  public function __construct(ItemRepositoryInterface $item, Config $config)
+  public function __construct(ItemRepositoryInterface $item)
   {
     $this->item = $item;
-    $this->config = $config;
     $this->parse();
   }
 
@@ -36,15 +34,15 @@ class RecipeRepository implements RecipeRepositoryInterface
     error_log("Building recipes database...");
 
     $recipes = array();
-    $dataPath = $this->config->get("cataclysm.dataPath");
-    if(file_exists("$dataPath/recipes.json"))
+
+    if(file_exists(\Config::get("cataclysm.dataPath")."/recipes.json"))
     {
-      $path = $dataPath;
+      $path = \Config::get("cataclysm.dataPath");
       $files = array("recipes.json");
     }
     else
     {
-      $path = "$dataPath/recipes";
+      $path = \Config::get("cataclysm.dataPath")."/recipes";
       $files = scandir($path);
     }
 

@@ -3,11 +3,9 @@
 class ItemRepository implements ItemRepositoryInterface
 {
   protected $database;
-  protected $config;
 
-  public function __construct(Config $config)
+  public function __construct()
   {
-    $this->config = $config;
     $this->parse();
   }
 
@@ -59,7 +57,7 @@ class ItemRepository implements ItemRepositoryInterface
     $items = array();
 
     error_log("Building item database..");
-    $path = $this->config->get("cataclysm.dataPath");
+    $path = \Config::get("cataclysm.dataPath");
     foreach(scandir("$path/items") as $file)
     {
       if($file[0]==".") continue;

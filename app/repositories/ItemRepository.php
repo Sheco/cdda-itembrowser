@@ -120,6 +120,11 @@ class ItemRepository implements ItemRepositoryInterface
         $this->database[$id]->disassembly[] = $recipe->id;
         return;
       }
+      if($key=="recipes" and isset($recipe->reversible) and $recipe->reversible=="true")      
+      {
+        $this->database[$id]->disassembly[] = $recipe->id;
+      }
+
       if($key=="toolFor")
       {
         $this->database[$id]->{"toolForCategory"}[$recipe->category][] = $recipe->id;

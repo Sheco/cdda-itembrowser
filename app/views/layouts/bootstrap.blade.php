@@ -39,14 +39,20 @@
         </div>
         <div class="collapse navbar-collapse">
           <form class="navbar-form navbar-right" role="form" action="<?= action("ItemsController@search") ?>" >
-            <a href="http://cdda.estilofusion.com<?= $_SERVER["REQUEST_URI"] ?>">[stable]</a>
-            <a href="http://cdda-trunk.estilofusion.com<?= $_SERVER["REQUEST_URI"] ?>">[trunk]</a>
 
             <div class="form-group">
               <input name="q" type="text" placeholder="Search..." class="form-control">
             </div>
             <button type="submit" class="btn btn-success">Go</button>
           </form>
+
+          <div class="navbar navbar-right navbar-default">
+            <ul class="nav navbar-nav">
+@foreach(Config::get("cataclysm.sites") as $label=>$domain)
+<li><a{{($_SERVER["SERVER_NAME"]==$domain? ' class="active"':'')}} href="http://{{$domain.$_SERVER["REQUEST_URI"]}}">{{{$label}}}</a>
+@endforeach
+          </ul>
+          </div>
         </div><!--/.nav-collapse -->
       </div>
     </div>

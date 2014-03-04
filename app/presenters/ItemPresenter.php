@@ -67,8 +67,9 @@ EOF;
     $badges = array();
     if(count($this->recipes)) 
       $badges[] = '<span class="label label-default">can be crafted</span>';
-    if(count($this->toolFor))
-      $badges[] = '<span class="label label-success">can be used to craft</span>';
+    $recipes = count($this->toolFor);
+    if($recipes)
+      $badges[] = '<span class="label label-success">can be used to craft ('.$recipes.')</span>';
     if(count($this->disassembly))
       $badges[] = '<span class="label label-info">can be disassembled</span>';
     return join(" ", $badges);

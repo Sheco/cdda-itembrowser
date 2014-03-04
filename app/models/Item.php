@@ -1,6 +1,6 @@
 <?php
 
-class Item
+class Item implements Robbo\Presenter\PresentableInterface
 {
   protected $data;
   protected $recipe;
@@ -33,14 +33,7 @@ class Item
     }
     if(isset($this->data->{$name}))
       return $this->data->{$name};
-    return "N/A";
-  }
-
-  function getHtmlSymbol()
-  {
-    if(isset($this->data->symbol))
-      return htmlentities($this->data->symbol);
-    return "&nbsp;";
+    return null;
   }
 
   function getColor()
@@ -56,18 +49,19 @@ class Item
     return $color;
   }
 
+
+  public function getSymbol()
+  {
+    if(!isset($this->data->symbol)) return " ";
+    return $this->data->symbol;
+  }
+
   public function getName()
   {
-     if(!isset($this->data->name)) return "N/A";
+     if(!isset($this->data->name)) return null;
      return ($this->type=="bionic"?"CBM: ":"").$this->data->name;
   }
   
-  public function getPrettyName()
-  { 
-    return <<<EOF
-    <span style="color: $this->color">$this->htmlSymbol $this->name</span>    
-EOF;
-  }
 
   public function getRecipes()
   {
@@ -146,17 +140,10 @@ EOF;
     }
   }
 
-  public function getVolume()
-  {
-    if(!isset($this->data->volume))
-      return "N/A";
-    return $this->data->volume;
-  }
-
   public function getWeight()
   {
     if(!isset($this->data->weight))
-      return "N/A";
+      return null;
     $weight = $this->data->weight;
     return number_format($weight/1000, 2)."kg/".number_format($weight/453.6,2)."lbs";
   }
@@ -164,14 +151,14 @@ EOF;
   public function getMovesPerAttack()
   {
     if(!isset($this->data->weight) || !isset($this->data->volume))
-      return "N/A";
+      return null;
     return ceil(65 + 4 * $this->data->volume + $this->data->weight / 60);
   }
 
   public function getToHit()
   {
     if(!isset($this->data->to_hit))
-      return "N/A";
+      return null;
     return sprintf("%+d", $this->data->to_hit);
   }
 
@@ -191,5 +178,10 @@ EOF;
           stristr($this->id, $text) || 
           stristr($this->name, $text);
 
+  }
+
+  public function getPresenter()
+  {
+    return new ItemPresenter($this);
   }
 }

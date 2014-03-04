@@ -1,6 +1,6 @@
 <?php
 
-class Recipe
+class Recipe implements Robbo\Presenter\PresentableInterface
 {
   protected $data;
   protected $item;
@@ -22,35 +22,27 @@ class Recipe
       return $this->{$method}();
     if (isset($this->data->$name))
       return $this->data->$name;
-    return "N/A";
+    return null;
+  }
+
+  public function getSkillsRequired ()
+  {
+    if(!isset($this->data->skills_required))
+      return null;
+
+    $skills = $this->data->skills_required;
+    if(!is_array($skills[0]))
+      return array($skills);
+
+    return array_map(function($i) use ($skills) { 
+            return $i; 
+    }, $skills);
   }
 
 
   public function getResult()
   {
     return $this->item->find($this->data->result);
-  }
-
-  public function getSkillsRequired ()
-  {
-    if(!isset($this->data->skills_required))
-      return array("N/A");
-
-    $skills = $this->data->skills_required;
-    if(!is_array($skills[0]))
-      return array("$skills[0]($skills[1])");
-
-    return array_map(function($i) use ($skills) { 
-            return "$i[0]($i[1])"; 
-    }, $skills);
-  }
-
-  public function getTime()
-  {
-    $time = $this->data->time;
-    if($time>=1000)
-      return ($time/1000)." minutes";
-    return ($time/100)." turns";
   }
 
   public function getHasTools()
@@ -77,4 +69,9 @@ class Recipe
         $this->data->components);
   }
 
+
+  public function getPresenter()
+  {
+    return new RecipePresenter($this);
+  }
 }

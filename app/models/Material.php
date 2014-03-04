@@ -1,6 +1,6 @@
 <?php
 
-class Material
+class Material implements Robbo\Presenter\PresentableInterface
 {
   protected $data;
 
@@ -18,7 +18,12 @@ class Material
     }
     if(isset($this->data->{$name}))
       return $this->data->{$name};
-    return "N/A";
+    return null;
+  }
+
+  public function getPresenter()
+  {
+    return new MaterialPresenter($this);
   }
 }
 

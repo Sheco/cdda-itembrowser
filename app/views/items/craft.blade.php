@@ -1,6 +1,6 @@
 @section('content')
 <h3>
-{{ link_to_route("item.view", $item->name, array("id"=>$item->id)) }}
+  <a href="{{ route("item.view", array("id"=>$item->id)) }}">{{ $item->name }}</a>
 @if (count($item->recipes)>0)
  can be crafted with the following recipes<br>
 @else
@@ -11,40 +11,18 @@
 <div class="row">
 <div class="col-sm-4">
 @foreach ($item->recipes as $recipe)
-  Skills used: {{ $recipe->skill_used }} <br>
-  Required skills: {{ join(" ", $recipe->skills_required) }} <br>
+  Skill used: {{ $recipe->skill_used }} <br>
+  Required skills: {{ $recipe->skillsRequired }} <br>
   Difficulty: {{ $recipe->difficulty }}<br>
   Time to complete: {{ $recipe->time }}<br>
   @if ($recipe->hasTools)
-  Tools required: <br>
-  @foreach ($recipe->tools as $group)
-    &gt; 
-    @foreach ($group->items as $item)
-      {{ link_to_route("item.view", $item["item"]->name, array("id"=>$item["item"]->id)) }}
-      @if ($item != end($group->items)) 
-        OR
-      @endif
-      {{ $item["amount"] }}
-    @endforeach
-    <br>
-  @endforeach
+  {{$recipe->tools}}<br>
   @endif
 
   @if ($recipe->hasComponents)
-  Components required: <br>
-  @foreach ($recipe->components as $group)
-    &gt; 
-    @foreach ($group->items as $item)
-      {{ $item["amount"] }}
-      {{ link_to_route("item.view", $item["item"]->name, array("id"=>$item["item"]->id)) }}
-      @if ($item != end($group->items)) 
-        OR
-      @endif
-    @endforeach
-    <br>
-  @endforeach
+  {{$recipe->components}}<br>
   @endif
-@if ($recipe->book_learn!="N/A")
+@if ($recipe->book_learn)
 This recipe can be learned reading the following books:<br>
 @foreach($recipe->book_learn as $book)
   <a href="{{ route('item.view', $book[0]) }}">{{ $itemRepository->find($book[0])->name }} ({{ $book[1] }})</a><br>

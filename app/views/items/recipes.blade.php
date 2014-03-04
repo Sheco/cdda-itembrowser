@@ -12,7 +12,7 @@ var show_recipe = function(id)
 }
 </script>
 <h3>
-{{ link_to_route("item.view", $item->name, array("id"=>$item->id)) }} 
+  <a href="{{ route("item.view", array("id"=>$item->id)) }}">{{ $item->name }}</a>
 @if (count($item->toolFor)>0) 
  can be used to craft following recipes:<br>
 @else
@@ -38,7 +38,7 @@ var show_recipe = function(id)
 <div class="row">
 <div class="col-sm-4">
 @foreach ($recipes as $recipe_id=>$local_recipe)
-<a href="#" onclick="return show_recipe('{{$recipe_id}}')">{{ $local_recipe->result->prettyName}}</a>
+<a href="#" onclick="return show_recipe('{{$recipe_id}}')">{{ $local_recipe->result->name}}</a>
 <br>
 @endforeach
 <br>
@@ -52,37 +52,15 @@ $recipe->result->name,
 array("id"=>$recipe->result->id)) }}<br>
   Category: {{ $recipe->category }}<Br>
   SubCategory: {{ $recipe->subcategory }}<br>
-  Required skills: {{ join(" ", $recipe->skills_required) }} <br>
+  Required skills: {{ $recipe->skills_required }} <br>
   Difficulty: {{ $recipe->difficulty }}<br>
   Time to complete: {{ $recipe->time }}<br>
   @if ($recipe->hasTools)
-  Tools required: <br>
-  @foreach ($recipe->tools as $group)
-    &gt; 
-    @foreach ($group->items as $gi)
-      {{ link_to_route("item.view", $gi["item"]->name, array("id"=>$gi["item"]->id)) }}
-      {{ $gi["amount"] }}
-      @if ($gi != end($group->items)) 
-        OR
-      @endif
-    @endforeach
-    <br>
-  @endforeach
+  {{$recipe->tools}}<br>
   @endif
 
   @if ($recipe->hasComponents)
-  Components required: <br>
-  @foreach ($recipe->components as $group)
-    &gt; 
-    @foreach ($group->items as $gi)
-      {{ $gi["amount"] }}
-      {{ link_to_route("item.view", $gi["item"]->name, array("id"=>$gi["item"]->id)) }}
-      @if ($gi != end($group->items)) 
-        OR
-      @endif
-    @endforeach
-    <br>
-  @endforeach
+  {{$recipe->components}}<br>
   @endif
 </div>
 @endforeach

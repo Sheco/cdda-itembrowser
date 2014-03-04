@@ -1,6 +1,6 @@
 @section('content')
 <h3>
-{{ link_to_route("item.view", $item->name, array("id"=>$item->id)) }}
+  <a href="{{ route("item.view", array("id"=>$item->id)) }}">{{ $item->name }}</a>
 @if (count($item->disassembly)>0)
  can be disassembled to obtain following items.<br>
 @else
@@ -13,39 +13,17 @@
 @foreach ($item->disassembly as $recipe)
   {{link_to_route("item.view", $recipe->result->name, array("id"=>$recipe->result->id))}}<br>
   Skills used: {{ $recipe->skill_used }} <br>
-  Required skills: {{ join(" ", $recipe->skills_required) }} <br>
+  Required skills: {{ $recipe->skills_required }} <br>
   Difficulty: {{ $recipe->difficulty }}<br>
   Reversible: {{ $recipe->reversible }}<br>
   Learn Automatically: {{ $recipe->autolearn }}<br>
   Time to complete: {{ $recipe->time }}<br>
   @if ($recipe->hasTools)
-  Tools required: <br>
-  @foreach ($recipe->tools as $group)
-    &gt; 
-    @foreach ($group->items as $item)
-      {{ link_to_route("item.view", $item["item"]->name, array("id"=>$item["item"]->id)) }}
-      @if ($item != end($group->items)) 
-        OR
-      @endif
-      {{ $item["amount"] }}
-    @endforeach
-    <br>
-  @endforeach
+  {{$recipe->tools}}<br>
   @endif
 
   @if ($recipe->hasComponents)
-  Components required: <br>
-  @foreach ($recipe->components as $group)
-    &gt; 
-    @foreach ($group->items as $item)
-      {{ $item["amount"] }}
-      {{ link_to_route("item.view", $item["item"]->name, array("id"=>$item["item"]->id)) }}
-      @if ($item != end($group->items)) 
-        OR
-      @endif
-    @endforeach
-    <br>
-  @endforeach
+  {{$recipe->components}}<br>
   @endif
 <br>
 @endforeach

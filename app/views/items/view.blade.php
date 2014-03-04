@@ -1,7 +1,7 @@
 @section('content')
 <div class="row">
   <div class="col-sm-4">
-    {{$item->prettyName}}
+    {{$item->name}}
     ({{$item->type}})
     <br>
     <br>
@@ -38,7 +38,7 @@
       Storage: {{ $item->storage }}<br>
       <br>
     @endif
-    @if ($item->learn!="N/A")
+    @if ($item->learn)
     This book contains {{ count($item->learn) }} crafting recipes:<br>
     @foreach($item->learn as $recipe)
     <a href="{{ route('item.view', $recipeRepository->find($recipe)->result->id) }}">{{ $recipeRepository->find($recipe)->result->name }}</a>,

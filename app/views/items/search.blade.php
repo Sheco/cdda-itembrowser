@@ -11,7 +11,7 @@
 </tr>
 @foreach ($items as $item)
 <Tr>
-  <td><a href="{{ route("item.view", array("id"=>$item->id)) }}">{{$item->prettyName}}</a></td>
+  <td><a href="{{ route("item.view", array("id"=>$item->id)) }}">{{$item->name}}</a></td>
   <td>{{ count($item->recipes) }}</td>
   <td>{{ count($item->toolFor) }}</td>
   <td>{{ count($item->disassembly) }}</td>

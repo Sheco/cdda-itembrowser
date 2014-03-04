@@ -46,7 +46,7 @@
             <button type="submit" class="btn btn-success">Go</button>
           </form>
 
-          <div class="navbar navbar-right navbar-default">
+          <div class="navbar navbar-right navbar-default" style="min-height: 0px; margin-bottom: 0px;">
             <ul class="nav navbar-nav">
 @foreach(Config::get("cataclysm.sites") as $label=>$domain)
 <li><a{{($_SERVER["SERVER_NAME"]==$domain? ' class="list-group-item active"':'')}} href="http://{{$domain.$_SERVER["REQUEST_URI"]}}">{{{$label}}}</a>

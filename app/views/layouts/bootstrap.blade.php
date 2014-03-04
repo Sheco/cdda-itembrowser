@@ -49,7 +49,7 @@
           <div class="navbar navbar-right navbar-default">
             <ul class="nav navbar-nav">
 @foreach(Config::get("cataclysm.sites") as $label=>$domain)
-<li><a{{($_SERVER["SERVER_NAME"]==$domain? ' class="active"':'')}} href="http://{{$domain.$_SERVER["REQUEST_URI"]}}">{{{$label}}}</a>
+<li><a{{($_SERVER["SERVER_NAME"]==$domain? ' class="list-group-item active"':'')}} href="http://{{$domain.$_SERVER["REQUEST_URI"]}}">{{{$label}}}</a>
 @endforeach
           </ul>
           </div>

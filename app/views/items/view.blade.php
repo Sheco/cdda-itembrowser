@@ -4,6 +4,8 @@
     {{$item->name}}
     ({{$item->type}})
     <br>
+    {{$item->badges}}
+    <br>
     <br>
     Volume: {{ $item->volume }} Weight: {{ $item->weight }}<br>
       Bash: {{ $item->bashing }}

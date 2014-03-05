@@ -61,6 +61,7 @@ class ItemRepository implements ItemRepositoryInterface
     foreach(scandir("$path/items") as $file)
     {
       if($file[0]==".") continue;
+      if($file=="ammo_types.json") continue;
       $json = (array) json_decode(file_get_contents("$path/items/$file"));
       foreach($json as $item)
       {

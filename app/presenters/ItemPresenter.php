@@ -29,12 +29,12 @@ EOF;
 
   public function presentBashing()
   {
-    return $this->object->bashing?:"N/A";
+    return $this->object->bashing?:"0";
   }
 
   public function presentCutting()
   {
-    return $this->object->cutting?:"N/A";
+    return $this->object->cutting?:"0";
   }
 
   public function presentToHit()

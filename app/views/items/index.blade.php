@@ -19,7 +19,7 @@ item's properties, then check how it can be crafted and even see what can craft 
 </p>
 
 <p>
-<b>Next to the search field on the top bar, there are two links, [stable] and [trunk], each one points to a copy of the database for the latest stable release and an up-to-date git master copy (updated nightly), respectively.
+<b>Next to the search field on the top bar, there are two links, [stable] and [trunk], each one points to a copy of the database for the latest stable release and an up-to-date git master copy (updated nightly), respectively.</b>
 </p>
 
 <p>

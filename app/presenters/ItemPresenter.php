@@ -86,4 +86,11 @@ EOF;
     return join(" ", $badges);
   }
 
+  public function presentCutResult()
+  {
+    $cutresult = $this->object->cutResult;
+    return $cutresult[0]." ".str_plural($cutresult[1]->name);
+  }
+
+
 }

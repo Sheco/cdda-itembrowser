@@ -14,6 +14,12 @@
     Moves per attack: {{ $item->movesPerAttack }}<br>
     Materials: {{ $item->material1->name }}, 
       {{ $item->material2->name }}<br>
+    @if ($item->canBeCut)
+      Can be cut into: {{ $item->cutResult }}<br>
+    @endif
+    @if ($item->isResultOfCutting)
+      Can be obtained if you cut items made of {{ $item->materialToCut }}<br>
+    @endif
     @if ($item->isComestible)
       Phase: {{ $item->phase }}<br>
       Nutrition: {{ $item->nutrition }}<br>

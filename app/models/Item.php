@@ -4,12 +4,22 @@ class Item implements Robbo\Presenter\PresentableInterface
 {
   protected $data;
   protected $recipe;
+  protected $item;
   protected $material;
+  private $cut_pairs = array(
+      "cotton"=>"rag",
+      "leather"=>"leather",
+      "nomex"=>"nomex",
+      "plastic"=>"plastic_chunk",
+      "kevlar"=>"kevlar_plate",
+      "wood"=>"skewer"
+    );
 
-  public function __construct(RecipeRepositoryInterface $recipe, MaterialRepositoryInterface $material)
+  public function __construct(RecipeRepositoryInterface $recipe, MaterialRepositoryInterface $material, ItemRepositoryInterface $item)
   {
     $this->recipe = $recipe;
     $this->material = $material;
+    $this->item = $item;
   }
 
   public function load($data)
@@ -170,6 +180,31 @@ class Item implements Robbo\Presenter\PresentableInterface
   public function getMaterial2()
   {
     return $this->material->find($this->data->material[1]);
+  }
+
+  public function getCanBeCut()
+  {
+    if(!$this->volume) return false;
+    $material = $this->material1->ident;
+    return in_array($material, array_keys($this->cut_pairs));
+  }
+
+  public function getCutResult()
+  {
+    $material = $this->material1->ident;
+    $count = $material=="wood"? 2: 1;
+    return array($this->volume*$count, $this->item->find($this->cut_pairs[$material]));
+  }
+
+  public function getIsResultOfCutting()
+  {
+    return in_array($this->id, array_keys(array_flip($this->cut_pairs)));
+  }
+
+  public function getMaterialToCut()
+  {
+    $pairs = array_flip($this->cut_pairs);
+    return $pairs[$this->id];
   }
 
   public function isMadeOf($material)

@@ -6,6 +6,5 @@ return array(
     "[stable]"=>"cdda.estilofusion.com",
     "[trunk]"=>"cdda-trunk.estilofusion.com"
   ),
-  "release"=>"stable",
 
 );

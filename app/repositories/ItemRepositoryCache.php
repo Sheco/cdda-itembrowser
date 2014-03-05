@@ -30,4 +30,19 @@ class ItemRepositoryCache extends ItemRepository
     Cache::put(self::CACHE_KEY, $this->database, 60);
   }
 
+
+  public function where($text)
+  {
+    // convert the results into an array of IDs
+    $items = Cache::remember("itemSearch:$text", 60, function() use ($text) {
+      return array_map(function($item) { 
+        return $item->id;
+      }, parent::where($text));
+    });
+
+    // expand the array back into full items
+    return array_map(function($item) {
+      return $this->find($item);
+    }, $items);
+  }
 }

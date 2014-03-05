@@ -6,12 +6,20 @@ This is a simple tool to browse through the items and recipies available in Cata
 </p>
 
 <p class="alert alert-info">
-<b>Feb 2014: Update:</b> next to the search field on the top bar, there are two links, [stable] and [trunk], each one points to a copy of the database for the latest stable release and an up-to-date git master copy (updated nightly), respectively.
+March 2014: Now you can search for materials, for example:
+{{ link_to_route('item.search', 'wood', array('q'=>'wood')) }},
+{{ link_to_route('item.search', 'hard steel', array('q'=>'hard steel')) }},
+{{ link_to_route('item.search', 'iron', array('q'=>'iron')) }},
+{{ link_to_route('item.search', 'cotton', array('q'=>'cotton')) }}.
 </p>
 
 <p>
 Please use the search field on the top right corner of this page to look for an item. You can check the 
 item's properties, then check how it can be crafted and even see what can craft using that item.
+</p>
+
+<p>
+<b>Next to the search field on the top bar, there are two links, [stable] and [trunk], each one points to a copy of the database for the latest stable release and an up-to-date git master copy (updated nightly), respectively.
 </p>
 
 <p>

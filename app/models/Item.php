@@ -209,8 +209,7 @@ class Item implements Robbo\Presenter\PresentableInterface
 
   public function isMadeOf($material)
   {
-    return stristr($this->material1->name,$material) ||
-           stristr($this->material2->name,$material);
+    return stristr($this->material1->name,$material);
   }
 
   public function matches($text)

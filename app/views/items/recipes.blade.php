@@ -42,11 +42,11 @@ var show_recipe = function(id)
 {{ link_to_route("item.view", 
 $recipe->result->name, 
 array("id"=>$recipe->result->id)) }}<br>
-  Category: {{ $recipe->category }}<Br>
-  SubCategory: {{ $recipe->subcategory }}<br>
-  Required skills: {{ $recipe->skills_required }} <br>
-  Difficulty: {{ $recipe->difficulty }}<br>
-  Time to complete: {{ $recipe->time }}<br>
+  Category: {{{ $recipe->category }}}<br>
+  SubCategory: {{{ $recipe->subcategory }}}<br>
+  Required skills: {{ $recipe->skillsRequired }} <br>
+  Difficulty: {{{ $recipe->difficulty }}}<br>
+  Time to complete: {{{ $recipe->time }}}<br>
   @if ($recipe->hasTools)
   {{$recipe->tools}}<br>
   @endif
@@ -58,7 +58,7 @@ array("id"=>$recipe->result->id)) }}<br>
 </div>
 @endforeach
 @foreach ($recipes as $recipe_id=>$local_recipe)
-<a href="#" onclick="return show_recipe('{{$recipe_id}}')">{{ $local_recipe->result->name}}</a>
+<a href="#" onclick="return show_recipe('{{$recipe_id}}')">{{{ $local_recipe->result->name }}}</a>
 <br>
 @endforeach
 <br>

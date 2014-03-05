@@ -62,7 +62,7 @@ EOF;
   }
 
 
-  public function presentBadges()
+  public function presentFeatureLabels()
   {
     $badges = array();
     if(count($this->recipes)) 

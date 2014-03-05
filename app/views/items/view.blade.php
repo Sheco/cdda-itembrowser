@@ -4,7 +4,7 @@
     {{$item->name}}
     ({{$item->type}})
     <br>
-    {{$item->badges}}
+    {{$item->featureLabels}}
     <br>
     <br>
     Volume: {{ $item->volume }} Weight: {{ $item->weight }}<br>

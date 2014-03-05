@@ -221,6 +221,16 @@ class Item implements Robbo\Presenter\PresentableInterface
 
   }
 
+  public function getCraftingRecipes()
+  {
+    $recipes = array();
+    foreach($this->learn as $r)
+    {
+      $recipes[] = $this->recipe->find($r);
+    }
+    return $recipes;
+  }
+
   public function getPresenter()
   {
     return new ItemPresenter($this);

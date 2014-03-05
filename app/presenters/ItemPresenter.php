@@ -93,5 +93,15 @@ EOF;
     return $cutresult[0]." ".str_plural($cutresult[1]->name);
   }
 
+  public function presentCraftingRecipes()
+  {
+    $recipes = array();
+    foreach($this->object->craftingRecipes as $recipe)
+    {
+      $recipes[] = link_to_route('item.view', $recipe->result->name, $recipe->result->id); 
+    }
+    return join(", ", $recipes);
+  }
+
 
 }

@@ -47,9 +47,7 @@
     @endif
     @if ($item->learn)
     This book contains {{ count($item->learn) }} crafting recipes:<br>
-    @foreach($item->learn as $recipe)
-    <a href="{{ route('item.view', $recipeRepository->find($recipe)->result->id) }}">{{ $recipeRepository->find($recipe)->result->name }}</a>,
-    @endforeach
+    {{ $item->craftingRecipes }}
     <br>
     @endif
     <br>

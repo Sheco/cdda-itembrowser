@@ -41,7 +41,7 @@
           <form class="navbar-form navbar-right" role="form" action="<?= action("ItemsController@search") ?>" >
 
             <div class="form-group">
-              <input name="q" type="text" placeholder="Search..." class="form-control">
+              <input name="q" type="text" placeholder="Search..." class="form-control" value="{{{ $q }}}">
             </div>
             <button type="submit" class="btn btn-success">Go</button>
           </form>

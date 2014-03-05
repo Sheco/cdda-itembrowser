@@ -20,6 +20,11 @@ Route::group(array('after'=>'theme:layouts.bootstrap'), function()
       'uses'=>'ItemsController@search')
   );
 
+  View::composer('layouts.bootstrap', function($view)
+  {
+    $view->with('q', Input::get('q', ''));
+  });
+
   Route::get('/{id}/craft', array(
       'as'=>'item.craft',
       'uses'=>'ItemsController@craft')

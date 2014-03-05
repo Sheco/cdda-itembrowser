@@ -66,8 +66,9 @@ EOF;
   {
     $materials = array(
       $this->object->material1->name, 
-      $this->object->material2->name
     );
+    if($this->object->material2->ident!="null") 
+      $this->object->material2->name;
     $open = '';
     $close = '';
     return $open.join("$close, $open", $materials).$close;

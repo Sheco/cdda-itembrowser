@@ -12,8 +12,7 @@
       Stab: {{ $item->cutting }}
     To-hit bonus: {{ $item->to_hit }}<br>
     Moves per attack: {{ $item->movesPerAttack }}<br>
-    Materials: {{ $item->material1->name }}, 
-      {{ $item->material2->name }}<br>
+    Materials: {{ $item->materials }}<br>
     @if ($item->canBeCut)
       Can be cut into: {{ $item->cutResult }}<br>
     @endif

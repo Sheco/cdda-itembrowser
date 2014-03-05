@@ -31,5 +31,12 @@ This recipe can be learned reading the following books:<br>
 <br>
 @endforeach
 </div>
+  <div class="col-sm-4">
+    <div class="list-group">
+      {{ link_to_route("item.view", "View item", array("id"=>$item->id), array("class"=>"list-group-item")) }}
+      {{ link_to_route("item.recipes", "Recipes", array("id"=>$item->id), array("class"=>"list-group-item")) }}
+      {{ link_to_route("item.disassemble", "Disassemble", array("id"=>$item->id), array("class"=>"list-group-item")) }}
+    </div>
+  </div>
 </div>
 @stop

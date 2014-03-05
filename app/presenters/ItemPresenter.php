@@ -103,5 +103,9 @@ EOF;
     return join(", ", $recipes);
   }
 
+  public function presentCovers()
+  {
+    return join(", ", $this->object->covers);
+  }
 
 }

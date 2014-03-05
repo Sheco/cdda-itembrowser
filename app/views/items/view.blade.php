@@ -29,7 +29,7 @@
     @endif
     <br>
     @if ($item->isArmor) 
-      Covers: {{ join(". ", $item->covers) }}<br>
+      Covers: {{{ $item->covers }}}<br>
       Coverage: {{{ $item->coverage }}}<br>
       Encumberment: {{{ $item->encumbrance }}}<br>
       Protection: <br>

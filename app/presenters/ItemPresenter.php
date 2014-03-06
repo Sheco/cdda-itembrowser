@@ -19,12 +19,15 @@ EOF;
 
   public function presentVolume()
   {
-    return $this->object->volume?:"N/A";
+    return $this->object->volume===null?"N/A":$this->object->volume;
   }
 
   public function presentWeight()
   {
-    return $this->object->weight?:"N/A";
+    $weight = $this->object->weight;
+    if($weight===null)
+      return null;
+    return number_format($weight/1000, 2)."kg/".number_format($weight/453.6,2)."lbs";
   }
 
   public function presentBashing()

@@ -150,12 +150,33 @@ class Item implements Robbo\Presenter\PresentableInterface
     }
   }
 
+  public function getIsAmmo()
+  {
+    return $this->data->type == "AMMO";
+  }
+
+  public function getStackSize()
+  {
+    return isset($this->data->stack_size)? $this->data->stack_size: 1;
+  }
+
+  public function getVolume()
+  {
+    if(!isset($this->data->volume))
+      return null;
+    if($this->isAmmo) {
+      return round($this->data->volume*$this->data->count/$this->stackSize);
+    }
+    return $this->data->volume;
+  }
+
   public function getWeight()
   {
     if(!isset($this->data->weight))
       return null;
-    $weight = $this->data->weight;
-    return number_format($weight/1000, 2)."kg/".number_format($weight/453.6,2)."lbs";
+    if($this->isAmmo)
+      return $this->data->weight*$this->data->count;
+    return $this->data->weight;
   }
 
   public function getMovesPerAttack()

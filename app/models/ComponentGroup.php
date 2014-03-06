@@ -2,18 +2,17 @@
 
 class ComponentGroup
 {
-  private $data;
   public $items;
   public function __construct($data)
   {
-    $this->data = $data;
     $item = App::make('ItemRepositoryInterface');
-    $this->items = array_map(function($i) use ($item) {
-        return array(
+    array_walk($data, function(&$i) use ($item) {
+        $i = array(
           "item"=>$item->find($i[0]),
           "amount"=>"$i[1]x  "
         );
-    }, $this->data);
+    });
+    $this->items = $data;
   }
 }
 

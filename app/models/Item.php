@@ -189,7 +189,7 @@ class Item implements Robbo\Presenter\PresentableInterface
   public function getToHit()
   {
     if(!isset($this->data->to_hit))
-      return null;
+      return 0;
     return sprintf("%+d", $this->data->to_hit);
   }
 

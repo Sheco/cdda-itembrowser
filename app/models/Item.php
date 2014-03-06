@@ -165,7 +165,7 @@ class Item implements Robbo\Presenter\PresentableInterface
     if(!isset($this->data->volume))
       return null;
     if($this->isAmmo) {
-      return round($this->data->volume*$this->data->count/$this->stackSize);
+      return round($this->data->volume/$this->stackSize);
     }
     return $this->data->volume;
   }

@@ -183,7 +183,7 @@ class Item implements Robbo\Presenter\PresentableInterface
   {
     if(!isset($this->data->weight) || !isset($this->data->volume))
       return null;
-    return ceil(65 + 4 * $this->data->volume + $this->data->weight / 60);
+    return floor(65 + 4 * $this->volume + $this->weight / 60);
   }
 
   public function getToHit()

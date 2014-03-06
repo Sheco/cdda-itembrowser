@@ -19,6 +19,14 @@
     @if ($item->isResultOfCutting)
       Can be obtained if you cut items made of {{{ $item->materialToCut }}}<br>
     @endif
+    @if ($item->isAmmo)
+    Damage: {{{ $item->damage }}}<br>
+    Armor-pierce: {{{ $item->pierce }}}<br>
+    Range: {{{ $item->range }}}<br>
+    Dispersion: {{{ $item->dispersion }}}<br>
+    Recoil: {{{ $item->recoil }}}<br>
+    Count: {{{ $item->count }}}<br>
+    @endif
     @if ($item->isComestible)
       Phase: {{{ $item->phase }}}<br>
       Nutrition: {{{ $item->nutrition }}}<br>

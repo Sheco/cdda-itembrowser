@@ -33,6 +33,7 @@
 	},
 	"config": {
 		"preferred-install": "dist"
+		,"vendor-dir": "/var/cache/cataclysm/vendor"
 	},
 	"minimum-stability": "dev"
 }

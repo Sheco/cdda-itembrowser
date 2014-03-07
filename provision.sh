@@ -3,9 +3,7 @@
 # this is script would normally be ran only once per server
 # it downloads the system dependencies needed for the app
 
-
-# get the absolute path to the data files
-BASE_PATH=$(cd $(dirname $0 ) && pwd )
+BASE_PATH=/vagrant
 USER=vagrant
 DATA_PATH=/var/cache/cataclysm
 
@@ -23,8 +21,10 @@ a2enmod rewrite
 service apache2 restart
 
 # download composer
-cd /usr/local/bin
-curl -sS https://getcomposer.org/installer | php -- --filename=composer
+curl -sS https://getcomposer.org/installer | php -- --filename=composer --install-dir=/usr/local/bin
 
-sudo -u $USER ./setup.sh "$DATA_PATH"
+mkdir -p "$DATA_PATH"
+chown $USER "$DATA_PATH"
+sudo -u $USER "$BASE_PATH"/setup.sh "$DATA_PATH"
+echo "Giving access to the webserver"
 chgrp -R www-data "$DATA_PATH"/storage/*

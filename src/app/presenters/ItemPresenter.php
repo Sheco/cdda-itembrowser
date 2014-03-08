@@ -80,13 +80,13 @@ EOF;
   public function presentFeatureLabels()
   {
     $badges = array();
-    if(count($this->recipes)) 
-      $badges[] = '<span class="label label-default">can be crafted</span>';
     $recipes = count($this->toolFor);
     if($recipes)
       $badges[] = '<span class="label label-success">recipes: '.$recipes.'</span>';
     if(count($this->disassembly))
-      $badges[] = '<span class="label label-info">can be disassembled</span>';
+      $badges[] = '<span class="label label-info">disassemble</span>';
+    if(count($this->recipes)) 
+      $badges[] = '<span class="label label-default">craft</span>';
     return join(" ", $badges);
   }
 

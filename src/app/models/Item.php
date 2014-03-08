@@ -117,6 +117,11 @@ class Item implements Robbo\Presenter\PresentableInterface
     , $this->pivot->find($this->data->id, "toolForCategory.$category"));    
   }
 
+  public function getLearn()
+  {
+    return $this->pivot->find($this->data->id, 'learn');
+  }
+
   public function getIsBook()
   {
     return count($this->learnBook)>0;

@@ -27,6 +27,13 @@
     Recoil: {{{ $item->recoil }}}<br>
     Count: {{{ $item->count }}}<br>
     @endif
+    @if ($item->isTool)
+    Maximum {{ $item->max_charges }} charges
+    @if ($item->ammo!="NULL")
+    of {{ $item->ammo }}
+    @endif
+    <br>
+    @endif
     @if ($item->isComestible)
       Phase: {{{ $item->phase }}}<br>
       Nutrition: {{{ $item->nutrition }}}<br>

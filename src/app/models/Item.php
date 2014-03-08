@@ -161,6 +161,11 @@ class Item implements Robbo\Presenter\PresentableInterface
     return $this->data->type == "BOOK";
   }
 
+  public function getIsTool()
+  {
+    return isset($this->data->max_charges) and isset($this->data->ammo);
+  }
+
   public function getStackSize()
   {
     return isset($this->data->stack_size)? $this->data->stack_size: 1;

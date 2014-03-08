@@ -80,7 +80,7 @@ class ItemRepositoryPivot implements ItemRepositoryPivotInterface
     return;
   }
 
-  function find($item_id, $type)
+  public function find($item_id, $type)
   {
     if(!isset($this->database[$item_id]->{$type}))
       return array();

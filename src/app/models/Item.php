@@ -6,6 +6,8 @@ class Item implements Robbo\Presenter\PresentableInterface
   protected $recipe;
   protected $item;
   protected $material;
+  protected $pivot;
+
   private $cut_pairs = array(
       "cotton"=>"rag",
       "leather"=>"leather",
@@ -15,11 +17,17 @@ class Item implements Robbo\Presenter\PresentableInterface
       "wood"=>"skewer"
     );
 
-  public function __construct(RecipeRepositoryInterface $recipe, MaterialRepositoryInterface $material, ItemRepositoryInterface $item)
+  public function __construct(
+    RecipeRepositoryInterface $recipe, 
+    MaterialRepositoryInterface $material, 
+    ItemRepositoryInterface $item,
+    ItemRepositoryPivotInterface $pivot
+  )
   {
     $this->recipe = $recipe;
     $this->material = $material;
     $this->item = $item;
+    $this->pivot = $pivot;
   }
 
   public function load($data)
@@ -80,40 +88,33 @@ class Item implements Robbo\Presenter\PresentableInterface
 
     return array_map(function($recipe)
         { return $this->recipe->find($recipe); }
-    , $this->data->recipes);
+    , $this->pivot->find($this->data->id, 'recipes'));
   }
 
   public function getDisassembly()
   {
-    if(!isset($this->data->disassembly))
-      return array();
-
     return array_map(function($recipe)
         { return $this->recipe->find($recipe); }
-    , $this->data->disassembly);    
+    , $this->pivot->find($this->data->id, 'disassembly'));
   }
 
   public function getToolFor()
   {
-    if(!isset($this->data->toolFor))
-      return array();
     return array_map(function($recipe)
         { return $this->recipe->find($recipe); }
-    , $this->data->toolFor);
+    , $this->pivot->find($this->data->id, 'toolFor'));
   }
 
   public function getToolCategories()
   {
-    return array_keys($this->data->toolForCategory);
+    return array_keys($this->pivot->find($this->data->id, 'categories'));
   }
 
   public function getToolForCategory($category)
   {
-    if(!isset($this->data->toolForCategory[$category]))
-      return array();
     return array_map(function($recipe)
         { return $this->recipe->find($recipe); }
-    , $this->data->toolForCategory[$category]);    
+    , $this->pivot->find($this->data->id, "toolForCategory.$category"));    
   }
 
   public function getIsBook()

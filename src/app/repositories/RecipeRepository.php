@@ -3,12 +3,10 @@
 class RecipeRepository implements RecipeRepositoryInterface
 {
   protected $database;
-  protected $item;
 
-  public function __construct(ItemRepositoryInterface $item)
+  public function __construct()
   {
-    $this->item = $item;
-    $this->parse();
+    $this->database = $this->read();
   }
 
   public function find($id)
@@ -20,13 +18,12 @@ class RecipeRepository implements RecipeRepositoryInterface
 
   public function where($text)
   {
-    throw new Exception();
-  }
-
-  protected function parse()
-  {
-    $this->database = $this->read();
-    $this->linkItems();
+    //TODO: make a real search
+    //right now, the search is only used to feed the ItemRecipePivot
+    return array_filter($this->database, function($recipe)
+    {
+      return true;     
+    });
   }
 
   protected function read()
@@ -59,43 +56,4 @@ class RecipeRepository implements RecipeRepositoryInterface
     return $recipes;
   }
 
-  protected function linkItems()
-  {
-    foreach($this->database as $recipe_id=>$recipe)
-    {
-      if(isset($recipe->result))
-      {
-        $this->item->link("result", $recipe->result, $recipe);
-        if(isset($recipe->book_learn))
-        {
-          foreach($recipe->book_learn as $learn)
-          {
-            $this->item->link("learn", $learn[0], $recipe);
-          }
-        }
-      }
-      if(isset($recipe->tools))
-      {
-        foreach($recipe->tools as $group)
-        {
-          foreach($group as $tool)
-          {
-            list($id, $amount) = $tool;
-            $this->item->link("tool", $id, $recipe);
-          }
-        }
-      }
-      if(isset($recipe->components)) 
-      {
-        foreach($recipe->components as $group)
-        {
-          foreach($group as $component)
-          {
-            list($id, $amount) = $component;
-            $this->item->link("component", $id, $recipe);
-          }
-        }
-      }
-    }
-  }
 }

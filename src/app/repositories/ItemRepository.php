@@ -6,7 +6,7 @@ class ItemRepository implements ItemRepositoryInterface
 
   public function __construct()
   {
-    $this->parse();
+    $this->database = $this->read();
   }
 
   public function find($id)
@@ -18,11 +18,6 @@ class ItemRepository implements ItemRepositoryInterface
       return $item;  
     }
 
-    if(isset($this->database["vehicle_parts/$id"]))
-    {
-      $item->load($this->database["vehicle_parts/$id"]);
-      return $item;
-    }
     $item->load(json_decode('{"id":"'.$id.'","name":"?'.$id.'?"}'));
     return $item;
   }
@@ -41,15 +36,6 @@ class ItemRepository implements ItemRepositoryInterface
       }
     }
     return $results;
-  }
-
-  protected function parse()
-  {
-    $this->database = $this->read();
-  }
-
-  protected function snapshot()
-  {
   }
 
   protected function read()
@@ -73,17 +59,6 @@ class ItemRepository implements ItemRepositoryInterface
         $items[$item->id] = $item;
       }
     }
-    $json = (array) json_decode(file_get_contents("$path/vehicle_parts.json"));
-    foreach($json as $item)
-    {
-      $item->recipes = array();
-      $item->disassembly = array();
-      $item->toolFor = array();
-      $item->toolForCategory = array();      
-      $item->componentFor = array();
-      $items["vehicle_parts/$item->item"] = $item;
-      $items[$item->id] = $item;
-    }
     $json = (array) json_decode(file_get_contents("$path/bionics.json"));
     foreach($json as $item)
     {
@@ -105,38 +80,4 @@ class ItemRepository implements ItemRepositoryInterface
     return $items;
   }
 
-  public function link($type, $id, $recipe)
-  {
-    $keys = array(
-        "result"=>"recipes",
-        "tool"=>"toolFor",
-        "component"=>"toolFor",
-        "learn"=>"learn"
-    );
-    $key = $keys[$type];
-    if(isset($this->database[$id]))
-    {
-      if($key=="recipes" and $recipe->category=="CC_NONCRAFT")
-      {
-        $this->database[$id]->disassembly[] = $recipe->id;
-        return;
-      }
-      if($key=="recipes" and isset($recipe->reversible) and $recipe->reversible=="true")      
-      {
-        $this->database[$id]->disassembly[] = $recipe->id;
-      }
-
-      if($key=="toolFor")
-      {
-        $this->database[$id]->{"toolForCategory"}[$recipe->category][] = $recipe->id;
-      }
-      $this->database[$id]->{$key}[] = $recipe->id;
-      return;
-    }
-    if(isset($this->database["vehicle_parts/$id"]))
-    {
-      $this->database["vehicle_parts/$id"]->{$key}[] = $recipe->id;
-      return;
-    }
-  }
 }

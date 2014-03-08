@@ -1,8 +1,8 @@
 <?php
 
-class RecipeRepositoryCache extends RecipeRepository
+class ItemRepositoryPivotCache extends ItemRepositoryPivot
 {
-  const CACHE_KEY = "recipeRepository";
+  const CACHE_KEY = "ItemRepositoryPivot";
 
   protected function read()
   {
@@ -14,4 +14,5 @@ class RecipeRepositoryCache extends RecipeRepository
     Cache::put(self::CACHE_KEY, $database, 60);
     return $database;
   }
+
 }

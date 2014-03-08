@@ -23,7 +23,7 @@ class ItemRepositoryPivot implements ItemRepositoryPivotInterface
     {
       if(isset($recipe->result))
       {
-        $this->link($database, "result", $recipe->result, $recipe);
+        $this->link($database, "recipes", $recipe->result, $recipe);
         if(isset($recipe->book_learn))
         {
           foreach($recipe->book_learn as $learn)
@@ -39,7 +39,7 @@ class ItemRepositoryPivot implements ItemRepositoryPivotInterface
           foreach($group as $tool)
           {
             list($id, $amount) = $tool;
-            $this->link($database, "tool", $id, $recipe);
+            $this->link($database, "toolFor", $id, $recipe);
           }
         }
       }
@@ -50,7 +50,7 @@ class ItemRepositoryPivot implements ItemRepositoryPivotInterface
           foreach($group as $component)
           {
             list($id, $amount) = $component;
-            $this->link($database, "tool", $id, $recipe);
+            $this->link($database, "toolFor", $id, $recipe);
           }
         }
       }
@@ -58,14 +58,8 @@ class ItemRepositoryPivot implements ItemRepositoryPivotInterface
     return $database;
   }
 
-  public function link(&$database, $type, $id, $recipe)
+  protected function link(&$database, $key, $id, $recipe)
   {
-    $keys = array(
-        "result"=>"recipes",
-        "tool"=>"toolFor",
-        "learn"=>"learn"
-    );
-    $key = $keys[$type];
     if($key=="recipes" and $recipe->category=="CC_NONCRAFT")
     {
       $database[$id]->disassembly[] = $recipe->id;

@@ -52,7 +52,23 @@
       Storage: {{{ $item->storage }}}<br>
       <br>
     @endif
-    @if ($item->learn)
+    @if ($item->isBook)
+    --<br>
+    @if ($item->skill=="none")
+    Just for fun.<br>
+    @else
+    Can bring your {{ $item->skill }} skill to 1<br>
+    @if ($item->required_level==0)
+    It can be understood by beginners.<br>
+    @else
+    Requires {{ $item->skill }} level {{ $item->required_level }} to understand.<br>
+    @endif
+    @endif
+    Requires intelligence of {{ $item->intelligence }} to easily read.<br>
+    @if ($item->fun!=0)
+    Reading this book affects your morale by {{ $item->fun }}<br>
+    @endif
+    This book takes {{ $item->time }} minutes to read.<br>
     --<br>
     This book contains {{ count($item->learn) }} crafting recipes:<br>
     {{ $item->craftingRecipes }}

@@ -122,11 +122,6 @@ class Item implements Robbo\Presenter\PresentableInterface
     return $this->pivot->find($this->data->id, 'learn');
   }
 
-  public function getIsBook()
-  {
-    return count($this->learnBook)>0;
-  }
-
   public function getIsArmor()
   {
     return isset($this->data->covers);
@@ -159,6 +154,11 @@ class Item implements Robbo\Presenter\PresentableInterface
   public function getIsAmmo()
   {
     return $this->data->type == "AMMO";
+  }
+
+  public function getIsBook()
+  {
+    return $this->data->type == "BOOK";
   }
 
   public function getStackSize()

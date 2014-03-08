@@ -35,7 +35,6 @@
       Spoils in {{{ $item->spoilsIn }}}<br>
       Heal: {{{ $item->heal }}}<br>
     @endif
-    <br>
     @if ($item->isArmor) 
       Covers: {{{ $item->covers }}}<br>
       Coverage: {{{ $item->coverage }}}<br>
@@ -54,6 +53,7 @@
       <br>
     @endif
     @if ($item->learn)
+    --<br>
     This book contains {{ count($item->learn) }} crafting recipes:<br>
     {{ $item->craftingRecipes }}
     <br>

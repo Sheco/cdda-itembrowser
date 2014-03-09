@@ -1,3 +1,6 @@
+@section('title')
+{{$item->rawName}} (recipes): Cataclysm: Dark Days Ahead
+@endsection
 @section('content')
 <script>
 var show_recipe = function(id)

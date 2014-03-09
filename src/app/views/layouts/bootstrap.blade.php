@@ -7,7 +7,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Cataclysm Items</title>
+    <title>@yield('title', 'Cataclysm Dark Days Ahead Item/Recipe Browser')</title>
 
     <!-- Bootstrap core CSS -->
     <link href="/css/bootstrap.css" rel="stylesheet">

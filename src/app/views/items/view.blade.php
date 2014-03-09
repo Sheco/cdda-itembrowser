@@ -1,3 +1,6 @@
+@section('title')
+{{$item->rawName}}: Cataclysm: Dark Days Ahead
+@endsection
 @section('content')
 @include('items.menu', array('active'=>'view'))
 <div class="row">

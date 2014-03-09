@@ -10,6 +10,11 @@ class ItemPresenter extends Robbo\Presenter\Presenter
     return htmlspecialchars($symbol);
   }
 
+  public function presentRawName()
+  {
+    return $this->object->name;
+  }
+
   public function presentName()
   { 
     return <<<EOF

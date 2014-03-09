@@ -1,3 +1,6 @@
+@section('title')
+{{$item->rawName}} (disassemble): Cataclysm: Dark Days Ahead
+@endsection
 @section('content')
 @include('items.menu', array('active'=>'disassemble'))
   <a href="{{ route("item.view", array("id"=>$item->id)) }}">{{ $item->name }}</a>

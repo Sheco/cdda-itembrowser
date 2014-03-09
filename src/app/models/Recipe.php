@@ -31,6 +31,8 @@ class Recipe implements Robbo\Presenter\PresentableInterface
       return null;
 
     $skills = $this->data->skills_required;
+    if(!isset($skills[0]))
+      return array();
     if(!is_array($skills[0]))
       return array($skills);
 

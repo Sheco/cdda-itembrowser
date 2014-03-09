@@ -13,7 +13,6 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.box = "wheezy"
   config.vm.hostname = "cataclysm"
   config.vm.synced_folder ".", "/vagrant"
-  config.proxy.http = "http://192.168.56.2:3128/"
   config.vm.network :private_network, type: :dhcp
   # The url from where the 'config.vm.box' box will be fetched if it
   # doesn't already exist on the user's system.

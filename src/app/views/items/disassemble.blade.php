@@ -8,7 +8,7 @@
 @endif
 <br>
 <div class="row">
-<div class="col-sm-4">
+<div class="col-md-6">
 @foreach ($item->disassembly as $recipe)
   {{link_to_route("item.view", $recipe->result->name, array("id"=>$recipe->result->id))}}<br>
   Skill used: {{{ $recipe->skill_used }}} <br>

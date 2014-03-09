@@ -8,7 +8,7 @@
 @endif
 <br>
 <div class="row">
-<div class="col-sm-4">
+<div class="col-md-6">
 @foreach ($item->recipes as $recipe)
   Skill used: {{{ $recipe->skill_used }}} <br>
   Required skills: {{ $recipe->skillsRequired }} <br>

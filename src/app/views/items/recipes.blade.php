@@ -19,25 +19,25 @@ var show_recipe = function(id)
  can't be used to craft anything.
 @endif
 <br>
-<div class="row">
-  <div class="col-sm-8">
-    <div class="navbar navbar-default">
-      <ul class="nav navbar-nav">
+<ul class="nav nav-tabs">
 
-  @foreach ($categories as $cat)
-      <li>{{ link_to_route("item.recipes", substr($cat, 3), 
-        array("id"=>$item->id, "category"=>$cat), 
-        array("class"=>"list-group-item".($cat==$category?" active": ""))) }}</li>
-  @endforeach
-      </ul>
-    </div>
+@foreach ($categories as $cat)
+<li{{ $cat==$category?' class="active"':'' }}>{{ link_to_route("item.recipes", substr($cat, 3), 
+      array("id"=>$item->id, "category"=>$cat)) }}</li>
+@endforeach
+</ul>
+
+<div class="row">
+  <div class="col-md-4">
+@foreach ($recipes as $recipe_id=>$local_recipe)
+<a href="#" onclick="return show_recipe('{{$recipe_id}}')">{{{ $local_recipe->result->name }}}</a>
+<br>
+@endforeach
+<hr>
   </div>
-</div>
-
-<div class="row">
-<div class="col-sm-4">
+<div class="col-md-6">
 @foreach($recipes as $recipe_id=>$recipe)
-<div id="recipe{{$recipe_id}}" class="recipes" style="display: none">
+<div id="recipe{{$recipe_id}}" class="recipes" style="display: none;">
 {{ link_to_route("item.view", 
 $recipe->result->name, 
 array("id"=>$recipe->result->id)) }}<br>
@@ -53,16 +53,8 @@ array("id"=>$recipe->result->id)) }}<br>
   @if ($recipe->hasComponents)
   {{$recipe->components}}<br>
   @endif
-  <hr>
 </div>
 @endforeach
-@foreach ($recipes as $recipe_id=>$local_recipe)
-<a href="#" onclick="return show_recipe('{{$recipe_id}}')">{{{ $local_recipe->result->name }}}</a>
-<br>
-@endforeach
-<br>
-
-
 </div>
 </div>
 @stop

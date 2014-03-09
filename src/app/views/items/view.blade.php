@@ -1,7 +1,7 @@
 @section('content')
 @include('items.menu', array('active'=>'view'))
 <div class="row">
-  <div class="col-sm-4">
+  <div class="col-md-6">
     {{$item->name}}
     ({{{$item->type}}})
     <br>

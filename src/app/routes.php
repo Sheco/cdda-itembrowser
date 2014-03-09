@@ -23,6 +23,7 @@ Route::group(array('after'=>'theme:layouts.bootstrap'), function()
   View::composer('layouts.bootstrap', function($view)
   {
     $view->with('q', Input::get('q', ''));
+    $view->with('sites', Config::get('cataclysm.sites'));
   });
 
   View::composer('items.menu', function($view) 

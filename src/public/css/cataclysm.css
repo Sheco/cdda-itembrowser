@@ -20,12 +20,29 @@ a.list-group-item:hover {
 	background: black;
 }
 
+.navbar-default .navbar-nav > li.active a
+{
+  background: #428bca;
+  color: white;
+}
 .navbar-default .navbar-nav > li > a
 {
 	color: white;
 }
-.navbar-default .navbar-nav > li > a:hover
+.navbar-default .navbar-nav > li > a:hover,
+.navbar-default .navbar-nav > .active > a:hover
 {
 	background: blue;
 	color: yellow;
 }
+
+.nav-tabs a
+{
+  color: white;
+}
+
+.nav-tabs li a:hover 
+{
+  background: blue;
+}
+

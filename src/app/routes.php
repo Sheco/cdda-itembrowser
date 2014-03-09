@@ -75,3 +75,5 @@ Route::group(array('after'=>'theme:layouts.bootstrap'), function()
 
 
 });
+
+Route::get('/sitemap.xml', 'ItemsController@sitemap');

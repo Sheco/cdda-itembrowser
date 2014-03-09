@@ -246,6 +246,7 @@ class Item implements Robbo\Presenter\PresentableInterface
 
   public function matches($text)
   {
+      if($text=="") return true;
       return $this->symbol==$text || 
           stristr($this->id, $text) || 
           stristr($this->name, $text) ||

@@ -58,4 +58,9 @@ class ItemsController extends BaseController
     return View::make('items.disassemble', compact('item'));
   }
 
+  public function sitemap()
+  {
+    $items = $this->item->where('');
+    return View::make('items.sitemap', compact('items'));
+  }
 }

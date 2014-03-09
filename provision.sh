@@ -15,10 +15,11 @@ apt-get update
 apt-get -y install php5 php5-mcrypt php5-mysql avahi-daemon php-apc unzip
 
 # setup apache2
-cp "$BASE_PATH"/sites-available/* /etc/apache2/sites-available
-a2ensite cataclysm
 a2enmod rewrite
+sed -i 's/AllowOverride None/AllowOverride All/' /etc/apache2/sites-available/*
 service apache2 restart
+rm -fr /var/www
+ln -sf "$BASE_PATH"/src/public /var/www
 
 # download composer
 curl -sS https://getcomposer.org/installer | php -- --filename=composer --install-dir=/usr/local/bin

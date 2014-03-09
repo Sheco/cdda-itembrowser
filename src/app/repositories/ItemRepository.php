@@ -18,7 +18,7 @@ class ItemRepository implements ItemRepositoryInterface
       return $item;  
     }
 
-    $item->load(json_decode('{"id":"'.$id.'","name":"?'.$id.'?"}'));
+    $item->load(json_decode('{"id":"'.$id.'","name":"?'.$id.'?","type":"invalid"}'));
     return $item;
   }
 

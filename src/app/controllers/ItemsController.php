@@ -28,6 +28,7 @@ class ItemsController extends BaseController
   public function view($id)
   {
     $item = $this->item->find($id);
+    if($item->type="invalid") App::abort(404);
     $recipeRepository = $this->recipe;
     return View::make('items.view', compact('item', 'recipeRepository'));
   }
@@ -35,6 +36,7 @@ class ItemsController extends BaseController
   public function craft($id)
   {
     $item = $this->item->find($id);
+    if($item->type="invalid") App::abort(404);
     $itemRepository = $this->item;
     return View::make('items.craft', compact('item', 'itemRepository'));
   }
@@ -42,6 +44,7 @@ class ItemsController extends BaseController
   public function recipes($id, $category="")
   {
     $item = $this->item->find($id);
+    if($item->type="invalid") App::abort(404);
     $categories = $item->toolCategories;
     if($category=="" && $categories)
     {
@@ -55,6 +58,7 @@ class ItemsController extends BaseController
   public function disassemble($id)
   {
     $item = $this->item->find($id);
+    if($item->type="invalid") App::abort(404);
     return View::make('items.disassemble', compact('item'));
   }
 

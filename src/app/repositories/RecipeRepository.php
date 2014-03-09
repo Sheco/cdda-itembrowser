@@ -29,28 +29,22 @@ class RecipeRepository implements RecipeRepositoryInterface
   protected function read()
   {
     error_log("Building recipes database...");
+    $types = array_flip(array(
+      "recipe"
+    ));
 
     $recipes = array();
-
-    if(file_exists(\Config::get("cataclysm.dataPath")."/recipes.json"))
+    $it = new RecursiveDirectoryIterator(\Config::get("cataclysm.dataPath"));
+    $id = 0;
+    foreach(new RecursiveIteratorIterator($it) as $file)
     {
-      $path = \Config::get("cataclysm.dataPath");
-      $files = array("recipes.json");
-    }
-    else
-    {
-      $path = \Config::get("cataclysm.dataPath")."/recipes";
-      $files = scandir($path);
-    }
-
-    foreach($files as $file)
-    {
-      if($file[0]==".") continue;
-      $json = (array) json_decode(file_get_contents("$path/$file"));
-      foreach($json as $id=>$recipe)
+      $json = (array) json_decode(file_get_contents($file));
+      foreach($json as $recipe)
       {
-        $recipe->id = $id;
-        $recipes[] = $recipe;
+        if(!isset($types[$recipe->type]))
+          continue;
+        $recipe->id = $id++;
+        $recipes[$recipe->id] = $recipe;
       }
     }
     return $recipes;

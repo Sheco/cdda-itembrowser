@@ -41,16 +41,21 @@ class ItemRepository implements ItemRepositoryInterface
   protected function read()
   {
     $items = array();
+    $item_types = array_flip(array(
+      "AMMO", "GUN", "ARMOR", "TOOL", "TOOL_ARMOR", "BOOK", "COMESTIBLE",
+      "CONTAINER", "GUNMOD", "GENERIC", "BIONIC_ITEM", "VAR_VEH_PART"
+    ));
 
     error_log("Building item database..");
     $path = \Config::get("cataclysm.dataPath");
-    foreach(scandir("$path/items") as $file)
+    $it = new RecursiveDirectoryIterator(\Config::get("cataclysm.dataPath"));
+    foreach(new RecursiveIteratorIterator($it) as $file)
     {
-      if($file[0]==".") continue;
-      if($file=="ammo_types.json") continue;
-      $json = (array) json_decode(file_get_contents("$path/items/$file"));
+      $json = (array) json_decode(file_get_contents($file));
       foreach($json as $item)
       {
+        if(!isset($item_types[$item->type]))
+          continue;
         $item->recipes = array();
         $item->disassembly = array();
         $item->toolFor = array();
@@ -58,21 +63,6 @@ class ItemRepository implements ItemRepositoryInterface
         $item->componentFor = array();
         $items[$item->id] = $item;
       }
-    }
-    $json = (array) json_decode(file_get_contents("$path/bionics.json"));
-    foreach($json as $item)
-    {
-      $item->recipes = array();
-      $item->disassembly = array();
-      $item->toolFor = array();
-      $item->toolForCategory = array();
-      $item->componentFor = array();
-      $item->weight = 2000;
-      $item->volume = 10;
-      $item->bashing = 8;
-      $item->cutting = 0;
-      $item->to_hit = 0;
-      $items[$item->id] = $item;
     }
 
     $items["toolset"] = json_decode('{"id":"toolset","name":"integrated toolset","type":"none"}');

@@ -25,6 +25,28 @@ Route::group(array('after'=>'theme:layouts.bootstrap'), function()
     $view->with('q', Input::get('q', ''));
   });
 
+  View::composer('items.menu', function($view) 
+  {
+    $view->with('areas', array(
+      "view"=>array(
+        "route"=>"item.view",
+        "label"=>"View item",
+      ),
+      "craft"=>array(
+        "route"=>"item.craft",
+        "label"=>"Craft",
+      ),
+      "recipes"=>array(
+        "route"=>"item.recipes",
+        "label"=>"Recipes",
+      ),
+      "disassemble"=>array(
+        "route"=>"item.disassemble",
+        "label"=>"Disassemble",
+      ),
+    ));
+  });
+
   Route::get('/{id}/craft', array(
       'as'=>'item.craft',
       'uses'=>'ItemsController@craft')

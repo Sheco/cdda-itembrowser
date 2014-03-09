@@ -11,6 +11,7 @@ var show_recipe = function(id)
   return false;
 }
 </script>
+@include('items.menu', array('active'=>'recipes'))
 <h3>
   <a href="{{ route("item.view", array("id"=>$item->id)) }}">{{ $item->name }}</a>
 @if (count($item->toolFor)>0) 
@@ -65,15 +66,5 @@ array("id"=>$recipe->result->id)) }}<br>
 
 
 </div>
-
-  <div class="col-sm-4">
-    <div class="list-group">
-      {{ link_to_route("item.craft", "Craft", array("id"=>$item->id), array("class"=>"list-group-item")) }}
-      {{ link_to_route("item.view", "View item", array("id"=>$item->id), array("class"=>"list-group-item")) }}
-      {{ link_to_route("item.disassemble", "Disassemble", array("id"=>$item->id), array("class"=>"list-group-item")) }}
-    </div>
-  </div>
-
-
 </div>
 @stop

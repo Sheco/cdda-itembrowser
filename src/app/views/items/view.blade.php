@@ -1,4 +1,5 @@
 @section('content')
+@include('items.menu', array('active'=>'view'))
 <div class="row">
   <div class="col-sm-4">
     {{$item->name}}
@@ -84,13 +85,6 @@
     <br>
     {{{ $item->description }}}
 
-  </div>
-  <div class="col-sm-4">
-    <div class="list-group">
-      {{ link_to_route("item.craft", "Craft", array("id"=>$item->id), array("class"=>"list-group-item")) }}
-      {{ link_to_route("item.recipes", "Recipes", array("id"=>$item->id), array("class"=>"list-group-item")) }}
-      {{ link_to_route("item.disassemble", "Disassemble", array("id"=>$item->id), array("class"=>"list-group-item")) }}
-    </div>
   </div>
 </div>
 @stop

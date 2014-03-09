@@ -1,4 +1,5 @@
 @section('content')
+@include('items.menu', array('active'=>'disassemble'))
 <h3>
   <a href="{{ route("item.view", array("id"=>$item->id)) }}">{{ $item->name }}</a>
 @if (count($item->disassembly)>0)
@@ -29,12 +30,5 @@
 @endforeach
 </div>
 
-  <div class="col-sm-4">
-    <div class="list-group">
-      {{ link_to_route("item.craft", "Craft", array("id"=>$item->id), array("class"=>"list-group-item")) }}
-      {{ link_to_route("item.recipes", "Recipes", array("id"=>$item->id), array("class"=>"list-group-item")) }}
-      {{ link_to_route("item.view", "View item", array("id"=>$item->id), array("class"=>"list-group-item")) }}
-    </div>
-  </div>
 </div>
 @stop

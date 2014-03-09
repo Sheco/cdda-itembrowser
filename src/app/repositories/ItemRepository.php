@@ -75,8 +75,8 @@ class ItemRepository implements ItemRepositoryInterface
       $items[$item->id] = $item;
     }
 
-    $items["toolset"] = json_decode('{"id":"toolset","name":"integrated toolset"}');
-    $items["fire"] = json_decode('{"id":"fire","name":"nearby fire"}');
+    $items["toolset"] = json_decode('{"id":"toolset","name":"integrated toolset","type":"none"}');
+    $items["fire"] = json_decode('{"id":"fire","name":"nearby fire","type":"none"}');
     return $items;
   }
 

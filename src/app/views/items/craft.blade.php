@@ -1,5 +1,12 @@
 @section('title')
-{{$item->rawName}} (craft) - Cataclysm: Dark Days Ahead
+{{{$item->rawName}}} (craft) - Cataclysm: Dark Days Ahead
+@endsection
+@section('description')
+@if (count($item->recipes)>0)
+{{{$item->rawName}}} can be crafted. You can find more information here.
+@else
+{{{$item->rawName}}} can't be crafted.
+@endif
 @endsection
 @section('content')
 @include('items.menu', array('active'=>'craft'))

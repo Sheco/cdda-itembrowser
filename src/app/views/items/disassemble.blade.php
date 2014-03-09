@@ -1,5 +1,12 @@
 @section('title')
-{{$item->rawName}} (disassemble) - Cataclysm: Dark Days Ahead
+{{{$item->rawName}}} (disassemble) - Cataclysm: Dark Days Ahead
+@endsection
+@section('description')
+@if (count($item->disassembly)>0)
+{{{$item->rawName}}} can be disassembled. You can find more information here.
+@else
+{{{$item->rawName}}} can't be disassembled.
+@endif
 @endsection
 @section('content')
 @include('items.menu', array('active'=>'disassemble'))

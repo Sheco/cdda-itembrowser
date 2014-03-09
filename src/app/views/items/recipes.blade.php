@@ -1,5 +1,12 @@
 @section('title')
-{{$item->rawName}} (recipes) - Cataclysm: Dark Days Ahead
+{{{$item->rawName}}} (recipes) - Cataclysm: Dark Days Ahead
+@endsection
+@section('description')
+@if (count($recipes)>0)
+{{{$item->rawName}}} can be used to craft other items. You can find more information here.
+@else
+{{{$item->rawName}}} can't be used to craft other items.
+@endif
 @endsection
 @section('content')
 <script>

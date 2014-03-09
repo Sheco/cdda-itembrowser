@@ -1,5 +1,8 @@
 @section('title')
-{{$item->rawName}} - Cataclysm: Dark Days Ahead
+{{{$item->rawName}}} - Cataclysm: Dark Days Ahead
+@endsection
+@section('description')
+{{{$item->rawName}}} is a Cataclysm: Dark Days Ahead item, it has a volume of {{{ $item->volume }}} and a weight of {{{ $item->weight }}}. It does {{{ $item->bashing }}} bashing damage and {{{ $item->cutting }}} cutting damage. You can find more information here.
 @endsection
 @section('content')
 @include('items.menu', array('active'=>'view'))

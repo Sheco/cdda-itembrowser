@@ -1,5 +1,5 @@
 @section('title')
-{{$item->rawName}} (recipes): Cataclysm: Dark Days Ahead
+{{$item->rawName}} (recipes) - Cataclysm: Dark Days Ahead
 @endsection
 @section('content')
 <script>

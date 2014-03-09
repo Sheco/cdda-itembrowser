@@ -12,7 +12,7 @@ class ItemPresenter extends Robbo\Presenter\Presenter
 
   public function presentRawName()
   {
-    return $this->object->name;
+    return ucfirst($this->object->name);
   }
 
   public function presentName()

@@ -1,5 +1,5 @@
 @section('title')
-{{$item->rawName}} (disassemble): Cataclysm: Dark Days Ahead
+{{$item->rawName}} (disassemble) - Cataclysm: Dark Days Ahead
 @endsection
 @section('content')
 @include('items.menu', array('active'=>'disassemble'))

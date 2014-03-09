@@ -77,3 +77,8 @@ Route::group(array('after'=>'theme:layouts.bootstrap'), function()
 });
 
 Route::get('/sitemap.xml', 'ItemsController@sitemap');
+
+App::missing(function($exception)
+{
+  return Response::view("notfound", array(), 404);
+});

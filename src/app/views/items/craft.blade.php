@@ -1,13 +1,11 @@
 @section('content')
 @include('items.menu', array('active'=>'craft'))
-<h3>
   <a href="{{ route("item.view", array("id"=>$item->id)) }}">{{ $item->name }}</a>
 @if (count($item->recipes)>0)
  can be crafted with the following recipes<br>
 @else
  can't be crafted
 @endif
-</h3>
 <br>
 <div class="row">
 <div class="col-sm-4">

@@ -26,7 +26,7 @@
 
   <body class="terminal">
 
-    <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <div class="navbar navbar-default navbar-fixed-top" role="navigation">
       <div class="container">
         <div class="navbar-header">
           <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -38,21 +38,23 @@
           <a class="navbar-brand" href="/">Cataclysm DDA</a>
         </div>
         <div class="collapse navbar-collapse">
-          <form class="navbar-form navbar-right" role="form" action="<?= action("ItemsController@search") ?>" >
-
-            <div class="form-group">
-              <input name="q" type="text" placeholder="Search..." class="form-control" value="{{{ $q }}}">
-            </div>
-            <button type="submit" class="btn btn-success">Go</button>
-          </form>
-
-          <div class="navbar navbar-right navbar-default" style="min-height: 0px; margin-bottom: 0px;">
-            <ul class="nav navbar-nav">
+          <ul class="nav navbar-nav">
 @foreach(Config::get("cataclysm.sites") as $label=>$domain)
-<li><a{{($_SERVER["SERVER_NAME"]==$domain? ' class="list-group-item active"':'')}} href="http://{{$domain.$_SERVER["REQUEST_URI"]}}">{{{$label}}}</a>
+<li{{($_SERVER["SERVER_NAME"]==$domain? ' class="active"':'')}}><a href="http://{{$domain.$_SERVER["REQUEST_URI"]}}">{{{$label}}}</a>
 @endforeach
           </ul>
+          <div class="col-sm-3 pull-right">
+          <form class="navbar-form" role="form" action="<?= action("ItemsController@search") ?>" >
+
+            <div class="input-group">
+              <input name="q" type="text" placeholder="Search..." class="form-control" value="{{{ $q }}}">
+              <span class="input-group-btn">
+              <button type="submit" class="btn btn-success">Go</button>
+            </span>
+            </div>
+          </form>
           </div>
+
         </div><!--/.nav-collapse -->
       </div>
     </div>

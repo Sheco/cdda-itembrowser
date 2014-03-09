@@ -75,10 +75,10 @@ class ItemRepositoryPivot implements ItemRepositoryPivotInterface
       $key2 = "toolForCategory.{$recipe->category}";
       if($recipe->category!="CC_NONCRAFT")
         $database[$id]->categories[$recipe->category] = $recipe->category;
-      $database[$id]->{$key2}[] = $recipe->id;
+      $database[$id]->{$key2}[$recipe->id] = $recipe->id;
     }
+
     $database[$id]->{$key}[] = $recipe->id;
-    return;
   }
 
   public function find($item_id, $type)

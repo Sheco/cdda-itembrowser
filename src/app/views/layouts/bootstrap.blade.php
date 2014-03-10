@@ -35,7 +35,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="/">Cataclysm DDA</a>
+          <a class="navbar-brand" href="{{ url("/") }}">CDDA Crafting Browser</a>
         </div>
         <div class="collapse navbar-collapse">
           <ul class="nav navbar-nav">

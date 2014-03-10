@@ -87,11 +87,11 @@ EOF;
     $badges = array();
     $recipes = count($this->toolFor);
     if($recipes)
-      $badges[] = '<span class="label label-success">recipes: '.$recipes.'</span>';
+      $badges[] = '<a href="'. route("item.recipes", $this->object->id) .'"><span class="label label-success">recipes: '.$recipes.'</span></a>';
     if(count($this->disassembly))
-      $badges[] = '<span class="label label-info">disassemble</span>';
+      $badges[] = '<a href="'. route("item.disassemble", $this->object->id) .'"><span class="label label-info">disassemble</span></a>';
     if(count($this->recipes)) 
-      $badges[] = '<span class="label label-default">craft</span>';
+      $badges[] = '<a href="'. route("item.craft", $this->object->id) .'"><span class="label label-default">craft</span></a>';
     return join(" ", $badges);
   }
 

@@ -2,11 +2,11 @@
 <h3>Crafting browser</h3>
 
 <p>
-This is a simple tool to browse through the items and recipies available in <a href="http://en.cataclysmdda.com">Cataclysm: Dark Days Ahead</a>.
+This is a simple tool to browse through the items and recipes available in <a href="http://en.cataclysmdda.com">Cataclysm: Dark Days Ahead</a>.
 </p>
 
 <p>
-Crafting could be as simple as looking at your hammer and being able to knoew what you can do with it.
+Crafting could be as simple as looking at your hammer and being able to know what you can do with it.
 </p>
 
 <p>

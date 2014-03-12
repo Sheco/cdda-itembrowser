@@ -159,4 +159,8 @@ class ItemRepository implements ItemRepositoryInterface, IndexerInterface
     return $this->repo->all("item");;
   }
 
+  public function index($name)
+  {
+    return $this->repo->all($name);
+  }
 }

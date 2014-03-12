@@ -24,7 +24,7 @@ class MaterialRepository implements MaterialRepositoryInterface, IndexerInterfac
     $material = App::make('Material');
     $data = $this->repo->get("material", $id);
     if($data)
-      $material->load($this->database[$id]);
+      $material->load($data);
     return $material;
   }
 

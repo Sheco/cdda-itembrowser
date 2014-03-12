@@ -8,6 +8,7 @@ class MaterialRepository implements MaterialRepositoryInterface, IndexerInterfac
   public function __construct(RepositoryInterface $repo)
   {
     $this->repo = $repo;
+    $repo->registerIndexer($this);
   }
 
   public function getIndexes($object)

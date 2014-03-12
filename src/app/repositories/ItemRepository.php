@@ -1,20 +1,39 @@
 <?php 
 
-class ItemRepository implements ItemRepositoryInterface
+class ItemRepository implements ItemRepositoryInterface, IndexerInterface
 {
-  protected $database;
+  protected $repo;
+  protected $types;
 
-  public function __construct()
+  public function __construct(RepositoryInterface $repo)
   {
-    $this->database = $this->read();
+    $this->repo = $repo;
+    $repo->registerIndexer($this);
+    $this->types = array_flip(array(
+      "AMMO", "GUN", "ARMOR", "TOOL", "TOOL_ARMOR", "BOOK", "COMESTIBLE",
+      "CONTAINER", "GUNMOD", "GENERIC", "BIONIC_ITEM", "VAR_VEH_PART"
+    ));
+  }
+
+
+  public function getIndexes($object)
+  {
+    $indexes = array();
+    if(isset($this->types[$object->type]))
+    {
+      $indexes["item"] = $object->id;
+    }
+    //TODO: check extra indexes (armor, melee, books, etc)
+    return $indexes;
   }
 
   public function find($id)
   {
     $item = App::make('Item');
-    if(isset($this->database[$id])) 
+    $data = $this->repo->get("item", $id);
+    if($data) 
     {
-      $item->load($this->database[$id]);
+      $item->load($data);
       return $item;  
     }
 
@@ -29,12 +48,12 @@ class ItemRepository implements ItemRepositoryInterface
     $results = array();
     if(!$text)
       return $results;
-    foreach($this->database as $item)
+    foreach($this->all() as $id=>$val)
     {
-      $item = $this->find($item->id);
+      $item = $this->find($id);
       if($item->matches($text))
       {
-        $results[] = $this->find($item->id);
+        $results[] = $item;
       }
     }
     return $results;
@@ -42,39 +61,7 @@ class ItemRepository implements ItemRepositoryInterface
 
   public function all()
   {
-    return $this->database;
-  }
-
-  protected function read()
-  {
-    $items = array();
-    $item_types = array_flip(array(
-      "AMMO", "GUN", "ARMOR", "TOOL", "TOOL_ARMOR", "BOOK", "COMESTIBLE",
-      "CONTAINER", "GUNMOD", "GENERIC", "BIONIC_ITEM", "VAR_VEH_PART"
-    ));
-
-    error_log("Building item database..");
-    $path = \Config::get("cataclysm.dataPath");
-    $it = new RecursiveDirectoryIterator(\Config::get("cataclysm.dataPath"));
-    foreach(new RecursiveIteratorIterator($it) as $file)
-    {
-      $json = (array) json_decode(file_get_contents($file));
-      foreach($json as $item)
-      {
-        if(!isset($item_types[$item->type]))
-          continue;
-        $item->recipes = array();
-        $item->disassembly = array();
-        $item->toolFor = array();
-        $item->toolForCategory = array();
-        $item->componentFor = array();
-        $items[$item->id] = $item;
-      }
-    }
-
-    $items["toolset"] = json_decode('{"id":"toolset","name":"integrated toolset","type":"none"}');
-    $items["fire"] = json_decode('{"id":"fire","name":"nearby fire","type":"none"}');
-    return $items;
+    return $this->repo->all("item");;
   }
 
 }

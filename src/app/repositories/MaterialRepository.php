@@ -1,18 +1,28 @@
 <?php
 
-class MaterialRepository implements MaterialRepositoryInterface
+class MaterialRepository implements MaterialRepositoryInterface, IndexerInterface
 {
   protected $database;
+  protected $repo;
 
-  public function __construct()
+  public function __construct(RepositoryInterface $repo)
   {
-    $this->parse();
+    $this->repo = $repo;
+  }
+
+  public function getIndexes($object)
+  {
+    $indexes = array();
+    if($object->type=="material")
+      $indexes["material"] = $object->ident;
+    return $indexes;
   }
 
   public function find($id)
   {
     $material = App::make('Material');
-    if(isset($this->database[$id]))
+    $data = $this->repo->get("material", $id);
+    if($data)
       $material->load($this->database[$id]);
     return $material;
   }
@@ -25,30 +35,5 @@ class MaterialRepository implements MaterialRepositoryInterface
   public function all()
   {
     throw new Exception();
-  }
-
-  protected function parse()
-  {
-    $this->database = $this->read();
-  }
-
-  protected function read()
-  {
-    error_log("reading materials...");
-
-    $items = array();
-    
-    $path = \Config::get("cataclysm.dataPath");
-    $file = "materials.json";
-    {
-      if($file[0]==".") continue;
-      $json = (array) json_decode(file_get_contents("$path/$file"));
-      foreach($json as $item)
-      {
-        $items[$item->ident] = $item;
-
-      }
-    }
-    return $items;
   }
 }

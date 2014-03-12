@@ -6,7 +6,6 @@ class Item implements Robbo\Presenter\PresentableInterface
   protected $recipe;
   protected $item;
   protected $material;
-  protected $pivot;
 
   private $cut_pairs = array(
       "cotton"=>"rag",
@@ -20,14 +19,12 @@ class Item implements Robbo\Presenter\PresentableInterface
   public function __construct(
     RecipeRepositoryInterface $recipe, 
     MaterialRepositoryInterface $material, 
-    ItemRepositoryInterface $item,
-    ItemRepositoryPivotInterface $pivot
+    ItemRepositoryInterface $item
   )
   {
     $this->recipe = $recipe;
     $this->material = $material;
     $this->item = $item;
-    $this->pivot = $pivot;
   }
 
   public function load($data)
@@ -83,43 +80,40 @@ class Item implements Robbo\Presenter\PresentableInterface
 
   public function getRecipes()
   {
-    if(!isset($this->data->recipes))
-      return array();
-
     return array_map(function($recipe)
         { return $this->recipe->find($recipe); }
-    , $this->pivot->find($this->data->id, 'recipes'));
+    , $this->recipe->index("item.recipes.{$this->data->id}"));
   }
 
   public function getDisassembly()
   {
     return array_map(function($recipe)
         { return $this->recipe->find($recipe); }
-    , $this->pivot->find($this->data->id, 'disassembly'));
+    , $this->recipe->index("item.disassembly.{$this->data->id}"));
   }
 
   public function getToolFor()
   {
     return array_map(function($recipe)
         { return $this->recipe->find($recipe); }
-    , $this->pivot->find($this->data->id, 'toolFor'));
+    , $this->recipe->index("item.toolFor.$this->id"));
   }
 
   public function getToolCategories()
   {
-    return array_keys($this->pivot->find($this->data->id, 'categories'));
+    return array_keys($this->recipe->index("item.categories.{$this->data->id}"));
   }
 
   public function getToolForCategory($category)
   {
     return array_map(function($recipe)
         { return $this->recipe->find($recipe); }
-    , $this->pivot->find($this->data->id, "toolForCategory.$category"));    
+    , $this->recipe->index("item.toolForCategory.{$this->data->id}.$category"));    
   }
 
   public function getLearn()
   {
-    return $this->pivot->find($this->data->id, 'learn');
+    return $this->recipe->index("item.learn.{$this->data->id}");
   }
 
   public function getIsArmor()

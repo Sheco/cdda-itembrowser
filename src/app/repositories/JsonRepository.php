@@ -2,8 +2,8 @@
 
 class JsonRepository implements RepositoryInterface
 {
-  private $database;
-  private $index;
+  protected $database;
+  protected $index;
   private $indexers;
 
   function __construct()
@@ -38,11 +38,12 @@ class JsonRepository implements RepositoryInterface
     }
   }
 
-  private function read()
+  protected function read()
   {
     $id = 0;
     $this->database = array();
     $it = new RecursiveDirectoryIterator(\Config::get("cataclysm.dataPath"));
+    error_log("Reading data files...");
     foreach(new RecursiveIteratorIterator($it) as $file)
     {
       $data = (array) json_decode(file_get_contents($file));

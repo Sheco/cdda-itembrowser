@@ -83,6 +83,9 @@
     Reading this book affects your morale by {{ $item->fun }}<br>
     @endif
     This book takes {{ $item->time }} minutes to read.<br>
+    @if ($item->chapters)
+    Chapters: {{ $item->chapters }}.<br>
+    @endif
     --<br>
     This book contains {{ count($item->learn) }} crafting recipes:<br>
     {{ $item->craftingRecipes }}

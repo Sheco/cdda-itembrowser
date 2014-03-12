@@ -73,6 +73,12 @@ Route::group(array('after'=>'theme:layouts.bootstrap'), function()
   )
     ->where('id', '[A-Za-z0-9_-]+');
 
+  Route::get('/armor/{part}', array(
+      'as'=>'item.armor',
+      'uses'=>'ItemsController@armor'));
+  Route::get('/books/{type}', array(
+      'as'=>'item.books',
+      'uses'=>'ItemsController@books'));
 
 });
 

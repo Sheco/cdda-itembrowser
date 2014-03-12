@@ -46,3 +46,10 @@ a.list-group-item:hover {
   background: blue;
 }
 
+
+.table-hover >tbody >tr:hover >td
+{
+  color: yellow;
+  background: #428bca;
+}
+

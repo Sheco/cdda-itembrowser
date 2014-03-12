@@ -62,6 +62,47 @@ class ItemsController extends BaseController
     return View::make('items.disassemble', compact('item'));
   }
 
+  public function armor($part)
+  {
+    $data = $this->item->index("armor.$part");
+    $items = array_map(function($id, $item)
+    {
+      return $this->item->find($item);
+    }, $data, array_keys($data));
+    $parts = array(
+      "head"=>"Head",
+      "eyes"=>"Eyes",
+      "mouth"=>"Mouth",
+      "torso"=>"Torso",
+      "arms"=>"Arms",
+      "hands"=>"Hands",
+      "legs" =>"Legs",
+      "feet" =>"Feet",
+    );
+    return View::make('items.armor', compact('items','parts','part'));
+  }
+
+  public function books($type="combat")
+  {
+    $data = $this->item->index("book.$type");
+    $items = array_map(function($id, $item)
+    {
+      return $this->item->find($item);
+    }, $data, array_keys($data));
+    $types = array(
+      "entertainment"=>"Entertainment",
+      "boring"=>"Boring",
+      "range"=>"Ranged",
+      "combat"=>"Combat",
+      "engineering"=>"Engineering",
+      "crafts"=>"Crafts",
+      "social"=>"Social",
+      "survival"=>"Survival",
+      "other"=>"Other",
+    );
+    return View::make('items.books', compact('items','type', 'types'));
+  }
+
   public function sitemap()
   {
     $items = $this->item->where('');

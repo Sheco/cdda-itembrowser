@@ -22,6 +22,11 @@ class MaterialRepository implements MaterialRepositoryInterface
     throw new Exception(); // not implemented
   }
 
+  public function all()
+  {
+    throw new Exception();
+  }
+
   protected function parse()
   {
     $this->database = $this->read();

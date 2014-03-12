@@ -19,7 +19,7 @@ class ItemRepositoryPivot implements ItemRepositoryPivotInterface
   {
     error_log("Creating ItemRepository pivot...");
     $database = array();
-    foreach($this->recipe->where('') as $recipe)
+    foreach($this->recipe->all() as $recipe)
     {
       if(isset($recipe->result))
       {

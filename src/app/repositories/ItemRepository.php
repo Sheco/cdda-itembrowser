@@ -27,6 +27,8 @@ class ItemRepository implements ItemRepositoryInterface
     error_log("searching for $text...");
 
     $results = array();
+    if(!$text)
+      return $results;
     foreach($this->database as $item)
     {
       $item = $this->find($item->id);
@@ -36,6 +38,11 @@ class ItemRepository implements ItemRepositoryInterface
       }
     }
     return $results;
+  }
+
+  public function all()
+  {
+    return $this->database;
   }
 
   protected function read()

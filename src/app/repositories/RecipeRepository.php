@@ -18,12 +18,12 @@ class RecipeRepository implements RecipeRepositoryInterface
 
   public function where($text)
   {
-    //TODO: make a real search
-    //right now, the search is only used to feed the ItemRecipePivot
-    return array_filter($this->database, function($recipe)
-    {
-      return true;     
-    });
+    throw new Exception();
+  }
+
+  public function all()
+  {
+    return $this->database;
   }
 
   protected function read()

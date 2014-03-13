@@ -51,7 +51,7 @@
     @endif
     @if ($item->isArmor) 
       Covers: {{{ $item->covers }}}<br>
-      Coverage: {{{ $item->coverage }}}<br>
+      Coverage: {{{ $item->coverage }}}%<br>
       Encumberment: {{{ $item->encumbrance }}}<br>
       Protection: <br>
       <ul>
@@ -64,7 +64,6 @@
       Environmental protection: {{{ $item->enviromental_protection }}}<br>
       Warmth: {{{ $item->warmth }}}<br>
       Storage: {{{ $item->storage }}}<br>
-      <br>
     @endif
     @if ($item->isBook)
     --<br>
@@ -89,7 +88,6 @@
     --<br>
     This book contains {{ count($item->learn) }} crafting recipes:<br>
     {{ $item->craftingRecipes }}
-    <br>
     @endif
     <br>
     {{{ $item->description }}}

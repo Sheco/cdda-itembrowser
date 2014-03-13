@@ -27,8 +27,8 @@ Armor - Cataclysm: Dark Days Ahead
   <td>{{ $item->volume }}</td>
   <td>{{ $item->weight }}</td>
   <td>{{ $item->encumbrance }}</td>
-  <td>{{ $item->bashing }}</td>
-  <td>{{ $item->cutting }}</td>
+  <td>{{ $item->protection('bash') }}</td>
+  <td>{{ $item->protection('cut') }}</td>
   <td>{{ $item->warmth }}</td>
 </tr>
 </tr>

@@ -30,9 +30,8 @@ var show_recipe = function(id)
 @endif
 <br>
 <ul class="nav nav-tabs">
-
 @foreach ($categories as $cat)
-<li{{ $cat==$category?' class="active"':'' }}>{{ link_to_route("item.recipes", substr($cat, 3), 
+<li @if ($cat==$category) class="active" @endif>{{ link_to_route("item.recipes", substr($cat, 3), 
       array("id"=>$item->id, "category"=>$cat)) }}</li>
 @endforeach
 </ul>

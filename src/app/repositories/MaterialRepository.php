@@ -8,15 +8,14 @@ class MaterialRepository
   public function __construct(RepositoryInterface $repo)
   {
     $this->repo = $repo;
-    Event::listen("cataclysm.newObject", function($repo, $object)
-    {
+    Event::listen("cataclysm.newObject", function ($repo, $object) {
       $this->getIndexes($repo, $object);
     });
   }
 
   private function getIndexes($repo, $object)
   {
-    if($object->type=="material")
+    if ($object->type=="material")
       $repo->index("material", $object->ident, $object);
   }
 
@@ -24,7 +23,7 @@ class MaterialRepository
   {
     $material = App::make('Material');
     $data = $this->repo->get("material", $id);
-    if($data)
+    if ($data)
       $material->load($data);
     return $material;
   }

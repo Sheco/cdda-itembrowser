@@ -12,11 +12,10 @@ class Material implements Robbo\Presenter\PresentableInterface
   public function __get($name)
   {
     $method = "get".str_replace(" ", "", ucwords(str_replace("_", " ", $name)));
-    if(method_exists($this, $method))
-    {
+    if (method_exists($this, $method)) {
       return $this->$method();
     }
-    if(isset($this->data->{$name}))
+    if (isset($this->data->{$name}))
       return $this->data->{$name};
     return null;
   }

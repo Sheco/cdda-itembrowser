@@ -2,10 +2,10 @@
 
 class ItemPresenter extends Robbo\Presenter\Presenter
 {
-  function presentSymbol()
+  public function presentSymbol()
   {
     $symbol = $this->object->symbol;
-    if($symbol==" ")
+    if ($symbol==" ")
       return "&nbsp;";
     return htmlspecialchars($symbol);
   }
@@ -30,7 +30,7 @@ EOF;
   public function presentWeight()
   {
     $weight = $this->object->weight;
-    if($weight===null)
+    if ($weight===null)
       return null;
     return number_format($weight/453.6,2)." lbs";
   }
@@ -38,7 +38,7 @@ EOF;
   public function presentWeightMetric()
   {
     $weight = $this->object->weight;
-    if($weight===null)
+    if ($weight===null)
       return null;
     return number_format($weight/1000, 2).' kg';
   
@@ -66,16 +66,16 @@ EOF;
 
   public function presentRecipes()
   {
-    return array_map(function($recipe)
-        { return new RecipePresenter($recipe); }
-    , $this->object->recipes);
+    return array_map(function ($recipe) { 
+      return new RecipePresenter($recipe); 
+    }, $this->object->recipes);
   }
 
   public function presentDisassembly()
   {
-    return array_map(function($recipe)
-        { return new RecipePresenter($recipe); }
-    , $this->object->disassembly);
+    return array_map(function ($recipe) { 
+      return new RecipePresenter($recipe); 
+    }, $this->object->disassembly);
   }
 
 
@@ -84,7 +84,7 @@ EOF;
     $materials = array(
       $this->object->material1->name, 
     );
-    if($this->object->material2->ident!="null") 
+    if ($this->object->material2->ident!="null") 
       $materials[] = $this->object->material2->name;
     $open = '';
     $close = '';
@@ -95,11 +95,11 @@ EOF;
   {
     $badges = array();
     $recipes = count($this->toolFor);
-    if($recipes)
+    if ($recipes)
       $badges[] = '<a href="'. route("item.recipes", $this->object->id) .'"><span class="label label-success">recipes: '.$recipes.'</span></a>';
-    if(count($this->disassembly))
+    if (count($this->disassembly))
       $badges[] = '<a href="'. route("item.disassemble", $this->object->id) .'"><span class="label label-info">disassemble</span></a>';
-    if(count($this->recipes)) 
+    if (count($this->recipes)) 
       $badges[] = '<a href="'. route("item.craft", $this->object->id) .'"><span class="label label-default">craft</span></a>';
     return join(" ", $badges);
   }
@@ -113,8 +113,7 @@ EOF;
   public function presentCraftingRecipes()
   {
     $recipes = array();
-    foreach($this->object->craftingRecipes as $recipe)
-    {
+    foreach($this->object->craftingRecipes as $recipe) {
       $recipes[] = link_to_route('item.view', $recipe->result->name, $recipe->result->id); 
     }
     return join(", ", $recipes);

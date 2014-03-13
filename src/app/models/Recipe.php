@@ -18,7 +18,7 @@ class Recipe implements Robbo\Presenter\PresentableInterface
   public function __get($name)
   {
     $method = "get".str_replace(" ", "", ucwords(str_replace("_", " ", $name)));
-    if(method_exists($this, $method))
+    if (method_exists($this, $method))
       return $this->{$method}();
     if (isset($this->data->$name))
       return $this->data->$name;
@@ -27,7 +27,7 @@ class Recipe implements Robbo\Presenter\PresentableInterface
 
   public function getSkillsRequired ()
   {
-    if(!isset($this->data->skills_required))
+    if (!isset($this->data->skills_required))
       return null;
 
     $skills = $this->data->skills_required;
@@ -36,8 +36,8 @@ class Recipe implements Robbo\Presenter\PresentableInterface
     if(!is_array($skills[0]))
       return array($skills);
 
-    return array_map(function($i) use ($skills) { 
-            return $i; 
+    return array_map(function ($i) use ($skills) { 
+      return $i; 
     }, $skills);
   }
 

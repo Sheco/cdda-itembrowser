@@ -29,11 +29,11 @@ class Item implements Robbo\Presenter\PresentableInterface
 
   public function load($data)
   {
-    if(!isset($data->material))
+    if (!isset($data->material))
       $data->material = array( "null", "null" );
-    if(!is_array($data->material))
+    if (!is_array($data->material))
       $data->material = array($data->material, "null");
-    if(!isset($data->material[1]))
+    if (!isset($data->material[1]))
       $data->material[1] = "null";
 
     $this->data = $data;
@@ -42,18 +42,17 @@ class Item implements Robbo\Presenter\PresentableInterface
   public function __get($name)
   {
     $method = "get".str_replace(" ", "", ucwords(str_replace("_", " ", $name)));
-    if(method_exists($this, $method))
-    {
+    if (method_exists($this, $method)) {
       return $this->$method();
     }
-    if(isset($this->data->{$name}))
+    if (isset($this->data->{$name}))
       return $this->data->{$name};
     return null;
   }
 
-  function getColor()
+  public function getColor()
   {
-    if(!isset($this->data->color))
+    if (!isset($this->data->color))
       return "white";
     $color = str_replace("_", "", $this->data->color);
     $colorTable = array(
@@ -80,23 +79,23 @@ class Item implements Robbo\Presenter\PresentableInterface
 
   public function getRecipes()
   {
-    return array_map(function($recipe)
-        { return $this->recipe->find($recipe); }
-    , $this->recipe->index("item.recipes.{$this->data->id}"));
+    return array_map(function ($recipe) { 
+      return $this->recipe->find($recipe); 
+    }, $this->recipe->index("item.recipes.{$this->data->id}"));
   }
 
   public function getDisassembly()
   {
-    return array_map(function($recipe)
-        { return $this->recipe->find($recipe); }
-    , $this->recipe->index("item.disassembly.{$this->data->id}"));
+    return array_map(function ($recipe) { 
+      return $this->recipe->find($recipe); 
+    }, $this->recipe->index("item.disassembly.{$this->data->id}"));
   }
 
   public function getToolFor()
   {
-    return array_map(function($recipe)
-        { return $this->recipe->find($recipe); }
-    , $this->recipe->index("item.toolFor.$this->id"));
+    return array_map(function ($recipe) { 
+      return $this->recipe->find($recipe); 
+    }, $this->recipe->index("item.toolFor.$this->id"));
   }
 
   public function getToolCategories()
@@ -106,9 +105,9 @@ class Item implements Robbo\Presenter\PresentableInterface
 
   public function getToolForCategory($category)
   {
-    return array_map(function($recipe)
-        { return $this->recipe->find($recipe); }
-    , $this->recipe->index("item.toolForCategory.{$this->data->id}.$category"));    
+    return array_map(function ($recipe) { 
+      return $this->recipe->find($recipe);
+    }, $this->recipe->index("item.toolForCategory.{$this->data->id}.$category"));    
   }
 
   public function getLearn()
@@ -135,12 +134,9 @@ class Item implements Robbo\Presenter\PresentableInterface
 
     $variable = "{$type}_resist";
     $thickness = $this->material_thickness;
-    if($mat2=="null")
-    {
+    if ($mat2=="null") {
       return $thickness*3*$mat1->$variable;
-    }
-    else
-    {
+    } else {
       return $thickness*(($mat1->$variable*2)+$mat2->$variable);
     }
   }
@@ -210,7 +206,7 @@ class Item implements Robbo\Presenter\PresentableInterface
 
   public function getCanBeCut()
   {
-    if(!$this->volume) return false;
+    if (!$this->volume) return false;
     $material = $this->material1->ident;
     return in_array($material, array_keys($this->cut_pairs));
   }
@@ -252,8 +248,7 @@ class Item implements Robbo\Presenter\PresentableInterface
   public function getCraftingRecipes()
   {
     $recipes = array();
-    foreach($this->learn as $r)
-    {
+    foreach($this->learn as $r) {
       $recipes[] = $this->recipe->find($r);
     }
     return $recipes;

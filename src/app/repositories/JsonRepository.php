@@ -7,7 +7,7 @@ class JsonRepository implements RepositoryInterface
   private $used_index;
   private $id;
 
-  function __construct()
+  public function __construct()
   {
     $this->id = 0;
     $this->index = array();
@@ -18,7 +18,7 @@ class JsonRepository implements RepositoryInterface
   // lazy load
   private function load()
   {
-    if($this->database)
+    if ($this->database)
       return;
 
     $this->read();
@@ -30,17 +30,17 @@ class JsonRepository implements RepositoryInterface
     Event::fire("cataclysm.newObject", array($this, $object));
 
     // only store items that have been indexed, this saves memory.
-    if(isset($this->used_index[$object->repo_id]))
+    if (isset($this->used_index[$object->repo_id]))
       $this->database[$object->repo_id] = $object;
   }
 
+  // read the data files and process them
   protected function read()
   {
+    error_log("Reading data files...");
     $this->database = array();
     $it = new RecursiveDirectoryIterator(\Config::get("cataclysm.dataPath"));
-    error_log("Reading data files...");
-    foreach(new RecursiveIteratorIterator($it) as $file)
-    {
+    foreach(new RecursiveIteratorIterator($it) as $file) {
       $data = (array) json_decode(file_get_contents($file));
       array_walk($data, array($this, 'newObject'));
     }
@@ -60,7 +60,7 @@ class JsonRepository implements RepositoryInterface
   {
     $this->load();
     
-    if(!isset($this->index[$index][$id]))
+    if (!isset($this->index[$index][$id]))
       return null;
     $db_id = $this->index[$index][$id];
     return $this->database[$db_id];
@@ -71,7 +71,7 @@ class JsonRepository implements RepositoryInterface
   {
     $this->load();
     
-    if(!isset($this->index[$index]))
+    if (!isset($this->index[$index]))
       return array();
 
     return $this->index[$index];

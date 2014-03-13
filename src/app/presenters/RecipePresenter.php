@@ -5,7 +5,7 @@ class RecipePresenter extends Robbo\Presenter\Presenter
   public function presentTime()
   {
     $time = $this->object->time;
-    if($time>=1000)
+    if ($time>=1000)
       return ($time/1000)." minutes";
     return ($time/100)." turns";
   }
@@ -13,7 +13,7 @@ class RecipePresenter extends Robbo\Presenter\Presenter
   public function presentSkillsRequired ()
   {
     $skills = $this->object->skills_required;
-    if(!$skills)
+    if (!$skills)
       return "N/A";
 
     return join(", ", array_map(function($i) use ($skills) { 
@@ -21,14 +21,12 @@ class RecipePresenter extends Robbo\Presenter\Presenter
     }, $skills));
   }
 
-  function presentTools()
+  public function presentTools()
   {
     $tools = array();
-    foreach ($this->object->tools as $group) 
-    {
+    foreach ($this->object->tools as $group) {
       $inner = array();
-      foreach ($group as $gi)
-      {
+      foreach ($group as $gi) {
         list($item, $amount) = $gi;
         $inner[] =  link_to_route("item.view", $item->name, array("id"=>$item->id))." ". $amount;
       }
@@ -37,14 +35,12 @@ class RecipePresenter extends Robbo\Presenter\Presenter
     return "Tools required:<br>&gt; ".join("<br>&gt; ", $tools)."\n";
   }
 
-  function presentComponents()
+  public function presentComponents()
   {
     $components = array();
-    foreach ($this->object->components as $group)
-    {
+    foreach ($this->object->components as $group) {
       $inner = array();
-      foreach ($group as $gi)
-      {
+      foreach ($group as $gi) {
         list($item, $amount) = $gi;
         $inner[] = $amount." ". link_to_route("item.view", $item->name, array("id"=>$item->id));
       }

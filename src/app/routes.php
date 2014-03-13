@@ -11,22 +11,25 @@
 |
 */
 
-Route::group(array('after'=>'theme:layouts.bootstrap'), function()
-{
+Route::group(array('after'=>'theme:layouts.bootstrap'), function () {
   Route::get('/', 'ItemsController@index');
 
   Route::get('/armor/{part}', array(
       'as'=>'item.armor',
-      'uses'=>'ItemsController@armor'));
+      'uses'=>'ItemsController@armor')
+  );
   Route::get('/melee', array(
       'as'=>'item.melee',
-      'uses'=>'ItemsController@melee'));
+      'uses'=>'ItemsController@melee')
+  );
   Route::get('/books/{type}', array(
       'as'=>'item.books',
-      'uses'=>'ItemsController@books'));
+      'uses'=>'ItemsController@books')
+  );
   Route::get('/containers', array(
       'as'=>'item.containers',
-      'uses'=>'ItemsController@containers'));
+      'uses'=>'ItemsController@containers')
+  );
 
 
   Route::get('/search', array(
@@ -34,14 +37,12 @@ Route::group(array('after'=>'theme:layouts.bootstrap'), function()
       'uses'=>'ItemsController@search')
   );
 
-  View::composer('layouts.bootstrap', function($view)
-  {
+  View::composer('layouts.bootstrap', function ($view) {
     $view->with('q', Input::get('q', ''));
     $view->with('sites', Config::get('cataclysm.sites'));
   });
 
-  View::composer('items.menu', function($view) 
-  {
+  View::composer('items.menu', function ($view) {
     $view->with('areas', array(
       "view"=>array(
         "route"=>"item.view",
@@ -91,7 +92,6 @@ Route::group(array('after'=>'theme:layouts.bootstrap'), function()
 
 Route::get('/sitemap.xml', 'ItemsController@sitemap');
 
-App::missing(function($exception)
-{
+App::missing(function ($exception) {
   return Response::view("notfound", array(), 404);
 });

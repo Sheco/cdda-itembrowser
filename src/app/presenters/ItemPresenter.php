@@ -32,7 +32,16 @@ EOF;
     $weight = $this->object->weight;
     if($weight===null)
       return null;
-    return '<span title="'.number_format($weight/1000, 2).' kg">'.number_format($weight/453.6,2)." lbs</span>";
+    return number_format($weight/453.6,2)." lbs";
+  }
+
+  public function presentWeightMetric()
+  {
+    $weight = $this->object->weight;
+    if($weight===null)
+      return null;
+    return number_format($weight/1000, 2).' kg';
+  
   }
 
   public function presentBashing()

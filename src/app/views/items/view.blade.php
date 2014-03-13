@@ -14,7 +14,7 @@
     {{$item->featureLabels}}
     <br>
     <br>
-    Volume: {{{ $item->volume }}} Weight: {{{ $item->weight }}}<br>
+    Volume: {{{ $item->volume }}} Weight: {{ $item->weight }}<br>
       Bash: {{{ $item->bashing }}}
       Stab: {{{ $item->cutting }}}
       To-hit bonus: {{{ $item->to_hit }}}<br>

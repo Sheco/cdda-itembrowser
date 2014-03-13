@@ -32,24 +32,19 @@ class ItemsController extends Controller
 
   public function view($id)
   {
-    $item = $this->item->find($id);
-    if ($item->type=="invalid") App::abort(404);
-    $recipeRepository = $this->recipe;
-    return View::make('items.view', compact('item', 'recipeRepository'));
+    $item = $this->item->findOr404($id);
+    return View::make('items.view', compact('item'));
   }
 
   public function craft($id)
   {
-    $item = $this->item->find($id);
-    if ($item->type=="invalid") App::abort(404);
-    $itemRepository = $this->item;
-    return View::make('items.craft', compact('item', 'itemRepository'));
+    $item = $this->item->findOr404($id);
+    return View::make('items.craft', compact('item'));
   }
 
   public function recipes($id, $category="")
   {
-    $item = $this->item->find($id);
-    if ($item->type=="invalid") App::abort(404);
+    $item = $this->item->findOr404($id);
     $categories = $item->toolCategories;
     if ($category=="" && $categories) {
       $category = $categories[0];
@@ -61,8 +56,7 @@ class ItemsController extends Controller
 
   public function disassemble($id)
   {
-    $item = $this->item->find($id);
-    if ($item->type=="invalid") App::abort(404);
+    $item = $this->item->findOr404($id);
     return View::make('items.disassemble', compact('item'));
   }
 

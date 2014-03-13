@@ -104,6 +104,14 @@ class Item
     return $item;
   }
 
+  public function findOr404($id)
+  {
+    $item = $this->find($id);
+    if($item->type=="invalid")
+      \App::abort(404);
+    return $item;
+  }
+
   public function where($text)
   {
     error_log("searching for $text...");

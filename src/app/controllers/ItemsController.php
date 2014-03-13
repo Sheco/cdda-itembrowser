@@ -1,6 +1,6 @@
 <?php
 
-class ItemsController extends BaseController 
+class ItemsController extends Controller 
 {
   protected $item;
   protected $recipe;

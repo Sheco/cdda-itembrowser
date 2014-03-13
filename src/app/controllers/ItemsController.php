@@ -78,6 +78,7 @@ class ItemsController extends BaseController
       "hands"=>"Hands",
       "legs" =>"Legs",
       "feet" =>"Feet",
+      "none"=>"None"
     );
     return View::make('items.armor', compact('items','parts','part'));
   }

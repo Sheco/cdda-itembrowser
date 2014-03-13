@@ -2,7 +2,7 @@
 {{{$item->rawName}}} (recipes) - Cataclysm: Dark Days Ahead
 @endsection
 @section('description')
-@if (count($recipes)>0)
+@if (count($item->toolFor)>0)
 {{{$item->rawName}}} can be used to craft other items. You can find more information here.
 @else
 {{{$item->rawName}}} can't be used to craft other items.

@@ -1,6 +1,7 @@
 <?php
+namespace Repositories;
 
-class MaterialRepository
+class Material
 {
   protected $database;
   protected $repo;
@@ -8,7 +9,7 @@ class MaterialRepository
   public function __construct(RepositoryInterface $repo)
   {
     $this->repo = $repo;
-    Event::listen("cataclysm.newObject", function ($repo, $object) {
+    \Event::listen("cataclysm.newObject", function ($repo, $object) {
       $this->getIndexes($repo, $object);
     });
   }
@@ -21,7 +22,7 @@ class MaterialRepository
 
   public function find($id)
   {
-    $material = App::make('Material');
+    $material = \App::make('Material');
     $data = $this->repo->get("material", $id);
     if ($data)
       $material->load($data);

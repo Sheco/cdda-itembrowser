@@ -1,6 +1,7 @@
-<?phP
+<?php
+namespace Repositories;
 
-class JsonRepository implements RepositoryInterface
+class Json implements RepositoryInterface
 {
   protected $database;
   protected $index;
@@ -27,7 +28,7 @@ class JsonRepository implements RepositoryInterface
   private function newObject($object)
   {
     $object->repo_id = $this->id++;
-    Event::fire("cataclysm.newObject", array($this, $object));
+    \Event::fire("cataclysm.newObject", array($this, $object));
 
     // only store items that have been indexed, this saves memory.
     if (isset($this->used_index[$object->repo_id]))
@@ -39,8 +40,8 @@ class JsonRepository implements RepositoryInterface
   {
     error_log("Reading data files...");
     $this->database = array();
-    $it = new RecursiveDirectoryIterator(\Config::get("cataclysm.dataPath"));
-    foreach(new RecursiveIteratorIterator($it) as $file) {
+    $it = new \RecursiveDirectoryIterator(\Config::get("cataclysm.dataPath"));
+    foreach(new \RecursiveIteratorIterator($it) as $file) {
       $data = (array) json_decode(file_get_contents($file));
       array_walk($data, array($this, 'newObject'));
     }

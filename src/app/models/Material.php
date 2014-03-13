@@ -22,7 +22,7 @@ class Material implements Robbo\Presenter\PresentableInterface
 
   public function getPresenter()
   {
-    return new MaterialPresenter($this);
+    return new Presenters\Material($this);
   }
 }
 

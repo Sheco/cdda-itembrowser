@@ -17,9 +17,9 @@ class Item implements Robbo\Presenter\PresentableInterface
     );
 
   public function __construct(
-    RecipeRepository $recipe, 
-    MaterialRepository $material, 
-    ItemRepository $item
+    Repositories\Recipe $recipe, 
+    Repositories\Material $material, 
+    Repositories\Item $item
   )
   {
     $this->recipe = $recipe;
@@ -256,6 +256,6 @@ class Item implements Robbo\Presenter\PresentableInterface
 
   public function getPresenter()
   {
-    return new ItemPresenter($this);
+    return new Presenters\Item($this);
   }
 }

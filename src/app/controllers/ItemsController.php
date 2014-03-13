@@ -7,9 +7,9 @@ class ItemsController extends BaseController
   protected $material;
 
   public function __construct(
-    ItemRepository $item, 
-    RecipeRepository $recipe, 
-    MaterialRepository $material
+    Repositories\Item $item, 
+    Repositories\Recipe $recipe, 
+    Repositories\Material $material
   ) {
     $this->item = $item;
     $this->recipe = $recipe;

@@ -5,7 +5,7 @@ class Recipe implements Robbo\Presenter\PresentableInterface
   protected $data;
   protected $item;
 
-  public function __construct(ItemRepository $item)
+  public function __construct(Repositories\Item $item)
   {
     $this->item = $item;
   }
@@ -80,6 +80,6 @@ class Recipe implements Robbo\Presenter\PresentableInterface
 
   public function getPresenter()
   {
-    return new RecipePresenter($this);
+    return new Presenters\Recipe($this);
   }
 }

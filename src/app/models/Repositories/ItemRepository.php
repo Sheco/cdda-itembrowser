@@ -1,6 +1,7 @@
 <?php 
+namespace Repositories;
 
-class ItemRepository
+class Item
 {
   protected $repo;
   protected $types;
@@ -13,7 +14,7 @@ class ItemRepository
       "CONTAINER", "GUNMOD", "GENERIC", "BIONIC_ITEM", "VAR_VEH_PART",
       "_SPECIAL",
     ));
-    Event::listen("cataclysm.newObject", function ($repo, $object) {
+    \Event::listen("cataclysm.newObject", function ($repo, $object) {
       $this->getIndexes($repo, $object);
     });
   }
@@ -92,7 +93,7 @@ class ItemRepository
 
   public function find($id)
   {
-    $item = App::make('Item');
+    $item = \App::make('Item');
     $data = $this->repo->get("item", $id);
     if ($data) {
       $item->load($data);

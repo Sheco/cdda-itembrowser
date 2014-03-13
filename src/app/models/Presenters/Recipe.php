@@ -1,6 +1,7 @@
 <?php
+namespace Presenters;
 
-class RecipePresenter extends Robbo\Presenter\Presenter
+class Recipe extends \Robbo\Presenter\Presenter
 {
   public function presentTime()
   {

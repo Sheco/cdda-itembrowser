@@ -1,12 +1,13 @@
 <?php
+namespace Repositories;
 
-class RecipeRepository
+class Recipe
 {
   protected $repo;
   public function __construct(RepositoryInterface $repo)
   {
     $this->repo = $repo;
-    Event::listen("cataclysm.newObject", function ($repo, $object) {
+    \Event::listen("cataclysm.newObject", function ($repo, $object) {
       $this->getIndexes($repo, $object);
     });
   }
@@ -70,7 +71,7 @@ class RecipeRepository
 
   public function find($id)
   {
-    $recipe = App::make('Recipe');
+    $recipe = \App::make('Recipe');
     $recipe->load($this->repo->get("recipe", $id));
     return $recipe;  
   }

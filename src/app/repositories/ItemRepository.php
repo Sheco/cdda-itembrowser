@@ -8,125 +8,92 @@ class ItemRepository implements ItemRepositoryInterface, IndexerInterface
   public function __construct(RepositoryInterface $repo)
   {
     $this->repo = $repo;
-    $repo->registerIndexer($this);
     $this->types = array_flip(array(
       "AMMO", "GUN", "ARMOR", "TOOL", "TOOL_ARMOR", "BOOK", "COMESTIBLE",
       "CONTAINER", "GUNMOD", "GENERIC", "BIONIC_ITEM", "VAR_VEH_PART",
       "_SPECIAL",
     ));
+    Event::listen("cataclysm.newObject", function($repo, $object)
+    {
+      $this->getIndexes($repo, $object);
+    });
   }
 
 
-  public function getIndexes($object)
+  private function getIndexes($repo, $object)
   {
-    $indexes = array();
     if(!isset($this->types[$object->type]))
-      return $indexes;
-    $indexes["item"] = $object->id;
+      return;
+    $repo->addIndex("item", $object->id, $object);
     if($object->type=="_SPECIAL")
-      return $indexes;
+      return;
     if($object->bashing+$object->cutting>10 and $object->to_hit>-2)
     {
-      $indexes["melee"] = $object->id;
+      $repo->addIndex("melee", $object->id, $object);
     }
     if($object->type=="ARMOR" and !isset($object->covers)) 
     {
-        $indexes["armor.none"] = $object->id;
+      $repo->addIndex("armor.none", $object->id, $object);
     } 
     else if($object->type=="ARMOR" and isset($object->covers))
     {
       if(in_array("FEET", $object->covers))
-      {
-        $indexes["armor.feet"] = $object->id;
-      }
+        $repo->addIndex("armor.feet", $object->id, $object);
       if(in_array("ARMS", $object->covers))
-      {
-        $indexes["armor.arms"] = $object->id;
-      }
+        $repo->addIndex("armor.arms", $object->id, $object);
       if(in_array("EYES", $object->covers))
-      {
-        $indexes["armor.eyes"] = $object->id;
-      }
+        $repo->addIndex("armor.eyes", $object->id, $object);
       if(in_array("LEGS", $object->covers))
-      {
-        $indexes["armor.legs"] = $object->id;
-      }
+        $repo->addIndex("armor.legs", $object->id, $object);
       if(in_array("HANDS", $object->covers))
-      {
-        $indexes["armor.hands"] = $object->id;
-      }
+        $repo->addIndex("armor.hands", $object->id, $object);
       if(in_array("TORSO", $object->covers))
-      {
-        $indexes["armor.torso"] = $object->id;
-      }
+        $repo->addIndex("armor.torso", $object->id, $object);
       if(in_array("HEAD", $object->covers))
-      {
-        $indexes["armor.head"] = $object->id;
-      }
+        $repo->addIndex("armor.head", $object->id, $object);
       if(in_array("MOUTH", $object->covers))
-      {
-        $indexes["armor.mouth"] = $object->id;
-      }
+        $repo->addIndex("armor.mouth", $object->id, $object);
     }
     if($object->type=="CONTAINER")
-      $indexes["container"] = $object->id;
+      $repo->addIndex("container", $object->id, $object);
     if($object->type=="COMESTIBLE")
-      $indexes["food"] = $object->id;
+      $repo->addIndex("food", $object->id, $object);
     if($object->type=="TOOL")
-      $indexes["tool"] = $object->id;
+      $repo->addIndex("tool", $object->id, $object);
     if($object->type=="BOOK")
     {
       if($object->skill=="none")
       {
         if($object->fun>0)
-          $indexes["book.entertainment"] = $object->id;
+          $repo->addIndex("book.entertainment", $object->id, $object);
         else
-          $indexes["book.boring"] = $object->id;
+          $repo->addIndex("book.boring", $object->id, $object);
       } else if(in_array($object->skill, array(
         "archery", "handguns", "markmanship",
         "launcher", "firearms", "throw", "rifle",
         "shotgun", "smg", "pistol", "gun")))
-      {
-        $indexes["book.range"] = $object->id;
-      } 
+        $repo->addIndex("book.range", $object->id, $object);
       else if(in_array($object->skill, array(
         "bashing", "cutting", "stabbing", "dodge",
         "melee", "unarmed")))
-      {
-        $indexes["book.combat"] = $object->id;
-      } 
+        $repo->addIndex("book.combat", $object->id, $object);
       else if(in_array($object->skill, array(
         "computer", "electronics", "fabrication",
         "mechanics", "construction", "carpentry",
         "traps")))
-      {
-        $indexes["book.engineering"] = $object->id;
-      } 
+        $repo->addIndex("book.engineering", $object->id, $object);
       else if(in_array($object->skill, array(
         "cooking", "tailor", "firstaid")))
-      {
-        $indexes["book.crafts"] = $object->id;
-      } 
+        $repo->addIndex("book.crafts", $object->id, $object);
       else if(in_array($object->skill, array(
         "barter", "speech")))
-      {
-        $indexes["book.social"] = $object->id;
-      } 
+        $repo->addIndex("book.social", $object->id, $object);
       else if(in_array($object->skill, array(
         "driving", "survival", "swimming")))
-      {
-        $indexes["book.survival"] = $object->id;
-      } 
+        $repo->addIndex("book.survival", $object->id, $object);
       else 
-      {
-        $indexes["book.other"] = $object->id;
-      }
-      
-
+        $repo->addIndex("book.other", $object->id, $object);
     }
-
-    //TODO: check extra indexes (armor, melee, books, etc)
-    return $indexes;
   }
 
   public function find($id)

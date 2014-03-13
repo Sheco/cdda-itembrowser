@@ -11,7 +11,6 @@ class JsonRepository implements RepositoryInterface
     $this->index = array();
     $this->indexers = array();
     $this->database = array();
-    Event::fire("cataclysm.registerIndexer", $this);
   }
 
   // lazy load
@@ -23,18 +22,18 @@ class JsonRepository implements RepositoryInterface
     $this->read();
   }
 
+  public function addIndex($index, $key, $object)
+  {
+    $this->index[$index][$key] = $object->repo_id;
+  }
+
   private function index($id, $object)
   {
     $object->repo_id = $id;
     $this->database[$id] = $object;
     foreach($this->indexers as $indexer)
     {
-      $indexes = $indexer->getIndexes($object);
-
-      foreach($indexes as $index=>$key)
-      {
-        $this->index[$index][$key] = $id;
-      }
+      Event::fire("cataclysm.newObject", array($this, $object));
     }
   }
 

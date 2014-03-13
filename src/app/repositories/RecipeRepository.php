@@ -1,51 +1,55 @@
 <?php
 
-class RecipeRepository implements RecipeRepositoryInterface, IndexerInterface
+class RecipeRepository implements RecipeRepositoryInterface
 {
   protected $repo;
   public function __construct(RepositoryInterface $repo)
   {
     $this->repo = $repo;
-    $repo->registerIndexer($this);
+    Event::listen("cataclysm.newObject", function($repo, $object)
+    {
+      $this->getIndexes($repo, $object);
+    });
   }
 
-  private function linkIndexes(&$indexes, $key, $id, $recipe)
+  private function linkIndexes($repo, $key, $id, $recipe)
   {
     if($key=="recipes" and $recipe->category=="CC_NONCRAFT")
     {
-      $indexes["item.disassembly.$id"] = $recipe->repo_id;
+      $repo->addIndex("item.disassembly.$id", $recipe->repo_id, $recipe);
       return;
     }
     if($key=="recipes" and isset($recipe->reversible) and $recipe->reversible=="true")      
     {
-      $indexes["item.disassembly.$id"] = $recipe->repo_id;
+      $repo->addIndex("item.disassembly.$id", $recipe->repo_id, $recipe);
     }
 
     if($key=="toolFor")
     {
       if($recipe->category!="CC_NONCRAFT")
-        $indexes["item.categories.$id"] = $recipe->category;
-      $indexes["item.toolForCategory.$id.$recipe->category"] = $recipe->repo_id;
+        $repo->addIndex("item.categories.$id", $recipe->category, $recipe);
+
+      $repo->addIndex("item.toolForCategory.$id.$recipe->category", $recipe->repo_id, $recipe);
     }
 
-    $indexes["item.$key.$id"] = $recipe->repo_id;
+    $repo->addIndex("item.$key.$id", $recipe->repo_id);
   }
 
-  public function getIndexes($object)
+  private function getIndexes($repo, $object)
   {
-    $indexes = array();
     if($object->type=="recipe")
     {
       $recipe = $object;
-      $indexes["recipe"] = $recipe->repo_id;
+
+      $repo->addIndex("recipe", $recipe->repo_id, $recipe);
       if(isset($recipe->result))
       {
-        $this->linkIndexes($indexes, "recipes", $recipe->result, $recipe);
+        $this->linkIndexes($repo, "recipes", $recipe->result, $recipe);
         if(isset($recipe->book_learn))
         {
           foreach($recipe->book_learn as $learn)
           {
-            $this->linkIndexes($indexes, "learn", $learn[0], $recipe);
+            $this->linkIndexes($repo, "learn", $learn[0], $recipe);
           }
         }
       }
@@ -56,7 +60,7 @@ class RecipeRepository implements RecipeRepositoryInterface, IndexerInterface
           foreach($group as $tool)
           {
             list($id, $amount) = $tool;
-            $this->linkIndexes($indexes, "toolFor", $id, $recipe);
+            $this->linkIndexes($repo, "toolFor", $id, $recipe);
           }
         }
       }
@@ -67,12 +71,11 @@ class RecipeRepository implements RecipeRepositoryInterface, IndexerInterface
           foreach($group as $component)
           {
             list($id, $amount) = $component;
-            $this->linkIndexes($indexes, "toolFor", $id, $recipe);
+            $this->linkIndexes($repo, "toolFor", $id, $recipe);
           }
         }
       }
     }
-    return $indexes;  
   }
 
   public function find($id)

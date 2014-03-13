@@ -1,6 +1,6 @@
 <?php
 
-class MaterialRepository implements MaterialRepositoryInterface, IndexerInterface
+class MaterialRepository implements MaterialRepositoryInterface
 {
   protected $database;
   protected $repo;
@@ -8,15 +8,16 @@ class MaterialRepository implements MaterialRepositoryInterface, IndexerInterfac
   public function __construct(RepositoryInterface $repo)
   {
     $this->repo = $repo;
-    $repo->registerIndexer($this);
+    Event::listen("cataclysm.newObject", function($repo, $object)
+    {
+      $this->getIndexes($repo, $object);
+    });
   }
 
-  public function getIndexes($object)
+  private function getIndexes($repo, $object)
   {
-    $indexes = array();
     if($object->type=="material")
-      $indexes["material"] = $object->ident;
-    return $indexes;
+      $repo->addIndex("material", $object->ident, $object);
   }
 
   public function find($id)

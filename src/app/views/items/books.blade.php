@@ -7,14 +7,14 @@ Books - Cataclysm: Dark Days Ahead
 <li @if($key==$type) class="active" @endif><a href="{{ route("item.books", $key) }}">{{{$value}}}</a></li>
 @endforeach
 </ul>
-<table class="table table-bordered table-hover">
+<table class="table table-bordered table-hover tablesorter">
   <thead>
   <tr>
-    <td>Name</td>
-    <td>Skill</td>
-    <td>Time</td>
-    <td>Fun</td>
-    <td>Recipes</td>
+    <th>Name</th>
+    <th>Skill</th>
+    <th>Time</th>
+    <th>Fun</th>
+    <th>Recipes</th>
   </tr>
 </thead>
 @foreach($items as $item)
@@ -28,4 +28,11 @@ Books - Cataclysm: Dark Days Ahead
 </tr>
 @endforeach
 </table>
+<script>
+$(function() {
+    $(".tablesorter").tablesorter({
+      sortList: [[4,1]]
+      });
+});
+</script>
 @endsection

@@ -4,16 +4,16 @@ Melee - Cataclysm: Dark Days Ahead
 @section('content')
 <h4>Items with bashing+cutting damage higher than 10 and to-hit bonus higher than -2</h4>
 
-<table class="table table-bordered table-hover">
+<table class="table table-bordered table-hover tablesorter">
   <thead>
   <tr>
-    <td>Name</td>
-    <td>Material</td>
-    <td><span title="Volume">V</span></td>
-    <td><span title="Weight">W</span></td>
-    <td><span title="Bashing">B</span></td>
-    <td><span title="Cutting">C</span></td>
-    <td><span title="To-Hit">H</span></td>
+    <th>Name</th>
+    <th>Material</th>
+    <th><span title="Volume">V</span></th>
+    <th><span title="Weight">W</span></th>
+    <th><span title="Bashing">B</span></th>
+    <th><span title="Cutting">C</span></th>
+    <th><span title="To-Hit">H</span></th>
   </tr>
 </thead>
 @foreach($items as $item)
@@ -29,4 +29,11 @@ Melee - Cataclysm: Dark Days Ahead
 </tr>
 @endforeach
 </table>
+<script>
+$(function() {
+    $(".tablesorter").tablesorter({
+      sortList: [[4,1], [5,1]]
+      });
+});
+</script>
 @endsection

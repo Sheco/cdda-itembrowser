@@ -53,3 +53,17 @@ a.list-group-item:hover {
   background: #428bca;
 }
 
+table.tablesorter thead tr .header {
+	background-image: url(blue/bg.gif);
+	background-repeat: no-repeat;
+	background-position: center right;
+	cursor: pointer;
+}
+table.tablesorter thead tr .headerSortUp {
+	background-image: url(blue/asc.gif);
+  background-color: #428bca;
+}
+table.tablesorter thead tr .headerSortDown {
+	background-image: url(blue/desc.gif);
+  background-color: #428bca;
+}

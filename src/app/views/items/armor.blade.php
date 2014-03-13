@@ -7,19 +7,20 @@ Armor - Cataclysm: Dark Days Ahead
 <li @if($key==$part) class="active" @endif><a href="{{ route("item.armor", $key) }}">{{{$value}}}</a></li>
 @endforeach
 </ul>
-<table class="table table-bordered table-hover">
+<table class="table table-bordered table-hover tablesorter">
   <thead>
   <tr>
-    <td>Name</td>
-    <td>Material</td>
-    <td><span title="Volume">V</span></td>
-    <td><span title="Weight">W</span></td>
-    <td><span title="Encumbrance">E</span></td>
-    <td><span title="Bash protection">BP</span></td>
-    <td><span title="Cutting protection">CP</span></td>
-    <td><span title="Warmth">Wa</span></td>
+    <th>Name</th>
+    <th>Material</th>
+    <th><span title="Volume">V</span></th>
+    <th><span title="Weight">W</span></th>
+    <th><span title="Encumbrance">E</span></th>
+    <th><span title="Bash protection">BP</span></th>
+    <th><span title="Cutting protection">CP</span></th>
+    <th><span title="Warmth">Wa</span></th>
   </tr>
 </thead>
+<tbody>
 @foreach($items as $item)
 <tr>
   <td><a href="{{route('item.view', $item->id)}}">{{ $item->name }}</a></td>
@@ -31,7 +32,15 @@ Armor - Cataclysm: Dark Days Ahead
   <td>{{ $item->protection('cut') }}</td>
   <td>{{ $item->warmth }}</td>
 </tr>
-</tr>
 @endforeach
+</tbody>
 </table>
+<script>
+$(function() {
+    $(".tablesorter").tablesorter({
+      sortList: [[2,0]]
+      });
+});
+</script>
+
 @endsection

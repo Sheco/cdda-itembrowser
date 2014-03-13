@@ -59,15 +59,13 @@
       </div>
     </div>
 
+<script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
+<script src="/js/jquery.tablesorter.min.js"></script>
     <div class="container">
 @yield('content')
 
-    @include('layouts.extra_footer')
-    </div>
-    <!-- Bootstrap core JavaScript
-    ================================================== -->
-    <!-- Placed at the end of the document so the pages load faster -->
-    <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
-    <script src="/js/bootstrap.min.js"></script>
+@include('layouts.extra_footer')
+</div>
+<script src="/js/bootstrap.min.js"></script>
   </body>
 </html>

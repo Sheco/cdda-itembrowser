@@ -22,12 +22,12 @@ class JsonRepository implements RepositoryInterface
     $this->read();
   }
 
-  public function addIndex($index, $key, $object)
+  public function index($index, $key, $object)
   {
     $this->index[$index][$key] = $object->repo_id;
   }
 
-  private function index($id, $object)
+  private function newObject($id, $object)
   {
     $object->repo_id = $id;
     $this->database[$id] = $object;
@@ -48,11 +48,11 @@ class JsonRepository implements RepositoryInterface
       $data = (array) json_decode(file_get_contents($file));
       foreach($data as $object) 
       {
-        $this->index($id++, $object);
+        $this->newObject($id++, $object);
       }
     }
-    $this->index($id++, json_decode('{"id":"toolset","name":"integrated toolset","type":"_SPECIAL"}'));
-    $this->index($id++, json_decode('{"id":"fire","name":"nearby fire","type":"_SPECIAL"}'));
+    $this->newObject($id++, json_decode('{"id":"toolset","name":"integrated toolset","type":"_SPECIAL"}'));
+    $this->newObject($id++, json_decode('{"id":"fire","name":"nearby fire","type":"_SPECIAL"}'));
   }
 
   public function registerIndexer(IndexerInterface $indexer)

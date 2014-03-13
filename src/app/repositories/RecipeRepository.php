@@ -16,23 +16,23 @@ class RecipeRepository implements RecipeRepositoryInterface
   {
     if($key=="recipes" and $recipe->category=="CC_NONCRAFT")
     {
-      $repo->addIndex("item.disassembly.$id", $recipe->repo_id, $recipe);
+      $repo->index("item.disassembly.$id", $recipe->repo_id, $recipe);
       return;
     }
     if($key=="recipes" and isset($recipe->reversible) and $recipe->reversible=="true")      
     {
-      $repo->addIndex("item.disassembly.$id", $recipe->repo_id, $recipe);
+      $repo->index("item.disassembly.$id", $recipe->repo_id, $recipe);
     }
 
     if($key=="toolFor")
     {
       if($recipe->category!="CC_NONCRAFT")
-        $repo->addIndex("item.categories.$id", $recipe->category, $recipe);
+        $repo->index("item.categories.$id", $recipe->category, $recipe);
 
-      $repo->addIndex("item.toolForCategory.$id.$recipe->category", $recipe->repo_id, $recipe);
+      $repo->index("item.toolForCategory.$id.$recipe->category", $recipe->repo_id, $recipe);
     }
 
-    $repo->addIndex("item.$key.$id", $recipe->repo_id);
+    $repo->index("item.$key.$id", $recipe->repo_id, $recipe);
   }
 
   private function getIndexes($repo, $object)
@@ -41,7 +41,7 @@ class RecipeRepository implements RecipeRepositoryInterface
     {
       $recipe = $object;
 
-      $repo->addIndex("recipe", $recipe->repo_id, $recipe);
+      $repo->index("recipe", $recipe->repo_id, $recipe);
       if(isset($recipe->result))
       {
         $this->linkIndexes($repo, "recipes", $recipe->result, $recipe);

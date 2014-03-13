@@ -17,7 +17,7 @@ class MaterialRepository implements MaterialRepositoryInterface
   private function getIndexes($repo, $object)
   {
     if($object->type=="material")
-      $repo->addIndex("material", $object->ident, $object);
+      $repo->index("material", $object->ident, $object);
   }
 
   public function find($id)

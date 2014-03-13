@@ -11,7 +11,8 @@ class ItemRepository implements ItemRepositoryInterface, IndexerInterface
     $repo->registerIndexer($this);
     $this->types = array_flip(array(
       "AMMO", "GUN", "ARMOR", "TOOL", "TOOL_ARMOR", "BOOK", "COMESTIBLE",
-      "CONTAINER", "GUNMOD", "GENERIC", "BIONIC_ITEM", "VAR_VEH_PART"
+      "CONTAINER", "GUNMOD", "GENERIC", "BIONIC_ITEM", "VAR_VEH_PART",
+      "_SPECIAL",
     ));
   }
 
@@ -22,6 +23,8 @@ class ItemRepository implements ItemRepositoryInterface, IndexerInterface
     if(!isset($this->types[$object->type]))
       return $indexes;
     $indexes["item"] = $object->id;
+    if($object->type=="_SPECIAL")
+      return $indexes;
     if($object->bashing+$object->cutting>10 and $object->to_hit>-2)
     {
       $indexes["melee"] = $object->id;

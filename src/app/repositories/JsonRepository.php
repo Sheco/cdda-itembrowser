@@ -52,8 +52,8 @@ class JsonRepository implements RepositoryInterface
         $this->index($id++, $object);
       }
     }
-    $this->index($id++, json_decode('{"id":"toolset","name":"integrated toolset","type":"none"}'));
-    $this->index($id++, json_decode('{"id":"fire","name":"nearby fire","type":"none"}'));
+    $this->index($id++, json_decode('{"id":"toolset","name":"integrated toolset","type":"_SPECIAL"}'));
+    $this->index($id++, json_decode('{"id":"fire","name":"nearby fire","type":"_SPECIAL"}'));
   }
 
   public function registerIndexer(IndexerInterface $indexer)

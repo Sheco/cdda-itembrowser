@@ -4,12 +4,10 @@ class JsonRepository implements RepositoryInterface
 {
   protected $database;
   protected $index;
-  private $indexers;
 
   function __construct()
   {
     $this->index = array();
-    $this->indexers = array();
     $this->database = array();
   }
 
@@ -31,10 +29,7 @@ class JsonRepository implements RepositoryInterface
   {
     $object->repo_id = $id;
     $this->database[$id] = $object;
-    foreach($this->indexers as $indexer)
-    {
-      Event::fire("cataclysm.newObject", array($this, $object));
-    }
+    Event::fire("cataclysm.newObject", array($this, $object));
   }
 
   protected function read()
@@ -53,11 +48,6 @@ class JsonRepository implements RepositoryInterface
     }
     $this->newObject($id++, json_decode('{"id":"toolset","name":"integrated toolset","type":"_SPECIAL"}'));
     $this->newObject($id++, json_decode('{"id":"fire","name":"nearby fire","type":"_SPECIAL"}'));
-  }
-
-  public function registerIndexer(IndexerInterface $indexer)
-  {
-    $this->indexers[] = $indexer;
   }
 
   // return a single object

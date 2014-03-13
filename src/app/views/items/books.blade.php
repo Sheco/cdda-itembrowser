@@ -12,6 +12,8 @@ Books - Cataclysm: Dark Days Ahead
   <tr>
     <th>Name</th>
     <th>Skill</th>
+    <th><span title="Required Level">RL</span></th>
+    <th><span title="Max Level">ML</span></th>
     <th>Time</th>
     <th>Fun</th>
     <th>Recipes</th>
@@ -21,6 +23,8 @@ Books - Cataclysm: Dark Days Ahead
 <tr>
   <td><a href="{{route('item.view', $item->id)}}">{{ $item->name }}</a></td>
   <td>{{ $item->skill }}</td>
+  <td>{{ $item->required_level }}</td>
+  <td>{{ $item->max_level }}</td>
   <td>{{ $item->time }}</td>
   <td>{{ $item->fun }}</td>
   <td>{{ count($item->learn) }}</td>

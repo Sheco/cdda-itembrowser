@@ -31,11 +31,11 @@
   @if ($recipe->hasComponents)
   {{$recipe->components}}<br>
   @endif
-@if ($recipe->book_learn)
+@if ($recipe->bookLearn)
 --<br>
-This recipe can be learned reading the following books:<br>
-@foreach($recipe->book_learn as $book)
-<a href="{{ route('item.view', $book[0]) }}">{{{ $itemRepository->find($book[0])->name }}} ({{{ $book[1] }}})</a><br>
+This recipe can be learned reading the following books when {{$recipe->skill_used}} is at least the required level:<br>
+@foreach($recipe->bookLearn as $book)
+<a href="{{ route('item.view', $book[0]->id) }}">{{{ $book[0]->name }}} (level {{{ $book[1] }}})</a><br>
 @endforeach
 @endif
 <br>

@@ -70,7 +70,8 @@
     @if ($item->skill=="none")
     Just for fun.<br>
     @else
-    Can bring your {{ $item->skill }} skill to 1<br>
+    Can bring your {{ $item->skill }} skill to {{ $item->max_level }}<br>
+
     @if ($item->required_level==0)
     It can be understood by beginners.<br>
     @else

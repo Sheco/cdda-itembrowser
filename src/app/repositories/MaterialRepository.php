@@ -1,6 +1,6 @@
 <?php
 
-class MaterialRepository implements MaterialRepositoryInterface
+class MaterialRepository
 {
   protected $database;
   protected $repo;

@@ -1,5 +1,5 @@
 <?php
+$app->singleton('ItemRepository', 'ItemRepository');
+$app->singleton('RecipeRepository', 'RecipeRepository');
+$app->singleton('MaterialRepository', 'MaterialRepository');
 $app->singleton('RepositoryInterface', 'JsonRepositoryCache');
-$app->singleton('ItemRepositoryInterface', 'ItemRepository');
-$app->singleton('RecipeRepositoryInterface', 'RecipeRepository');
-$app->singleton('MaterialRepositoryInterface', 'MaterialRepository');

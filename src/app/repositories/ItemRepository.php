@@ -1,6 +1,6 @@
 <?php 
 
-class ItemRepository implements ItemRepositoryInterface
+class ItemRepository
 {
   protected $repo;
   protected $types;

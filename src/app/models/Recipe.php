@@ -5,7 +5,7 @@ class Recipe implements Robbo\Presenter\PresentableInterface
   protected $data;
   protected $item;
 
-  public function __construct(ItemRepositoryInterface $item)
+  public function __construct(ItemRepository $item)
   {
     $this->item = $item;
   }
@@ -60,15 +60,21 @@ class Recipe implements Robbo\Presenter\PresentableInterface
   public function getTools()
   {
     return array_map(function($group) {
-        return new ToolGroup($group);}, 
-        $this->data->tools);
+      return array_map(function($tool) {
+        list($id, $amount) = $tool;
+        return array($this->item->find($id), $amount);
+      }, $group);
+    }, $this->data->tools);
   }
 
   public function getComponents()
   {
     return array_map(function($group) {
-        return new ComponentGroup($group);}, 
-        $this->data->components);
+      return array_map(function($component) {
+        list($id, $amount) = $component;
+        return array($this->item->find($id), $amount);
+      }, $group);
+    }, $this->data->components);
   }
 
 

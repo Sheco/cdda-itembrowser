@@ -1,6 +1,6 @@
 <?php
 
-class RecipeRepository implements RecipeRepositoryInterface
+class RecipeRepository
 {
   protected $repo;
   public function __construct(RepositoryInterface $repo)

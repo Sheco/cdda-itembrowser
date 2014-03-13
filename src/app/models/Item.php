@@ -17,9 +17,9 @@ class Item implements Robbo\Presenter\PresentableInterface
     );
 
   public function __construct(
-    RecipeRepositoryInterface $recipe, 
-    MaterialRepositoryInterface $material, 
-    ItemRepositoryInterface $item
+    RecipeRepository $recipe, 
+    MaterialRepository $material, 
+    ItemRepository $item
   )
   {
     $this->recipe = $recipe;

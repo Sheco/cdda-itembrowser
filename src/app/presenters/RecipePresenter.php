@@ -27,9 +27,10 @@ class RecipePresenter extends Robbo\Presenter\Presenter
     foreach ($this->object->tools as $group) 
     {
       $inner = array();
-      foreach ($group->items as $gi)
+      foreach ($group as $gi)
       {
-        $inner[] =  link_to_route("item.view", $gi["item"]->name, array("id"=>$gi["item"]->id))." ". $gi["amount"];
+        list($item, $amount) = $gi;
+        $inner[] =  link_to_route("item.view", $item->name, array("id"=>$item->id))." ". $amount;
       }
       $tools[] = join(" OR ", $inner);
     }
@@ -42,9 +43,10 @@ class RecipePresenter extends Robbo\Presenter\Presenter
     foreach ($this->object->components as $group)
     {
       $inner = array();
-      foreach ($group->items as $gi)
+      foreach ($group as $gi)
       {
-        $inner[] = $gi["amount"]." ". link_to_route("item.view", $gi["item"]->name, array("id"=>$gi["item"]->id));
+        list($item, $amount) = $gi;
+        $inner[] = $amount." ". link_to_route("item.view", $item->name, array("id"=>$item->id));
       }
       $components[] = join(" OR ", $inner);
     }

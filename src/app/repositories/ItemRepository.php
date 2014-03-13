@@ -22,6 +22,10 @@ class ItemRepository implements ItemRepositoryInterface, IndexerInterface
     if(!isset($this->types[$object->type]))
       return $indexes;
     $indexes["item"] = $object->id;
+    if($object->bashing+$object->cutting>10 and $object->to_hit>-2)
+    {
+      $indexes["melee"] = $object->id;
+    }
     if($object->type=="ARMOR" and !isset($object->covers)) 
     {
         $indexes["armor.none"] = $object->id;

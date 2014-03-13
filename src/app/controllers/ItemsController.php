@@ -103,6 +103,16 @@ class ItemsController extends BaseController
     return View::make('items.books', compact('items','type', 'types'));
   }
 
+  public function melee()
+  {
+    $data = $this->item->index("melee");
+    $items = array_map(function($id, $item)
+    {
+      return $this->item->find($item);
+    }, $data, array_keys($data));
+    return View::make('items.melee', compact('items'));
+  }
+
   public function sitemap()
   {
     $items = $this->item->where('');

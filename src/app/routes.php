@@ -15,6 +15,9 @@ Route::group(array('after'=>'theme:layouts.bootstrap'), function()
 {
   Route::get('/', 'ItemsController@index');
 
+  Route::get('/melee', array(
+      'as'=>'item.melee',
+      'uses'=>'ItemsController@melee'));
   Route::get('/search', array(
       'as'=>'item.search', 
       'uses'=>'ItemsController@search')

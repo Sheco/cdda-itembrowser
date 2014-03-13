@@ -1,5 +1,5 @@
 @section('content')
-<h3>Crafting browser</h3>
+<h3>Item browser</h3>
 
 <p>
 This is a simple tool to browse through the items and recipes available in <a href="http://en.cataclysmdda.com">Cataclysm: Dark Days Ahead</a>.

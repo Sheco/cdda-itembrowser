@@ -7,7 +7,7 @@
     <meta name="description" content="@yield('description', 'Item/recipe Browser for the Cataclysm: Dark Days Ahead roguelike game. You can look at items and plan ahead!')">
     <meta name="author" content="Sergio Duran">
 
-    <title>@yield('title', 'Cataclysm: Dark Days Ahead Item/Recipe Browser')</title>
+    <title>@yield('title', 'Cataclysm: Dark Days Ahead Item Browser')</title>
 
     <!-- Bootstrap core CSS -->
     <link href="/css/bootstrap.css" rel="stylesheet">
@@ -35,7 +35,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="{{ url("/") }}">CDDA Crafting Browser</a>
+          <a class="navbar-brand" href="{{ url("/") }}">CDDA Item Browser</a>
         </div>
         <div class="collapse navbar-collapse">
           <ul class="nav navbar-nav">

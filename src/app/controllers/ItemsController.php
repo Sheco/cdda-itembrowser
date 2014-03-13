@@ -116,7 +116,11 @@ class ItemsController extends BaseController
 
   public function sitemap()
   {
-    $items = $this->item->where('');
+    $items = $this->item->all();
+    $items = array_map(function($item, $id)
+    { 
+      return $this->item->find($id);
+    }, $items, array_keys($items));
     return View::make('items.sitemap', compact('items'));
   }
 }

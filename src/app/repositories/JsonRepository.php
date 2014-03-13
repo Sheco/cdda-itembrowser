@@ -42,10 +42,7 @@ class JsonRepository implements RepositoryInterface
     foreach(new RecursiveIteratorIterator($it) as $file)
     {
       $data = (array) json_decode(file_get_contents($file));
-      foreach($data as $object) 
-      {
-        $this->newObject($object);
-      }
+      array_walk($data, array($this, 'newObject'));
     }
     $this->newObject(json_decode('{"id":"toolset","name":"integrated toolset","type":"_SPECIAL"}'));
     $this->newObject(json_decode('{"id":"fire","name":"nearby fire","type":"_SPECIAL"}'));

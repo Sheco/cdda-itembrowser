@@ -15,9 +15,20 @@ Route::group(array('after'=>'theme:layouts.bootstrap'), function()
 {
   Route::get('/', 'ItemsController@index');
 
+  Route::get('/armor/{part}', array(
+      'as'=>'item.armor',
+      'uses'=>'ItemsController@armor'));
   Route::get('/melee', array(
       'as'=>'item.melee',
       'uses'=>'ItemsController@melee'));
+  Route::get('/books/{type}', array(
+      'as'=>'item.books',
+      'uses'=>'ItemsController@books'));
+  Route::get('/containers', array(
+      'as'=>'item.containers',
+      'uses'=>'ItemsController@containers'));
+
+
   Route::get('/search', array(
       'as'=>'item.search', 
       'uses'=>'ItemsController@search')
@@ -75,13 +86,6 @@ Route::group(array('after'=>'theme:layouts.bootstrap'), function()
       'uses'=>'ItemsController@disassemble')
   )
     ->where('id', '[A-Za-z0-9_-]+');
-
-  Route::get('/armor/{part}', array(
-      'as'=>'item.armor',
-      'uses'=>'ItemsController@armor'));
-  Route::get('/books/{type}', array(
-      'as'=>'item.books',
-      'uses'=>'ItemsController@books'));
 
 });
 

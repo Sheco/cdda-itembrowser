@@ -20,7 +20,12 @@
 <div class="row">
 <div class="col-md-6">
 @foreach ($item->disassembly as $recipe)
+  @if ($recipe->hasTools)
+  Tools required:<br>
+  {{$recipe->tools}}<br>
+  @endif
   @if ($recipe->hasComponents)
+  Components obtained:<br>
   {{$recipe->components}}<br>
   @endif
   --<br>

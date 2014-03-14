@@ -83,11 +83,19 @@ class Recipe
 
   public function all()
   {
-    return $this->repo->all("recipe");
+    $ret = array();
+    foreach($this->repo->all("recipe") as $id=>$recipe) {
+      $ret[$id] = $this->find($id);
+    }
+    return $ret;
   }
 
   public function index($index)
   {
-    return $this->repo->all($index);
+    $ret = array();
+    foreach($this->repo->all($index) as $id=>$recipe) {
+      $ret[$id] = $this->find($id);
+    }
+    return $ret;
   }
 }

@@ -5,21 +5,21 @@ class Json implements RepositoryInterface
 {
   protected $database;
   protected $index;
-  protected $hashes;
+  protected $chunks;
   private $id;
 
   public function __construct()
   {
     $this->id = 0;
     $this->index = array();
-    $this->hashes = array();
+    $this->chunks = array();
     $this->database = array();
   }
 
   // lazy load
   private function load()
   {
-    if ($this->hashes)
+    if ($this->chunks)
       return;
 
     $this->read();
@@ -29,9 +29,9 @@ class Json implements RepositoryInterface
   {
     $object->repo_id = $this->id++;
     \Event::fire("cataclysm.newObject", array($this, $object));
-    $hash = intval($object->repo_id/50);
-    $this->hashes[$object->repo_id] = $hash;
-    $this->database[$hash][$object->repo_id] = $object;
+    $chunk = intval($object->repo_id/50);
+    $this->chunks[$object->repo_id] = $chunk;
+    $this->database[$chunk][$object->repo_id] = $object;
   }
 
   // read the data files and process them
@@ -48,7 +48,7 @@ class Json implements RepositoryInterface
     $this->newObject(json_decode('{"id":"fire","name":"nearby fire","type":"_SPECIAL"}'));
   }
 
-  protected function checkHash($hash)
+  protected function checkChunk($chunk)
   {
   }
 
@@ -66,9 +66,9 @@ class Json implements RepositoryInterface
     if (!isset($this->index[$index][$id]))
       return null;
     $db_id = $this->index[$index][$id];
-    $hash = $this->hashes[$db_id];
-    $this->checkHash($hash);
-    return $this->database[$hash][$db_id];
+    $chunk = $this->chunks[$db_id];
+    $this->checkChunk($chunk);
+    return $this->database[$chunk][$db_id];
   }
 
   // return all the objects in the index

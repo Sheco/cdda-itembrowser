@@ -7,27 +7,27 @@ class JsonCache extends Json implements RepositoryInterface
   protected function read()
   {
     $key = self::CACHE_KEY;
-    if(\Cache::has("$key:hashes"))
+    if(\Cache::has("$key:chunks"))
     {
-      $this->hashes = \Cache::get("$key:hashes");
+      $this->chunks = \Cache::get("$key:chunks");
       $this->index = \Cache::get("$key:index");
       return;
     }
 
     parent::read();
-    foreach($this->database as $hash=>$data)
+    foreach($this->database as $chunk=>$data)
     {
-      \Cache::put("$key:db:$hash", $data, 60);
+      \Cache::put("$key:db:$chunk", $data, 60);
     }
     \Cache::put("$key:index", $this->index, 60);
-    \Cache::put("$key:hashes", $this->hashes, 60);
+    \Cache::put("$key:chunks", $this->chunks, 60);
   }
 
-  protected function checkHash($hash)
+  protected function checkChunk($chunk)
   {
-    if(isset($this->database[$hash]))
+    if(isset($this->database[$chunk]))
       return;
     $key = self::CACHE_KEY;
-    $this->database[$hash] = \Cache::get("$key:db:$hash");
+    $this->database[$chunk] = \Cache::get("$key:db:$chunk");
   }
 }

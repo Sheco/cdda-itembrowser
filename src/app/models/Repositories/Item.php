@@ -119,8 +119,7 @@ class Item
     $results = array();
     if (!$text)
       return $results;
-    foreach($this->all() as $id=>$val) {
-      $item = $this->find($id);
+    foreach($this->all() as $item) {
       if ($item->matches($text)) {
         $results[] = $item;
       }

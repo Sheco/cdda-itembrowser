@@ -114,7 +114,7 @@ class Item
 
   public function where($text)
   {
-    error_log("searching for $text...");
+    \Log::info("searching for $text...");
 
     $results = array();
     if (!$text)

@@ -38,7 +38,7 @@ class Json implements RepositoryInterface
   // read the data files and process them
   protected function read()
   {
-    error_log("Reading data files...");
+    \Log::info("Reading data files...");
     $this->database = array();
     $it = new \RecursiveDirectoryIterator(\Config::get("cataclysm.dataPath"));
     foreach(new \RecursiveIteratorIterator($it) as $file) {

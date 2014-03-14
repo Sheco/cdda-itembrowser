@@ -131,7 +131,7 @@ class Item
   {
     $ret = array();
     foreach($this->repo->all("item") as $id=>$item) {
-      $ret[] = $this->find($id);
+      $ret[$id] = $this->find($id);
     }
     return $ret;
   }
@@ -140,7 +140,7 @@ class Item
   {
     $ret = array();
     foreach($this->repo->all($name) as $id=>$item) {
-      $ret[] = $this->find($id);
+      $ret[$id] = $this->find($id);
     }
     return $ret;
   }

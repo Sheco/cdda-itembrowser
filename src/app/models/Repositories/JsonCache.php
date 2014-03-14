@@ -7,10 +7,15 @@ class JsonCache extends Json implements RepositoryInterface
   protected function read()
   {
     $key = self::CACHE_KEY;
+    $lock_fp = fopen(storage_path()."/cache/.json.lock", "w+");
+    flock($lock_fp, LOCK_EX);
+
     if(\Cache::has("$key:chunks"))
     {
       $this->chunks = \Cache::get("$key:chunks");
       $this->index = \Cache::get("$key:index");
+      flock($lock_fp, LOCK_UN);
+      fclose($lock_fp);
       return;
     }
 
@@ -21,6 +26,8 @@ class JsonCache extends Json implements RepositoryInterface
     }
     \Cache::put("$key:index", $this->index, 60);
     \Cache::put("$key:chunks", $this->chunks, 60);
+    flock($lock_fp, LOCK_UN);
+    fclose($lock_fp);
   }
 
   protected function checkChunk($chunk)

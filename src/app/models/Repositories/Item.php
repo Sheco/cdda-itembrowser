@@ -130,11 +130,19 @@ class Item
 
   public function all()
   {
-    return $this->repo->all("item");
+    $ret = array();
+    foreach($this->repo->all("item") as $id=>$item) {
+      $ret[] = $this->find($id);
+    }
+    return $ret;
   }
 
   public function index($name)
   {
-    return $this->repo->all($name);
+    $ret = array();
+    foreach($this->repo->all($name) as $id=>$item) {
+      $ret[] = $this->find($id);
+    }
+    return $ret;
   }
 }

@@ -3,17 +3,10 @@
 class ItemsController extends Controller 
 {
   protected $item;
-  protected $recipe;
-  protected $material;
 
-  public function __construct(
-    Repositories\Item $item, 
-    Repositories\Recipe $recipe, 
-    Repositories\Material $material
-  ) {
+  public function __construct(Repositories\Item $item) 
+  {
     $this->item = $item;
-    $this->recipe = $recipe;
-    $this->material= $material;
   }
 
   public function index()
@@ -24,8 +17,6 @@ class ItemsController extends Controller
   public function search()
   {
     $search = Input::get('q');
-    if ($search=="")
-      return Redirect::to("/");
     $items = $this->item->where($search);
     return View::make('items.search', compact('items', 'search'));
   }
@@ -46,9 +37,9 @@ class ItemsController extends Controller
   {
     $item = $this->item->findOr404($id);
     $categories = $item->toolCategories;
-    if ($category=="" && $categories) {
-      $category = $categories[0];
-    }
+    if ($category=="" && $categories) 
+      return Redirect::route("item.recipes", array($id, $categories[0]));
+
     $recipes = $item->getToolForCategory($category);
 
     return View::make('items.recipes', compact('item', "category", "recipes", "categories"));
@@ -62,10 +53,7 @@ class ItemsController extends Controller
 
   public function armor($part)
   {
-    $data = $this->item->index("armor.$part");
-    $items = array_map(function ($id, $item) {
-      return $this->item->find($item);
-    }, $data, array_keys($data));
+    $items = $this->item->index("armor.$part");
     $parts = array(
       "head"=>"Head",
       "eyes"=>"Eyes",
@@ -82,10 +70,7 @@ class ItemsController extends Controller
 
   public function books($type="combat")
   {
-    $data = $this->item->index("book.$type");
-    $items = array_map(function ($id, $item) {
-      return $this->item->find($item);
-    }, $data, array_keys($data));
+    $items = $this->item->index("book.$type");
     $types = array(
       "entertainment"=>"Entertainment",
       "boring"=>"Boring",
@@ -102,19 +87,13 @@ class ItemsController extends Controller
 
   public function melee()
   {
-    $data = $this->item->index("melee");
-    $items = array_map(function ($id, $item) {
-      return $this->item->find($item);
-    }, $data, array_keys($data));
+    $items = $this->item->index("melee");
     return View::make('items.melee', compact('items'));
   }
 
   public function sitemap()
   {
     $items = $this->item->all();
-    $items = array_map(function ($item, $id) { 
-      return $this->item->find($id);
-    }, $items, array_keys($items));
     return View::make('items.sitemap', compact('items'));
   }
 }

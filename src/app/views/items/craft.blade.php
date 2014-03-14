@@ -25,10 +25,12 @@
   Difficulty: {{{ $recipe->difficulty }}}<br>
   Time to complete: {{{ $recipe->time }}}<br>
   @if ($recipe->hasTools)
+  Tools required:<br>
   {{$recipe->tools}}<br>
   @endif
 
   @if ($recipe->hasComponents)
+  Components required/obtained:<br>
   {{$recipe->components}}<br>
   @endif
 @if ($recipe->bookLearn)

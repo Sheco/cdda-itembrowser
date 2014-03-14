@@ -29,11 +29,11 @@ class Recipe extends \Robbo\Presenter\Presenter
       $inner = array();
       foreach ($group as $gi) {
         list($item, $amount) = $gi;
-        $inner[] =  link_to_route("item.view", $item->name, array("id"=>$item->id))." ". $amount;
+        $inner[] =  link_to_route("item.view", $item->name, array("id"=>$item->id))." ". ($amount>0? "($amount&nbsp;charges)": "");
       }
       $tools[] = join(" OR ", $inner);
     }
-    return "Tools required:<br>&gt; ".join("<br>&gt; ", $tools)."\n";
+    return "&gt; ".join("<br>&gt; ", $tools)."\n";
   }
 
   public function presentComponents()
@@ -43,11 +43,11 @@ class Recipe extends \Robbo\Presenter\Presenter
       $inner = array();
       foreach ($group as $gi) {
         list($item, $amount) = $gi;
-        $inner[] = $amount." ". link_to_route("item.view", $item->name, array("id"=>$item->id));
+        $inner[] = "{$amount}x ". link_to_route("item.view", $item->name, array("id"=>$item->id));
       }
       $components[] = join(" OR ", $inner);
     }
     $label = $this->object->category=="CC_NONCRAFT"? "obtained":"required";
-    return "Components $label:<br>&gt; ".join("<br>&gt; ", $components)."\n";
+    return "&gt; ".join("<br>&gt; ", $components)."\n";
   }
 }

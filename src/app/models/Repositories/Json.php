@@ -5,21 +5,21 @@ class Json implements RepositoryInterface
 {
   protected $database;
   protected $index;
-  private $used_index;
+  protected $hashes;
   private $id;
 
   public function __construct()
   {
     $this->id = 0;
     $this->index = array();
-    $this->used_index = array();
+    $this->hashes = array();
     $this->database = array();
   }
 
   // lazy load
   private function load()
   {
-    if ($this->database)
+    if ($this->hashes)
       return;
 
     $this->read();
@@ -29,10 +29,9 @@ class Json implements RepositoryInterface
   {
     $object->repo_id = $this->id++;
     \Event::fire("cataclysm.newObject", array($this, $object));
-
-    // only store items that have been indexed, this saves memory.
-    if (isset($this->used_index[$object->repo_id]))
-      $this->database[$object->repo_id] = $object;
+    $hash = intval($object->repo_id/50);
+    $this->hashes[$object->repo_id] = $hash;
+    $this->database[$hash][$object->repo_id] = $object;
   }
 
   // read the data files and process them
@@ -49,10 +48,13 @@ class Json implements RepositoryInterface
     $this->newObject(json_decode('{"id":"fire","name":"nearby fire","type":"_SPECIAL"}'));
   }
 
+  protected function checkHash($hash)
+  {
+  }
+
   // save an index to an object
   public function index($index, $key, $object)
   {
-    $this->used_index[$object->repo_id] = true;
     $this->index[$index][$key] = $object->repo_id;
   }
 
@@ -64,7 +66,9 @@ class Json implements RepositoryInterface
     if (!isset($this->index[$index][$id]))
       return null;
     $db_id = $this->index[$index][$id];
-    return $this->database[$db_id];
+    $hash = $this->hashes[$db_id];
+    $this->checkHash($hash);
+    return $this->database[$hash][$db_id];
   }
 
   // return all the objects in the index

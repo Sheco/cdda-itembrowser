@@ -18,8 +18,7 @@ have the appropiate dependencies.
 
 * composer
 * php5.3 (with the mcrypt extension)
-* It's recommended to have the php apc extension.
-* A webserver, I've included a sample config file for apache.
+* A webserver
 
 Then you can run the setup.sh script, it expects a single argument, a
 path to install the data files and variable files.

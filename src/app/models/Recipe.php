@@ -77,7 +77,12 @@ class Recipe implements Robbo\Presenter\PresentableInterface
     }, $this->data->components);
   }
 
-  public function getBookLearn()
+  public function getCanBeLearned()
+  {
+    return !empty($this->data->book_learn);
+  }
+
+  public function getBooksTeaching()
   {
     return array_map(function ($book) {
       return array($this->item->find($book[0]), $book[1]);

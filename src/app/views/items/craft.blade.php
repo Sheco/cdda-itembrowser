@@ -33,10 +33,10 @@
   Components required/obtained:<br>
   {{$recipe->components}}<br>
   @endif
-@if ($recipe->bookLearn)
+@if ($recipe->canBeLearned)
 --<br>
-This recipe can be learned reading the following books when {{$recipe->skill_used}} is at least the required level:<br>
-@foreach($recipe->bookLearn as $book)
+This recipe can be found in the following books when {{$recipe->skill_used}} is at least the required level:<br>
+@foreach($recipe->booksTeaching as $book)
 <a href="{{ route('item.view', $book[0]->id) }}">{{{ $book[0]->name }}} (level {{{ $book[1] }}})</a><br>
 @endforeach
 @endif

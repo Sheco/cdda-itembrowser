@@ -1,4 +1,4 @@
-<?php 
+<?php
 namespace Repositories;
 
 class JsonCache extends Json implements RepositoryInterface
@@ -20,6 +20,7 @@ class JsonCache extends Json implements RepositoryInterface
     }
 
     parent::read();
+
     foreach($this->database as $chunk=>$data)
     {
       \Cache::put("$key:db:$chunk", $data, 60);
@@ -30,7 +31,7 @@ class JsonCache extends Json implements RepositoryInterface
     fclose($lock_fp);
   }
 
-  protected function checkChunk($chunk)
+  protected function loadChunk($chunk)
   {
     if(isset($this->database[$chunk]))
       return;

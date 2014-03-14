@@ -48,7 +48,7 @@ class Json implements RepositoryInterface
     $this->newObject(json_decode('{"id":"fire","name":"nearby fire","type":"_SPECIAL"}'));
   }
 
-  protected function checkChunk($chunk)
+  protected function loadChunk($chunk)
   {
   }
 
@@ -65,9 +65,12 @@ class Json implements RepositoryInterface
     
     if (!isset($this->index[$index][$id]))
       return null;
+
     $db_id = $this->index[$index][$id];
     $chunk = $this->chunks[$db_id];
-    $this->checkChunk($chunk);
+
+    $this->loadChunk($chunk);
+
     return $this->database[$chunk][$db_id];
   }
 

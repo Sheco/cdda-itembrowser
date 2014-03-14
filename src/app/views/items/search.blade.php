@@ -1,5 +1,8 @@
 @section('content')
-<h3>{{ $search }} </h3>
+<h3>Search: {{ $search }} </h3>
+@if (empty($items))
+No matches found.
+@endif
 @foreach ($items as $item)
 <div class="row">
 

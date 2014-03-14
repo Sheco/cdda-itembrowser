@@ -30,7 +30,7 @@
   @endif
 
   @if ($recipe->hasComponents)
-  Components required/obtained:<br>
+  Components required:<br>
   {{$recipe->components}}<br>
   @endif
 @if ($recipe->canBeLearned)

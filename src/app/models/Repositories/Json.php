@@ -48,8 +48,9 @@ class Json implements RepositoryInterface
     $this->newObject(json_decode('{"id":"fire","name":"nearby fire","type":"_SPECIAL"}'));
   }
 
-  protected function loadChunk($chunk)
+  protected function chunk($chunk)
   {
+    return $this->database[$chunk];
   }
 
   // save an index to an object
@@ -69,9 +70,7 @@ class Json implements RepositoryInterface
     $db_id = $this->index[$index][$id];
     $chunk = $this->chunks[$db_id];
 
-    $this->loadChunk($chunk);
-
-    return $this->database[$chunk][$db_id];
+    return $this->chunk($chunk)[$db_id];
   }
 
   // return all the objects in the index

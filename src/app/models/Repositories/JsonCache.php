@@ -31,11 +31,14 @@ class JsonCache extends Json implements RepositoryInterface
     fclose($lock_fp);
   }
 
-  protected function loadChunk($chunk)
+  protected function chunk($chunk)
   {
     if(isset($this->database[$chunk]))
-      return;
+      return $this->database[$chunk];
+
     $key = self::CACHE_KEY;
     $this->database[$chunk] = \Cache::get("$key:db:$chunk");
+
+    return $this->database[$chunk];
   }
 }

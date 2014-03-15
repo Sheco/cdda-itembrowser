@@ -28,9 +28,12 @@ class Json implements RepositoryInterface
   private function newObject($object)
   {
     $object->repo_id = $this->id++;
+
     \Event::fire("cataclysm.newObject", array($this, $object));
+
     $chunk = intval($object->repo_id/50);
     $this->chunks[$object->repo_id] = $chunk;
+
     $this->database[$chunk][$object->repo_id] = $object;
   }
 
@@ -39,13 +42,23 @@ class Json implements RepositoryInterface
   {
     \Log::info("Reading data files...");
     $this->database = array();
+
     $it = new \RecursiveDirectoryIterator(\Config::get("cataclysm.dataPath"));
     foreach(new \RecursiveIteratorIterator($it) as $file) {
       $data = (array) json_decode(file_get_contents($file));
       array_walk($data, array($this, 'newObject'));
     }
-    $this->newObject(json_decode('{"id":"toolset","name":"integrated toolset","type":"_SPECIAL"}'));
-    $this->newObject(json_decode('{"id":"fire","name":"nearby fire","type":"_SPECIAL"}'));
+
+    $this->newObject(json_decode('{
+      "id":"toolset",
+      "name":"integrated toolset",
+      "type":"_SPECIAL"
+    }'));
+    $this->newObject(json_decode('{
+      "id":"fire",
+      "name":"nearby fire",
+      "type":"_SPECIAL"
+    }'));
   }
 
   protected function chunk($chunk)

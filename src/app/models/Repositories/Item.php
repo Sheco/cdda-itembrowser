@@ -95,12 +95,9 @@ class Item
   {
     $item = \App::make('Item');
     $data = $this->repo->get("item", $id);
-    if ($data) {
-      $item->load($data);
-      return $item;  
-    }
-
-    $item->load(json_decode('{"id":"'.$id.'","name":"?'.$id.'?","type":"invalid"}'));
+    $item->load($data?:
+      json_decode('{"id":"'.$id.'","name":"'.$id.'?","type":"invalid"}')
+    );
     return $item;
   }
 

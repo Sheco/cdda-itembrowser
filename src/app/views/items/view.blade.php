@@ -21,10 +21,10 @@
       Moves per attack: {{{ $item->movesPerAttack }}}<br>
     Materials: {{ $item->materials }}<br>
     @if ($item->canBeCut)
-      Can be cut into: {{{ $item->cutResult }}}<br>
+    Can be cut into: {{{ $item->cutResultAmount }}} <a href="{{ route('item.view', $item->cutResultItem->id) }}">{{ str_plural($item->cutResultItem->name) }}</a><br>
     @endif
     @if ($item->isResultOfCutting)
-      Can be obtained if you cut items made of {{{ $item->materialToCut }}}<br>
+    Can be obtained if you cut items made of <a href="{{ route('item.search', array('q'=>$item->materialToCut)) }}">{{{ $item->materialToCut }}}</a><br>
     @endif
     @if ($item->isAmmo)
     Damage: {{{ $item->damage }}}<br>

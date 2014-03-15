@@ -105,10 +105,16 @@ EOF;
     return join(" ", $badges);
   }
 
-  public function presentCutResult()
+  public function presentCutResultAmount()
   {
     $cutresult = $this->object->cutResult;
-    return $cutresult[0]." ".str_plural($cutresult[1]->name);
+    return $cutresult[0];
+  }
+
+  public function presentCutResultItem()
+  {
+    $cutresult = $this->object->cutResult;
+    return $cutresult[1];
   }
 
   public function presentCraftingRecipes()

@@ -68,14 +68,14 @@ EOF;
   public function presentRecipes()
   {
     return array_map(function ($recipe) { 
-      return new Recipe($recipe); 
+      return $recipe->getPresenter(); 
     }, $this->object->recipes);
   }
 
   public function presentDisassembly()
   {
     return array_map(function ($recipe) { 
-      return new Recipe($recipe); 
+      return $recipe->getPresenter(); 
     }, $this->object->disassembly);
   }
 

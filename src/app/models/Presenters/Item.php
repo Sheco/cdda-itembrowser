@@ -128,6 +128,8 @@ EOF;
 
   public function presentCovers()
   {
+    if(!$this->object->covers)
+      return "none";
     return join(", ", $this->object->covers);
   }
 

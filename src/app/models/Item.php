@@ -100,7 +100,7 @@ class Item implements Robbo\Presenter\PresentableInterface
 
   public function getIsArmor()
   {
-    return isset($this->data->covers);
+    return $this->data->type=="ARMOR";
   }
 
   public function getIsComestible()
@@ -117,6 +117,7 @@ class Item implements Robbo\Presenter\PresentableInterface
 
     $variable = "{$type}_resist";
     $thickness = $this->material_thickness;
+    if($thickness<1) $thickness=1;
     if ($mat2=="null") {
       return $thickness*3*$mat1->$variable;
     } else {

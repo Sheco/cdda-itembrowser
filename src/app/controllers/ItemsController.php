@@ -38,7 +38,7 @@ class ItemsController extends Controller
     $item = $this->item->findOr404($id);
     $categories = $item->toolCategories;
     if ($category=="" && $categories) 
-      return Redirect::route("item.recipes", array($id, $categories[0]));
+      return Redirect::route("item.recipes", array($id, key($categories)));
 
     $recipes = $item->getToolForCategory($category);
 

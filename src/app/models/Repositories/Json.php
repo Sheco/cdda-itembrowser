@@ -67,9 +67,9 @@ class Json implements RepositoryInterface
   }
 
   // save an index to an object
-  public function index($index, $key, $object)
+  public function index($index, $key, $value)
   {
-    $this->index[$index][$key] = $object->repo_id;
+    $this->index[$index][$key] = $value;
   }
 
   // return a single object

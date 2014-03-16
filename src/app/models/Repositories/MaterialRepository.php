@@ -17,7 +17,7 @@ class Material
   private function getIndexes($repo, $object)
   {
     if ($object->type=="material")
-      $repo->index("material", $object->ident, $object);
+      $repo->index("material", $object->ident, $object->repo_id);
   }
 
   public function find($id)

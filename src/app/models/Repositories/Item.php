@@ -24,70 +24,70 @@ class Item
   {
     if (!isset($this->types[$object->type]))
       return;
-    $repo->index("item", $object->id, $object);
+    $repo->index("item", $object->id, $object->repo_id);
     if ($object->type=="_SPECIAL")
       return;
     if ($object->bashing+$object->cutting>10 and $object->to_hit>-2) {
-      $repo->index("melee", $object->id, $object);
+      $repo->index("melee", $object->id, $object->repo_id);
     }
     if ($object->type=="ARMOR" and !isset($object->covers)) {
-      $repo->index("armor.none", $object->id, $object);
+      $repo->index("armor.none", $object->id, $object->repo_id);
     } 
     else if ($object->type=="ARMOR" and isset($object->covers)) {
       if (in_array("FEET", $object->covers))
-        $repo->index("armor.feet", $object->id, $object);
+        $repo->index("armor.feet", $object->id, $object->repo_id);
       if (in_array("ARMS", $object->covers))
-        $repo->index("armor.arms", $object->id, $object);
+        $repo->index("armor.arms", $object->id, $object->repo_id);
       if (in_array("EYES", $object->covers))
-        $repo->index("armor.eyes", $object->id, $object);
+        $repo->index("armor.eyes", $object->id, $object->repo_id);
       if (in_array("LEGS", $object->covers))
-        $repo->index("armor.legs", $object->id, $object);
+        $repo->index("armor.legs", $object->id, $object->repo_id);
       if (in_array("HANDS", $object->covers))
-        $repo->index("armor.hands", $object->id, $object);
+        $repo->index("armor.hands", $object->id, $object->repo_id);
       if (in_array("TORSO", $object->covers))
-        $repo->index("armor.torso", $object->id, $object);
+        $repo->index("armor.torso", $object->id, $object->repo_id);
       if (in_array("HEAD", $object->covers))
-        $repo->index("armor.head", $object->id, $object);
+        $repo->index("armor.head", $object->id, $object->repo_id);
       if (in_array("MOUTH", $object->covers))
-        $repo->index("armor.mouth", $object->id, $object);
+        $repo->index("armor.mouth", $object->id, $object->repo_id);
     }
     if ($object->type=="CONTAINER")
-      $repo->index("container", $object->id, $object);
+      $repo->index("container", $object->id, $object->repo_id);
     if ($object->type=="COMESTIBLE")
-      $repo->index("food", $object->id, $object);
+      $repo->index("food", $object->id, $object->repo_id);
     if ($object->type=="TOOL")
-      $repo->index("tool", $object->id, $object);
+      $repo->index("tool", $object->id, $object->repo_id);
     if ($object->type=="BOOK") {
       if ($object->skill=="none") {
         if ($object->fun>0)
-          $repo->index("book.entertainment", $object->id, $object);
+          $repo->index("book.entertainment", $object->id, $object->repo_id);
         else
-          $repo->index("book.boring", $object->id, $object);
+          $repo->index("book.boring", $object->id, $object->repo_id);
       } else if (in_array($object->skill, array(
         "archery", "handguns", "markmanship",
         "launcher", "firearms", "throw", "rifle",
         "shotgun", "smg", "pistol", "gun")))
-        $repo->index("book.range", $object->id, $object);
+        $repo->index("book.range", $object->id, $object->repo_id);
       else if (in_array($object->skill, array(
         "bashing", "cutting", "stabbing", "dodge",
         "melee", "unarmed")))
-        $repo->index("book.combat", $object->id, $object);
+        $repo->index("book.combat", $object->id, $object->repo_id);
       else if (in_array($object->skill, array(
         "computer", "electronics", "fabrication",
         "mechanics", "construction", "carpentry",
         "traps")))
-        $repo->index("book.engineering", $object->id, $object);
+        $repo->index("book.engineering", $object->id, $object->repo_id);
       else if (in_array($object->skill, array(
         "cooking", "tailor", "firstaid")))
-        $repo->index("book.crafts", $object->id, $object);
+        $repo->index("book.crafts", $object->id, $object->repo_id);
       else if (in_array($object->skill, array(
         "barter", "speech")))
-        $repo->index("book.social", $object->id, $object);
+        $repo->index("book.social", $object->id, $object->repo_id);
       else if (in_array($object->skill, array(
         "driving", "survival", "swimming")))
-        $repo->index("book.survival", $object->id, $object);
+        $repo->index("book.survival", $object->id, $object->repo_id);
       else 
-        $repo->index("book.other", $object->id, $object);
+        $repo->index("book.other", $object->id, $object->repo_id);
     }
   }
 

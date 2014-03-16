@@ -68,6 +68,21 @@ class ItemsController extends Controller
     return View::make('items.armor', compact('items','parts','part'));
   }
 
+  public function gun($skill)
+  {
+    $items = $this->item->index("gun.$skill");
+    $skills = array(
+      "archery"=>"Archery",
+      "launcher"=>"Launchers",
+      "pistol"=>"Pistols",
+      "rifle"=>"Rifles",
+      "shotgun"=>"Shotguns",
+      "smg"=>"SMGs",
+      "throw" =>"Thrown",
+    );
+    return View::make('items.gun', compact('items','skills','skill'));
+  }
+
   public function books($type="combat")
   {
     $items = $this->item->index("book.$type");

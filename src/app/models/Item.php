@@ -118,6 +118,10 @@ class Item implements Robbo\Presenter\PresentableInterface
     return $this->data->type == "BOOK";
   }
 
+  public function getIsGun()
+  {
+    return $this->data->type == "GUN";
+  }
 
   public function protection($type)
   {
@@ -177,6 +181,11 @@ class Item implements Robbo\Presenter\PresentableInterface
     return sprintf("%+d", $this->data->to_hit);
   }
 
+  public function getPierce()
+  {
+    return isset($this->data->pierce)? $this->data->pierce: 0;
+  }
+
   public function getMaterial1()
   {
     return $this->material->find($this->data->material[0]);
@@ -210,6 +219,11 @@ class Item implements Robbo\Presenter\PresentableInterface
   {
     $pairs = array_flip($this->cut_pairs);
     return $pairs[$this->id];
+  }
+
+  public function getAmmoTypes()
+  {
+    return $this->item->index("ammo.$this->ammo");
   }
 
   public function isMadeOf($material)

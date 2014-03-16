@@ -35,10 +35,27 @@
     Count: {{{ $item->count }}}<br>
     @endif
     @if ($item->isTool)
+
     Maximum {{ $item->max_charges }} charges
     @if ($item->ammo!="NULL")
-    of {{ $item->ammo }}
+    of: {{ $item->ammoTypes }}
     @endif
+    @endif
+    <br>
+    @if($item->isGun)
+    Ammunition: {{{ $item->clip_size }}} rounds of {{ $item->ammoTypes }}<br>
+    Damage: {{{ $item->ranged_damage }}}<br>
+    Range: {{{ $item->range }}}<br>
+    Armor-pierce: {{{ $item->pierce }}}<br>
+    Dispersion: {{{ $item->dispersion }}}<br>
+    Recoil: {{{ $item->recoil }}}<br>
+    Reload time: {{{ $item->reload }}}<br>
+    @if ($item->burst==0)
+    Semi-automatic<br>
+    @else
+    Burst size: {{{$item->burst}}}
+    @endif
+
     <br>
     @endif
     @if ($item->isComestible)

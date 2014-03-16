@@ -133,4 +133,10 @@ EOF;
     return join(", ", $this->object->covers);
   }
 
+  public function presentAmmoTypes()
+  {
+    return join(", ", array_map(function ($item) {
+      return "<a href=\"". route("item.view", $item->id) ."\">$item->name</a>";
+    }, $this->object->ammoTypes));
+  }
 }

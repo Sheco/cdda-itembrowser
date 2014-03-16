@@ -89,6 +89,13 @@ class Item
       else 
         $repo->index("book.other", $object->id, $object->repo_id);
     }
+    if($object->type=="GUN") {
+      $repo->index("gun.$object->skill", $object->id, $object->repo_id);
+    }
+    if($object->type=="AMMO") {
+      $repo->index("ammo.$object->ammo_type", $object->id, $object->repo_id);
+    }
+
   }
 
   public function find($id)
@@ -140,5 +147,10 @@ class Item
       $ret[$id] = $this->find($id);
     }
     return $ret;
+  }
+
+  public function indexRaw($index)
+  {
+    return $this->repo->all($index);
   }
 }

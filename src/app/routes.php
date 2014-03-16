@@ -18,6 +18,12 @@ Route::group(array('after'=>'theme:layouts.bootstrap'), function () {
       'as'=>'item.armor',
       'uses'=>'ItemsController@armor')
   );
+
+  Route::get('/gun/{skill}', array(
+      'as'=>'item.gun',
+      'uses'=>'ItemsController@gun')
+    );
+
   Route::get('/melee', array(
       'as'=>'item.melee',
       'uses'=>'ItemsController@melee')

@@ -105,10 +105,19 @@ class Item implements Robbo\Presenter\PresentableInterface
 
   public function getIsComestible()
   {
-    if(!isset($this->data->type))
-      return false;
     return $this->data->type=="COMESTIBLE";
   }
+
+  public function getIsAmmo()
+  {
+    return $this->data->type == "AMMO";
+  }
+
+  public function getIsBook()
+  {
+    return $this->data->type == "BOOK";
+  }
+
 
   public function protection($type)
   {
@@ -123,16 +132,6 @@ class Item implements Robbo\Presenter\PresentableInterface
     } else {
       return $thickness*(($mat1->$variable*2)+$mat2->$variable);
     }
-  }
-
-  public function getIsAmmo()
-  {
-    return $this->data->type == "AMMO";
-  }
-
-  public function getIsBook()
-  {
-    return $this->data->type == "BOOK";
   }
 
   public function getIsTool()
@@ -226,7 +225,6 @@ class Item implements Robbo\Presenter\PresentableInterface
         stristr($this->id, $text) || 
         stristr($this->name, $text) ||
         $this->isMadeOf($text);
-
   }
 
   public function getPresenter()

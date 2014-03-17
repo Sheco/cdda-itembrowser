@@ -63,7 +63,7 @@
 <script src="/js/jquery.tablesorter.min.js"></script>
     <div class="container">
 @yield('content')
-
+<br><br>
 @include('layouts.extra_footer')
 </div>
 <script src="/js/bootstrap.min.js"></script>

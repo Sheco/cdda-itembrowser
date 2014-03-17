@@ -63,7 +63,7 @@
       Nutrition: {{{ $item->nutrition }}}<br>
       Quench: {{{ $item->quench }}}<br>
       Enjoyability: {{{ $item->fun }}}<br>
-      Spoils in {{{ $item->spoilsIn }}}<br>
+      Spoils in {{{ $item->spoils_in }}}<br>
       Heal: {{{ $item->heal }}}<br>
     @endif
     @if ($item->isArmor) 

@@ -25,10 +25,10 @@ Comestibles - Cataclysm: Dark Days Ahead
   <td><a href="{{route('item.view', $item->id)}}">{{ $item->name }}</a></td>
   <td>{{ $item->quench }}</td>
   <td>{{ $item->nutrition }}</td>
-  <td>{{ $item->stim }}</td>
   <td>{{ $item->spoils_in }}</td>
-  <td>{{ $item->addiction_potential }}</td>
+  <td>{{ $item->stim }}</td>
   <td>{{ $item->heal }}</td>
+  <td>{{ $item->addiction_potential }}</td>
   <td>{{ $item->fun }}</td>
 </tr>
 </tr>

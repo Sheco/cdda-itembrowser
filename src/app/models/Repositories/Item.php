@@ -95,7 +95,10 @@ class Item
     if($object->type=="AMMO") {
       $repo->index("ammo.$object->ammo_type", $object->id, $object->repo_id);
     }
-
+    if ($object->type=="COMESTIBLE") {
+      $type = strtolower($object->comestible_type);
+      $repo->index("comestible.$type", $object->id, $object->repo_id);
+    }
   }
 
   public function find($id)

@@ -37,6 +37,10 @@ Route::group(array('after'=>'theme:layouts.bootstrap'), function () {
       'uses'=>'ItemsController@containers')
   );
 
+  Route::get('consumibles/{type}', array(
+      'as'=>'item.comestibles',
+      'uses'=>'ItemsController@comestibles')
+  );
 
   Route::get('/search', array(
       'as'=>'item.search', 

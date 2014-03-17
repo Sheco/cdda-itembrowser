@@ -106,6 +106,17 @@ class ItemsController extends Controller
     return View::make('items.melee', compact('items'));
   }
 
+  public function comestibles($type="drink")
+  {
+    $items = $this->item->index("comestible.$type");
+    $types = array(
+      "drink"=>"Drinks",
+      "food"=>"Food",
+      "med"=>"Meds",
+    );
+    return View::make('items.comestibles', compact('items','type', 'types'));
+  }
+
   public function sitemap()
   {
     $items = $this->item->all();

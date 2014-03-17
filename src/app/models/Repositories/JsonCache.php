@@ -32,14 +32,12 @@ class JsonCache extends Json implements RepositoryInterface
 
     $database = $this->chopDatabase($this->database);
     foreach($database as $chunk=>$data) {
-      \Log::info("saving database chunk $chunk: ". count($data).":". strlen(serialize($data)));
       \Cache::put("$key:db:$chunk", $data, 60);
     }
 
     $index = $this->chopIndex($this->index);
     foreach($index as $chunk=>$data)
     {
-      \Log::info("saving index chunk $chunk: ". count($data).":". strlen(serialize($data)));
       \Cache::put("$key:index:$chunk", $data, 60);
     }
 
@@ -76,7 +74,6 @@ class JsonCache extends Json implements RepositoryInterface
     if(!isset($this->dataChunks[$chunk])) {
       $key = self::CACHE_KEY;
       $this->dataChunks[$chunk] = \Cache::get("$key:db:$chunk");
-      \Log::debug("loading data chunk $chunk for data id: $repo_id");
     }
     $this->database[$repo_id] = $this->dataChunks[$chunk][$repo_id];
   }
@@ -116,7 +113,6 @@ class JsonCache extends Json implements RepositoryInterface
     if(!isset($this->indexChunks[$chunk])) {
       $key = self::CACHE_KEY;
       $this->indexChunks[$chunk] = \Cache::get("$key:index:$chunk");
-      \Log::debug("loading index chunk $chunk for index $index");
     }
 
     if(!isset($this->indexChunks[$chunk][$index]))

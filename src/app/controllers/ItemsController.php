@@ -87,8 +87,7 @@ class ItemsController extends Controller
   {
     $items = $this->item->index("book.$type");
     $types = array(
-      "entertainment"=>"Entertainment",
-      "boring"=>"Boring",
+      "fun"=>"Just for fun",
       "range"=>"Ranged",
       "combat"=>"Combat",
       "engineering"=>"Engineering",

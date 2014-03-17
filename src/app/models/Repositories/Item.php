@@ -14,6 +14,41 @@ class Item
       "CONTAINER", "GUNMOD", "GENERIC", "BIONIC_ITEM", "VAR_VEH_PART",
       "_SPECIAL",
     ));
+    $this->book_types = array(
+        "archery"=>"range", 
+        "handguns"=>"range", 
+        "markmanship"=>"range",
+        "launcher"=>"range", 
+        "firearms"=>"range", 
+        "throw"=>"range", 
+        "rifle"=>"range",
+        "shotgun"=>"range", 
+        "smg"=>"range", 
+        "pistol"=>"range", 
+        "gun"=>"range",
+        "bashing"=>"combat", 
+        "cutting"=>"combat", 
+        "stabbing"=>"combat", 
+        "dodge"=>"combat",
+        "melee"=>"combat", 
+        "unarmed"=>"combat",
+        "computer"=>"engineering", 
+        "electronics"=>"engineering", 
+        "fabrication"=>"engineering",
+        "mechanics"=>"engineering", 
+        "construction"=>"engineering", 
+        "carpentry"=>"engineering",
+        "traps"=>"engineering",
+        "tailor"=>"crafts",
+        "firstaid"=>"crafts",
+        "cooking"=>"crafts",
+        "barter"=>"social", 
+        "speech"=>"social",
+        "driving"=>"survival", 
+        "survival"=>"survival", 
+        "swimming"=>"survival",
+        "none"=>"fun",
+    );
     \Event::listen("cataclysm.newObject", function ($repo, $object) {
       $this->getIndexes($repo, $object);
     });
@@ -58,35 +93,10 @@ class Item
     if ($object->type=="TOOL")
       $repo->index("tool", $object->id, $object->repo_id);
     if ($object->type=="BOOK") {
-      if ($object->skill=="none") {
-        if ($object->fun>0)
-          $repo->index("book.entertainment", $object->id, $object->repo_id);
-        else
-          $repo->index("book.boring", $object->id, $object->repo_id);
-      } else if (in_array($object->skill, array(
-        "archery", "handguns", "markmanship",
-        "launcher", "firearms", "throw", "rifle",
-        "shotgun", "smg", "pistol", "gun")))
-        $repo->index("book.range", $object->id, $object->repo_id);
-      else if (in_array($object->skill, array(
-        "bashing", "cutting", "stabbing", "dodge",
-        "melee", "unarmed")))
-        $repo->index("book.combat", $object->id, $object->repo_id);
-      else if (in_array($object->skill, array(
-        "computer", "electronics", "fabrication",
-        "mechanics", "construction", "carpentry",
-        "traps")))
-        $repo->index("book.engineering", $object->id, $object->repo_id);
-      else if (in_array($object->skill, array(
-        "cooking", "tailor", "firstaid")))
-        $repo->index("book.crafts", $object->id, $object->repo_id);
-      else if (in_array($object->skill, array(
-        "barter", "speech")))
-        $repo->index("book.social", $object->id, $object->repo_id);
-      else if (in_array($object->skill, array(
-        "driving", "survival", "swimming")))
-        $repo->index("book.survival", $object->id, $object->repo_id);
-      else 
+      if(isset($this->book_types[$object->skill])) {
+        $skill = $this->book_types[$object->skill];
+        $repo->index("book.$skill", $object->id, $object->repo_id);
+      } else 
         $repo->index("book.other", $object->id, $object->repo_id);
     }
     if($object->type=="GUN") {

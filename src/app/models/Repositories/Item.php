@@ -69,22 +69,10 @@ class Item
       $repo->index("armor.none", $object->id, $object->repo_id);
     } 
     else if ($object->type=="ARMOR" and isset($object->covers)) {
-      if (in_array("FEET", $object->covers))
-        $repo->index("armor.feet", $object->id, $object->repo_id);
-      if (in_array("ARMS", $object->covers))
-        $repo->index("armor.arms", $object->id, $object->repo_id);
-      if (in_array("EYES", $object->covers))
-        $repo->index("armor.eyes", $object->id, $object->repo_id);
-      if (in_array("LEGS", $object->covers))
-        $repo->index("armor.legs", $object->id, $object->repo_id);
-      if (in_array("HANDS", $object->covers))
-        $repo->index("armor.hands", $object->id, $object->repo_id);
-      if (in_array("TORSO", $object->covers))
-        $repo->index("armor.torso", $object->id, $object->repo_id);
-      if (in_array("HEAD", $object->covers))
-        $repo->index("armor.head", $object->id, $object->repo_id);
-      if (in_array("MOUTH", $object->covers))
-        $repo->index("armor.mouth", $object->id, $object->repo_id);
+      foreach($object->covers as $part) {
+        $part = strtolower($part);
+        $repo->index("armor.$part", $object->id, $object->repo_id);
+      }
     }
     if ($object->type=="CONTAINER")
       $repo->index("container", $object->id, $object->repo_id);

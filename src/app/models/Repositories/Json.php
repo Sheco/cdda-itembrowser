@@ -5,24 +5,30 @@ class Json implements RepositoryInterface
 {
   protected $database;
   protected $index;
-  protected $chunks;
   private $id;
 
   public function __construct()
   {
     $this->id = 0;
     $this->index = array();
-    $this->chunks = array();
     $this->database = array();
   }
 
   // lazy load
   private function load()
   {
-    if ($this->chunks)
+    if ($this->database)
       return;
 
     $this->read();
+  }
+
+  protected function loadObject($repo_id)
+  {    
+  }
+
+  protected function loadIndex($index)
+  {
   }
 
   private function newObject($object)
@@ -31,10 +37,7 @@ class Json implements RepositoryInterface
 
     \Event::fire("cataclysm.newObject", array($this, $object));
 
-    $chunk = intval($object->repo_id/50);
-    $this->chunks[$object->repo_id] = $chunk;
-
-    $this->database[$chunk][$object->repo_id] = $object;
+    $this->database[$object->repo_id] = $object;
   }
 
   // read the data files and process them
@@ -61,11 +64,6 @@ class Json implements RepositoryInterface
     }'));
   }
 
-  protected function chunk($chunk)
-  {
-    return $this->database[$chunk];
-  }
-
   // save an index to an object
   public function index($index, $key, $value)
   {
@@ -76,20 +74,22 @@ class Json implements RepositoryInterface
   public function get($index, $id)
   {
     $this->load();
+    $this->loadIndex($index);
     
     if (!isset($this->index[$index][$id]))
       return null;
 
     $db_id = $this->index[$index][$id];
-    $chunk = $this->chunks[$db_id];
+    $this->loadObject($db_id);
 
-    return $this->chunk($chunk)[$db_id];
+    return $this->database[$db_id];
   }
 
   // return all the objects in the index
   public function all($index)
   {
     $this->load();
+    $this->loadIndex($index);
     
     if (!isset($this->index[$index]))
       return array();

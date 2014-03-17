@@ -65,6 +65,8 @@
       Enjoyability: {{{ $item->fun }}}<br>
       Spoils in {{{ $item->spoils_in }}}<br>
       Heal: {{{ $item->heal }}}<br>
+      Stimulant: {{{ $item->stim }}}<br>
+      Addiction: {{{ $item->addiction_potential }}}<br>
     @endif
     @if ($item->isArmor) 
       Covers: {{{ $item->covers }}}<br>

@@ -11,6 +11,7 @@ class JsonCache extends Json implements RepositoryInterface
   {
     $this->dataChunks = array();
     $this->indexChunks = array();
+    $this->indexHashSize = null;
     parent::__construct();
   }
 
@@ -22,6 +23,7 @@ class JsonCache extends Json implements RepositoryInterface
     flock($lock_fp, LOCK_EX);
 
     if(\Cache::has("$key:loaded")) {
+      $this->indexHashSize = \Cache::get("$key:indexHashSize");
       flock($lock_fp, LOCK_UN);
       fclose($lock_fp);
 
@@ -35,11 +37,15 @@ class JsonCache extends Json implements RepositoryInterface
       \Cache::put("$key:db:$chunk", $data, 60);
     }
 
+    $this->indexHashSize = $this->makeIndexHashSize();
+
     $index = $this->chopIndex($this->index);
     foreach($index as $chunk=>$data)
     {
       \Cache::put("$key:index:$chunk", $data, 60);
     }
+
+    \Cache::put("$key:indexHashSize", $this->indexHashSize, 60);
 
     \Cache::put("$key:loaded", true, 60);
 
@@ -78,18 +84,25 @@ class JsonCache extends Json implements RepositoryInterface
     $this->database[$repo_id] = $this->dataChunks[$chunk][$repo_id];
   }
 
+
+  private function makeIndexHashSize()
+  {
+    return 10;
+  }
+
   private function makeIndexHash($index)
   {
-    $max = 10;
+    $size = $this->indexHashSize;
+
     // the item index is quite big by itself, use a chunk just for it.
     if ($index=="item") 
-      return $max+1;
+      return 0;
 
     // the recipe index is common enough to be in a chunk by itself.
-    else if ($index=="recipe")
-      return $max+2;
+    if ($index=="recipe")
+      return 1;
 
-    return abs(intval(base_convert($index, 16, 10)/$max)%$max);
+    return abs(intval(base_convert($index, 16, 10)/$size)%$size)+2;
   }
 
   private function chopIndex($database)
@@ -119,6 +132,5 @@ class JsonCache extends Json implements RepositoryInterface
       return;
 
     $this->index[$index] = $this->indexChunks[$chunk][$index];
-    
   }
 }

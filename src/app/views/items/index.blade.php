@@ -2,6 +2,10 @@
 <h3>Item browser</h3>
 
 <p>
+Version: {{{ $version }}}
+</p>
+
+<p>
 This is a simple tool to browse through the items and recipes available in <a href="http://en.cataclysmdda.com">Cataclysm: Dark Days Ahead</a>.
 </p>
 

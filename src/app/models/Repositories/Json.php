@@ -96,4 +96,11 @@ class Json implements RepositoryInterface
 
     return $this->index[$index];
   }
+
+  public function version()
+  {
+    $version_file = \Config::get("cataclysm.dataPath")."/../../src/version.h";
+    $data = @file_get_contents($version_file);
+    return substr($data, 17, -2);
+  }
 }

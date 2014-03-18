@@ -22,13 +22,14 @@ var show_recipe = function(id)
 }
 </script>
 @include('items.menu', array('active'=>'recipes'))
+<h1>
   <a href="{{ route("item.view", array("id"=>$item->id)) }}">{{ $item->name }}</a>
 @if (count($item->toolFor)>0) 
  can be used to craft following recipes:<br>
 @else
  can't be used to craft anything.
 @endif
-<br>
+</h1>
 <ul class="nav nav-tabs">
 @foreach ($categories as $cat)
 <li @if ($cat==$category) class="active" @endif>{{ link_to_route("item.recipes", substr($cat, 3), 

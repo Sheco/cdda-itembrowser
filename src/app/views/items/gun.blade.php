@@ -2,6 +2,7 @@
 Ranged weapons - Cataclysm: Dark Days Ahead
 @endsection
 @section('content')
+<h1>Ranged weapons</h1>
 <ul class="nav nav-tabs">
 @foreach($skills as $key=>$value)
 <li @if($key==$skill) class="active" @endif><a href="{{ route("item.gun", $key) }}">{{{$value}}}</a></li>

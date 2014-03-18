@@ -10,13 +10,14 @@
 @endsection
 @section('content')
 @include('items.menu', array('active'=>'disassemble'))
+<h1>
   <a href="{{ route("item.view", array("id"=>$item->id)) }}">{{ $item->name }}</a>
 @if (count($item->disassembly)>0)
  can be disassembled to obtain the following components.<br>
 @else
  can't be disassembled.
 @endif
-<br>
+</h1>
 <div class="row">
 <div class="col-md-6">
 @foreach ($item->disassembly as $recipe)

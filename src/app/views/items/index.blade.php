@@ -1,5 +1,5 @@
 @section('content')
-<h3>Item browser</h3>
+<h1>Item browser</h1>
 
 <p>
 Version: {{{ $version }}}
@@ -14,7 +14,7 @@ Crafting could be as simple as looking at your hammer and being able to know wha
 </p>
 
 <p>
-<h4>Browse the items!</h4>
+<h2>Browse the items!</h2>
 <a href="{{ route('item.armor', 'head') }}">Clothing</a>,
 <a href="{{ route("item.melee") }}">Melee</a>,
 <a href="{{ route('item.gun', 'archery') }}">Ranged weapons</a>,
@@ -23,7 +23,7 @@ Crafting could be as simple as looking at your hammer and being able to know wha
 
 </p>
 <p>
-<h4>Common useful items</h4>
+<h2>Common useful items</h2>
 {{link_to_route('item.view', 'stone hammer', "primitive_hammer") }}, 
 {{link_to_route('item.view', 'stone axe', "primitive_axe") }}, 
 {{link_to_route('item.view', 'wood axe', "ax") }}, 
@@ -36,7 +36,7 @@ and
 
 
 <p>
-<h4>Material search</h4>
+<h2>Material search</h2>
 For example: {{ link_to_route('item.search', 'wood', array('q'=>'wood')) }},
 {{ link_to_route('item.search', 'hard steel', array('q'=>'hard steel')) }},
 {{ link_to_route('item.search', 'iron', array('q'=>'iron')) }},

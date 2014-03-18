@@ -2,7 +2,10 @@
 Melee - Cataclysm: Dark Days Ahead
 @endsection
 @section('content')
-<h4>Items with bashing+cutting damage higher than 10 and to-hit bonus higher than -2</h4>
+<h1>Melee</h1>
+<p>
+Items with bashing+cutting damage higher than 10 and to-hit bonus higher than -2
+</p>
 
 <table class="table table-bordered table-hover tablesorter">
   <thead>

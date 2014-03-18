@@ -5,6 +5,16 @@ font-family: "Lucida Console", Monaco, monospace;
 color: white;
 }
 
+h1
+{
+  font-size: 170%;
+}
+
+h2 
+{
+  font-size: 130%;
+}
+
 a.list-group-item {
 	background: black;
 	color: white;

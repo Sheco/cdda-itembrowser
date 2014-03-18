@@ -2,6 +2,8 @@
 Books - Cataclysm: Dark Days Ahead
 @endsection
 @section('content')
+<h1>Books</h1>
+
 <ul class="nav nav-tabs">
 @foreach($types as $key=>$value)
 <li @if($key==$type) class="active" @endif><a href="{{ route("item.books", $key) }}">{{{$value}}}</a></li>

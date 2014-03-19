@@ -30,6 +30,9 @@ class JsonCache extends Json implements RepositoryInterface
       return;
     }
 
+    // clear all cache, this ensures searches are read again.
+    \Cache::flush();
+
     parent::read();
 
     $database = $this->chopDatabase($this->database);

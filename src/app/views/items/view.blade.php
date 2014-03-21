@@ -17,7 +17,7 @@
       Stab: {{{ $item->cutting }}}
       To-hit bonus: {{{ $item->to_hit }}}<br>
       Moves per attack: {{{ $item->movesPerAttack }}}<br>
-    Materials: {{ $item->materials }}<br>
+      Materials: {{ $item->materials }}<br>
     @if ($item->canBeCut)
     Can be cut into: {{{ $item->cutResultAmount }}} <a href="{{ route('item.view', $item->cutResultItem->id) }}">{{ str_plural($item->cutResultItem->name) }}</a><br>
     @endif

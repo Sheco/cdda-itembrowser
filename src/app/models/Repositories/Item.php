@@ -87,10 +87,10 @@ class Item
       } else 
         $repo->index("book.other", $object->id, $object->repo_id);
     }
-    if($object->type=="GUN") {
+    if ($object->type=="GUN") {
       $repo->index("gun.$object->skill", $object->id, $object->repo_id);
     }
-    if($object->type=="AMMO") {
+    if ($object->type=="AMMO") {
       $repo->index("ammo.$object->ammo_type", $object->id, $object->repo_id);
     }
     if ($object->type=="COMESTIBLE") {

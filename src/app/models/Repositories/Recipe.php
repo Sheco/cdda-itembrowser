@@ -7,6 +7,7 @@ class Recipe
   public function __construct(RepositoryInterface $repo)
   {
     $this->repo = $repo;
+
     \Event::listen("cataclysm.newObject", function ($repo, $object) {
       $this->getIndexes($repo, $object);
     });

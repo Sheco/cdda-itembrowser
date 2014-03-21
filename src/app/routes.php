@@ -22,16 +22,18 @@ Route::group(array('after'=>'theme:layouts.bootstrap'), function () {
   Route::get('/gun/{skill}', array(
       'as'=>'item.gun',
       'uses'=>'ItemsController@gun')
-    );
+  );
 
   Route::get('/melee', array(
       'as'=>'item.melee',
       'uses'=>'ItemsController@melee')
   );
+
   Route::get('/books/{type}', array(
       'as'=>'item.books',
       'uses'=>'ItemsController@books')
   );
+
   Route::get('/containers', array(
       'as'=>'item.containers',
       'uses'=>'ItemsController@containers')

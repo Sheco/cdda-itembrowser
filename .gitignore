@@ -6,3 +6,7 @@ Thumbs.db
 .*.sw*
 .vagrant
 *.zip
+/.*
+/src/app/storage
+/src/vendor
+

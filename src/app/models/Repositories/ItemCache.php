@@ -7,9 +7,16 @@ class ItemCache extends Item
   public function where($text)
   {
     $key = self::CACHE_KEY.":$text";
-    return \Cache::remember($key, 60, function () use ($text) {
-      return parent::where($text);
+    $items = \Cache::remember($key, 60, function () use ($text) {
+      return array_map(function ($item) { 
+        return $item->id;
+      }, parent::where($text));
+      return $result;
     });
+
+    return array_map(function ($item) {
+      return $this->find($item);
+    }, $items);
 
   }
 }

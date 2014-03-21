@@ -1,17 +1,22 @@
 <?php
 namespace Repositories;
 
+use Illuminate\Cache\CacheManager;
+
 class JsonCache extends Json implements RepositoryInterface
 {
   const CACHE_KEY="json";
   private $dataChunks;
   private $indexChunks;
 
-  public function __construct()
+  private $cache;
+
+  public function __construct(CacheManager $cache)
   {
     $this->dataChunks = array();
     $this->indexChunks = array();
     $this->indexHashSize = null;
+    $this->cache = $cache;
     parent::__construct();
   }
 
@@ -22,8 +27,8 @@ class JsonCache extends Json implements RepositoryInterface
     $lock_fp = fopen(storage_path()."/cache/.json.lock", "w+");
     flock($lock_fp, LOCK_EX);
 
-    if(\Cache::has("$key:loaded")) {
-      $this->indexHashSize = \Cache::get("$key:indexHashSize");
+    if($this->cache->has("$key:loaded")) {
+      $this->indexHashSize = $this->cache->get("$key:indexHashSize");
       flock($lock_fp, LOCK_UN);
       fclose($lock_fp);
 
@@ -31,13 +36,13 @@ class JsonCache extends Json implements RepositoryInterface
     }
 
     // clear all cache, this ensures searches are read again.
-    \Cache::flush();
+    $this->cache->flush();
 
     parent::read();
 
     $database = $this->chopDatabase($this->database);
     foreach($database as $chunk=>$data) {
-      \Cache::put("$key:db:$chunk", $data, 60);
+      $this->cache->put("$key:db:$chunk", $data, 60);
     }
 
     $this->indexHashSize = $this->makeIndexHashSize();
@@ -45,12 +50,12 @@ class JsonCache extends Json implements RepositoryInterface
     $index = $this->chopIndex($this->index);
     foreach($index as $chunk=>$data)
     {
-      \Cache::put("$key:index:$chunk", $data, 60);
+      $this->cache->put("$key:index:$chunk", $data, 60);
     }
 
-    \Cache::put("$key:indexHashSize", $this->indexHashSize, 60);
+    $this->cache->put("$key:indexHashSize", $this->indexHashSize, 60);
 
-    \Cache::put("$key:loaded", true, 60);
+    $this->cache->put("$key:loaded", true, 60);
 
     flock($lock_fp, LOCK_UN);
     fclose($lock_fp);
@@ -82,7 +87,7 @@ class JsonCache extends Json implements RepositoryInterface
 
     if(!isset($this->dataChunks[$chunk])) {
       $key = self::CACHE_KEY;
-      $this->dataChunks[$chunk] = \Cache::get("$key:db:$chunk");
+      $this->dataChunks[$chunk] = $this->cache->get("$key:db:$chunk");
     }
     $this->database[$repo_id] = $this->dataChunks[$chunk][$repo_id];
   }
@@ -128,7 +133,7 @@ class JsonCache extends Json implements RepositoryInterface
     $chunk = $this->makeIndexHash($index);
     if(!isset($this->indexChunks[$chunk])) {
       $key = self::CACHE_KEY;
-      $this->indexChunks[$chunk] = \Cache::get("$key:index:$chunk");
+      $this->indexChunks[$chunk] = $this->cache->get("$key:index:$chunk");
     }
 
     if(!isset($this->indexChunks[$chunk][$index]))

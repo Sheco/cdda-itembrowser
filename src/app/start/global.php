@@ -82,13 +82,13 @@ App::down(function()
 
 require app_path().'/filters.php';
 
-// register singleton repositories
+$app->bind('Repositories\RepositoryReaderInterface', 'Repositories\LocalReader');
 $app->singleton('Repositories\Recipe', 'Repositories\Recipe');
 $app->singleton('Repositories\Item', 'Repositories\ItemCache');
 $app->singleton('Repositories\Material', 'Repositories\Material');
-$app->bind('Repositories\RepositoryReaderInterface', 'Repositories\LocalReader');
 $app->singleton('Repositories\RepositoryInterface', 'Repositories\Repository');
+
+// create an instance of each repository, so they register their listeners.
 App::make('Repositories\Recipe');
 App::make('Repositories\Item');
 App::make('Repositories\Material');
-App::make('Repositories\RepositoryInterface');

@@ -9,11 +9,14 @@ class Item
   public function __construct(RepositoryInterface $repo)
   {
     $this->repo = $repo;
+
+    // this is a hash with the valid item types
     $this->types = array_flip(array(
       "AMMO", "GUN", "ARMOR", "TOOL", "TOOL_ARMOR", "BOOK", "COMESTIBLE",
       "CONTAINER", "GUNMOD", "GENERIC", "BIONIC_ITEM", "VAR_VEH_PART",
       "_SPECIAL",
     ));
+    
     $this->book_types = array(
         "archery"=>"range", 
         "handguns"=>"range", 
@@ -57,29 +60,41 @@ class Item
 
   private function getIndexes($repo, $object)
   {
+    // only index objects with valid item types.
     if (!isset($this->types[$object->type]))
       return;
+
     $repo->addIndex("item", $object->id, $object->repo_id);
+
+    // nearby fire and integrated toolset are "virtual" items
+    // they don't have anything special.
     if ($object->type=="_SPECIAL")
       return;
+
+    // items with enough damage might be good melee weapons.
     if ($object->bashing+$object->cutting>10 and $object->to_hit>-2) {
       $repo->addIndex("melee", $object->id, $object->repo_id);
     }
+
+    // create an index with armor for each body part they cover.
     if ($object->type=="ARMOR" and !isset($object->covers)) {
       $repo->addIndex("armor.none", $object->id, $object->repo_id);
-    } 
+    }
     else if ($object->type=="ARMOR" and isset($object->covers)) {
       foreach($object->covers as $part) {
         $part = strtolower($part);
         $repo->addIndex("armor.$part", $object->id, $object->repo_id);
       }
     }
+
     if ($object->type=="CONTAINER")
       $repo->addIndex("container", $object->id, $object->repo_id);
     if ($object->type=="COMESTIBLE")
       $repo->addIndex("food", $object->id, $object->repo_id);
     if ($object->type=="TOOL")
       $repo->addIndex("tool", $object->id, $object->repo_id);
+
+    // save books per skill
     if ($object->type=="BOOK") {
       if(isset($this->book_types[$object->skill])) {
         $skill = $this->book_types[$object->skill];

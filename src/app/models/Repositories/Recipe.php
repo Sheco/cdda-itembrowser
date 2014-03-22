@@ -15,11 +15,16 @@ class Recipe
 
   private function linkIndexes($repo, $key, $id, $recipe)
   {
+    // NONCRAFT recipes go directly to the disassembly index, 
+    // they are not needed anywhere else.
     if ($key=="recipes" 
       and $recipe->category=="CC_NONCRAFT") {
       $repo->addIndex("item.disassembly.$id", $recipe->repo_id, $recipe->repo_id);
       return;
-    }
+      }
+
+    // reversible recipes go to the disassembly index,
+    // but they're used to craft, so process further indexes.
     if ($key=="recipes" 
       and isset($recipe->reversible) 
       and $recipe->reversible=="true") {
@@ -27,9 +32,11 @@ class Recipe
     }
 
     if ($key=="toolFor") {
+      // create a list of recipe categories, excluding NONCRAFT.
       if ($recipe->category!="CC_NONCRAFT")
         $repo->addIndex("item.categories.$id", $recipe->category, $recipe->category);
 
+      // create a list of tools per category for this object.
       $repo->addIndex("item.toolForCategory.$id.$recipe->category", 
         $recipe->repo_id, $recipe->repo_id);
     }
@@ -43,6 +50,7 @@ class Recipe
       $recipe = $object;
 
       $repo->addIndex("recipe", $recipe->repo_id, $recipe->repo_id);
+
       if (isset($recipe->result)) {
         $this->linkIndexes($repo, "recipes", $recipe->result, $recipe);
         if (isset($recipe->book_learn)) {
@@ -51,6 +59,7 @@ class Recipe
           }
         }
       }
+
       if (isset($recipe->tools)) {
         foreach($recipe->tools as $group) {
           foreach($group as $tool) {
@@ -59,6 +68,7 @@ class Recipe
           }
         }
       }
+
       if (isset($recipe->components)) {
         foreach($recipe->components as $group) {
           foreach($group as $component) {
@@ -70,6 +80,7 @@ class Recipe
     }
   }
 
+  // locate and return a recipe object.
   public function find($id)
   {
     $recipe = \App::make('Recipe');
@@ -82,6 +93,7 @@ class Recipe
     throw new Exception();
   }
 
+  // returns a list with every recipe object.
   public function all()
   {
     $ret = array();
@@ -91,6 +103,7 @@ class Recipe
     return $ret;
   }
 
+  // return a list with every recipe object in certain index.
   public function index($index)
   {
     $ret = array();
@@ -100,6 +113,7 @@ class Recipe
     return $ret;
   }
 
+  // return the contents of certain index, without creating recipe objects.
   public function indexRaw($index)
   {
     return $this->repo->all($index);

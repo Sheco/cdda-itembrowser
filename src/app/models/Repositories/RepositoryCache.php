@@ -3,9 +3,9 @@ namespace Repositories;
 
 use Illuminate\Cache\CacheManager;
 
-class JsonCache implements RepositoryReaderInterface
+class RepositoryCache implements RepositoryReaderInterface
 {
-  const CACHE_KEY="json";
+  const CACHE_KEY="repository";
   private $dataChunks;
   private $indexChunks;
 

@@ -87,7 +87,7 @@ $app->singleton('Repositories\Recipe', 'Repositories\Recipe');
 $app->singleton('Repositories\Item', 'Repositories\ItemCache');
 $app->singleton('Repositories\Material', 'Repositories\Material');
 $app->bind('Repositories\RepositoryReaderInterface', 'Repositories\LocalReader');
-$app->singleton('Repositories\RepositoryInterface', 'Repositories\Json');
+$app->singleton('Repositories\RepositoryInterface', 'Repositories\Repository');
 App::make('Repositories\Recipe');
 App::make('Repositories\Item');
 App::make('Repositories\Material');

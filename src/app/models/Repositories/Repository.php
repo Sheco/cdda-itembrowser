@@ -1,16 +1,14 @@
 <?php
 namespace Repositories;
 
-class Json implements RepositoryInterface
+class Repository implements RepositoryInterface
 {
-  protected $index;
   protected $reader;
   protected $loaded;
 
   public function __construct(RepositoryReaderInterface $reader)
   {
-    $this->index = array();
-    $this->reader = new JsonCache($reader);
+    $this->reader = new RepositoryCache($reader);
     $this->loaded = false;
   }
 

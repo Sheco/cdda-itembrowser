@@ -3,20 +3,20 @@
 class ItemsController extends Controller 
 {
   protected $item;
-  protected $json;
+  protected $repo;
 
   public function __construct(
     Repositories\Item $item,
-    Repositories\Json $json
+    Repositories\Repository $repo
   ) 
   {
     $this->item = $item;
-    $this->json = $json;
+    $this->repo = $repo;
   }
 
   public function index()
   {
-    $version = $this->json->version();
+    $version = $this->repo->version();
     return View::make('items.index', compact('version'));
   }
 

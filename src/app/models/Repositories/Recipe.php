@@ -17,24 +17,24 @@ class Recipe
   {
     if ($key=="recipes" 
       and $recipe->category=="CC_NONCRAFT") {
-      $repo->index("item.disassembly.$id", $recipe->repo_id, $recipe->repo_id);
+      $repo->addIndex("item.disassembly.$id", $recipe->repo_id, $recipe->repo_id);
       return;
     }
     if ($key=="recipes" 
       and isset($recipe->reversible) 
       and $recipe->reversible=="true") {
-      $repo->index("item.disassembly.$id", $recipe->repo_id, $recipe->repo_id);
+      $repo->addIndex("item.disassembly.$id", $recipe->repo_id, $recipe->repo_id);
     }
 
     if ($key=="toolFor") {
       if ($recipe->category!="CC_NONCRAFT")
-        $repo->index("item.categories.$id", $recipe->category, $recipe->category);
+        $repo->addIndex("item.categories.$id", $recipe->category, $recipe->category);
 
-      $repo->index("item.toolForCategory.$id.$recipe->category", 
+      $repo->addIndex("item.toolForCategory.$id.$recipe->category", 
         $recipe->repo_id, $recipe->repo_id);
     }
 
-    $repo->index("item.$key.$id", $recipe->repo_id, $recipe->repo_id);
+    $repo->addIndex("item.$key.$id", $recipe->repo_id, $recipe->repo_id);
   }
 
   private function getIndexes($repo, $object)
@@ -42,7 +42,7 @@ class Recipe
     if ($object->type=="recipe") {
       $recipe = $object;
 
-      $repo->index("recipe", $recipe->repo_id, $recipe->repo_id);
+      $repo->addIndex("recipe", $recipe->repo_id, $recipe->repo_id);
       if (isset($recipe->result)) {
         $this->linkIndexes($repo, "recipes", $recipe->result, $recipe);
         if (isset($recipe->book_learn)) {

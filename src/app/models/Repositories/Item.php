@@ -59,43 +59,43 @@ class Item
   {
     if (!isset($this->types[$object->type]))
       return;
-    $repo->index("item", $object->id, $object->repo_id);
+    $repo->addIndex("item", $object->id, $object->repo_id);
     if ($object->type=="_SPECIAL")
       return;
     if ($object->bashing+$object->cutting>10 and $object->to_hit>-2) {
-      $repo->index("melee", $object->id, $object->repo_id);
+      $repo->addIndex("melee", $object->id, $object->repo_id);
     }
     if ($object->type=="ARMOR" and !isset($object->covers)) {
-      $repo->index("armor.none", $object->id, $object->repo_id);
+      $repo->addIndex("armor.none", $object->id, $object->repo_id);
     } 
     else if ($object->type=="ARMOR" and isset($object->covers)) {
       foreach($object->covers as $part) {
         $part = strtolower($part);
-        $repo->index("armor.$part", $object->id, $object->repo_id);
+        $repo->addIndex("armor.$part", $object->id, $object->repo_id);
       }
     }
     if ($object->type=="CONTAINER")
-      $repo->index("container", $object->id, $object->repo_id);
+      $repo->addIndex("container", $object->id, $object->repo_id);
     if ($object->type=="COMESTIBLE")
-      $repo->index("food", $object->id, $object->repo_id);
+      $repo->addIndex("food", $object->id, $object->repo_id);
     if ($object->type=="TOOL")
-      $repo->index("tool", $object->id, $object->repo_id);
+      $repo->addIndex("tool", $object->id, $object->repo_id);
     if ($object->type=="BOOK") {
       if(isset($this->book_types[$object->skill])) {
         $skill = $this->book_types[$object->skill];
-        $repo->index("book.$skill", $object->id, $object->repo_id);
+        $repo->addIndex("book.$skill", $object->id, $object->repo_id);
       } else 
-        $repo->index("book.other", $object->id, $object->repo_id);
+        $repo->addIndex("book.other", $object->id, $object->repo_id);
     }
     if ($object->type=="GUN") {
-      $repo->index("gun.$object->skill", $object->id, $object->repo_id);
+      $repo->addIndex("gun.$object->skill", $object->id, $object->repo_id);
     }
     if ($object->type=="AMMO") {
-      $repo->index("ammo.$object->ammo_type", $object->id, $object->repo_id);
+      $repo->addIndex("ammo.$object->ammo_type", $object->id, $object->repo_id);
     }
     if ($object->type=="COMESTIBLE") {
       $type = strtolower($object->comestible_type);
-      $repo->index("comestible.$type", $object->id, $object->repo_id);
+      $repo->addIndex("comestible.$type", $object->id, $object->repo_id);
     }
   }
 

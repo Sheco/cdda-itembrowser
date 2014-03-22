@@ -3,32 +3,32 @@ namespace Repositories;
 
 use Illuminate\Cache\CacheManager;
 
-class JsonCache extends Json implements RepositoryInterface
+class JsonCache implements RepositoryReaderInterface
 {
   const CACHE_KEY="json";
   private $dataChunks;
   private $indexChunks;
 
-  private $cache;
+  private $reader;
 
-  public function __construct(CacheManager $cache)
+  public function __construct(RepositoryReaderInterface $reader)
   {
     $this->dataChunks = array();
     $this->indexChunks = array();
     $this->indexHashSize = null;
-    $this->cache = $cache;
-    parent::__construct();
+    $this->reader = $reader;
   }
 
-  protected function read()
+  public function read()
   {
     $key = self::CACHE_KEY;
 
-    $lock_fp = fopen(storage_path()."/cache/.json.lock", "w+");
+    // create a exclusive read lock, to any file, just to block
+    $lock_fp = fopen(base_path()."/composer.json", "r");
     flock($lock_fp, LOCK_EX);
 
-    if($this->cache->has("$key:loaded")) {
-      $this->indexHashSize = $this->cache->get("$key:indexHashSize");
+    if(\Cache::has("$key:loaded")) {
+      $this->indexHashSize = \Cache::get("$key:indexHashSize");
       flock($lock_fp, LOCK_UN);
       fclose($lock_fp);
 
@@ -36,26 +36,26 @@ class JsonCache extends Json implements RepositoryInterface
     }
 
     // clear all cache, this ensures searches are read again.
-    $this->cache->flush();
+    \Cache::flush();
 
-    parent::read();
+    list($database, $index) = $this->reader->read();
 
-    $database = $this->chopDatabase($this->database);
+    $database = $this->chopDatabase($database);
     foreach($database as $chunk=>$data) {
-      $this->cache->put("$key:db:$chunk", $data, 60);
+      \Cache::forever("$key:db:$chunk", $data);
     }
 
     $this->indexHashSize = $this->makeIndexHashSize();
 
-    $index = $this->chopIndex($this->index);
+    $index = $this->chopIndex($index);
     foreach($index as $chunk=>$data)
     {
-      $this->cache->put("$key:index:$chunk", $data, 60);
+      \Cache::forever("$key:index:$chunk", $data);
     }
 
-    $this->cache->put("$key:indexHashSize", $this->indexHashSize, 60);
+    \Cache::forever("$key:indexHashSize", $this->indexHashSize);
 
-    $this->cache->put("$key:loaded", true, 60);
+    \Cache::forever("$key:loaded", true);
 
     flock($lock_fp, LOCK_UN);
     fclose($lock_fp);
@@ -78,18 +78,22 @@ class JsonCache extends Json implements RepositoryInterface
     return $newDatabase;
   }
 
-  protected function loadObject($repo_id)
+  public function loadObject($index, $id)
   {
+    $indexDb = $this->loadIndex($index);
+    $repo_id = $indexDb[$id];
+
     if(isset($this->database[$repo_id]))
-      return;
+      return $this->database[$repo_id];
 
     $chunk = $this->makeDatabaseHash($repo_id);
 
     if(!isset($this->dataChunks[$chunk])) {
       $key = self::CACHE_KEY;
-      $this->dataChunks[$chunk] = $this->cache->get("$key:db:$chunk");
+      $this->dataChunks[$chunk] = \Cache::get("$key:db:$chunk");
     }
     $this->database[$repo_id] = $this->dataChunks[$chunk][$repo_id];
+    return $this->database[$repo_id];
   }
 
 
@@ -125,20 +129,26 @@ class JsonCache extends Json implements RepositoryInterface
     return $newDatabase;
   }
 
-  protected function loadIndex($index)
+  public function loadIndex($index)
   {
     if(isset($this->index[$index])) 
-      return;
+      return $this->index[$index];
 
     $chunk = $this->makeIndexHash($index);
     if(!isset($this->indexChunks[$chunk])) {
       $key = self::CACHE_KEY;
-      $this->indexChunks[$chunk] = $this->cache->get("$key:index:$chunk");
+      $this->indexChunks[$chunk] = \Cache::get("$key:index:$chunk");
     }
 
     if(!isset($this->indexChunks[$chunk][$index]))
-      return;
+      return array();
 
     $this->index[$index] = $this->indexChunks[$chunk][$index];
+    return $this->index[$index];
+  }
+
+  public function addIndex($index, $key, $value)
+  {
+    $this->reader->addIndex($index, $key, $value);
   }
 }

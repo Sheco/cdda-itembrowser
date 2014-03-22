@@ -35,6 +35,7 @@ class JsonCache implements RepositoryReaderInterface
       return;
     }
 
+    $expiration = \Config::get("cataclysm.dataCacheExpiration");
     // clear all cache, this ensures searches are read again.
     \Cache::flush();
 
@@ -55,7 +56,7 @@ class JsonCache implements RepositoryReaderInterface
 
     \Cache::forever("$key:indexHashSize", $this->indexHashSize);
 
-    \Cache::forever("$key:loaded", true);
+    \Cache::put("$key:loaded", true, $expiration);
 
     flock($lock_fp, LOCK_UN);
     fclose($lock_fp);

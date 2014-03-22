@@ -1,6 +1,8 @@
 <?php 
 namespace Repositories;
 
+use Illuminate\Database\Eloquent\ModelNotFoundException;
+
 class Item
 {
   protected $repo;
@@ -124,11 +126,11 @@ class Item
     return $item;
   }
 
-  public function findOr404($id)
+  public function findOrFail($id)
   {
     $item = $this->find($id);
     if($item->type=="invalid")
-      \App::abort(404);
+      throw new ModelNotFoundException;
     return $item;
   }
 

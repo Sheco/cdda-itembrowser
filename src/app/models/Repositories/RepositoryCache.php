@@ -82,6 +82,9 @@ class RepositoryCache implements RepositoryReaderInterface
   public function loadObject($index, $id)
   {
     $indexDb = $this->loadIndex($index);
+    if(!isset($indexDb[$id])) 
+      return null;
+
     $repo_id = $indexDb[$id];
 
     if(isset($this->database[$repo_id]))

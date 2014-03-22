@@ -104,6 +104,14 @@ Route::group(array('after'=>'theme:layouts.bootstrap'), function () {
 
 Route::get('/sitemap.xml', 'ItemsController@sitemap');
 
+/////////
+use Illuminate\Database\Eloquent\ModelNotFoundException;
+
+App::error(function(ModelNotFoundException $e)
+{
+  return Response::view("notfound", array(), 404);
+});
+
 App::missing(function ($exception) {
   return Response::view("notfound", array(), 404);
 });

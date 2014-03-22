@@ -29,19 +29,19 @@ class ItemsController extends Controller
 
   public function view($id)
   {
-    $item = $this->item->findOr404($id);
+    $item = $this->item->findOrFail($id);
     return View::make('items.view', compact('item'));
   }
 
   public function craft($id)
   {
-    $item = $this->item->findOr404($id);
+    $item = $this->item->findOrFail($id);
     return View::make('items.craft', compact('item'));
   }
 
   public function recipes($id, $category="")
   {
-    $item = $this->item->findOr404($id);
+    $item = $this->item->findOrFail($id);
     $categories = $item->toolCategories;
     if ($category=="" && $categories) 
       return Redirect::route("item.recipes", array($id, key($categories)));
@@ -53,7 +53,7 @@ class ItemsController extends Controller
 
   public function disassemble($id)
   {
-    $item = $this->item->findOr404($id);
+    $item = $this->item->findOrFail($id);
     return View::make('items.disassemble', compact('item'));
   }
 

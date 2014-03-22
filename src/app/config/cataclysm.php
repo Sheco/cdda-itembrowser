@@ -7,5 +7,6 @@ return array(
     "development"=>"cdda-trunk.estilofusion.com"
   ),
   "dataCacheExpiration"=>60,
+  "searchCacheExpiration"=>60
 
 );

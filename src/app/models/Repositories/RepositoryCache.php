@@ -11,12 +11,15 @@ class RepositoryCache implements RepositoryReaderInterface
 
   private $reader;
 
+  private $itemsPerCache;
+
   public function __construct(RepositoryReaderInterface $reader)
   {
     $this->dataChunks = array();
     $this->indexChunks = array();
     $this->indexHashSize = null;
     $this->reader = $reader;
+    $this->itemsPerCache = \Config::get("cataclysm.itemsPerCache", 100);
   }
 
   public function read()
@@ -46,7 +49,7 @@ class RepositoryCache implements RepositoryReaderInterface
       \Cache::forever("$key:db:$chunk", $data);
     }
 
-    $this->indexHashSize = $this->makeIndexHashSize();
+    $this->indexHashSize = $this->makeIndexHashSize($index);
 
     $index = $this->chopIndex($index);
     foreach($index as $chunk=>$data)
@@ -64,7 +67,7 @@ class RepositoryCache implements RepositoryReaderInterface
 
   private function makeDatabaseHash($repo_id)
   {
-    return intval($repo_id/100);
+    return intval($repo_id/$this->itemsPerCache);
   }
 
   private function chopDatabase($database)
@@ -101,9 +104,9 @@ class RepositoryCache implements RepositoryReaderInterface
   }
 
 
-  private function makeIndexHashSize()
+  private function makeIndexHashSize($index)
   {
-    return 10;
+    return count($index)/$this->itemsPerCache;
   }
 
   private function makeIndexHash($index)

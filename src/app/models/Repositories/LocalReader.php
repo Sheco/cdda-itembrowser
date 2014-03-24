@@ -34,13 +34,28 @@ class LocalReader implements RepositoryReaderInterface
     $this->newObject(json_decode('{
       "id":"toolset",
       "name":"integrated toolset",
-      "type":"_SPECIAL"
+      "type":"_SPECIAL",
+      "description":"A fake item. If you are reading this it\'s a bug!"
     }'));
     $this->newObject(json_decode('{
       "id":"fire",
       "name":"nearby fire",
-      "type":"_SPECIAL"
+      "type":"_SPECIAL",
+      "description":"A fake item. If you are reading this it\'s a bug!"
     }'));
+    $this->newObject(json_decode('{
+      "id":"cvd_machine",
+      "name":"cvd machine",
+      "type":"_SPECIAL",
+      "description":"A fake item. If you are reading this it\'s a bug!"
+    }'));
+    $this->newObject(json_decode('{
+      "id":"apparatus",
+      "name":"a smoking device and a source of flame",
+      "type":"_SPECIAL",
+      "description":"A fake item. If you are reading this it\'s a bug!"
+    }'));
+
 
     $this->version = $this->getVersion($path);
 

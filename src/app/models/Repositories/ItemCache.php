@@ -6,7 +6,7 @@ class ItemCache extends Item
   const CACHE_KEY = "itemSearch";
   public function where($text)
   {
-    $key = self::CACHE_KEY.":$text";
+    $key = self::CACHE_KEY.":".str_replace(" ", "_", $text);
     $expiration = \Config::get("cataclysm.searchCacheExpiration");
     $items = \Cache::remember($key, $expiration, function () use ($text) {
       return array_map(function ($item) { 

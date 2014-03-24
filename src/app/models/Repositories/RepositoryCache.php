@@ -56,6 +56,7 @@ class RepositoryCache implements RepositoryReaderInterface
     {
       \Cache::forever("$key:index:$chunk", $data);
     }
+    $this->repo->forever("$key:version", $this->reader->version());
 
     \Cache::forever("$key:indexHashSize", $this->indexHashSize);
 
@@ -157,5 +158,12 @@ class RepositoryCache implements RepositoryReaderInterface
   public function addIndex($index, $key, $value)
   {
     $this->reader->addIndex($index, $key, $value);
+  }
+
+  public function version()
+  {
+    $key = self::CACHE_KEY;
+
+    return $this->repo->get("$key:version");
   }
 }

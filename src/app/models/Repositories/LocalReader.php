@@ -6,6 +6,7 @@ class LocalReader implements RepositoryReaderInterface
   private $id;
   private $database;
   private $index;
+  private $version;
 
   private function newObject($object)
   {
@@ -40,6 +41,9 @@ class LocalReader implements RepositoryReaderInterface
       "name":"nearby fire",
       "type":"_SPECIAL"
     }'));
+
+    $this->version = $this->getVersion($path);
+
     return array($this->database, $this->index);
   }
 
@@ -64,4 +68,15 @@ class LocalReader implements RepositoryReaderInterface
     return $this->index[$index];
   }
 
+  public function getVersion($path)
+  {
+    $version_file = "$path/src/version.h";
+    $data = @file_get_contents($version_file);
+    return substr($data, 17, -2);
+  }
+
+  public function version()
+  {
+    return $this->version;
+  }
 }

@@ -8,4 +8,5 @@ interface RepositoryReaderInterface
   public function loadObject($index, $id);
   public function loadIndex($index);
   public function addIndex($index, $key, $value);
+  public function version();
 }

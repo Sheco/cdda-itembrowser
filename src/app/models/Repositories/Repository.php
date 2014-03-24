@@ -38,8 +38,6 @@ class Repository implements RepositoryInterface
 
   public function version()
   {
-    $version_file = \Config::get("cataclysm.dataPath")."/../../src/version.h";
-    $data = @file_get_contents($version_file);
-    return substr($data, 17, -2);
+    return $this->reader->version();
   }
 }

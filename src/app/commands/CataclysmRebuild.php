@@ -13,14 +13,14 @@ class CataclysmCache extends Command {
 	 *
 	 * @var string
 	 */
-	protected $name = 'cataclysm:cache';
+	protected $name = 'cataclysm:rebuild';
 
 	/**
 	 * The console command description.
 	 *
 	 * @var string
 	 */
-	protected $description = 'Rebuild the database cache.';
+	protected $description = 'Compile the database.';
 
 
   protected $repo;
@@ -29,7 +29,7 @@ class CataclysmCache extends Command {
 	 *
 	 * @return void
 	 */
-	public function __construct(RepositoryInterface $repo)
+	public function __construct(Repositories\RepositoryCache $repo)
   {
     $this->repo = $repo;
 		parent::__construct();
@@ -43,8 +43,7 @@ class CataclysmCache extends Command {
 	public function fire()
 	{
     echo "rebuilding database cache...\n";
-    Cache::flush();
-    $this->repo->get("item", "fire");
+    $this->repo->compile($this->argument('path'));
 	}
 
 	/**
@@ -55,6 +54,7 @@ class CataclysmCache extends Command {
 	protected function getArguments()
 	{
 		return array(
+      array('path', InputArgument::REQUIRED, 'Path to the game files')
 		);
 	}
 

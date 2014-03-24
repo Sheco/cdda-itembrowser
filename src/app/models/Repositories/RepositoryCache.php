@@ -11,42 +11,45 @@ class RepositoryCache implements RepositoryReaderInterface
 
   private $reader;
 
-  private $itemsPerCache;
+  private $adhesion;
+  private $repo;
 
   public function __construct(RepositoryReaderInterface $reader)
   {
+    $this->repo = new \Illuminate\Cache\Repository(
+      new \Illuminate\Cache\FileStore(
+        new \Illuminate\Filesystem\FileSystem, 
+        storage_path()."/database"
+      )
+    );
+
     $this->dataChunks = array();
     $this->indexChunks = array();
     $this->indexHashSize = null;
     $this->reader = $reader;
-    $this->itemsPerCache = \Config::get("cataclysm.itemsPerCache", 100);
   }
 
-  public function read()
+  public function read($path=null)
+  {
+    $key = self::CACHE_KEY;
+    $this->adhesion = $this->repo->get("$key:adhesion");
+    $this->indexHashSize = $this->repo->get("$key:indexHashSize");
+  }
+
+  public function compile($path, $adhesion=100)
   {
     $key = self::CACHE_KEY;
 
-    // create a exclusive read lock, to any file, just to block
-    $lock_fp = fopen(base_path()."/composer.json", "r");
-    flock($lock_fp, LOCK_EX);
+    $this->adhesion = $adhesion;
 
-    if(\Cache::has("$key:loaded")) {
-      $this->indexHashSize = \Cache::get("$key:indexHashSize");
-      flock($lock_fp, LOCK_UN);
-      fclose($lock_fp);
-
-      return;
-    }
-
-    $expiration = \Config::get("cataclysm.dataCacheExpiration");
     // clear all cache, this ensures searches are read again.
-    \Cache::flush();
+    $this->repo->flush();
 
-    list($database, $index) = $this->reader->read();
+    list($database, $index) = $this->reader->read($path);
 
     $database = $this->chopDatabase($database);
     foreach($database as $chunk=>$data) {
-      \Cache::forever("$key:db:$chunk", $data);
+      $this->repo->forever("$key:db:$chunk", $data);
     }
 
     $this->indexHashSize = $this->makeIndexHashSize($index);
@@ -54,21 +57,16 @@ class RepositoryCache implements RepositoryReaderInterface
     $index = $this->chopIndex($index);
     foreach($index as $chunk=>$data)
     {
-      \Cache::forever("$key:index:$chunk", $data);
+      $this->repo->forever("$key:index:$chunk", $data);
     }
     $this->repo->forever("$key:version", $this->reader->version());
-
-    \Cache::forever("$key:indexHashSize", $this->indexHashSize);
-
-    \Cache::put("$key:loaded", true, $expiration);
-
-    flock($lock_fp, LOCK_UN);
-    fclose($lock_fp);
+    $this->repo->forever("$key:adhesion", $this->adhesion);
+    $this->repo->forever("$key:indexHashSize", $this->indexHashSize);
   }
 
   private function makeDatabaseHash($repo_id)
   {
-    return intval($repo_id/$this->itemsPerCache);
+    return intval($repo_id/$this->adhesion);
   }
 
   private function chopDatabase($database)
@@ -98,7 +96,7 @@ class RepositoryCache implements RepositoryReaderInterface
 
     if(!isset($this->dataChunks[$chunk])) {
       $key = self::CACHE_KEY;
-      $this->dataChunks[$chunk] = \Cache::get("$key:db:$chunk");
+      $this->dataChunks[$chunk] = $this->repo->get("$key:db:$chunk");
     }
     $this->database[$repo_id] = $this->dataChunks[$chunk][$repo_id];
     return $this->database[$repo_id];
@@ -107,7 +105,7 @@ class RepositoryCache implements RepositoryReaderInterface
 
   private function makeIndexHashSize($index)
   {
-    return count($index)/$this->itemsPerCache;
+    return count($index)/$this->adhesion;
   }
 
   private function makeIndexHash($index)
@@ -145,7 +143,7 @@ class RepositoryCache implements RepositoryReaderInterface
     $chunk = $this->makeIndexHash($index);
     if(!isset($this->indexChunks[$chunk])) {
       $key = self::CACHE_KEY;
-      $this->indexChunks[$chunk] = \Cache::get("$key:index:$chunk");
+      $this->indexChunks[$chunk] = $this->repo->get("$key:index:$chunk");
     }
 
     if(!isset($this->indexChunks[$chunk][$index]))

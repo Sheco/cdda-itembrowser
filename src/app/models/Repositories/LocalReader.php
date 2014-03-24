@@ -17,7 +17,7 @@ class LocalReader implements RepositoryReaderInterface
     $this->database[$object->repo_id] = $object;
   }
 
-  public function read()
+  public function read($path=null)
   {
     \Log::info("Reading data files...");
 
@@ -25,7 +25,7 @@ class LocalReader implements RepositoryReaderInterface
     $this->id = 0;
     $this->index = array();
 
-    $it = new \RecursiveDirectoryIterator(\Config::get("cataclysm.dataPath"));
+    $it = new \RecursiveDirectoryIterator("$path/data/json");
     foreach(new \RecursiveIteratorIterator($it) as $file) {
       $data = (array) json_decode(file_get_contents($file));
       array_walk($data, array($this, 'newObject'));

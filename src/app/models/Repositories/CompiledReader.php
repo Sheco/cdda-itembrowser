@@ -1,9 +1,7 @@
 <?php
 namespace Repositories;
 
-use Illuminate\Cache\CacheManager;
-
-class RepositoryCache implements RepositoryReaderInterface
+class CompiledReader implements RepositoryReaderInterface
 {
   const CACHE_KEY="repository";
   private $dataChunks;

@@ -8,7 +8,9 @@ class Repository implements RepositoryInterface
 
   public function __construct(RepositoryReaderInterface $reader)
   {
-    $this->reader = new RepositoryCache($reader);
+    $reader = new CompiledReader($reader);
+
+    $this->reader = $reader;
     $this->loaded = false;
   }
 

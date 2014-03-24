@@ -156,11 +156,6 @@ class CompiledReader implements RepositoryReaderInterface
     return $this->index[$index];
   }
 
-  public function addIndex($index, $key, $value)
-  {
-    $this->reader->addIndex($index, $key, $value);
-  }
-
   public function version()
   {
     $key = self::CACHE_KEY;

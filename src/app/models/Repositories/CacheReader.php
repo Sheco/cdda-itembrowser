@@ -39,9 +39,4 @@ class CacheReader implements RepositoryReaderInterface
       return $this->reader->loadIndex($index);
     });
   }
-
-  public function addIndex($index, $key, $value)
-  {
-    $this->reader->addIndex($index, $key, $value);
-  }
 }

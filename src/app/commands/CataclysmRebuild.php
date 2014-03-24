@@ -29,7 +29,7 @@ class CataclysmCache extends Command {
 	 *
 	 * @return void
 	 */
-	public function __construct(Repositories\RepositoryCache $repo)
+	public function __construct(Repositories\CompiledReader $repo)
   {
     $this->repo = $repo;
 		parent::__construct();

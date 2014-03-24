@@ -82,7 +82,7 @@ App::down(function()
 
 require app_path().'/filters.php';
 
-$app->bind('Repositories\RepositoryReaderInterface', 'Repositories\LocalReader');
+$app->singleton('Repositories\RepositoryReaderInterface', 'Repositories\CompiledReader');
 $app->singleton('Repositories\Recipe', 'Repositories\Recipe');
 $app->singleton('Repositories\Item', 'Repositories\ItemCache');
 $app->singleton('Repositories\Material', 'Repositories\Material');

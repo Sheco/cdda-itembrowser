@@ -6,6 +6,7 @@ return array(
     "development"=>"cdda-trunk.estilofusion.com"
   ),
 
+  "dataPath"=>storage_path()."/Cataclysm-DDA",
   "searchCacheExpiration"=>60
 
 );

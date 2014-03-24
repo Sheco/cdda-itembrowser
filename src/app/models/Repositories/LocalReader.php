@@ -20,6 +20,8 @@ class LocalReader implements RepositoryReaderInterface
   public function read($path=null)
   {
     \Log::info("Reading data files...");
+    if(!$path)
+      $path = \Config::get('cataclysm.dataPath');
 
     $this->database = array();
     $this->id = 0;

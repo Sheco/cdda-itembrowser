@@ -53,8 +53,9 @@ class CataclysmCache extends Command {
 	 */
 	protected function getArguments()
 	{
+    $path = \Config::get('cataclysm.dataPath');
 		return array(
-      array('path', InputArgument::REQUIRED, 'Path to the game files')
+      array('path', InputArgument::OPTIONAL, 'Path to the game files', $path)
 		);
 	}
 

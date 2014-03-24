@@ -12,7 +12,7 @@ class CompiledReader implements RepositoryReaderInterface
   private $adhesion;
   private $repo;
 
-  public function __construct(RepositoryReaderInterface $reader)
+  public function __construct(LocalReader $reader)
   {
     $this->repo = new \Illuminate\Cache\Repository(
       new \Illuminate\Cache\FileStore(
@@ -23,7 +23,9 @@ class CompiledReader implements RepositoryReaderInterface
 
     $this->dataChunks = array();
     $this->indexChunks = array();
+
     $this->indexHashSize = null;
+
     $this->reader = $reader;
   }
 
@@ -36,6 +38,9 @@ class CompiledReader implements RepositoryReaderInterface
 
   public function compile($path, $adhesion=100)
   {
+    if(!$path)
+      $path = \Config::get('cataclysm.dataPath');
+
     $key = self::CACHE_KEY;
 
     $this->adhesion = $adhesion;

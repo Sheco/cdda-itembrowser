@@ -43,7 +43,7 @@ class CataclysmCache extends Command {
 	public function fire()
 	{
     echo "rebuilding database cache...\n";
-    $this->repo->compile($this->argument('path'));
+    $this->repo->compile($this->argument('path'), $this->option('adhesion'));
 	}
 
 	/**
@@ -66,6 +66,7 @@ class CataclysmCache extends Command {
 	protected function getOptions()
 	{
 		return array(
+      array('adhesion', 'a', InputOption::VALUE_OPTIONAL, "Chunk adhesion, reduces the amount of files created", 100)
 		);
 	}
 

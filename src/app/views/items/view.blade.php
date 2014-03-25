@@ -14,7 +14,13 @@
     <br>
     Volume: {{{ $item->volume }}} Weight: {{ $item->weight }}/{{ $item->weightMetric }}<br>
       Bash: {{{ $item->bashing }}}
+      @if ($item->hasFlag("SPEAR"))
+      Pierce: {{{ $item->cutting }}}
+      @elseif ($item->hasFlag("STAB"))
       Stab: {{{ $item->cutting }}}
+      @else
+      Cut: {{{ $item->cutting }}}
+      @endif
       To-hit bonus: {{{ $item->to_hit }}}<br>
       Moves per attack: {{{ $item->movesPerAttack }}}<br>
       Materials: {{ $item->materials }}<br>
@@ -108,7 +114,34 @@
     {{ $item->craftingRecipes }}
     @endif
     <br>
-    {{{ $item->description }}}
+    {{{ $item->description }}}<br>
+    @if ($item->hasFlag("FIT"))
+    <br>This piece of clothing fits you perfectly.<br>
+    @endif
+    @if ($item->hasFlag("SKINTIGHT"))
+    <br>This piece of clothing lies close to the skin and layers easily.<br>
+    @endif
+    @if ($item->hasFlag("POCKETS"))
+    <br>This piece of clothing has pockets to warm your hands.<br>
+    @endif
+    @if ($item->hasFlag("HOOD"))
+    <br>This piece of clothing has a hood to keep your head warm.<br>
+    @endif
+    @if ($item->hasFlag("RAINPROOF"))
+    <br>This piece of clothing is designed to keep you dry in the rain.<br>
+    @endif
+    @if ($item->hasFlag("WATER_FRIENDLY"))
+    <br>This piece of clothing performs well even when soaking wet. This can feel good.<br>
+    @endif
+    @if ($item->hasFlag("WATERPROOF"))
+    <br>This piece of clothing won't let water through.  Unless you jump in the river or something like that.<br>
+    @endif
+    @if ($item->hasFlag("STURDY"))
+    <br>This piece of clothing is designed to protect you from harm and withstand a lot of abuse<br>
+    @endif
+    @if ($item->hasFlag("SWIM_GOGGLES"))
+    <br>This piece of clothing allows you to see much further under water.<br>
+    @endif
 
   </div>
 </div>

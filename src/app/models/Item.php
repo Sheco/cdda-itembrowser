@@ -38,6 +38,10 @@ class Item implements Robbo\Presenter\PresentableInterface
     if (!isset($data->material[1]))
       $data->material[1] = "null";
 
+    if(!isset($data->flags))
+      $data->flags = array();
+    else
+      $data->flags = array_flip((array) $data->flags);
     $this->data = $data;
   }
 
@@ -244,5 +248,10 @@ class Item implements Robbo\Presenter\PresentableInterface
   public function getPresenter()
   {
     return new Presenters\Item($this);
+  }
+
+  public function hasFlag($flag)
+  {
+    return isset($this->flags[$flag]);
   }
 }

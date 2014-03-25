@@ -34,6 +34,11 @@ Route::group(array('after'=>'theme:layouts.bootstrap'), function () {
       'uses'=>'ItemsController@books')
   );
 
+  Route::get('/qualities/{id?}', array(
+      'as'=>'item.qualities',
+      'uses'=>'ItemsController@qualities')
+  );
+
   Route::get('/containers', array(
       'as'=>'item.containers',
       'uses'=>'ItemsController@containers')

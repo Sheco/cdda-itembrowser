@@ -266,7 +266,7 @@ class Item implements Robbo\Presenter\PresentableInterface
   {
     return array_map(function ($quality) {
       return array(
-        "name"=>$this->quality->find($quality[0])->name,
+        "quality"=>$this->quality->find($quality[0]),
         "level"=>$quality[1]
       );
     }, $this->data->qualities);

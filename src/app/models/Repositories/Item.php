@@ -114,6 +114,13 @@ class Item
       $type = strtolower($object->comestible_type);
       $repo->addIndex("comestible.$type", $object->id, $object->repo_id);
     }
+    if (isset($object->qualities)) {
+      foreach ($object->qualities as $quality) {
+        $repo->addIndex("quality.$quality[0]", $object->id, $object->repo_id);
+        $repo->addIndex("qualities", $quality[0], $quality[0]);
+      }
+    }
+
   }
 
   public function find($id)

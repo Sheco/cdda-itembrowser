@@ -19,7 +19,8 @@ Crafting could be as simple as looking at your hammer and being able to know wha
 <a href="{{ route("item.melee") }}">Melee</a>,
 <a href="{{ route('item.gun', 'archery') }}">Ranged weapons</a>,
 <a href="{{ route('item.comestibles', 'drink') }}">Comestibles/Consumables</a>,
-<a href="{{ route('item.books', 'engineering') }}">Books</a>.
+<a href="{{ route('item.books', 'engineering') }}">Books</a>,
+<a href="{{ route('item.qualities') }}">Qualities</a>.
 
 </p>
 <p>

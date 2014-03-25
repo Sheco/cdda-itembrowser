@@ -122,6 +122,13 @@ class ItemsController extends Controller
     return View::make('items.comestibles', compact('items','type', 'types'));
   }
 
+  public function qualities($id=null)
+  {
+    $qualities = $this->repo->all("qualities");
+    $items = $id? $this->item->index("quality.$id"): array();
+    return View::make('items.qualities', compact('items', 'qualities', 'id'));
+  }
+
   public function sitemap()
   {
     $items = $this->item->all();

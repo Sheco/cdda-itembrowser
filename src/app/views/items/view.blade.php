@@ -25,7 +25,7 @@
       Moves per attack: {{{ $item->movesPerAttack }}}<br>
       Materials: {{ $item->materials }}<br>
       @foreach ($item->qualities as $quality)
-      Has {{{ $quality["name"] }}} of level {{{ $quality["level"] }}}.<br>
+      Has <a href="{{ route("item.qualities", $quality["quality"]->id) }}">{{{ $quality["quality"]->name }}}</a> of level {{{ $quality["level"] }}}.<br>
       @endforeach
     @if ($item->canBeCut)
     Can be cut into: {{{ $item->cutResultAmount }}} <a href="{{ route('item.view', $item->cutResultItem->id) }}">{{ str_plural($item->cutResultItem->name) }}</a><br>

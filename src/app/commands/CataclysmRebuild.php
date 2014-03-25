@@ -44,6 +44,7 @@ class CataclysmCache extends Command {
 	{
     $this->info("rebuilding database cache...");
     $this->repo->compile($this->argument('path'), $this->option('adhesion'));
+    \Cache::flush();
 	}
 
 	/**

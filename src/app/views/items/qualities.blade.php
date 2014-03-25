@@ -14,7 +14,7 @@ Qualities - Cataclysm: Dark Days Ahead
   </div>
   <div class="col-md-9">
 @if (!$id)
-Please select a tab
+Please select an entry from the menu on the left.
 @else
 <table class="table table-bordered table-hover tablesorter">
   <thead>

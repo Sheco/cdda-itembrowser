@@ -271,4 +271,13 @@ class Item implements Robbo\Presenter\PresentableInterface
       );
     }, $this->data->qualities);
   }
+
+  public function qualityLevel($quality)
+  {
+    foreach ($this->data->qualities as $q) {
+      if($q[0]==$quality) {
+        return $q[1];
+      }
+    }
+  }
 }

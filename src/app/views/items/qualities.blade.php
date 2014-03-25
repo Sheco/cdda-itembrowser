@@ -20,11 +20,13 @@ Please select an entry from the menu on the left.
   <thead>
   <tr>
     <th>Name</th>
+    <th>Level</th>
   </tr>
 </thead>
 @foreach($items as $item)
 <tr>
   <td><a href="{{route('item.view', $item->id)}}">{{ $item->name }}</a></td>
+  <td>{{{ $item->qualityLevel($id) }}}</td>
 </tr>
 </tr>
 @endforeach
@@ -32,7 +34,7 @@ Please select an entry from the menu on the left.
 <script>
 $(function() {
     $(".tablesorter").tablesorter({
-      sortList: [[0,1]]
+      sortList: [[1,0]]
       });
 });
 </script>

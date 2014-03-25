@@ -4,13 +4,16 @@ class ItemsController extends Controller
 {
   protected $item;
   protected $repo;
+  protected $quality;
 
   public function __construct(
     Repositories\Item $item,
+    Repositories\Quality $quality,
     Repositories\Repository $repo
   ) 
   {
     $this->item = $item;
+    $this->quality = $quality;
     $this->repo = $repo;
   }
 
@@ -124,7 +127,7 @@ class ItemsController extends Controller
 
   public function qualities($id=null)
   {
-    $qualities = $this->repo->all("qualities");
+    $qualities = $this->quality->all("qualities");
     $items = $id? $this->item->index("quality.$id"): array();
     return View::make('items.qualities', compact('items', 'qualities', 'id'));
   }

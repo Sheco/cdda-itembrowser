@@ -36,8 +36,12 @@ class Quality
     throw new Exception(); // not implemented
   }
 
-  public function all()
+  public function all($name)
   {
-    throw new Exception();
+    $ret = array();
+    foreach($this->repo->all($name) as $id=>$item) {
+      $ret[$id] = $this->find($id);
+    }
+    return $ret;
   }
 }

@@ -5,8 +5,8 @@ Qualities - Cataclysm: Dark Days Ahead
 <h1>Qualities</h1>
 
 <ul class="nav nav-tabs">
-@foreach($qualities as $key=>$value)
-<li @if($key==$id) class="active" @endif><a href="{{ route("item.qualities", $key) }}">{{{$value}}}</a></li>
+@foreach($qualities as $key=>$quality)
+<li @if($key==$id) class="active" @endif><a href="{{ route("item.qualities", $key) }}">{{{$quality->name}}}</a></li>
 @endforeach
 </ul>
 @if (!$id)

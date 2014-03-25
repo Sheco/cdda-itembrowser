@@ -10,15 +10,17 @@ class ItemCache extends Item
     $key = self::CACHE_KEY.":".str_replace(" ", "_", $text);
     $expiration = \Config::get("cataclysm.searchCacheExpiration");
     $items = \Cache::remember($key, $expiration, function () use ($text) {
-      return array_map(function ($item) { 
-        return $item->id;
-      }, parent::where($text));
-      return $result;
+      $items = parent::where($text);
+      array_walk($items, function (&$item) { 
+        $item = $item->id;
+      });
+      return $items;
     });
 
-    return array_map(function ($item) {
-      return $this->find($item);
-    }, $items);
+    array_walk($items, function (&$item) {
+      $item = $this->find($item);
+    });
+    return $items;
 
   }
 }

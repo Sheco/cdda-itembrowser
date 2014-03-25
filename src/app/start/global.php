@@ -86,9 +86,11 @@ $app->singleton('Repositories\RepositoryReaderInterface', 'Repositories\Compiled
 $app->singleton('Repositories\Recipe', 'Repositories\Recipe');
 $app->singleton('Repositories\Item', 'Repositories\ItemCache');
 $app->singleton('Repositories\Material', 'Repositories\Material');
+$app->singleton('Repositories\Quality', 'Repositories\Quality');
 $app->singleton('Repositories\RepositoryInterface', 'Repositories\Repository');
 
 // create an instance of each repository, so they register their listeners.
 App::make('Repositories\Recipe');
 App::make('Repositories\Item');
 App::make('Repositories\Material');
+App::make('Repositories\Quality');

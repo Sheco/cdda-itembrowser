@@ -8,6 +8,7 @@ class Item implements Robbo\Presenter\PresentableInterface
   protected $recipe;
   protected $item;
   protected $material;
+  protected $quality;
 
   private $cut_pairs = array(
       "cotton"=>"rag",
@@ -21,12 +22,14 @@ class Item implements Robbo\Presenter\PresentableInterface
   public function __construct(
     Repositories\Recipe $recipe, 
     Repositories\Material $material, 
-    Repositories\Item $item
+    Repositories\Item $item,
+    Repositories\Quality $quality
   )
   {
     $this->recipe = $recipe;
     $this->material = $material;
     $this->item = $item;
+    $this->quality = $quality;
   }
 
   public function load($data)
@@ -42,6 +45,10 @@ class Item implements Robbo\Presenter\PresentableInterface
       $data->flags = array();
     else
       $data->flags = array_flip((array) $data->flags);
+
+    if(!isset($data->qualities))
+      $data->qualities = array();
+
     $this->data = $data;
   }
 
@@ -253,5 +260,15 @@ class Item implements Robbo\Presenter\PresentableInterface
   public function hasFlag($flag)
   {
     return isset($this->flags[$flag]);
+  }
+
+  public function getQualities()
+  {
+    return array_map(function ($quality) {
+      return array(
+        "name"=>$this->quality->find($quality[0])->name,
+        "level"=>$quality[1]
+      );
+    }, $this->data->qualities);
   }
 }

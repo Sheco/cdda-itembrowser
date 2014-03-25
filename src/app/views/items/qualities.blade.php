@@ -4,11 +4,15 @@ Qualities - Cataclysm: Dark Days Ahead
 @section('content')
 <h1>Qualities</h1>
 
-<ul class="nav nav-tabs">
+<div class="row">
+  <div class="col-md-3">
+<ul class="nav nav-pills nav-stacked">
 @foreach($qualities as $key=>$quality)
-<li @if($key==$id) class="active" @endif><a href="{{ route("item.qualities", $key) }}">{{{$quality->name}}}</a></li>
+<li class="@if($key==$id) active @endif"><a href="{{ route("item.qualities", $key) }}">{{{$quality->name}}}</a></li>
 @endforeach
 </ul>
+  </div>
+  <div class="col-md-9">
 @if (!$id)
 Please select a tab
 @else
@@ -33,4 +37,5 @@ $(function() {
 });
 </script>
 @endif
+</div>
 @endsection

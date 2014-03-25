@@ -76,14 +76,13 @@
       Covers: {{{ $item->covers }}}<br>
       Coverage: {{{ $item->coverage }}}%<br>
       Encumberment: {{{ $item->encumbrance }}}<br>
-      Protection: <br>
-      <ul>
-        <li>Bash: {{{ $item->protection('bash') }}}
-        <li>Cut:  {{{  $item->protection('cut') }}}
-        <li>Acid: {{{  $item->protection('acid') }}}
-        <li>Fire: {{{  $item->protection('fire') }}}
-        <li>Elec: {{{  $item->protection('elec') }}}
-      </ul>
+      Protection: Bash: 
+      {{{ $item->protection('bash') }}}  
+      Cut:  {{{  $item->protection('cut') }}}<br>
+      Acid: {{{  $item->protection('acid') }}}
+      &nbsp;&nbsp;&nbsp;
+      Fire: {{{  $item->protection('fire') }}}
+      Elec: {{{  $item->protection('elec') }}}<br>
       Environmental protection: {{{ $item->enviromental_protection }}}<br>
       Warmth: {{{ $item->warmth }}}<br>
       Storage: {{{ $item->storage }}}<br>

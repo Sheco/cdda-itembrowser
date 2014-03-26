@@ -33,12 +33,14 @@ class LocalReader implements RepositoryReaderInterface
       array_walk($data, array($this, 'newObject'));
     }
 
-    $this->newObject(json_decode('{
-      "id":"toolset",
-      "name":"integrated toolset",
-      "type":"_SPECIAL",
-      "description":"A fake item. If you are reading this it\'s a bug!"
-    }'));
+    if (!$this->loadObject("item", "toolset")) {
+      $this->newObject(json_decode('{
+        "id":"toolset",
+        "name":"integrated toolset",
+        "type":"_SPECIAL",
+        "description":"A fake item. If you are reading this it\'s a bug!"
+      }'));
+    }
     $this->newObject(json_decode('{
       "id":"fire",
       "name":"nearby fire",
@@ -73,6 +75,8 @@ class LocalReader implements RepositoryReaderInterface
   public function loadObject($index, $id)
   {    
     $indexDb = $this->loadIndex($index);
+    if(!isset($indexDb[$id]))
+      return null;
     $repo_id = $indexDb[$id];
 
     return $this->database[$repo_id];

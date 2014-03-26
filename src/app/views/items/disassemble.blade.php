@@ -23,6 +23,11 @@
 @foreach ($item->disassembly as $recipe)
   @if ($recipe->hasTools)
   Tools required:<br>
+  @if ($recipe->hasQualities)
+  @foreach ($recipe->qualities as $q)
+  &gt; {{{$q["amount"]}}} tool with <a href="{{ route("item.qualities", $q["quality"]->id) }}">{{{ $q["quality"]->name }}}</a> quality of {{{ $q["level"] }}}<br>
+  @endforeach
+  @endif
   {{$recipe->tools}}<br>
   @endif
   @if ($recipe->hasComponents)

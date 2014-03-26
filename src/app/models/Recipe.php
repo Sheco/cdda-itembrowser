@@ -6,10 +6,15 @@ class Recipe implements Robbo\Presenter\PresentableInterface
 
   protected $data;
   protected $item;
+  protected $quality;
 
-  public function __construct(Repositories\Item $item)
+  public function __construct(
+    Repositories\Item $item,
+    Repositories\Quality $quality
+  )
   {
     $this->item = $item;
+    $this->quality = $quality;
   }
 
   public function load($data)
@@ -81,6 +86,21 @@ class Recipe implements Robbo\Presenter\PresentableInterface
     }, $this->data->book_learn);
   }
 
+  public function getHasQualities()
+  {
+    return !empty($this->data->qualities);
+  }
+
+  public function getQualities()
+  {
+    return array_map(function ($quality) {
+      return array(
+        "quality"=>$this->quality->find($quality->id),
+        "level"=>$quality->level,
+        "amount"=>$quality->amount
+      );
+    }, $this->data->qualities);
+  }
 
   public function getPresenter()
   {

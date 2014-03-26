@@ -63,6 +63,8 @@ class LocalReader implements RepositoryReaderInterface
 
     $this->version = $this->getVersion($path);
 
+    \Event::fire("cataclysm.finishedLoading", array($this));
+
     return array($this->database, $this->index);
   }
 

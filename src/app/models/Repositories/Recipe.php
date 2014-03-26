@@ -11,6 +11,31 @@ class Recipe
     \Event::listen("cataclysm.newObject", function ($repo, $object) {
       $this->getIndexes($repo, $object);
     });
+
+    \Event::listen("cataclysm.finishedLoading", function($repo)
+    {
+      $this->finishLoading($repo);
+    });
+  }
+
+  private function finishLoading($repo)
+  {
+    foreach($repo->loadIndex('recipe') as $id)
+    {
+      $recipe = $repo->loadObject("recipe", $id);
+      // search for all the items with the apropiate qualities
+      if (isset($recipe->qualities)) {
+        foreach ($recipe->qualities as $group) {
+          foreach($repo->loadIndex("quality.$group->id") as $id=>$item) {
+            $item = \App::make("Item");
+            $item->load($repo->loadObject("item", $id));
+            if($item->qualityLevel($group->id)<$group->level)
+              continue;
+            $this->linkIndexes($repo, 'toolFor', $id, $recipe);
+          }
+        }
+      }
+    }
   }
 
   private function linkIndexes($repo, $key, $id, $recipe)
@@ -21,7 +46,7 @@ class Recipe
       and $recipe->category=="CC_NONCRAFT") {
       $repo->addIndex("item.disassembly.$id", $recipe->repo_id, $recipe->repo_id);
       return;
-      }
+    }
 
     // reversible recipes go to the disassembly index,
     // but they're used to craft, so process further indexes.
@@ -74,19 +99,6 @@ class Recipe
           foreach($group as $component) {
             list($id, $amount) = $component;
             $this->linkIndexes($repo, "toolFor", $id, $recipe);
-          }
-        }
-      }
-
-      // search for all the items with the apropiate qualities
-      if (isset($recipe->qualities)) {
-        foreach ($recipe->qualities as $group) {
-          foreach($repo->loadIndex("quality.$group->id") as $id=>$item) {
-            $item = \App::make("Item");
-            $item->load($repo->loadObject("item", $id));
-            if($item->qualityLevel($group->id)<$group->level)
-              continue;
-            $this->linkIndexes($repo, 'toolFor', $id, $recipe);
           }
         }
       }

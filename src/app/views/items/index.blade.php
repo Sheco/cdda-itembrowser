@@ -32,7 +32,7 @@ Crafting could be as simple as looking at your hammer and being able to know wha
 {{link_to_route('item.search', 'survivor items', array("q"=>"survivor")) }},
 {{link_to_route('item.recipes', 'nearby fire', array("id"=>"fire")) }} 
 and 
-{{link_to_route('item.recipes', 'integrated toolset', array("id"=>"toolset")) }}.
+{{link_to_route('item.view', 'integrated toolset', "toolset") }}.
 </p>
 
 

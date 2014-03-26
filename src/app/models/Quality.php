@@ -8,6 +8,7 @@ class Quality implements Robbo\Presenter\PresentableInterface
 
   public function load($data)
   {
+    $data->name = str_replace(" quality", "", $data->name);
     $this->data = $data;
   }  
 

@@ -82,6 +82,10 @@ class Recipe
       if (isset($recipe->qualities)) {
         foreach ($recipe->qualities as $group) {
           foreach($repo->loadIndex("quality.$group->id") as $id=>$item) {
+            $item = \App::make("Item");
+            $item->load($repo->loadObject("item", $id));
+            if($item->qualityLevel($group->id)<$group->level)
+              continue;
             $this->linkIndexes($repo, 'toolFor', $id, $recipe);
           }
         }

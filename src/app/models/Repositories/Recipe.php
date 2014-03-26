@@ -77,6 +77,15 @@ class Recipe
           }
         }
       }
+
+      // search for all the items with the apropiate qualities
+      if (isset($recipe->qualities)) {
+        foreach ($recipe->qualities as $group) {
+          foreach($repo->loadIndex("quality.$group->id") as $id=>$item) {
+            $this->linkIndexes($repo, 'toolFor', $id, $recipe);
+          }
+        }
+      }
     }
   }
 

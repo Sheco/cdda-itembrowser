@@ -9,6 +9,7 @@ class Item implements Robbo\Presenter\PresentableInterface
   protected $item;
   protected $material;
   protected $quality;
+  protected $repo;
 
   private $cut_pairs = array(
       "cotton"=>"rag",
@@ -23,13 +24,15 @@ class Item implements Robbo\Presenter\PresentableInterface
     Repositories\Recipe $recipe, 
     Repositories\Material $material, 
     Repositories\Item $item,
-    Repositories\Quality $quality
+    Repositories\Quality $quality,
+    Repositories\Repository $repo
   )
   {
     $this->recipe = $recipe;
     $this->material = $material;
     $this->item = $item;
     $this->quality = $quality;
+    $this->repo = $repo;
   }
 
   public function load($data)
@@ -92,6 +95,12 @@ class Item implements Robbo\Presenter\PresentableInterface
   public function getToolFor()
   {
     return $this->recipe->index("item.toolFor.$this->id");
+  }
+
+  public function getToolForCount()
+  {
+    $counts = $this->repo->all("item.count.$this->id");
+    return $counts["toolFor"];
   }
 
   public function getToolCategories()

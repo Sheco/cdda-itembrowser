@@ -57,8 +57,20 @@ class Item
     \Event::listen("cataclysm.newObject", function ($repo, $object) {
       $this->getIndexes($repo, $object);
     });
+
+    \Event::listen("cataclysm.finishedLoading", function($repo)
+    {
+      $this->finishLoading($repo);
+    });
   }
 
+  private function finishLoading($repo)
+  {
+    foreach ($repo->loadIndex("item") as $id=>$item) {
+      $recipes = count($repo->loadIndex("item.toolFor.$id"));
+      $repo->addIndex("item.count.$id", "toolFor", $recipes);
+    }
+  }
 
   private function getIndexes($repo, $object)
   {

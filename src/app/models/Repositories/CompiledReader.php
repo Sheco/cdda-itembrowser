@@ -108,7 +108,7 @@ class CompiledReader implements RepositoryReaderInterface
 
   private function makeIndexHashSize($index)
   {
-    return count($index)/$this->adhesion;
+    return intval(count($index)/$this->adhesion);
   }
 
   private function makeIndexHash($index)

@@ -25,14 +25,16 @@
   Required skills: {{ $recipe->skillsRequired }} <br>
   Difficulty: {{{ $recipe->difficulty }}}<br>
   Time to complete: {{{ $recipe->time }}}<br>
-  @if ($recipe->hasTools)
+  @if ($recipe->hasTools || $recipe->hasQualities)
   Tools required:<br>
   @if ($recipe->hasQualities)
   @foreach ($recipe->qualities as $q)
   &gt; {{{$q["amount"]}}} tool with <a href="{{ route("item.qualities", $q["quality"]->id) }}">{{{ $q["quality"]->name }}}</a> quality of {{{ $q["level"] }}}<br>
   @endforeach
   @endif
+  @if ($recipe->hasTools)
   {{$recipe->tools}}<br>
+  @endif
   @endif
 
   @if ($recipe->hasComponents)

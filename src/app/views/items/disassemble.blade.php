@@ -21,15 +21,18 @@
 <div class="row">
 <div class="col-md-6">
 @foreach ($item->disassembly as $recipe)
-  @if ($recipe->hasTools)
+  @if ($recipe->hasTools || $recipe->hasQualities)
   Tools required:<br>
   @if ($recipe->hasQualities)
   @foreach ($recipe->qualities as $q)
   &gt; {{{$q["amount"]}}} tool with <a href="{{ route("item.qualities", $q["quality"]->id) }}">{{{ $q["quality"]->name }}}</a> quality of {{{ $q["level"] }}}<br>
   @endforeach
   @endif
+  @if ($recipe->hasTools)
   {{$recipe->tools}}<br>
   @endif
+  @endif
+
   @if ($recipe->hasComponents)
   Components obtained:<br>
   {{$recipe->components}}<br>

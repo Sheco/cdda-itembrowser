@@ -84,9 +84,9 @@ class CompiledReader implements RepositoryReaderInterface
     return $newDatabase;
   }
 
-  public function loadObject($index, $id)
+  public function get($index, $id)
   {
-    $indexDb = $this->loadIndex($index);
+    $indexDb = $this->all($index);
     if(!isset($indexDb[$id])) 
       return null;
 
@@ -138,7 +138,7 @@ class CompiledReader implements RepositoryReaderInterface
     return $newDatabase;
   }
 
-  public function loadIndex($index)
+  public function all($index)
   {
     if(isset($this->index[$index])) 
       return $this->index[$index];

@@ -22,21 +22,21 @@ class CacheReader implements RepositoryReaderInterface
     return $this->reader->version();
   }
 
-  public function loadObject($index, $id)
+  public function get($index, $id)
   {
     return \Cache::remember(self::CACHE_KEY."object:$index:$id", 60, 
       function () use ($index, $id)
     {
-      return $this->reader->loadObject($index, $id);
+      return $this->reader->get($index, $id);
     });
   }
 
-  public function loadIndex($index)
+  public function all($index)
   {
     return \Cache::remember(self::CACHE_KEY."index:$index", 60, 
       function () use ($index)
     {
-      return $this->reader->loadIndex($index);
+      return $this->reader->all($index);
     });
   }
 }

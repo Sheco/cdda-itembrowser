@@ -66,17 +66,17 @@ class Item
 
   private function finishLoading($repo)
   {
-    foreach ($repo->loadIndex("item") as $id=>$item) {
-      $recipes = count($repo->loadIndex("item.toolFor.$id"));
+    foreach ($repo->all("item") as $id=>$item) {
+      $recipes = count($repo->all("item.toolFor.$id"));
       $repo->addIndex("item.count.$id", "toolFor", $recipes);
 
-      $recipes = count($repo->loadIndex("item.recipes.$id"));
+      $recipes = count($repo->all("item.recipes.$id"));
       $repo->addIndex("item.count.$id", "recipes", $recipes);
 
-      $recipes = count($repo->loadIndex("item.learn.$id"));
+      $recipes = count($repo->all("item.learn.$id"));
       $repo->addIndex("item.count.$id", "learn", $recipes);
 
-      $recipes = count($repo->loadIndex("item.disassembly.$id"));
+      $recipes = count($repo->all("item.disassembly.$id"));
       $repo->addIndex("item.count.$id", "disassembly", $recipes);
     }
   }

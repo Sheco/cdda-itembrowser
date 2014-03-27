@@ -28,14 +28,14 @@ class Repository implements RepositoryInterface
   public function get($index, $id)
   {
     $this->load();
-    return $this->reader->loadObject($index, $id);
+    return $this->reader->get($index, $id);
   }
 
   // return all the objects in the index
   public function all($index)
   {
     $this->load();
-    return $this->reader->loadIndex($index);
+    return $this->reader->all($index);
   }
 
   public function version()

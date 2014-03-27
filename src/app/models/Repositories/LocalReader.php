@@ -33,7 +33,7 @@ class LocalReader implements RepositoryReaderInterface
       array_walk($data, array($this, 'newObject'));
     }
 
-    if (!$this->loadObject("item", "toolset")) {
+    if (!$this->get("item", "toolset")) {
       $this->newObject(json_decode('{
         "id":"toolset",
         "name":"integrated toolset",
@@ -74,9 +74,9 @@ class LocalReader implements RepositoryReaderInterface
     $this->index[$index][$key] = $value;
   }
 
-  public function loadObject($index, $id)
+  public function get($index, $id)
   {    
-    $indexDb = $this->loadIndex($index);
+    $indexDb = $this->all($index);
     if(!isset($indexDb[$id]))
       return null;
     $repo_id = $indexDb[$id];
@@ -84,7 +84,7 @@ class LocalReader implements RepositoryReaderInterface
     return $this->database[$repo_id];
   }
 
-  public function loadIndex($index)
+  public function all($index)
   {
     if (!isset($this->index[$index]))
       return array();

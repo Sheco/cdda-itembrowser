@@ -20,15 +20,15 @@ class Recipe
 
   private function finishLoading($repo)
   {
-    foreach($repo->loadIndex('recipe') as $id)
+    foreach($repo->all('recipe') as $id)
     {
-      $recipe = $repo->loadObject("recipe", $id);
+      $recipe = $repo->get("recipe", $id);
       // search for all the items with the apropiate qualities
       if (isset($recipe->qualities)) {
         foreach ($recipe->qualities as $group) {
-          foreach($repo->loadIndex("quality.$group->id") as $id=>$item) {
+          foreach($repo->all("quality.$group->id") as $id=>$item) {
             $item = \App::make("Item");
-            $item->load($repo->loadObject("item", $id));
+            $item->load($repo->get("item", $id));
             if($item->qualityLevel($group->id)<$group->level)
               continue;
             $this->linkIndexes($repo, 'toolFor', $id, $recipe);

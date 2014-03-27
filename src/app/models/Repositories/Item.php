@@ -185,9 +185,4 @@ class Item
     }
     return $ret;
   }
-
-  public function indexRaw($index)
-  {
-    return $this->repo->all($index);
-  }
 }

@@ -127,10 +127,4 @@ class Recipe
     }
     return $ret;
   }
-
-  // return the contents of certain index, without creating recipe objects.
-  public function indexRaw($index)
-  {
-    return $this->repo->all($index);
-  }
 }

@@ -105,7 +105,7 @@ class Item implements Robbo\Presenter\PresentableInterface
 
   public function getToolCategories()
   {
-    return $this->recipe->indexRaw("item.categories.{$this->id}");
+    return $this->repo->all("item.categories.{$this->id}");
   }
 
   public function getToolForCategory($category)

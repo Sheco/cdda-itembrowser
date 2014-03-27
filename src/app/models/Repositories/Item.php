@@ -144,7 +144,7 @@ class Item
 
   }
 
-  public function find($id)
+  public function get($id)
   {
     $item = \App::make('Item');
     $data = $this->repo->get("item", $id);
@@ -154,9 +154,9 @@ class Item
     return $item;
   }
 
-  public function findOrFail($id)
+  public function getOrFail($id)
   {
-    $item = $this->find($id);
+    $item = $this->get($id);
     if($item->type=="invalid")
       throw new ModelNotFoundException;
     return $item;
@@ -177,20 +177,11 @@ class Item
     return $results;
   }
 
-  public function all()
-  {
-    $ret = array();
-    foreach($this->repo->all("item") as $id=>$item) {
-      $ret[$id] = $this->find($id);
-    }
-    return $ret;
-  }
-
-  public function index($name)
+  public function all($name="item")
   {
     $ret = array();
     foreach($this->repo->all($name) as $id=>$item) {
-      $ret[$id] = $this->find($id);
+      $ret[$id] = $this->get($id);
     }
     return $ret;
   }

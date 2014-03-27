@@ -20,7 +20,7 @@ class Material
       $repo->addIndex("material", $object->ident, $object->repo_id);
   }
 
-  public function find($id)
+  public function get($id)
   {
     $material = \App::make('Material');
     $data = $this->repo->get("material", $id);

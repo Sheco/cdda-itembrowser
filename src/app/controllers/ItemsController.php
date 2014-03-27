@@ -32,19 +32,19 @@ class ItemsController extends Controller
 
   public function view($id)
   {
-    $item = $this->item->findOrFail($id);
+    $item = $this->item->getOrFail($id);
     return View::make('items.view', compact('item'));
   }
 
   public function craft($id)
   {
-    $item = $this->item->findOrFail($id);
+    $item = $this->item->getOrFail($id);
     return View::make('items.craft', compact('item'));
   }
 
   public function recipes($id, $category="")
   {
-    $item = $this->item->findOrFail($id);
+    $item = $this->item->getOrFail($id);
     $categories = $item->toolCategories;
     if ($category=="" && $categories) 
       return Redirect::route("item.recipes", array($id, key($categories)));
@@ -56,13 +56,13 @@ class ItemsController extends Controller
 
   public function disassemble($id)
   {
-    $item = $this->item->findOrFail($id);
+    $item = $this->item->getOrFail($id);
     return View::make('items.disassemble', compact('item'));
   }
 
   public function armor($part)
   {
-    $items = $this->item->index("armor.$part");
+    $items = $this->item->all("armor.$part");
     $parts = array(
       "head"=>"Head",
       "eyes"=>"Eyes",
@@ -79,7 +79,7 @@ class ItemsController extends Controller
 
   public function gun($skill)
   {
-    $items = $this->item->index("gun.$skill");
+    $items = $this->item->all("gun.$skill");
     $skills = array(
       "archery"=>"Archery",
       "launcher"=>"Launchers",
@@ -94,7 +94,7 @@ class ItemsController extends Controller
 
   public function books($type="combat")
   {
-    $items = $this->item->index("book.$type");
+    $items = $this->item->all("book.$type");
     $types = array(
       "fun"=>"Just for fun",
       "range"=>"Ranged",
@@ -110,13 +110,13 @@ class ItemsController extends Controller
 
   public function melee()
   {
-    $items = $this->item->index("melee");
+    $items = $this->item->all("melee");
     return View::make('items.melee', compact('items'));
   }
 
   public function comestibles($type="drink")
   {
-    $items = $this->item->index("comestible.$type");
+    $items = $this->item->all("comestible.$type");
     $types = array(
       "drink"=>"Drinks",
       "food"=>"Food",
@@ -128,7 +128,7 @@ class ItemsController extends Controller
   public function qualities($id=null)
   {
     $qualities = $this->quality->all("qualities");
-    $items = $id? $this->item->index("quality.$id"): array();
+    $items = $id? $this->item->all("quality.$id"): array();
     return View::make('items.qualities', compact('items', 'qualities', 'id'));
   }
 

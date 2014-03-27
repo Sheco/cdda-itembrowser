@@ -106,7 +106,7 @@ class Recipe
   }
 
   // locate and return a recipe object.
-  public function find($id)
+  public function get($id)
   {
     $recipe = \App::make('Recipe');
     $recipe->load($this->repo->get("recipe", $id));
@@ -119,21 +119,11 @@ class Recipe
   }
 
   // returns a list with every recipe object.
-  public function all()
-  {
-    $ret = array();
-    foreach($this->repo->all("recipe") as $id=>$recipe) {
-      $ret[$id] = $this->find($id);
-    }
-    return $ret;
-  }
-
-  // return a list with every recipe object in certain index.
-  public function index($index)
+  public function all($index="recipe")
   {
     $ret = array();
     foreach($this->repo->all($index) as $id=>$recipe) {
-      $ret[$id] = $this->find($id);
+      $ret[$id] = $this->get($id);
     }
     return $ret;
   }

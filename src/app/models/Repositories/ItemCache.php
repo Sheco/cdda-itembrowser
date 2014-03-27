@@ -18,7 +18,7 @@ class ItemCache extends Item
     });
 
     array_walk($items, function (&$item) {
-      $item = $this->find($item);
+      $item = $this->get($item);
     });
     return $items;
 

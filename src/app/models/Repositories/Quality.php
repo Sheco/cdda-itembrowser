@@ -22,7 +22,7 @@ class Quality
     }
   }
 
-  public function find($id)
+  public function get($id)
   {
     $quality = \App::make('Quality');
     $data = $this->repo->get("tool_quality", $id);
@@ -40,7 +40,7 @@ class Quality
   {
     $ret = array();
     foreach($this->repo->all($name) as $id=>$item) {
-      $ret[$id] = $this->find($id);
+      $ret[$id] = $this->get($id);
     }
     return $ret;
   }

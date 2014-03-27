@@ -41,7 +41,7 @@ class Recipe implements Robbo\Presenter\PresentableInterface
 
   public function getResult()
   {
-    return $this->item->find($this->data->result);
+    return $this->item->get($this->data->result);
   }
 
   public function getHasTools()
@@ -59,7 +59,7 @@ class Recipe implements Robbo\Presenter\PresentableInterface
     return array_map(function($group) {
       return array_map(function($tool) {
         list($id, $amount) = $tool;
-        return array($this->item->find($id), $amount);
+        return array($this->item->get($id), $amount);
       }, $group);
     }, $this->data->tools);
   }
@@ -69,7 +69,7 @@ class Recipe implements Robbo\Presenter\PresentableInterface
     return array_map(function($group) {
       return array_map(function($component) {
         list($id, $amount) = $component;
-        return array($this->item->find($id), $amount);
+        return array($this->item->get($id), $amount);
       }, $group);
     }, $this->data->components);
   }
@@ -82,7 +82,7 @@ class Recipe implements Robbo\Presenter\PresentableInterface
   public function getBooksTeaching()
   {
     return array_map(function ($book) {
-      return array($this->item->find($book[0]), $book[1]);
+      return array($this->item->get($book[0]), $book[1]);
     }, $this->data->book_learn);
   }
 
@@ -95,7 +95,7 @@ class Recipe implements Robbo\Presenter\PresentableInterface
   {
     return array_map(function ($quality) {
       return array(
-        "quality"=>$this->quality->find($quality->id),
+        "quality"=>$this->quality->get($quality->id),
         "level"=>$quality->level,
         "amount"=>$quality->amount
       );

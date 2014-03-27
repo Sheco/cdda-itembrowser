@@ -84,17 +84,17 @@ class Item implements Robbo\Presenter\PresentableInterface
 
   public function getRecipes()
   {
-    return $this->recipe->index("item.recipes.{$this->data->id}");
+    return $this->recipe->all("item.recipes.{$this->data->id}");
   }
 
   public function getDisassembly()
   {
-    return $this->recipe->index("item.disassembly.{$this->id}");
+    return $this->recipe->all("item.disassembly.{$this->id}");
   }
 
   public function getToolFor()
   {
-    return $this->recipe->index("item.toolFor.$this->id");
+    return $this->recipe->all("item.toolFor.$this->id");
   }
 
   public function count($type)
@@ -110,12 +110,12 @@ class Item implements Robbo\Presenter\PresentableInterface
 
   public function getToolForCategory($category)
   {
-    return $this->recipe->index("item.toolForCategory.{$this->data->id}.$category");
+    return $this->recipe->all("item.toolForCategory.{$this->data->id}.$category");
   }
 
   public function getLearn()
   {
-    return $this->recipe->index("item.learn.{$this->data->id}");
+    return $this->recipe->all("item.learn.{$this->data->id}");
   }
 
   public function getIsArmor()
@@ -208,12 +208,12 @@ class Item implements Robbo\Presenter\PresentableInterface
 
   public function getMaterial1()
   {
-    return $this->material->find($this->data->material[0]);
+    return $this->material->get($this->data->material[0]);
   }
 
   public function getMaterial2()
   {
-    return $this->material->find($this->data->material[1]);
+    return $this->material->get($this->data->material[1]);
   }
 
   public function getCanBeCut()
@@ -227,7 +227,7 @@ class Item implements Robbo\Presenter\PresentableInterface
   {
     $material = $this->material1->ident;
     $count = $material=="wood"? 2: 1;
-    return array($this->volume*$count, $this->item->find($this->cut_pairs[$material]));
+    return array($this->volume*$count, $this->item->get($this->cut_pairs[$material]));
   }
 
   public function getIsResultOfCutting()
@@ -243,7 +243,7 @@ class Item implements Robbo\Presenter\PresentableInterface
 
   public function getAmmoTypes()
   {
-    return $this->item->index("ammo.$this->ammo");
+    return $this->item->all("ammo.$this->ammo");
   }
 
   public function isMadeOf($material)
@@ -275,7 +275,7 @@ class Item implements Robbo\Presenter\PresentableInterface
   {
     return array_map(function ($quality) {
       return array(
-        "quality"=>$this->quality->find($quality[0]),
+        "quality"=>$this->quality->get($quality[0]),
         "level"=>$quality[1]
       );
     }, $this->data->qualities);

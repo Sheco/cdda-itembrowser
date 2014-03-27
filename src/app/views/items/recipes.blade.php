@@ -2,7 +2,7 @@
 {{{$item->rawName}}} (recipes) - Cataclysm: Dark Days Ahead
 @endsection
 @section('description')
-@if ($item->toolForCount)
+@if ($item->count("toolFor"))
 {{{$item->rawName}}} can be used to craft other items. You can find more information here.
 @else
 {{{$item->rawName}}} can't be used to craft other items.
@@ -24,7 +24,7 @@ var show_recipe = function(id)
 @include('items.menu', array('active'=>'recipes'))
 <h1>
   <a href="{{ route("item.view", array("id"=>$item->id)) }}">{{ $item->name }}</a>
-@if ($item->toolForCount) 
+@if ($item->count("toolFor")) 
  can be used to craft following recipes:<br>
 @else
  can't be used to craft anything.

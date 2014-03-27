@@ -29,7 +29,7 @@ Books - Cataclysm: Dark Days Ahead
   <td>{{ $item->max_level }}</td>
   <td>{{ $item->time }}</td>
   <td>{{ $item->fun }}</td>
-  <td>{{ count($item->learn) }}</td>
+  <td>{{ $item->count("learn") }}</td>
 </tr>
 </tr>
 @endforeach

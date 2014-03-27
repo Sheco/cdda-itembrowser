@@ -112,7 +112,7 @@
     Chapters: {{ $item->chapters }}.<br>
     @endif
     --<br>
-    This book contains {{ count($item->learn) }} crafting recipes:<br>
+    This book contains {{ $item->count("learn") }} crafting recipes:<br>
     {{ $item->craftingRecipes }}
     @endif
     <br>

@@ -2,7 +2,7 @@
 {{{$item->rawName}}} (disassemble) - Cataclysm: Dark Days Ahead
 @endsection
 @section('description')
-@if (count($item->disassembly)>0)
+@if ($item->count("disassembly")>0)
 {{{$item->rawName}}} can be disassembled. You can find more information here.
 @else
 {{{$item->rawName}}} can't be disassembled.
@@ -12,7 +12,7 @@
 @include('items.menu', array('active'=>'disassemble'))
 <h1>
   <a href="{{ route("item.view", array("id"=>$item->id)) }}">{{ $item->name }}</a>
-@if (count($item->disassembly)>0)
+@if ($item->count("disassembly")>0)
  can be disassembled to obtain the following components.<br>
 @else
  can't be disassembled.

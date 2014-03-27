@@ -28,7 +28,7 @@ Please select an entry from the menu on the left.
 <tr>
   <td><a href="{{route('item.view', $item->id)}}">{{ $item->name }}</a></td>
   <td>{{{ $item->qualityLevel($id) }}}</td>
-  <td>{{{ $item->toolForCount }}}</td>
+  <td>{{{ $item->count("toolFor") }}}</td>
 </tr>
 </tr>
 @endforeach

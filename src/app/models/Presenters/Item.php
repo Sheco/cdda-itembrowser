@@ -95,11 +95,11 @@ EOF;
   public function presentFeatureLabels()
   {
     $badges = array();
-    if ($this->toolForCount)
-      $badges[] = '<a href="'. route("item.recipes", $this->object->id) .'"><span class="label label-success">recipes: '.$this->toolForCount.'</span></a>';
-    if (count($this->disassembly))
+    if ($this->count("toolFor"))
+      $badges[] = '<a href="'. route("item.recipes", $this->object->id) .'"><span class="label label-success">recipes: '.$this->count("toolFor").'</span></a>';
+    if ($this->count("disassembly"))
       $badges[] = '<a href="'. route("item.disassemble", $this->object->id) .'"><span class="label label-info">disassemble</span></a>';
-    if (count($this->recipes)) 
+    if ($this->count("recipes")) 
       $badges[] = '<a href="'. route("item.craft", $this->object->id) .'"><span class="label label-default">craft</span></a>';
     return join(" ", $badges);
   }

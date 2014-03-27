@@ -2,7 +2,7 @@
 {{{$item->rawName}}} (craft) - Cataclysm: Dark Days Ahead
 @endsection
 @section('description')
-@if (count($item->recipes)>0)
+@if ($item->count("recipes")>0)
 {{{$item->rawName}}} can be crafted. You can find more information here.
 @else
 {{{$item->rawName}}} can't be crafted.
@@ -12,7 +12,7 @@
 @include('items.menu', array('active'=>'craft'))
 <h1>
   <a href="{{ route("item.view", array("id"=>$item->id)) }}">{{ $item->name }}</a>
-@if (count($item->recipes)>0)
+@if ($item->count("recipes")>0)
  can be crafted with the following recipes<br>
 @else
  can't be crafted

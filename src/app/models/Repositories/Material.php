@@ -16,14 +16,15 @@ class Material
 
   private function getIndexes($repo, $object)
   {
-    if ($object->type=="material")
-      $repo->addIndex("material", $object->ident, $object->repo_id);
+    if ($object->type=="material") {
+      $repo->addIndex("materials", $object->ident, $object->repo_id);
+    }
   }
 
   public function get($id)
   {
     $material = \App::make('Material');
-    $data = $this->repo->get("material", $id);
+    $data = $this->repo->get("materials", $id);
     if ($data)
       $material->load($data);
     return $material;
@@ -34,8 +35,12 @@ class Material
     throw new Exception(); // not implemented
   }
 
-  public function all()
+  public function all($name)
   {
-    throw new Exception();
+    $ret = array();
+    foreach($this->repo->all($name) as $id=>$item) {
+      $ret[$id] = $this->get($id);
+    }
+    return $ret;
   }
 }

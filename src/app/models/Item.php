@@ -257,8 +257,7 @@ class Item implements Robbo\Presenter\PresentableInterface
 
      return $this->symbol==$text || 
         stristr($this->id, $text) || 
-        stristr($this->name, $text) ||
-        $this->isMadeOf($text);
+        stristr($this->name, $text);
   }
 
   public function getPresenter()

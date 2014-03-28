@@ -5,15 +5,18 @@ class ItemsController extends Controller
   protected $item;
   protected $repo;
   protected $quality;
+  protected $material;
 
   public function __construct(
     Repositories\Item $item,
     Repositories\Quality $quality,
+    Repositories\Material $material,
     Repositories\Repository $repo
   ) 
   {
     $this->item = $item;
     $this->quality = $quality;
+    $this->material = $material;
     $this->repo = $repo;
   }
 
@@ -130,6 +133,13 @@ class ItemsController extends Controller
     $qualities = $this->quality->all("qualities");
     $items = $id? $this->item->all("quality.$id"): array();
     return View::make('items.qualities', compact('items', 'qualities', 'id'));
+  }
+
+  public function materials($id=null)
+  {
+    $materials = $this->material->all("materials");
+    $items = $id? $this->item->all("material.$id"): array();
+    return View::make('items.materials', compact('items', 'materials', 'id'));
   }
 
   public function sitemap()

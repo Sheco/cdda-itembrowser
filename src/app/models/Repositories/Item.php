@@ -142,6 +142,10 @@ class Item
       }
     }
 
+    if (isset($object->material)) {
+      $materials = (array) $object->material; 
+      $repo->addIndex("material.$materials[0]", $object->id, $object->repo_id);
+    }
   }
 
   public function get($id)

@@ -42,4 +42,5 @@ $(function() {
 </script>
 @endif
 </div>
+</div>
 @endsection

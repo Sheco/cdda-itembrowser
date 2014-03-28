@@ -57,4 +57,5 @@ On the top bar, there are two links, stable and development, each one points to 
 If you have any requests or if you find a bug, please let me know at <a href="mailto:sduran@estilofusion.com">sduran@estilofusion.com</a>
 </p>
 </div>
+</div>
 @stop

@@ -17,14 +17,13 @@ Crafting could be as simple as looking at your hammer and being able to know wha
 
 <p>
 <h2>Common useful items</h2>
+{{link_to_route('item.recipes', 'nearby fire', array("id"=>"fire")) }},
+{{link_to_route('item.view', 'integrated toolset', "toolset") }},
 {{link_to_route('item.view', 'stone hammer', "primitive_hammer") }}, 
 {{link_to_route('item.view', 'stone axe', "primitive_axe") }}, 
 {{link_to_route('item.view', 'wood axe', "ax") }}, 
 {{link_to_route('item.view', 'stone knife', "primitive_knife") }}, 
 {{link_to_route('item.search', 'survivor items', array("q"=>"survivor")) }},
-{{link_to_route('item.recipes', 'nearby fire', array("id"=>"fire")) }} 
-and 
-{{link_to_route('item.view', 'integrated toolset', "toolset") }}.
 </p>
 
 <p>

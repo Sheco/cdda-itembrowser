@@ -31,7 +31,7 @@
     Can be cut into: {{{ $item->cutResultAmount }}} <a href="{{ route('item.view', $item->cutResultItem->id) }}">{{ str_plural($item->cutResultItem->name) }}</a><br>
     @endif
     @if ($item->isResultOfCutting)
-    Can be obtained if you cut items made of <a href="{{ route('item.search', array('q'=>$item->materialToCut)) }}">{{{ $item->materialToCut }}}</a><br>
+    Can be obtained if you cut items made of <a href="{{ route('item.materials', $item->materialToCut) }}">{{{ $item->materialToCut }}}</a><br>
     @endif
     @if ($item->isAmmo)
     Damage: {{{ $item->damage }}}<br>

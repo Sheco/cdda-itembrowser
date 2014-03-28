@@ -1,4 +1,6 @@
 @section('content')
+<div class="row">
+  <div class="col-md-6">
 <h1>Item browser</h1>
 
 <p>
@@ -54,5 +56,5 @@ On the top bar, there are two links, stable and development, each one points to 
 <p>
 If you have any requests or if you find a bug, please let me know at <a href="mailto:sduran@estilofusion.com">sduran@estilofusion.com</a>
 </p>
-
+</div>
 @stop

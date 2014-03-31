@@ -35,6 +35,7 @@ To repair your armor and clothes, you can cut some
 <br>
 </p>
 
+<h2>There are two copies of the database</h2>
 <p>
 On the top bar, there are two links, stable and development, each one points to a copy of the database for the latest stable release and an up-to-date git master copy (updated nightly), respectively.
 </p>

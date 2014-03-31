@@ -4,19 +4,9 @@ class ItemsController extends Controller
 {
   protected $item;
   protected $repo;
-  protected $quality;
-  protected $material;
 
-  public function __construct(
-    Repositories\Item $item,
-    Repositories\Quality $quality,
-    Repositories\Material $material,
-    Repositories\Repository $repo
-  ) 
+  public function __construct(Repositories\RepositoryInterface $repo) 
   {
-    $this->item = $item;
-    $this->quality = $quality;
-    $this->material = $material;
     $this->repo = $repo;
   }
 
@@ -29,25 +19,25 @@ class ItemsController extends Controller
   public function search()
   {
     $search = Input::get('q');
-    $items = $this->item->where($search);
+    $items = $this->repo->searchObjects("Item", $search);
     return View::make('items.search', compact('items', 'search'));
   }
 
   public function view($id)
   {
-    $item = $this->item->getOrFail($id);
+    $item = $this->repo->getObjectOrFail("Item", $id);
     return View::make('items.view', compact('item'));
   }
 
   public function craft($id)
   {
-    $item = $this->item->getOrFail($id);
+    $item = $this->repo->getObjectOrFail("Item", $id);
     return View::make('items.craft', compact('item'));
   }
 
   public function recipes($id, $category="")
   {
-    $item = $this->item->getOrFail($id);
+    $item = $this->repo->getObjectOrFail("Item", $id);
     $categories = $item->toolCategories;
     if ($category=="" && $categories) 
       return Redirect::route("item.recipes", array($id, key($categories)));
@@ -59,13 +49,13 @@ class ItemsController extends Controller
 
   public function disassemble($id)
   {
-    $item = $this->item->getOrFail($id);
+    $item = $this->repo->getObjectOrFail("Item", $id);
     return View::make('items.disassemble', compact('item'));
   }
 
   public function armor($part)
   {
-    $items = $this->item->all("armor.$part");
+    $items = $this->repo->allObjects("Item", "armor.$part");
     $parts = array(
       "head"=>"Head",
       "eyes"=>"Eyes",
@@ -82,7 +72,7 @@ class ItemsController extends Controller
 
   public function gun($skill)
   {
-    $items = $this->item->all("gun.$skill");
+    $items = $this->repo->allObjects("Item", "gun.$skill");
     $skills = array(
       "archery"=>"Archery",
       "launcher"=>"Launchers",
@@ -97,7 +87,7 @@ class ItemsController extends Controller
 
   public function books($type="combat")
   {
-    $items = $this->item->all("book.$type");
+    $items = $this->repo->allObjects("Item", "book.$type");
     $types = array(
       "fun"=>"Just for fun",
       "range"=>"Ranged",
@@ -113,13 +103,13 @@ class ItemsController extends Controller
 
   public function melee()
   {
-    $items = $this->item->all("melee");
+    $items = $this->repo->allObjects("Item", "melee");
     return View::make('items.melee', compact('items'));
   }
 
   public function comestibles($type="drink")
   {
-    $items = $this->item->all("comestible.$type");
+    $items = $this->repo->allObjects("Item", "comestible.$type");
     $types = array(
       "drink"=>"Drinks",
       "food"=>"Food",
@@ -130,21 +120,21 @@ class ItemsController extends Controller
 
   public function qualities($id=null)
   {
-    $qualities = $this->quality->all("qualities");
-    $items = $id? $this->item->all("quality.$id"): array();
+    $qualities = $this->repo->allObjects("Quality", "qualities");
+    $items = $id? $this->repo->allObjects("Item", "quality.$id"): array();
     return View::make('items.qualities', compact('items', 'qualities', 'id'));
   }
 
   public function materials($id=null)
   {
-    $materials = $this->material->all("materials");
-    $items = $id? $this->item->all("material.$id"): array();
+    $materials = $this->repo->allObjects("Material", "materials");
+    $items = $id? $this->repo->allObjects("Item", "material.$id"): array();
     return View::make('items.materials', compact('items', 'materials', 'id'));
   }
 
   public function sitemap()
   {
-    $items = $this->item->all();
+    $items = $this->repo->allObjects("Item");
     return View::make('items.sitemap', compact('items'));
   }
 }

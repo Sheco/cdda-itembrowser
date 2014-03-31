@@ -6,6 +6,9 @@ class Quality
   protected $database;
   protected $repo;
 
+  const DEFAULT_INDEX = "tool_quality";
+  const ID_FIELD = "id";
+
   public function __construct(RepositoryInterface $repo)
   {
     $this->repo = $repo;
@@ -18,30 +21,12 @@ class Quality
   {
     if ($object->type=="tool_quality")
     {
-      $repo->addIndex("tool_quality", $object->id, $object->repo_id);
+      $repo->addIndex(self::DEFAULT_INDEX, $object->id, $object->repo_id);
     }
   }
 
-  public function get($id)
+  public function model()
   {
-    $quality = \App::make('Quality');
-    $data = $this->repo->get("tool_quality", $id);
-    if ($data)
-      $quality->load($data);
-    return $quality;
-  }
-
-  public function where($text)
-  {
-    throw new Exception(); // not implemented
-  }
-
-  public function all($name)
-  {
-    $ret = array();
-    foreach($this->repo->all($name) as $id=>$item) {
-      $ret[$id] = $this->get($id);
-    }
-    return $ret;
+    return \App::make("Quality");
   }
 }

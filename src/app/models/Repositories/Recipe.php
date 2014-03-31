@@ -4,6 +4,10 @@ namespace Repositories;
 class Recipe
 {
   protected $repo;
+
+  const DEFAULT_INDEX = "recipe";
+  const ID_FIELD = "repo_id";
+
   public function __construct(RepositoryInterface $repo)
   {
     $this->repo = $repo;
@@ -20,9 +24,9 @@ class Recipe
 
   private function finishLoading($repo)
   {
-    foreach($repo->all('recipe') as $id)
+    foreach($repo->all(self::DEFAULT_INDEX) as $id)
     {
-      $recipe = $repo->get("recipe", $id);
+      $recipe = $repo->get(self::DEFAULT_INDEX, $id);
       // search for all the items with the apropiate qualities
       if (isset($recipe->qualities)) {
         foreach ($recipe->qualities as $group) {
@@ -74,7 +78,7 @@ class Recipe
     if ($object->type=="recipe") {
       $recipe = $object;
 
-      $repo->addIndex("recipe", $recipe->repo_id, $recipe->repo_id);
+      $repo->addIndex(self::DEFAULT_INDEX, $recipe->repo_id, $recipe->repo_id);
 
       if (isset($recipe->result)) {
         $this->linkIndexes($repo, "recipes", $recipe->result, $recipe);
@@ -105,26 +109,8 @@ class Recipe
     }
   }
 
-  // locate and return a recipe object.
-  public function get($id)
+  public function model()
   {
-    $recipe = \App::make('Recipe');
-    $recipe->load($this->repo->get("recipe", $id));
-    return $recipe;  
-  }
-
-  public function where($text)
-  {
-    throw new Exception();
-  }
-
-  // returns a list with every recipe object.
-  public function all($index="recipe")
-  {
-    $ret = array();
-    foreach($this->repo->all($index) as $id=>$recipe) {
-      $ret[$id] = $this->get($id);
-    }
-    return $ret;
+    return \App::make("Recipe");
   }
 }

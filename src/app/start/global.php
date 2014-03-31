@@ -84,10 +84,10 @@ require app_path().'/filters.php';
 
 $app->singleton('Repositories\RepositoryReaderInterface', 'Repositories\CompiledReader');
 $app->singleton('Repositories\Recipe', 'Repositories\Recipe');
-$app->singleton('Repositories\Item', 'Repositories\ItemCache');
+$app->singleton('Repositories\Item', 'Repositories\Item');
 $app->singleton('Repositories\Material', 'Repositories\Material');
 $app->singleton('Repositories\Quality', 'Repositories\Quality');
-$app->singleton('Repositories\RepositoryInterface', 'Repositories\Repository');
+$app->singleton('Repositories\RepositoryInterface', 'Repositories\RepositoryCache');
 
 // create an instance of each repository, so they register their listeners.
 App::make('Repositories\Recipe');

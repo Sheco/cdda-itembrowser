@@ -6,6 +6,9 @@ class Material
   protected $database;
   protected $repo;
 
+  const DEFAULT_INDEX = "materials";
+  const ID_FIELD = "ident";
+
   public function __construct(RepositoryInterface $repo)
   {
     $this->repo = $repo;
@@ -17,30 +20,12 @@ class Material
   private function getIndexes($repo, $object)
   {
     if ($object->type=="material") {
-      $repo->addIndex("materials", $object->ident, $object->repo_id);
+      $repo->addIndex(self::DEFAULT_INDEX, $object->ident, $object->repo_id);
     }
   }
 
-  public function get($id)
+  public function model()
   {
-    $material = \App::make('Material');
-    $data = $this->repo->get("materials", $id);
-    if ($data)
-      $material->load($data);
-    return $material;
-  }
-
-  public function where($text)
-  {
-    throw new Exception(); // not implemented
-  }
-
-  public function all($name)
-  {
-    $ret = array();
-    foreach($this->repo->all($name) as $id=>$item) {
-      $ret[$id] = $this->get($id);
-    }
-    return $ret;
+    return \App::make("Material");
   }
 }

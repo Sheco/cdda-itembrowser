@@ -8,6 +8,9 @@ class Item
   protected $repo;
   protected $types;
 
+  const DEFAULT_INDEX="item";
+  const ID_FIELD="id";
+
   public function __construct(RepositoryInterface $repo)
   {
     $this->repo = $repo;
@@ -66,7 +69,7 @@ class Item
 
   private function finishLoading($repo)
   {
-    foreach ($repo->all("item") as $id=>$item) {
+    foreach ($repo->all(self::DEFAULT_INDEX) as $id=>$item) {
       $recipes = count($repo->all("item.toolFor.$id"));
       $repo->addIndex("item.count.$id", "toolFor", $recipes);
 
@@ -87,7 +90,7 @@ class Item
     if (!isset($this->types[$object->type]))
       return;
 
-    $repo->addIndex("item", $object->id, $object->repo_id);
+    $repo->addIndex(self::DEFAULT_INDEX, $object->id, $object->repo_id);
 
     // nearby fire and integrated toolset are "virtual" items
     // they don't have anything special.
@@ -148,45 +151,8 @@ class Item
     }
   }
 
-  public function get($id)
+  public function model()
   {
-    $item = \App::make('Item');
-    $data = $this->repo->get("item", $id);
-    $item->load($data?:
-      json_decode('{"id":"'.$id.'","name":"'.$id.'?","type":"invalid"}')
-    );
-    return $item;
-  }
-
-  public function getOrFail($id)
-  {
-    $item = $this->get($id);
-    if($item->type=="invalid")
-      throw new ModelNotFoundException;
-    return $item;
-  }
-
-  public function where($text)
-  {
-    \Log::info("searching for $text...");
-
-    $results = array();
-    if (!$text)
-      return $results;
-    foreach($this->all() as $item) {
-      if ($item->matches($text)) {
-        $results[] = $item;
-      }
-    }
-    return $results;
-  }
-
-  public function all($name="item")
-  {
-    $ret = array();
-    foreach($this->repo->all($name) as $id=>$item) {
-      $ret[$id] = $this->get($id);
-    }
-    return $ret;
+    return \App::make("Item");
   }
 }

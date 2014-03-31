@@ -5,10 +5,6 @@ class Item implements Robbo\Presenter\PresentableInterface
   use MagicModel;
 
   protected $data;
-  protected $recipe;
-  protected $item;
-  protected $material;
-  protected $quality;
   protected $repo;
 
   private $cut_pairs = array(
@@ -20,18 +16,8 @@ class Item implements Robbo\Presenter\PresentableInterface
       "wood"=>"skewer"
     );
 
-  public function __construct(
-    Repositories\Recipe $recipe, 
-    Repositories\Material $material, 
-    Repositories\Item $item,
-    Repositories\Quality $quality,
-    Repositories\Repository $repo
-  )
+  public function __construct(Repositories\RepositoryInterface $repo)
   {
-    $this->recipe = $recipe;
-    $this->material = $material;
-    $this->item = $item;
-    $this->quality = $quality;
     $this->repo = $repo;
   }
 
@@ -53,6 +39,12 @@ class Item implements Robbo\Presenter\PresentableInterface
       $data->qualities = array();
 
     $this->data = $data;
+  }
+
+  public function loadDefault($id)
+  {
+    $data = json_decode('{"id":"'.$id.'","name":"'.$id.'?","type":"invalid"}');
+    $this->load($data);
   }
 
   public function getColor()
@@ -84,17 +76,17 @@ class Item implements Robbo\Presenter\PresentableInterface
 
   public function getRecipes()
   {
-    return $this->recipe->all("item.recipes.{$this->data->id}");
+    return $this->repo->allObjects("Recipe", "item.recipes.{$this->data->id}");
   }
 
   public function getDisassembly()
   {
-    return $this->recipe->all("item.disassembly.{$this->id}");
+    return $this->repo->allObjects("Recipe", "item.disassembly.{$this->id}");
   }
 
   public function getToolFor()
   {
-    return $this->recipe->all("item.toolFor.$this->id");
+    return $this->repo->allObjects("Item", "item.toolFor.$this->id");
   }
 
   public function count($type)
@@ -110,12 +102,12 @@ class Item implements Robbo\Presenter\PresentableInterface
 
   public function getToolForCategory($category)
   {
-    return $this->recipe->all("item.toolForCategory.{$this->data->id}.$category");
+    return $this->repo->allObjects("Recipe", "item.toolForCategory.{$this->data->id}.$category");
   }
 
   public function getLearn()
   {
-    return $this->recipe->all("item.learn.{$this->data->id}");
+    return $this->repo->allObjects("Recipe", "item.learn.{$this->data->id}");
   }
 
   public function getIsArmor()
@@ -208,12 +200,12 @@ class Item implements Robbo\Presenter\PresentableInterface
 
   public function getMaterial1()
   {
-    return $this->material->get($this->data->material[0]);
+    return $this->repo->getObject("Material", $this->data->material[0]);
   }
 
   public function getMaterial2()
   {
-    return $this->material->get($this->data->material[1]);
+    return $this->repo->getObject("Material", $this->data->material[1]);
   }
 
   public function getCanBeCut()
@@ -227,7 +219,7 @@ class Item implements Robbo\Presenter\PresentableInterface
   {
     $material = $this->material1->ident;
     $count = $material=="wood"? 2: 1;
-    return array($this->volume*$count, $this->item->get($this->cut_pairs[$material]));
+    return array($this->volume*$count, $this->repo->getObject("Item", $this->cut_pairs[$material]));
   }
 
   public function getIsResultOfCutting()
@@ -243,7 +235,7 @@ class Item implements Robbo\Presenter\PresentableInterface
 
   public function getAmmoTypes()
   {
-    return $this->item->all("ammo.$this->ammo");
+    return $this->repo->allObjects("Item", "ammo.$this->ammo");
   }
 
   public function isMadeOf($material)
@@ -274,7 +266,7 @@ class Item implements Robbo\Presenter\PresentableInterface
   {
     return array_map(function ($quality) {
       return array(
-        "quality"=>$this->quality->get($quality[0]),
+        "quality"=>$this->repo->getObject("Quality", $quality[0]),
         "level"=>$quality[1]
       );
     }, $this->data->qualities);

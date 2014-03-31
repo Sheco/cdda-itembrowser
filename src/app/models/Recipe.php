@@ -5,16 +5,11 @@ class Recipe implements Robbo\Presenter\PresentableInterface
   use MagicModel;
 
   protected $data;
-  protected $item;
-  protected $quality;
+  protected $repo;
 
-  public function __construct(
-    Repositories\Item $item,
-    Repositories\Quality $quality
-  )
+  public function __construct(Repositories\RepositoryInterface $repo)
   {
-    $this->item = $item;
-    $this->quality = $quality;
+    $this->repo = $repo;
   }
 
   public function load($data)
@@ -41,7 +36,7 @@ class Recipe implements Robbo\Presenter\PresentableInterface
 
   public function getResult()
   {
-    return $this->item->get($this->data->result);
+    return $this->repo->getObject("Item", $this->data->result);
   }
 
   public function getHasTools()
@@ -59,7 +54,7 @@ class Recipe implements Robbo\Presenter\PresentableInterface
     return array_map(function($group) {
       return array_map(function($tool) {
         list($id, $amount) = $tool;
-        return array($this->item->get($id), $amount);
+        return array($this->repo->getObject("Item", $id), $amount);
       }, $group);
     }, $this->data->tools);
   }
@@ -69,7 +64,7 @@ class Recipe implements Robbo\Presenter\PresentableInterface
     return array_map(function($group) {
       return array_map(function($component) {
         list($id, $amount) = $component;
-        return array($this->item->get($id), $amount);
+        return array($this->repo->getObject("Item", $id), $amount);
       }, $group);
     }, $this->data->components);
   }
@@ -82,7 +77,7 @@ class Recipe implements Robbo\Presenter\PresentableInterface
   public function getBooksTeaching()
   {
     return array_map(function ($book) {
-      return array($this->item->get($book[0]), $book[1]);
+      return array($this->repo->getObject("Item", $book[0]), $book[1]);
     }, $this->data->book_learn);
   }
 
@@ -95,7 +90,7 @@ class Recipe implements Robbo\Presenter\PresentableInterface
   {
     return array_map(function ($quality) {
       return array(
-        "quality"=>$this->quality->get($quality->id),
+        "quality"=>$this->repo->getObject("Quality", $quality->id),
         "level"=>$quality->level,
         "amount"=>$quality->amount
       );

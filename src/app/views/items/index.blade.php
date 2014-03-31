@@ -8,7 +8,8 @@ Version: {{{ $version }}}
 </p>
 
 <p>
-This is a simple tool to browse through the items and recipes available in <a href="http://en.cataclysmdda.com">Cataclysm: Dark Days Ahead</a>.
+This is a simple tool to browse through the items and recipes available in <a href="http://en.cataclysmdda.com">Cataclysm: Dark Days Ahead</a>,
+this is done by reading the game's data files and creating an optimized database linking everything together.
 </p>
 
 <p>

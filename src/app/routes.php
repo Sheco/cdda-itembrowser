@@ -91,7 +91,13 @@ Route::group(array('after'=>'theme:layouts.bootstrap'), function () {
   )
     ->where('id', '[A-Za-z0-9_-]+');
 
-  Route::get('/{id}/recipes/{category?}', array(
+  Route::get('/{id}/recipes', array(
+      'as'=>'item.recipesProxy',
+      'uses'=>'ItemsController@recipesProxy')
+  )
+  ->where('id', '[A-Za-z0-9_-]+');
+
+  Route::get('/{id}/recipes/{category}', array(
       'as'=>'item.recipes',
       'uses'=>'ItemsController@recipes')
   )

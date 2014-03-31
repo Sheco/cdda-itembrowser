@@ -33,6 +33,17 @@
     @if ($item->isResultOfCutting)
     Can be obtained if you cut items made of <a href="{{ route('item.materials', $item->materialToCut) }}">{{{ $item->materialToCut }}}</a><br>
     @endif
+
+    @if ($item->count("disassembledFrom"))
+    Can be obtained when disassembling: 
+    @foreach($item->disassembledFrom as $recipe)
+    {{ link_to_route("item.disassemble", $recipe->result->name, $recipe->result->id) }},
+    @endforeach
+    <br>
+    --
+    <br>
+    @endif
+
     @if ($item->isAmmo)
     Damage: {{{ $item->damage }}}<br>
     Armor-pierce: {{{ $item->pierce }}}<br>

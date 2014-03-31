@@ -84,6 +84,11 @@ class Item implements Robbo\Presenter\PresentableInterface
     return $this->repo->allObjects("Recipe", "item.disassembly.{$this->id}");
   }
 
+  public function getDisassembledFrom()
+  {
+    return $this->repo->allObjects("Recipe", "item.disassembledFrom.$this->id");
+  }
+
   public function getToolFor()
   {
     return $this->repo->allObjects("Item", "item.toolFor.$this->id");

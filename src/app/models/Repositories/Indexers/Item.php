@@ -78,6 +78,9 @@ class Item
 
       $recipes = count($repo->all("item.disassembly.$id"));
       $repo->addIndex("item.count.$id", "disassembly", $recipes);
+
+      $recipes = count($repo->all("item.disassembledFrom.$id"));
+      $repo->addIndex("item.count.$id", "disassembledFrom", $recipes);
     }
   }
 

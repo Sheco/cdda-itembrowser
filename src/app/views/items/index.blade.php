@@ -18,12 +18,21 @@ Crafting could be as simple as looking at your hammer and being able to know wha
 <p>
 <h2>Common useful items</h2>
 {{link_to_route('item.recipes', 'nearby fire', array("id"=>"fire")) }},
-{{link_to_route('item.view', 'integrated toolset', "toolset") }},
-{{link_to_route('item.view', 'stone hammer', "primitive_hammer") }}, 
-{{link_to_route('item.view', 'stone axe', "primitive_axe") }}, 
-{{link_to_route('item.view', 'wood axe', "ax") }}, 
-{{link_to_route('item.view', 'stone knife', "primitive_knife") }}, 
-{{link_to_route('item.search', 'survivor items', array("q"=>"survivor")) }},
+{{link_to_route('item.view', 'integrated toolset', "toolset") }}.<br>
+<br>
+To repair your armor and clothes, you can cut some 
+{{ link_to_route("item.materials", "items made of wood", "wood") }} 
+ to obtain 
+{{ link_to_route("item.view", "skewers", "skewer") }}, 
+ with that you can 
+{{ link_to_route("item.craft", "craft a wooden needle", "needle_wood") }}, 
+ then you need 
+{{ link_to_route("item.view", "thread", "thread") }}
+ so you will have to 
+{{ link_to_route("item.disassemble", "disassemble a rag", "rag") }}, 
+ which can be obtained by cutting 
+{{ link_to_route("item.materials", "items made of cotton", "cotton") }}.
+<br>
 </p>
 
 <p>

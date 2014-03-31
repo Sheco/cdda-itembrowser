@@ -17,8 +17,7 @@ Crafting could be as simple as looking at your hammer and being able to know wha
 
 <p>
 <h2>Common useful items</h2>
-{{link_to_route('item.recipes', 'nearby fire', array("id"=>"fire")) }},
-{{link_to_route('item.view', 'integrated toolset', "toolset") }}.<br>
+It's always nice to make a {{link_to_route('item.recipes', 'fire', array("id"=>"fire")) }}. There are lots of things you can do with an {{link_to_route('item.view', 'integrated toolset', "toolset") }}.<br>
 <br>
 To repair your armor and clothes, you can cut some 
 {{ link_to_route("item.materials", "items made of wood", "wood") }} 

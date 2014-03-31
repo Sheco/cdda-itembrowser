@@ -5,16 +5,13 @@ use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 class Item
 {
-  protected $repo;
   protected $types;
 
   const DEFAULT_INDEX="item";
   const ID_FIELD="id";
 
-  public function __construct(RepositoryInterface $repo)
+  public function __construct()
   {
-    $this->repo = $repo;
-
     // this is a hash with the valid item types
     $this->types = array_flip(array(
       "AMMO", "GUN", "ARMOR", "TOOL", "TOOL_ARMOR", "BOOK", "COMESTIBLE",

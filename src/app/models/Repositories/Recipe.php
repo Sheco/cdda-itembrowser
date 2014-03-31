@@ -3,15 +3,11 @@ namespace Repositories;
 
 class Recipe
 {
-  protected $repo;
-
   const DEFAULT_INDEX = "recipe";
   const ID_FIELD = "repo_id";
 
-  public function __construct(RepositoryInterface $repo)
+  public function __construct()
   {
-    $this->repo = $repo;
-
     \Event::listen("cataclysm.newObject", function ($repo, $object) {
       $this->getIndexes($repo, $object);
     });

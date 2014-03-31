@@ -4,14 +4,12 @@ namespace Repositories;
 class Quality
 {
   protected $database;
-  protected $repo;
 
   const DEFAULT_INDEX = "tool_quality";
   const ID_FIELD = "id";
 
-  public function __construct(RepositoryInterface $repo)
+  public function __construct()
   {
-    $this->repo = $repo;
     \Event::listen("cataclysm.newObject", function ($repo, $object) {
       $this->getIndexes($repo, $object);
     });

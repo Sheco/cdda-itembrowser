@@ -4,14 +4,12 @@ namespace Repositories;
 class Material
 {
   protected $database;
-  protected $repo;
 
   const DEFAULT_INDEX = "materials";
   const ID_FIELD = "ident";
 
-  public function __construct(RepositoryInterface $repo)
+  public function __construct()
   {
-    $this->repo = $repo;
     \Event::listen("cataclysm.newObject", function ($repo, $object) {
       $this->getIndexes($repo, $object);
     });

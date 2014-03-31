@@ -1,5 +1,5 @@
 <?php
-namespace Repositories;
+namespace Repositories\Indexers;
 
 class Recipe
 {

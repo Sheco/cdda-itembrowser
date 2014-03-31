@@ -1,12 +1,12 @@
 <?php
-namespace Repositories;
+namespace Repositories\Indexers;
 
-class Material
+class Quality
 {
   protected $database;
 
-  const DEFAULT_INDEX = "materials";
-  const ID_FIELD = "ident";
+  const DEFAULT_INDEX = "tool_quality";
+  const ID_FIELD = "id";
 
   public function __construct()
   {
@@ -17,13 +17,14 @@ class Material
 
   private function getIndexes($repo, $object)
   {
-    if ($object->type=="material") {
-      $repo->addIndex(self::DEFAULT_INDEX, $object->ident, $object->repo_id);
+    if ($object->type=="tool_quality")
+    {
+      $repo->addIndex(self::DEFAULT_INDEX, $object->id, $object->repo_id);
     }
   }
 
   public function model()
   {
-    return \App::make("Material");
+    return \App::make("Quality");
   }
 }

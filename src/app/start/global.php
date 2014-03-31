@@ -83,14 +83,14 @@ App::down(function()
 require app_path().'/filters.php';
 
 $app->singleton('Repositories\RepositoryReaderInterface', 'Repositories\CompiledReader');
-$app->singleton('Repositories\Recipe', 'Repositories\Recipe');
-$app->singleton('Repositories\Item', 'Repositories\Item');
-$app->singleton('Repositories\Material', 'Repositories\Material');
-$app->singleton('Repositories\Quality', 'Repositories\Quality');
+$app->singleton('Repositories\Indexers\Recipe', 'Repositories\Indexers\Recipe');
+$app->singleton('Repositories\Indexers\Item', 'Repositories\Indexers\Item');
+$app->singleton('Repositories\Indexers\Material', 'Repositories\Indexers\Material');
+$app->singleton('Repositories\Indexers\Quality', 'Repositories\Indexers\Quality');
 $app->singleton('Repositories\RepositoryInterface', 'Repositories\RepositoryCache');
 
 // create an instance of each repository, so they register their listeners.
-App::make('Repositories\Recipe');
-App::make('Repositories\Item');
-App::make('Repositories\Material');
-App::make('Repositories\Quality');
+App::make('Repositories\Indexers\Recipe');
+App::make('Repositories\Indexers\Item');
+App::make('Repositories\Indexers\Material');
+App::make('Repositories\Indexers\Quality');

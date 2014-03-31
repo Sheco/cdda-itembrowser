@@ -40,7 +40,7 @@ class Repository implements RepositoryInterface
 
   public function getObjectOrFail($repo, $id)
   {
-    $repo = \App::make("Repositories\\$repo");
+    $repo = \App::make("Repositories\\Indexers\\$repo");
     $data = $this->get($repo::DEFAULT_INDEX, $id);
     $model = $repo->model();
     if (!$data) {
@@ -52,7 +52,7 @@ class Repository implements RepositoryInterface
 
   public function getObject($repo, $id)
   {
-    $repo = \App::make("Repositories\\$repo");
+    $repo = \App::make("Repositories\\Indexers\\$repo");
     $data = $this->get($repo::DEFAULT_INDEX, $id);
     $model = $repo->model();
     if (!$data) {
@@ -66,7 +66,7 @@ class Repository implements RepositoryInterface
   public function allObjects($repo, $index=null)
   {
     if (!$index) {
-      $repoInstance = \App::make("Repositories\\$repo");
+      $repoInstance = \App::make("Repositories\\Indexers\\$repo");
       $index = $repoInstance::DEFAULT_INDEX;
     }
 

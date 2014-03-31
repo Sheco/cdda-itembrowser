@@ -1,5 +1,5 @@
 <?php 
-namespace Repositories;
+namespace Repositories\Indexers;
 
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 

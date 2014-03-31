@@ -15,7 +15,7 @@ class RepositoryCache extends Repository
 
     $expiration = \Config::get("cataclysm.searchCacheExpiration");
 
-    $repoInstance = \App::make("Repositories\\$repo");
+    $repoInstance = \App::make("Repositories\\Indexers\\$repo");
     $idField = $repoInstance::ID_FIELD;
 
     $objects = \Cache::remember($key, $expiration, function () use ($repo, $search, $idField) {

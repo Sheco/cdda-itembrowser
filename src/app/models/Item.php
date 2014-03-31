@@ -285,4 +285,9 @@ class Item implements Robbo\Presenter\PresentableInterface
       }
     }
   }
+
+  public function getSlug()
+  {
+    return str_replace(" ", "_", $this->data->name);
+  }
 }

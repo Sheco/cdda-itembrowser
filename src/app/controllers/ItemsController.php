@@ -138,6 +138,13 @@ class ItemsController extends Controller
     return View::make('items.materials', compact('items', 'materials', 'id'));
   }
 
+
+  public function wiki($id)
+  {
+    $item = $this->repo->getObjectOrFail("Item", $id);
+    return Redirect::to("http://www.wiki.cataclysmdda.com/index.php?title=$item->slug");
+  }
+
   public function sitemap()
   {
     $items = $this->repo->allObjects("Item");

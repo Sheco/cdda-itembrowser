@@ -82,6 +82,10 @@ Route::group(array('after'=>'theme:layouts.bootstrap'), function () {
         "route"=>"item.disassemble",
         "label"=>"Disassemble",
       ),
+      "wiki"=>array(
+        "route"=>"item.wiki",
+        "label"=>"Wiki"
+      ),
     ));
   });
 
@@ -116,6 +120,11 @@ Route::group(array('after'=>'theme:layouts.bootstrap'), function () {
   )
     ->where('id', '[A-Za-z0-9_-]+');
 
+  Route::get('/{id}/wiki', array(
+      'as'=>'item.wiki',
+      'uses'=>'ItemsController@wiki')
+  )
+    ->where('id', '[A-Za-z0-9_-]+');
 });
 
 Route::get('/sitemap.xml', 'ItemsController@sitemap');

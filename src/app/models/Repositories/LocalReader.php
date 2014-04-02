@@ -17,6 +17,27 @@ class LocalReader implements RepositoryReaderInterface
     $this->database[$object->repo_id] = $object;
   }
 
+  private function modDirectory($path, $id)
+  {
+    $mods = array_filter(glob("$path/data/mods/*"), "is_dir");
+    foreach ($mods as $mod) {
+      $modinfo = json_decode(file_get_contents("$mod/modinfo.json"));
+      if ($modinfo->ident == $id)
+        return $mod;
+    }
+  }
+
+  private function dataPaths($path)
+  {
+    $default_mods_data = json_decode(file_get_contents("$path/data/mods/dev-default-mods.json"));
+    $paths = array("$path/data/json");
+
+    foreach ($default_mods_data->dependencies as $mod) {
+      $paths[] = $this->modDirectory($path, $mod);
+    }
+    return $paths;
+  }
+
   public function read($path=null)
   {
     \Log::info("Reading data files...");
@@ -27,10 +48,17 @@ class LocalReader implements RepositoryReaderInterface
     $this->id = 0;
     $this->index = array();
 
-    $it = new \RecursiveDirectoryIterator("$path/data/json");
-    foreach(new \RecursiveIteratorIterator($it) as $file) {
-      $data = (array) json_decode(file_get_contents($file));
-      array_walk($data, array($this, 'newObject'));
+    $paths = $this->dataPaths($path);
+
+    foreach ($paths as $path) {
+      $it = new \RecursiveDirectoryIterator($path);
+      foreach(new \RecursiveIteratorIterator($it) as $file) {
+        $data = (array) json_decode(file_get_contents($file));
+
+        if(substr($file, -12)!="modinfo.json") {        
+          array_walk($data, array($this, 'newObject'));
+        }
+      }
     }
 
     if (!$this->get("item", "toolset")) {

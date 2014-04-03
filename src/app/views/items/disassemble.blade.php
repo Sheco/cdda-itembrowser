@@ -40,6 +40,7 @@
   --<br>
 <br>
 @endforeach
+  Note: Components obtained yield only one component per group, if the item was crafted, it yields the component used, otherwise it yields the first component.<br>
 </div>
 
 </div>

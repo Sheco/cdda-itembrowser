@@ -101,10 +101,9 @@ class Recipe
             $this->linkIndexes($repo, "toolFor", $id, $recipe);
 
             if($recipe->category=="CC_NONCRAFT" 
-              and isset($recipe->reversible)
-              and $recipe->reversible=="true")
+              or (isset($recipe->reversible)
+              and $recipe->reversible=="true"))
             {           
-
               $repo->addIndex("item.disassembledFrom.$id", $recipe->repo_id, $recipe->repo_id);
             }
           }

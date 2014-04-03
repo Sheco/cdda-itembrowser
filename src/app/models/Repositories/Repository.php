@@ -41,11 +41,13 @@ class Repository implements RepositoryInterface
   public function getObjectOrFail($repo, $id)
   {
     $repo = \App::make("Repositories\\Indexers\\$repo");
+
     $data = $this->get($repo::DEFAULT_INDEX, $id);
-    $model = $repo->model();
     if (!$data) {
       throw new ModelNotFoundException;      
     }
+
+    $model = $repo->model();
     $model->load($data);
     return $model;
   }
@@ -53,13 +55,17 @@ class Repository implements RepositoryInterface
   public function getObject($repo, $id)
   {
     $repo = \App::make("Repositories\\Indexers\\$repo");
+
     $data = $this->get($repo::DEFAULT_INDEX, $id);
+
     $model = $repo->model();
+
     if (!$data) {
       $model->loadDefault($id);
     } else {
       $model->load($data);
     }
+
     return $model;
   }
 
@@ -93,7 +99,6 @@ class Repository implements RepositoryInterface
       }
     }
     return $results;
-
   }
 
   public function version()

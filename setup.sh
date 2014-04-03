@@ -14,14 +14,15 @@ DATA_PATH=$1
 cd "$BASE_PATH"
 # make storage paths
 mkdir -p "$DATA_PATH"/vendor
-for dir in cache logs meta sessions views
+for dir in cache logs meta sessions views database
 do mkdir -p "$DATA_PATH"/storage/$dir
 done
 chmod -R g+w "$DATA_PATH"
 
 # download the cataclysm dda's source code
 [ ! -e master.zip ] && wget https://github.com/CleverRaven/Cataclysm-DDA/archive/master.zip
-unzip -d "$DATA_PATH" master.zip
+unzip -d "$DATA_PATH/storage" master.zip
+mv "$DATA_PATH/storage/Cataclysm-DDA-master" "$DATA_PATH/storage/Cataclysm-DDA"
 
 # edit some files, set the appropiate paths
 sed -i "s@require\s\+.*vendor/autoload.php.*@require '$DATA_PATH/vendor/autoload.php';@" src/bootstrap/autoload.php
@@ -35,6 +36,7 @@ sed -i "s@\"vendor-dir\"\s*:\s*\"[^\"]*\"@\"vendor-dir\": \"$DATA_PATH/vendor\"@
 cd src
 rm -f composer.lock
 composer install
+php artisan cataclysm:rebuild
 )
 
 echo "--------------------------"

@@ -50,8 +50,8 @@ class LocalReader implements RepositoryReaderInterface
 
     $paths = $this->dataPaths($path);
 
-    foreach ($paths as $path) {
-      $it = new \RecursiveDirectoryIterator($path);
+    foreach ($paths as $currPath) {
+      $it = new \RecursiveDirectoryIterator($currPath);
       foreach(new \RecursiveIteratorIterator($it) as $file) {
         $data = (array) json_decode(file_get_contents($file));
 

@@ -10,7 +10,7 @@ class RepositoryCache extends Repository
 
   public function searchObjects($repo, $search) 
   {
-    $key = "search2:$repo:".str_replace(" ", "!", $search);
+    $key = "search:$repo:".str_replace(" ", "!", $search);
 
     $expiration = \Config::get("cataclysm.searchCacheExpiration");
 

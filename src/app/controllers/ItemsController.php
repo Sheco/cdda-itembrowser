@@ -50,6 +50,10 @@ class ItemsController extends Controller
     $categories = $item->toolCategories;
     $recipes = $item->getToolForCategory($category);
 
+    usort($recipes, function($a, $b) {
+      return $a->difficulty-$b->difficulty;
+    });
+
     return View::make('items.recipes', compact('item', "category", "recipes", "categories"));
   }
 

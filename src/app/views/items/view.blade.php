@@ -64,7 +64,7 @@
     <br>
     @if($item->isGun)
     Ammunition: {{{ $item->clip_size }}} rounds of:<br>
-    <table class="table" style="width: 300px">
+    <table>
       <tr>
         <th>Ammo</th>
         <th>Damage</th>

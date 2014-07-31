@@ -295,6 +295,10 @@ class Item implements Robbo\Presenter\PresentableInterface
   {
     if(!$this->isGun)
       return 0;
+
+    if(in_array($ammo->ammo_type, array('bolt', 'arrow', 'pebble', 'fishspear', 'dart')))
+      return 0;
+
     $ret = $ammo->damage;
     $ret *= 0.8;
     if($ret>5) $ret+=20;

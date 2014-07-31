@@ -290,4 +290,15 @@ class Item implements Robbo\Presenter\PresentableInterface
   {
     return str_replace(" ", "_", $this->data->name);
   }
+
+  public function noise($ammo)
+  {
+    if(!$this->isGun)
+      return 0;
+    $ret = $ammo->damage;
+    $ret *= 0.8;
+    if($ret>5) $ret+=20;
+    $ret *= 1.5;
+    return $ret;
+  }
 }

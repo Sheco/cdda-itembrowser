@@ -56,12 +56,28 @@
 
     Maximum {{ $item->max_charges }} charges
     @if ($item->ammo!="NULL")
-    of: {{ $item->ammoTypes }}
+    of: @foreach($item->ammoTypes as $ammo)
+      <a href="{{ route("item.view", $ammo->id) }}">{{$ammo->name}}</a>,
+    @endforeach
     @endif
     @endif
     <br>
     @if($item->isGun)
-    Ammunition: {{{ $item->clip_size }}} rounds of {{ $item->ammoTypes }}<br>
+    Ammunition: {{{ $item->clip_size }}} rounds of:<br>
+    <table class="table" style="width: 300px">
+      <tr>
+        <th>Ammo</th>
+        <th>Damage</th>
+        <th>Noise</th>
+      </tr>
+    @foreach($item->ammoTypes as $ammo)
+    <tr>
+      <td><a href="{{ route("item.view", $ammo->id) }}">{{$ammo->name}}</a></td>
+      <td class="text-right">{{ $ammo->damage }}</td>
+      <td class="text-right">{{ $item->noise($ammo) }}</td>
+    </tr>
+    @endforeach
+    </table>
     Damage: {{{ $item->ranged_damage }}}<br>
     Range: {{{ $item->range }}}<br>
     Armor-pierce: {{{ $item->pierce }}}<br>

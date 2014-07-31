@@ -68,8 +68,8 @@
       <thead>
       <tr>
         <th>Ammo</th>
-        <th>Damage</th>
-        <th>Noise</th>
+        <th class="text-right">Dmg</th>
+        <th style="width: 4em" class="text-right">Noise</th>
       </tr>
       </thead>
     @foreach($item->ammoTypes as $ammo)

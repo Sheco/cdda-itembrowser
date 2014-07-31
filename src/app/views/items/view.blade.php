@@ -64,12 +64,14 @@
     <br>
     @if($item->isGun)
     Ammunition: {{{ $item->clip_size }}} rounds of:<br>
-    <table>
+    <table class="tablesorter">
+      <thead>
       <tr>
         <th>Ammo</th>
         <th>Damage</th>
         <th>Noise</th>
       </tr>
+      </thead>
     @foreach($item->ammoTypes as $ammo)
     <tr>
       <td><a href="{{ route("item.view", $ammo->id) }}">{{$ammo->name}}</a></td>
@@ -174,4 +176,11 @@
 
   </div>
 </div>
+<script>
+$(function() {
+  $(".tablesorter").tablesorter({
+    sortList: [[1,0]]
+  });
+}); 
+</script>
 @stop

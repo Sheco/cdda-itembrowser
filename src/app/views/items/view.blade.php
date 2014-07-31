@@ -74,7 +74,7 @@
     <tr>
       <td><a href="{{ route("item.view", $ammo->id) }}">{{$ammo->name}}</a></td>
       <td class="text-right">{{ $ammo->damage }}</td>
-      <td class="text-right">{{ $item->noise($ammo) }}</td>
+      <td class="text-right">{{ round($item->noise($ammo)) }}</td>
     </tr>
     @endforeach
     </table>

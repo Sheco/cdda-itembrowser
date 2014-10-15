@@ -6,7 +6,7 @@ Skills - Cataclysm: Dark Days Ahead
   <div class="col-md-3">
 <ul class="nav nav-pills nav-stacked">
 @foreach($skills as $key=>$skill)
-<li class="@if($key==$id) active @endif"><a href="{{ route("item.skills", array($skill, $level)) }}">{{{$skill}}}</a></li>
+<li class="@if($skill==$id) active @endif"><a href="{{ route("item.skills", array($skill, $level)) }}">{{{$skill}}}</a></li>
 @endforeach
 </ul>
   </div>

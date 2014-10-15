@@ -128,6 +128,7 @@ class Item
       } else 
         $repo->addIndex("book.other", $object->id, $object->repo_id);
     }
+
     if ($object->type=="GUN") {
       $repo->addIndex("gun.$object->skill", $object->id, $object->repo_id);
     }

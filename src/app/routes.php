@@ -49,6 +49,11 @@ Route::group(array('after'=>'theme:layouts.bootstrap'), function () {
       'uses'=>'ItemsController@flags')
   );
 
+  Route::get('/skills/{id?}/{level?}', array(
+      'as'=>'item.skills',
+      'uses'=>'ItemsController@skills')
+  );
+
   Route::get('/containers', array(
       'as'=>'item.containers',
       'uses'=>'ItemsController@containers')

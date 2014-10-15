@@ -150,6 +150,13 @@ class ItemsController extends Controller
     return View::make("items.flags", compact("items", "flags", "id"));
   }
 
+  public function skills($id=null, $level=1) {
+    $skills = $this->repo->all("skills");
+    sort($skills);
+    $items = $id? $this->repo->allObjects("Item", "skill.$id.$level"): array();
+    $levels = array(1,2,3,4,5,6,7,8,9,10);
+    return View::make("items.skills", compact("items", "skills", "id", "level", "levels"));
+  }
 
   public function wiki($id)
   {

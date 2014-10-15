@@ -35,6 +35,25 @@ class Recipe
           }
         }
       }
+
+      if(isset($recipe->skills_required)) {
+        $skills = (array) $recipe->skills_required;
+        $skill = null;
+
+        // the database sometimes has [ "skill", "level" ]
+        // and sometimes it is  [ [ "skill", "level" ] ]
+        if(isset($skills[0])) {
+          if(is_array($skills[0])) 
+            $skill = $skills[0];
+          else $skill = $skills;
+        }
+        if($skill) {
+          $item = \App::make("Item");
+          $item->load($repo->get("item", $recipe->result));
+          $repo->addIndex("skill.$skill[0].$skill[1]", $item->id, $item->repo_id);
+          $repo->addIndex("skills", $skill[0], $skill[0]);
+        }
+      }
     }
   }
 

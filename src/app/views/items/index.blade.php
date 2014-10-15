@@ -58,6 +58,7 @@ If you have any requests or if you find a bug, please let me know at <a href="ma
 <li><a href="{{ route('item.materials') }}">Materials</a></li>
 <li><a href="{{ route('item.qualities') }}">Qualities</a></li>
 <li><a href="{{ route("item.flags") }}">Flags</a></li>
+<li><a href="{{ route("item.skills") }}">Skills</a></li>
 </ul>
 </div>
 </div>

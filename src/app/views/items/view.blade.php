@@ -99,8 +99,11 @@
       Nutrition: {{{ $item->nutrition }}}<br>
       Quench: {{{ $item->quench }}}<br>
       Enjoyability: {{{ $item->fun }}}<br>
+      @if ($item->spoils_in>0)
       Spoils in {{{ $item->spoils_in }}}<br>
-      Heal: {{{ $item->heal }}}<br>
+      @endif
+      Charges: {{{ $item->charges }}}<br>
+      Healthy: {{{ $item->healthy }}}<br>
       Stimulant: {{{ $item->stim }}}<br>
       Addiction: {{{ $item->addiction_potential }}}<br>
     @endif

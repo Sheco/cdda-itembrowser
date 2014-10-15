@@ -149,6 +149,9 @@
     @if ($item->hasFlag("FIT"))
     <br>This piece of clothing fits you perfectly.<br>
     @endif
+    @if ($item->hasFlag("OVERSIZE")) 
+    <br>This piece of clothing is large enough to accommodate mutated anatomy.<br>
+    @endif
     @if ($item->hasFlag("SKINTIGHT"))
     <br>This piece of clothing lies close to the skin and layers easily.<br>
     @endif
@@ -161,6 +164,9 @@
     @if ($item->hasFlag("RAINPROOF"))
     <br>This piece of clothing is designed to keep you dry in the rain.<br>
     @endif
+    @if ($item->hasFlag("SUN_GLASSES"))
+    <br>This piece of clothing keeps the glare out of your eyes.<br>
+    @endif
     @if ($item->hasFlag("WATER_FRIENDLY"))
     <br>This piece of clothing performs well even when soaking wet. This can feel good.<br>
     @endif
@@ -172,6 +178,12 @@
     @endif
     @if ($item->hasFlag("SWIM_GOGGLES"))
     <br>This piece of clothing allows you to see much further under water.<br>
+    @endif
+    @if ($item->hasFlag("LEAK_DAM") && $item->hasFlag("RADIOACTIVE"))
+    <br>The casing of this item has cracked, revealing an ominous green glow. (when damaged).<br>
+    @endif
+    @if ($item->hasFlag("LEAK_ALWAYS") && $item->hasFlag("RADIOACTIVE"))
+    <br>This object is surrounded by a sickly green glow.<br>
     @endif
 
   </div>

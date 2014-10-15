@@ -149,6 +149,14 @@ class Item
       $materials = (array) $object->material; 
       $repo->addIndex("material.$materials[0]", $object->id, $object->repo_id);
     }
+
+    if(isset($object->flags)) {
+      $flags = (array) $object->flags;
+      foreach($flags as $flag) {
+        $repo->addIndex("flag.$flag", $object->id, $object->repo_id);
+        $repo->addIndex("flags", $flag, $flag);
+      }
+    }
   }
 
   public function model()

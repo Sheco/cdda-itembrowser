@@ -44,6 +44,11 @@ Route::group(array('after'=>'theme:layouts.bootstrap'), function () {
       'uses'=>'ItemsController@materials')
   );
 
+  Route::get('/flags/{id?}', array(
+      'as'=>'item.flags',
+      'uses'=>'ItemsController@flags')
+  );
+
   Route::get('/containers', array(
       'as'=>'item.containers',
       'uses'=>'ItemsController@containers')

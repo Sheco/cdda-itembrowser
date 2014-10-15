@@ -142,6 +142,14 @@ class ItemsController extends Controller
     return View::make('items.materials', compact('items', 'materials', 'id'));
   }
 
+  public function flags($id=null)
+  {
+    $flags = $this->repo->all("flags");
+    sort($flags);
+    $items = $id? $this->repo->allObjects("Item", "flag.$id"): array();
+    return View::make("items.flags", compact("items", "flags", "id"));
+  }
+
 
   public function wiki($id)
   {

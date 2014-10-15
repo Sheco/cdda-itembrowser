@@ -21,7 +21,7 @@ Please select an entry from the menu on the left and a level on the top.
 @else
 <ul class="list-unstyled">
 @foreach($items as $item)
-  <li><a href="{{route('item.view', $item->id)}}">{{ $item->name }}</a></li>
+  <li><a href="{{route('item.craft', $item->id)}}">{{ $item->name }}</a></li>
 @endforeach
 </ul>
 @endif

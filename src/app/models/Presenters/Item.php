@@ -79,6 +79,13 @@ EOF;
     }, $this->object->disassembly);
   }
 
+  public function presentMaterials() 
+  {
+    return join(", ", array_map(function($material) {
+      return $material->name;
+    }, $this->object->materials));
+  }
+
   public function presentFeatureLabels()
   {
     $badges = array();

@@ -77,3 +77,7 @@ table.tablesorter thead tr .headerSortDown {
 	background-image: url(blue/desc.gif);
   background-color: #428bca;
 }
+
+table tr:hover a {
+  color: #ffa;
+}

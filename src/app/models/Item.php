@@ -307,4 +307,14 @@ class Item implements Robbo\Presenter\PresentableInterface
     $ret *= 1.5;
     return $ret;
   }
+
+  public function getMaterials() 
+  {
+    $materials = array(
+      $this->material1, 
+    );
+    if ($this->material2->ident!="null") 
+      $materials[] = $this->material2;
+    return $materials;
+  }
 }

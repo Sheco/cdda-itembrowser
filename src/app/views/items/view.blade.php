@@ -23,10 +23,7 @@
       @endif
       To-hit bonus: {{{ $item->to_hit }}}<br>
       Moves per attack: {{{ $item->movesPerAttack }}}<br>
-      Materials: @foreach($item->materials as $material)
-      {{ link_to_route("item.materials", $material->name, $material->ident) }},
-      @endforeach
-      <br>
+      Materials: {{ $item->materials }}<br>
       Flags: @foreach($item->flags as $flag=>$_)
       {{ link_to_route("item.flags", $flag, array($flag)) }},
       @endforeach

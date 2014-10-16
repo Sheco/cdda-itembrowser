@@ -82,7 +82,7 @@ EOF;
   public function presentMaterials() 
   {
     return join(", ", array_map(function($material) {
-      return $material->name;
+      return link_to_route("item.materials", $material->name, $material->ident);
     }, $this->object->materials));
   }
 

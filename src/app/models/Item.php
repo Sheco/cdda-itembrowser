@@ -320,6 +320,6 @@ class Item implements Robbo\Presenter\PresentableInterface
 
   public function getHasFlags()
   {
-    return !empty($this->flags);
+    return count($this->flags)>0;
   }
 }

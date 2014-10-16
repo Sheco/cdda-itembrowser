@@ -317,4 +317,9 @@ class Item implements Robbo\Presenter\PresentableInterface
       $materials[] = $this->material2;
     return $materials;
   }
+
+  public function getHasFlags()
+  {
+    return !empty($this->flags);
+  }
 }

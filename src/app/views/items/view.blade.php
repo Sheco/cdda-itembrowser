@@ -149,6 +149,10 @@
     @endif
     <br>
     {{{ $item->description }}}<br>
+    Flags: @foreach($item->flags as $flag=>$_)
+    {{ link_to_route("item.flags", $flag, array($flag)) }},
+    @endforeach
+    <br>
     @if ($item->hasFlag("FIT"))
     <br>This piece of clothing fits you perfectly.<br>
     @endif

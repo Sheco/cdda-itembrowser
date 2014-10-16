@@ -29,6 +29,7 @@
       <br>
       Flags: @foreach($item->flags as $flag=>$_)
       {{ link_to_route("item.flags", $flag, array($flag)) }},
+      @endforeach
       <br>
       @foreach ($item->qualities as $quality)
       Has level {{{ $quality["level"] }}} <a href="{{ route("item.qualities", $quality["quality"]->id) }}">{{{ $quality["quality"]->name }}}</a> quality.<br>
@@ -155,7 +156,6 @@
     @endif
     <br>
     {{{ $item->description }}}<br>
-    @endforeach
     @if ($item->hasFlag("FIT"))
     <br>This piece of clothing fits you perfectly.<br>
     @endif

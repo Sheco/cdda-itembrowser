@@ -24,10 +24,7 @@
       To-hit bonus: {{{ $item->to_hit }}}<br>
       Moves per attack: {{{ $item->movesPerAttack }}}<br>
       Materials: {{ $item->materials }}<br>
-      Flags: @foreach($item->flags as $flag=>$_)
-      {{ link_to_route("item.flags", $flag, array($flag)) }},
-      @endforeach
-      <br>
+      Flags: {{ $item->flags }}<br>
       @foreach ($item->qualities as $quality)
       Has level {{{ $quality["level"] }}} <a href="{{ route("item.qualities", $quality["quality"]->id) }}">{{{ $quality["quality"]->name }}}</a> quality.<br>
       @endforeach

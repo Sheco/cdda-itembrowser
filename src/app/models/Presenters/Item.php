@@ -86,6 +86,18 @@ EOF;
     }, $this->object->materials));
   }
 
+  public function presentFlags() 
+  {
+    $invert = array_flip($this->object->flags);
+
+    if(empty($invert))
+      return "None";
+
+    return join(", ", array_map(function($flag) {
+      return link_to_route("item.materials", $flag, $flag);
+    }, $invert));
+  }
+
   public function presentFeatureLabels()
   {
     $badges = array();

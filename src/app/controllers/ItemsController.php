@@ -147,6 +147,9 @@ class ItemsController extends Controller
     $flags = $this->repo->all("flags");
     sort($flags);
     $items = $id? $this->repo->allObjects("Item", "flag.$id"): array();
+    usort($items, function($a, $b) {
+      return strcmp(strtolower($a->name),strtolower($b->name));
+    });
     return View::make("items.flags", compact("items", "flags", "id"));
   }
 

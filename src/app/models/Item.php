@@ -32,9 +32,11 @@ class Item implements Robbo\Presenter\PresentableInterface
 
     if(!isset($data->flags))
       $data->flags = array();
-    else
-      $data->flags = array_flip((array) $data->flags);
-
+    else {
+      if(isset($data->flags[0])) {
+        $data->flags = array_flip((array) $data->flags);
+      }
+    }
     if(!isset($data->qualities))
       $data->qualities = array();
 

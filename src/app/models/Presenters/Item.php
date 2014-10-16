@@ -94,7 +94,7 @@ EOF;
       return "None";
 
     return join(", ", array_map(function($flag) {
-      return link_to_route("item.materials", $flag, $flag);
+      return link_to_route("item.flags", $flag, $flag);
     }, $invert));
   }
 

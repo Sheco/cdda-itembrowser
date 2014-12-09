@@ -12,7 +12,7 @@ class Monster extends \Robbo\Presenter\Presenter
   }
 
   function presentDeathFunction() {
-    $death = $this->object->death_function;
+    $death = (array) $this->object->death_function;
     if(empty($death))
       return "";
 
@@ -20,7 +20,7 @@ class Monster extends \Robbo\Presenter\Presenter
   }
 
   function presentSpecialAttacks() {
-    $attacks = $this->object->special_attacks;
+    $attacks = (array) $this->object->special_attacks;
     if(empty($attacks)) {
       var_export($attacks); exit;
       return "";

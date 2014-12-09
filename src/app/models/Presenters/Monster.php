@@ -38,4 +38,8 @@ class Monster extends \Robbo\Presenter\Presenter
 
     return join(", ", $links);
   }
+
+  function presentDamage() {
+    return "{$this->melee_dice}d{$this->melee_dice_sides}+{$this->melee_cut}";
+  }
 }

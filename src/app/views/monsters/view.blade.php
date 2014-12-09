@@ -34,7 +34,7 @@ Monster: {{{$monster->name}}}
   <td>{{$monster->size}}</td>
 
   <td>Damage:</td>
-  <td>{{{$monster->melee_dice}}}d{{{$monster->melee_dice_sides}}}+{{{$monster->melee_cut}}}</td>
+  <td>{{$monster->damage }}</td>
 </tr>
 <tr>
   <td>Material:</td>

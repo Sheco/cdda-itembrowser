@@ -14,7 +14,7 @@ Monster groups
 </ul>
 </div>
 <div class="col-md-9">
-@include("monsters/_list");
+@include("monsters/_list")
 </div>
 </div>
 @endsection

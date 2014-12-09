@@ -9,7 +9,7 @@ then
 fi
 # get the absolute path to the data files
 BASE_PATH=$(cd $(dirname $0 ) && pwd )
-DATA_PATH=$1
+DATA_PATH=$(realpath $1)
 
 cd "$BASE_PATH"
 # make storage paths

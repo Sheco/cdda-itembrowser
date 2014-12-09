@@ -6,7 +6,7 @@ Flags - Cataclysm: Dark Days Ahead
   <div class="col-md-3">
 <ul class="nav nav-pills nav-stacked">
 @foreach($flags as $key=>$flag)
-<li class="@if($flag==$id) active @endif"><a href="{{ route("item.flags", $flag) }}">{{{$flag}}}</a></li>
+<li class="@if ($flag==$id) active @endif@"><a href="{{ route("item.flags", $flag) }}">{{{$flag}}}</a></li>
 @endforeach
 </ul>
   </div>

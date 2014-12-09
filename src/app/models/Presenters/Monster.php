@@ -26,9 +26,8 @@ class Monster extends \Robbo\Presenter\Presenter
       return "";
     }
 
-    $attacks = $this->object->special_attacks;
     array_walk($attacks, function(&$attack) {
-      $attack = "$attack[1]% $attack[0]";
+      $attack = "$attack[0]: $attack[1]";
     });
     return join(",<br>", $attacks);
   }

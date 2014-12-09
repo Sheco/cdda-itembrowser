@@ -59,6 +59,10 @@ If you have any requests or if you find a bug, please let me know at <a href="ma
 <li><a href="{{ route('item.qualities') }}">Qualities</a></li>
 <li><a href="{{ route("item.flags") }}">Flags</a></li>
 <li><a href="{{ route("item.skills") }}">Skills</a></li>
+
+<h2>Monster catalogs</h2>
+<li>{{ link_to_route('monster.groups', 'Groups') }}</li>
+<li>{{ link_to_route('monster.species', 'Species') }}</li>
 </ul>
 </div>
 </div>

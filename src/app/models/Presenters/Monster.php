@@ -22,7 +22,6 @@ class Monster extends \Robbo\Presenter\Presenter
   function presentSpecialAttacks() {
     $attacks = (array) $this->object->special_attacks;
     if(empty($attacks)) {
-      var_export($attacks); exit;
       return "";
     }
 

@@ -135,6 +135,22 @@ Route::group(array('after'=>'theme:layouts.bootstrap'), function () {
       'uses'=>'ItemsController@wiki')
   )
     ->where('id', '[A-Za-z0-9_-]+');
+
+  Route::get('/monsters/groups/{id?}', array(
+    'as'=>'monster.groups',
+    'uses'=>'MonsterController@groups')
+  );
+
+  Route::get('/monsters/species/{id}', array(
+    'as'=>'monster.species',
+    'uses'=>'MonsterController@species')
+  );
+
+  Route::get('/monsters/{id}', array(
+    'as'=>'monster.view',
+    'uses'=>'MonsterController@view')
+  );
+
 });
 
 Route::get('/sitemap.xml', 'ItemsController@sitemap');

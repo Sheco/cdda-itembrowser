@@ -87,6 +87,11 @@ $app->singleton('Repositories\Indexers\Recipe', 'Repositories\Indexers\Recipe');
 $app->singleton('Repositories\Indexers\Item', 'Repositories\Indexers\Item');
 $app->singleton('Repositories\Indexers\Material', 'Repositories\Indexers\Material');
 $app->singleton('Repositories\Indexers\Quality', 'Repositories\Indexers\Quality');
+$app->singleton('Repositories\Indexers\Monster', 
+  'Repositories\Indexers\Monster');
+$app->singleton('Repositories\Indexers\MonsterGroup',
+  'Repositories\Indexers\MonsterGroup');
+
 $app->singleton('Repositories\RepositoryInterface', 'Repositories\RepositoryCache');
 
 // create an instance of each repository, so they register their listeners.
@@ -94,3 +99,6 @@ App::make('Repositories\Indexers\Recipe');
 App::make('Repositories\Indexers\Item');
 App::make('Repositories\Indexers\Material');
 App::make('Repositories\Indexers\Quality');
+App::make('Repositories\Indexers\Monster');
+App::make('Repositories\Indexers\MonsterGroup');
+

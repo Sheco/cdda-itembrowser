@@ -31,9 +31,6 @@ class MonsterController extends Controller {
       return Redirect::route("monster.species", array($id));
     }
     $data = $this->repo->allObjects("Monster", "monster.species.$id");
-    usort($data, function($a, $b) {
-      return strcmp(strtolower($a->name), strtolower($b->name));
-    });
     return View::make('monsters.species', compact('species', 'id', 'data'));
     
   }

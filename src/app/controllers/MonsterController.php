@@ -16,7 +16,8 @@ class MonsterController extends Controller {
       return Redirect::route("monster.groups", array($id));
     }
     $group = $this->repo->getObject('MonsterGroup', $id);
-    return View::make('monsters.groups', compact('groups', 'group', 'id'));
+    $data = $group->uniqueMonsters;
+    return View::make('monsters.groups', compact('groups', 'group', 'id', 'data'));
   }
 
   function species($id=null)

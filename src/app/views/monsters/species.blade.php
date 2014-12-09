@@ -14,11 +14,7 @@ Monster species: {{{$id}}}
 </ul>
 </div>
 <div class="col-md-9">
-<ul class="list-unstyled">
-@foreach ($data as $monster)
-<li>{{ link_to_route('monster.view', $monster->niceName, array($monster->id)) }}</li>
-@endforeach
-</ul>
+@include("monsters/_list")
 </div>
 </div>
 @endsection

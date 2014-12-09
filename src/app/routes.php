@@ -141,7 +141,7 @@ Route::group(array('after'=>'theme:layouts.bootstrap'), function () {
     'uses'=>'MonsterController@groups')
   );
 
-  Route::get('/monsters/species/{id}', array(
+  Route::get('/monsters/species/{id?}', array(
     'as'=>'monster.species',
     'uses'=>'MonsterController@species')
   );

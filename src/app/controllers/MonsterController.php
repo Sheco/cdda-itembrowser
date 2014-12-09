@@ -26,7 +26,7 @@ class MonsterController extends Controller {
       return strcmp($a, $b); 
     });
     if($id===null) {
-      $id = reset($groups)->name;
+      $id = reset($species);
       return Redirect::route("monster.species", array($id));
     }
     $data = $this->repo->allObjects("Monster", "monster.species.$id");

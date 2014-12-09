@@ -12,15 +12,19 @@ class Monster extends \Robbo\Presenter\Presenter
   }
 
   function presentDeathFunction() {
-    if(empty($this->object->death_function))
+    $death = $this->object->death_function;
+    if(empty($death))
       return "";
 
-    return join(", ", $this->object->death_function);
+    return join(", ", $death);
   }
 
   function presentSpecialAttacks() {
-    if(empty($this->object->special_attacks))
+    $attacks = $this->object->special_attacks;
+    if(empty($attacks)) {
+      var_export($attacks); exit;
       return "";
+    }
 
     $attacks = $this->object->special_attacks;
     array_walk($attacks, function(&$attack) {

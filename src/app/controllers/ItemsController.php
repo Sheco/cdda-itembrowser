@@ -35,19 +35,16 @@ class ItemsController extends Controller
     return View::make('items.craft', compact('item'));
   }
 
-  public function recipesProxy($id)
+  public function recipes($id, $category=null)
   {
     $item = $this->repo->getObjectOrFail("Item", $id);
     $categories = $item->toolCategories;
-    $category = key($categories)?: "CC_NONE";
-    
-    return Redirect::route("item.recipes", array($id, $category));
-  }
 
-  public function recipes($id, $category)
-  {
-    $item = $this->repo->getObjectOrFail("Item", $id);
-    $categories = $item->toolCategories;
+    if($category===null) {
+      $category = key($categories);
+      return Redirect::route(Route::currentRouteName(), array($id, $category));
+    }
+
     $recipes = $item->getToolForCategory($category);
 
     usort($recipes, function($a, $b) {

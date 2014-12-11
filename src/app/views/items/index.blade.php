@@ -50,11 +50,11 @@ If you have any requests or if you find a bug, please let me know at <a href="ma
 <ul class="nav nav-pills nav-stacked">
 <h2>Item catalogs</h2>
 
-<li><a href="{{ route('item.armor', 'head') }}">Clothing</a></li>
+<li><a href="{{ route('item.armor') }}">Clothing</a></li>
 <li><a href="{{ route("item.melee") }}">Melee</a></li>
-<li><a href="{{ route('item.gun', 'archery') }}">Ranged weapons</a></li>
-<li><a href="{{ route('item.consumables', 'drink') }}">Consumables</a></li>
-<li><a href="{{ route('item.books', 'engineering') }}">Books</a></li>
+<li><a href="{{ route('item.gun') }}">Ranged weapons</a></li>
+<li><a href="{{ route('item.consumables') }}">Consumables</a></li>
+<li><a href="{{ route('item.books') }}">Books</a></li>
 <li><a href="{{ route('item.materials') }}">Materials</a></li>
 <li><a href="{{ route('item.qualities') }}">Qualities</a></li>
 <li><a href="{{ route("item.flags") }}">Flags</a></li>

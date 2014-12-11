@@ -63,9 +63,8 @@ class ItemsController extends Controller
     return View::make('items.disassemble', compact('item'));
   }
 
-  public function armor($part)
+  public function armor($part=null)
   {
-    $items = $this->repo->allObjects("Item", "armor.$part");
     $parts = array(
       "head"=>"Head",
       "eyes"=>"Eyes",
@@ -77,12 +76,17 @@ class ItemsController extends Controller
       "feet" =>"Feet",
       "none"=>"None"
     );
+
+    if($part===null) {
+      return Redirect::route("item.armor", array(key($parts)));
+    }
+
+    $items = $this->repo->allObjects("Item", "armor.$part");
     return View::make('items.armor', compact('items','parts','part'));
   }
 
-  public function gun($skill)
+  public function gun($skill=null)
   {
-    $items = $this->repo->allObjects("Item", "gun.$skill");
     $skills = array(
       "archery"=>"Archery",
       "launcher"=>"Launchers",
@@ -92,12 +96,17 @@ class ItemsController extends Controller
       "smg"=>"SMGs",
       "throw" =>"Thrown",
     );
+
+    if($skill===null) {
+      return Redirect::route("item.gun", array(key($skills)));
+    }
+
+    $items = $this->repo->allObjects("Item", "gun.$skill");
     return View::make('items.gun', compact('items','skills','skill'));
   }
 
-  public function books($type="combat")
+  public function books($type=null)
   {
-    $items = $this->repo->allObjects("Item", "book.$type");
     $types = array(
       "fun"=>"Just for fun",
       "range"=>"Ranged",
@@ -108,6 +117,12 @@ class ItemsController extends Controller
       "survival"=>"Survival",
       "other"=>"Other",
     );
+
+    if($type===null) {
+      return Redirect::route("item.books", array("combat"));
+    }
+
+    $items = $this->repo->allObjects("Item", "book.$type");
     return View::make('items.books', compact('items','type', 'types'));
   }
 
@@ -117,20 +132,30 @@ class ItemsController extends Controller
     return View::make('items.melee', compact('items'));
   }
 
-  public function consumables($type="drink")
+  public function consumables($type=null)
   {
-    $items = $this->repo->allObjects("Item", "consumables.$type");
     $types = array(
       "drink"=>"Drinks",
       "food"=>"Food",
       "med"=>"Meds",
     );
+
+    if($type===null) {
+      return Redirect::route("item.consumables", array(key($types)));
+    }
+
+    $items = $this->repo->allObjects("Item", "consumables.$type");
     return View::make('items.consumables', compact('items','type', 'types'));
   }
 
   public function qualities($id=null)
   {
     $qualities = $this->repo->allObjects("Quality", "qualities");
+
+    if($id===null) {
+      return Redirect::route("item.qualities", array(reset($qualities)->id));
+    }
+
     $items = $id? $this->repo->allObjects("Item", "quality.$id"): array();
     return View::make('items.qualities', compact('items', 'qualities', 'id'));
   }
@@ -138,6 +163,10 @@ class ItemsController extends Controller
   public function materials($id=null)
   {
     $materials = $this->repo->allObjects("Material", "materials");
+
+    if($id===null) {
+      return Redirect::route("item.materials", array(reset($materials)->ident));
+    }
     $items = $id? $this->repo->allObjects("Item", "material.$id"): array();
     return View::make('items.materials', compact('items', 'materials', 'id'));
   }
@@ -146,6 +175,10 @@ class ItemsController extends Controller
   {
     $flags = $this->repo->all("flags");
     sort($flags);
+
+    if($id===null) {
+      return Redirect::route("item.flags", array(reset($flags)));
+    }
     $items = $id? $this->repo->allObjects("Item", "flag.$id"): array();
     usort($items, function($a, $b) {
       return strcmp(strtolower($a->name),strtolower($b->name));
@@ -156,6 +189,10 @@ class ItemsController extends Controller
   public function skills($id=null, $level=1) {
     $skills = $this->repo->all("skills");
     sort($skills);
+
+    if($id===null) {
+      return Redirect::route("item.skills", array(reset($skills)));
+    }
     $items = $id? $this->repo->allObjects("Item", "skill.$id.$level"): array();
     $levels = array(1,2,3,4,5,6,7,8,9,10);
     return View::make("items.skills", compact("items", "skills", "id", "level", "levels"));

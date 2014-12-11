@@ -14,12 +14,12 @@
 Route::group(array('after'=>'theme:layouts.bootstrap'), function () {
   Route::get('/', 'ItemsController@index');
 
-  Route::get('/armor/{part}', array(
+  Route::get('/armor/{part?}', array(
       'as'=>'item.armor',
       'uses'=>'ItemsController@armor')
   );
 
-  Route::get('/gun/{skill}', array(
+  Route::get('/gun/{skill?}', array(
       'as'=>'item.gun',
       'uses'=>'ItemsController@gun')
   );
@@ -29,7 +29,7 @@ Route::group(array('after'=>'theme:layouts.bootstrap'), function () {
       'uses'=>'ItemsController@melee')
   );
 
-  Route::get('/books/{type}', array(
+  Route::get('/books/{type?}', array(
       'as'=>'item.books',
       'uses'=>'ItemsController@books')
   );
@@ -59,12 +59,12 @@ Route::group(array('after'=>'theme:layouts.bootstrap'), function () {
       'uses'=>'ItemsController@containers')
   );
 
-  Route::get('consumables/{type}', array(
+  Route::get('consumables/{type?}', array(
       'as'=>'item.consumables',
       'uses'=>'ItemsController@consumables')
   );
 
-  Route::get('consumibles/{type}', function($type) {
+  Route::get('consumibles/{type?}', function($type="") {
     return Redirect::route('item.consumables', array($type), 301);
   });
 

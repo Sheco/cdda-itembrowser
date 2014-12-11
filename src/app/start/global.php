@@ -81,6 +81,7 @@ App::down(function()
 */
 
 require app_path().'/filters.php';
+require app_path().'/cdda-helpers.php';
 
 $app->singleton('Repositories\RepositoryReaderInterface', 'Repositories\CompiledReader');
 $app->singleton('Repositories\Indexers\Recipe', 'Repositories\Indexers\Recipe');

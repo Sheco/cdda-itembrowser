@@ -7,7 +7,7 @@ Monster: {{{$monster->name}}}
 @section('content')
 <div class="row">
 <div class="col-md-6">
-<h4>{{{$monster->name}}}</h4>
+<h4>{{$monster->niceName}}</h4>
 <p>{{{$monster->description}}}</p>
 <br>
 <table>

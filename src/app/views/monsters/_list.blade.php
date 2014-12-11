@@ -10,7 +10,7 @@
 </thead>
 @foreach ($data as $monster)
 <tr>
-  <td>{{ link_to_route('monster.view', $monster->niceName, array($monster->id)) }}</td>
+  <td><a href="{{ route('monster.view', array($monster->id)) }}">{{ $monster->niceName }}</a></td>
   <td>{{{ $monster->hp }}}</td>
   <td>{{{ $monster->damage }}}</td>
   <td>{{{ $monster->melee_skill }}}</td>

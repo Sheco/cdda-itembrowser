@@ -5,7 +5,7 @@ Armor - Cataclysm: Dark Days Ahead
 <h1>Armor</h1>
 <ul class="nav nav-tabs">
 @foreach($parts as $key=>$value)
-<li @if($key==$part) class="active" @endif><a href="{{ route("item.armor", $key) }}">{{{$value}}}</a></li>
+<li @if($key==$part) class="active" @endif><a href="{{ route("item.armors", $key) }}">{{{$value}}}</a></li>
 @endforeach
 </ul>
 <table class="table table-bordered table-hover tablesorter">

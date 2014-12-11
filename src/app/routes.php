@@ -14,13 +14,22 @@
 Route::group(array('after'=>'theme:layouts.bootstrap'), function () {
   Route::get('/', 'ItemsController@index');
 
-  Route::get('/armor/{part?}', array(
-      'as'=>'item.armor',
+
+  Route::get('/armor/{part?}', function($part="") {
+    return Redirect::route('item.armors', array($part), 301);
+  });
+
+  Route::get('/armors/{part?}', array(
+      'as'=>'item.armors',
       'uses'=>'ItemsController@armor')
   );
 
-  Route::get('/gun/{skill?}', array(
-      'as'=>'item.gun',
+  Route::get('/gun/{skill?}', function($skill="") {
+    return Redirect::route('item.guns', array($skill), 301);
+  });
+
+  Route::get('/guns/{skill?}', array(
+      'as'=>'item.guns',
       'uses'=>'ItemsController@gun')
   );
 

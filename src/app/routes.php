@@ -65,7 +65,7 @@ Route::group(array('after'=>'theme:layouts.bootstrap'), function () {
   );
 
   Route::get('consumibles/{type}', function($type) {
-    return Redirect::route('item.comestibles', array($type));
+    return Redirect::route('item.comestibles', array($type), 301);
   });
 
   Route::get('/search', array(

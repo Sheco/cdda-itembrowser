@@ -8,7 +8,7 @@ Qualities - Cataclysm: Dark Days Ahead
   <div class="col-md-3">
 <ul class="nav nav-pills nav-stacked">
 @foreach($qualities as $key=>$quality)
-<li class="@if($key==$id) active @endif"><a href="{{ route("item.qualities", $key) }}">{{{$quality->name}}}</a></li>
+<li class="@if($key==$id) active @endif"><a href="{{ route(Route::currentRouteName(), $key) }}">{{{$quality->name}}}</a></li>
 @endforeach
 </ul>
   </div>

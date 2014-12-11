@@ -5,7 +5,7 @@ Ranged weapons - Cataclysm: Dark Days Ahead
 <h1>Ranged weapons</h1>
 <ul class="nav nav-tabs">
 @foreach($skills as $key=>$value)
-<li @if($key==$skill) class="active" @endif><a href="{{ route("item.guns", $key) }}">{{{$value}}}</a></li>
+<li @if($key==$skill) class="active" @endif><a href="{{ route(Route::currentRouteName(), $key) }}">{{{$value}}}</a></li>
 @endforeach
 </ul>
 <table class="table table-bordered table-hover tablesorter">

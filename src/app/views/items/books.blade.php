@@ -6,7 +6,7 @@ Books - Cataclysm: Dark Days Ahead
 
 <ul class="nav nav-tabs">
 @foreach($types as $key=>$value)
-<li @if($key==$type) class="active" @endif><a href="{{ route("item.books", $key) }}">{{{$value}}}</a></li>
+<li @if($key==$type) class="active" @endif><a href="{{ route(Route::currentRouteName(), $key) }}">{{{$value}}}</a></li>
 @endforeach
 </ul>
 <table class="table table-bordered table-hover tablesorter">

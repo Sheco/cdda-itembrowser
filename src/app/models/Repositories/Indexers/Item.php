@@ -137,7 +137,7 @@ class Item
     }
     if ($object->type=="COMESTIBLE") {
       $type = strtolower($object->comestible_type);
-      $repo->addIndex("comestible.$type", $object->id, $object->repo_id);
+      $repo->addIndex("consumables.$type", $object->id, $object->repo_id);
     }
     if (isset($object->qualities)) {
       foreach ($object->qualities as $quality) {

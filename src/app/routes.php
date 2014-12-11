@@ -60,12 +60,12 @@ Route::group(array('after'=>'theme:layouts.bootstrap'), function () {
   );
 
   Route::get('consumables/{type}', array(
-      'as'=>'item.comestibles',
-      'uses'=>'ItemsController@comestibles')
+      'as'=>'item.consumables',
+      'uses'=>'ItemsController@consumables')
   );
 
   Route::get('consumibles/{type}', function($type) {
-    return Redirect::route('item.comestibles', array($type), 301);
+    return Redirect::route('item.consumables', array($type), 301);
   });
 
   Route::get('/search', array(

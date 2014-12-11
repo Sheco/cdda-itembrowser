@@ -1,12 +1,12 @@
 @section('title')
-Comestibles - Cataclysm: Dark Days Ahead
+Consumables - Cataclysm: Dark Days Ahead
 @endsection
 @section('content')
-<h1>Comestibles/Consumables</h1>
+<h1>Consumables</h1>
 
 <ul class="nav nav-tabs">
 @foreach($types as $key=>$value)
-<li @if($key==$type) class="active" @endif><a href="{{ route("item.comestibles", $key) }}">{{{$value}}}</a></li>
+<li @if($key==$type) class="active" @endif><a href="{{ route("item.consumables", $key) }}">{{{$value}}}</a></li>
 @endforeach
 </ul>
 <table class="table table-bordered table-hover tablesorter">

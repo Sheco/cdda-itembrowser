@@ -122,7 +122,7 @@ class Item implements Robbo\Presenter\PresentableInterface
     return $this->data->type=="ARMOR";
   }
 
-  public function getIsComestible()
+  public function getIsConsumable()
   {
     return $this->data->type=="COMESTIBLE";
   }

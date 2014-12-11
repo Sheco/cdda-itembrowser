@@ -117,15 +117,15 @@ class ItemsController extends Controller
     return View::make('items.melee', compact('items'));
   }
 
-  public function comestibles($type="drink")
+  public function consumables($type="drink")
   {
-    $items = $this->repo->allObjects("Item", "comestible.$type");
+    $items = $this->repo->allObjects("Item", "consumables.$type");
     $types = array(
       "drink"=>"Drinks",
       "food"=>"Food",
       "med"=>"Meds",
     );
-    return View::make('items.comestibles', compact('items','type', 'types'));
+    return View::make('items.consumables', compact('items','type', 'types'));
   }
 
   public function qualities($id=null)

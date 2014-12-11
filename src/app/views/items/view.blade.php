@@ -97,7 +97,7 @@
 
     <br>
     @endif
-    @if ($item->isComestible)
+    @if ($item->isConsumable)
       Phase: {{{ $item->phase }}}<br>
       Nutrition: {{{ $item->nutrition }}}<br>
       Quench: {{{ $item->quench }}}<br>

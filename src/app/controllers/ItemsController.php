@@ -78,7 +78,7 @@ class ItemsController extends Controller
     );
 
     if($part===null) {
-      return Redirect::route("item.armor", array(key($parts)));
+      return Redirect::route(Route::currentRouteName(), array(key($parts)));
     }
 
     $items = $this->repo->allObjects("Item", "armor.$part");
@@ -98,7 +98,7 @@ class ItemsController extends Controller
     );
 
     if($skill===null) {
-      return Redirect::route("item.gun", array(key($skills)));
+      return Redirect::route(Route::currentRouteName(), array(key($skills)));
     }
 
     $items = $this->repo->allObjects("Item", "gun.$skill");
@@ -119,7 +119,7 @@ class ItemsController extends Controller
     );
 
     if($type===null) {
-      return Redirect::route("item.books", array("combat"));
+      return Redirect::route(Route::currentRouteName(), array("combat"));
     }
 
     $items = $this->repo->allObjects("Item", "book.$type");
@@ -129,7 +129,7 @@ class ItemsController extends Controller
   public function melee()
   {
     $items = $this->repo->allObjects("Item", "melee");
-    return View::make('items.melee', compact('items'));
+    return View::make(Route::currentRouteName(), compact('items'));
   }
 
   public function consumables($type=null)
@@ -141,7 +141,7 @@ class ItemsController extends Controller
     );
 
     if($type===null) {
-      return Redirect::route("item.consumables", array(key($types)));
+      return Redirect::route(Route::currentRouteName(), array(key($types)));
     }
 
     $items = $this->repo->allObjects("Item", "consumables.$type");
@@ -165,7 +165,7 @@ class ItemsController extends Controller
     $materials = $this->repo->allObjects("Material", "materials");
 
     if($id===null) {
-      return Redirect::route("item.materials", array(reset($materials)->ident));
+      return Redirect::route(Route::currentRouteName(), array(reset($materials)->ident));
     }
     $items = $id? $this->repo->allObjects("Item", "material.$id"): array();
     return View::make('items.materials', compact('items', 'materials', 'id'));
@@ -177,7 +177,7 @@ class ItemsController extends Controller
     sort($flags);
 
     if($id===null) {
-      return Redirect::route("item.flags", array(reset($flags)));
+      return Redirect::route(Route::currentRouteName(), array(reset($flags)));
     }
     $items = $id? $this->repo->allObjects("Item", "flag.$id"): array();
     usort($items, function($a, $b) {
@@ -191,7 +191,7 @@ class ItemsController extends Controller
     sort($skills);
 
     if($id===null) {
-      return Redirect::route("item.skills", array(reset($skills)));
+      return Redirect::route(Route::currentRouteName(), array(reset($skills)));
     }
     $items = $id? $this->repo->allObjects("Item", "skill.$id.$level"): array();
     $levels = array(1,2,3,4,5,6,7,8,9,10);

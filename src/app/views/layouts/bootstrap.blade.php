@@ -63,6 +63,7 @@
 
 <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
 <script src="/js/jquery.tablesorter.min.js"></script>
+<script src="/js/jquery.tinysort.min.js"></script>
     <div class="container">
 @yield('content')
 <br><br>

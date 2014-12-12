@@ -11,9 +11,6 @@ class MonsterController extends Controller {
   function groups($id=null)
   {
     $groups = $this->repo->allObjects('MonsterGroup', 'monstergroups');
-    usort($groups, function($a, $b) {
-      return strcmp($a->name, $b->name); 
-    });
     if($id===null) {
       $id = reset($groups)->name;
       return Redirect::route("monster.groups", array($id));
@@ -26,9 +23,6 @@ class MonsterController extends Controller {
   function species($id=null)
   {
     $species = $this->repo->all("monster.species");
-    usort($species, function($a, $b) {
-      return strcmp($a, $b); 
-    });
     if($id===null) {
       $id = reset($species);
       return Redirect::route("monster.species", array($id));

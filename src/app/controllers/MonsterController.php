@@ -11,6 +11,9 @@ class MonsterController extends Controller {
   function groups($id=null)
   {
     $groups = $this->repo->allObjects('MonsterGroup', 'monstergroups');
+    usort($groups, function($a, $b) {
+      return strcmp($a->name, $b->name); 
+    });
     if($id===null) {
       $id = reset($groups)->name;
       return Redirect::route("monster.groups", array($id));

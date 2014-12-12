@@ -16,13 +16,6 @@ class Item extends \Robbo\Presenter\Presenter
     return ucfirst($this->object->name);
   }
 
-  public function presentName()
-  { 
-    return <<<EOF
-    <span style="color: $this->color">$this->symbol {$this->object->name}</span>    
-EOF;
-  }
-
   public function presentVolume()
   {
     return $this->object->volume===null?"N/A":$this->object->volume;

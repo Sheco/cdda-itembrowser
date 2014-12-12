@@ -11,7 +11,7 @@
 @section('content')
 @include('items.menu', array('active'=>'disassemble'))
 <h1>
-  <a href="{{ route("item.view", array("id"=>$item->id)) }}">{{ $item->name }}</a>
+  {{$item->symbol}} <a href="{{ route("item.view", array("id"=>$item->id)) }}">{{ $item->name }}</a>
 @if ($item->count("disassembly")>0)
  can be disassembled to obtain the following components.<br>
 @else

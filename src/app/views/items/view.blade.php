@@ -8,7 +8,7 @@
 @include('items.menu', array('active'=>'view'))
 <div class="row">
   <div class="col-md-6">
-    <h1>{{$item->name}}</h1>
+    <h1>{{$item->symbol}} {{$item->name}}</h1>
     {{$item->featureLabels}}
     <br>
     <br>

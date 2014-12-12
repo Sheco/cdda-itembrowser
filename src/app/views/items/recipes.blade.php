@@ -23,7 +23,7 @@ var show_recipe = function(id)
 </script>
 @include('items.menu', array('active'=>'recipes'))
 <h1>
-  <a href="{{ route("item.view", array("id"=>$item->id)) }}">{{ $item->name }}</a>
+  {{$item->symbol}} <a href="{{ route("item.view", array("id"=>$item->id)) }}">{{ $item->name }}</a>
 @if ($item->count("toolFor")) 
  can be used to craft following recipes:<br>
 @else
@@ -40,7 +40,7 @@ var show_recipe = function(id)
 <div class="row">
   <div class="col-md-4">
 @foreach ($recipes as $recipe_id=>$local_recipe)
-<a href="#" onclick="return show_recipe('{{$recipe_id}}')">{{{ $local_recipe->result->name }}}</a>
+{{$local_recipe->result->symbol}} <a href="#" onclick="return show_recipe('{{$recipe_id}}')">{{{ $local_recipe->result->name }}}</a>
 <br>
 @endforeach
 <hr>
@@ -48,7 +48,7 @@ var show_recipe = function(id)
 <div class="col-md-6">
 @foreach($recipes as $recipe_id=>$recipe)
 <div id="recipe{{$recipe_id}}" class="recipes" style="display: none;">
-{{ link_to_route("item.view", 
+{{$recipe->result->symbol}} {{ link_to_route("item.view", 
 $recipe->result->name, 
 array("id"=>$recipe->result->id)) }}<br>
   Category: {{{ $recipe->category }}}<br>

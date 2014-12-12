@@ -252,6 +252,8 @@ class Item implements Robbo\Presenter\PresentableInterface
 
   public function matches($text)
   {
+    $text = trim($text);
+
     if($text=="") return false;
 
      return $this->symbol==$text || 

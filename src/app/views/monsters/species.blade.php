@@ -7,7 +7,7 @@ Monster species: {{{$id}}}
 @section('content')
 <div class="row">
 <div class="col-md-3">
-<ul class="nav nav-pills nav-stacked">
+<ul class="nav nav-pills nav-stacked tsort">
 @foreach($species as $s)
 <li class="@if ($s==$id) active @endif">{{ link_to_route(Route::currentRouteName(), ucfirst(strtolower($s)), array($s)) }}</li>
 @endforeach
@@ -17,4 +17,9 @@ Monster species: {{{$id}}}
 @include("monsters/_list")
 </div>
 </div>
+<script>
+$(function() {
+  $(".tsort>li").tsort();
+});
+</script>
 @endsection

@@ -4,7 +4,7 @@ Flags - Cataclysm: Dark Days Ahead
 @section('content')
 <div class="row">
   <div class="col-md-3">
-<ul class="nav nav-pills nav-stacked">
+<ul class="nav nav-pills nav-stacked tsort">
 @foreach($flags as $key=>$flag)
 <li class="@if ($flag==$id) active @endif@"><a href="{{ route(Route::currentRouteName(), $flag) }}">{{{$flag}}}</a></li>
 @endforeach
@@ -22,4 +22,9 @@ Please select an entry from the menu on the left.
 @endif
 </div>
 </div>
+<script>
+$(function() {
+  $(".tsort>li").tsort();
+});
+</script>
 @stop

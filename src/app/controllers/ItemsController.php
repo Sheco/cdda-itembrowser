@@ -126,7 +126,7 @@ class ItemsController extends Controller
   public function melee()
   {
     $items = $this->repo->allObjects("Item", "melee");
-    return View::make(Route::currentRouteName(), compact('items'));
+    return View::make("items.melee", compact('items'));
   }
 
   public function consumables($type=null)

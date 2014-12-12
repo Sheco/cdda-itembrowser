@@ -188,7 +188,7 @@ class ItemsController extends Controller
     sort($skills);
 
     if($id===null) {
-      return Redirect::route(Route::currentRouteName(), array(reset($skills)));
+      return Redirect::route(Route::currentRouteName(), array(reset($skills), 1));
     }
     $items = $id? $this->repo->allObjects("Item", "skill.$id.$level"): array();
     $levels = array(1,2,3,4,5,6,7,8,9,10);

@@ -49,4 +49,8 @@ class Monster extends \Robbo\Presenter\Presenter
   function presentDamage() {
     return "{$this->melee_dice}d{$this->melee_dice_sides}+{$this->melee_cut}";
   }
+
+  function presentDescription() {
+    return preg_replace("/\\n/", "<br>", htmlspecialchars($this->object->description));
+  }
 }

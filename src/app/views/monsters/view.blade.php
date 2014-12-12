@@ -7,8 +7,8 @@ Monster: {{{$monster->name}}}
 @section('content')
 <div class="row">
 <div class="col-md-6">
-<h4>{{$monster->niceName}}</h4>
-<p>{{{$monster->description}}}</p>
+<h4>{{ $monster->symbol }} {{$monster->niceName}}</h4>
+<p>{{$monster->description}}</p>
 <br>
 <table>
 <tr>

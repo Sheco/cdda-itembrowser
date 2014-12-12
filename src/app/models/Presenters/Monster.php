@@ -3,12 +3,15 @@ namespace Presenters;
 
 class Monster extends \Robbo\Presenter\Presenter
 {
-  function presentNiceName() {
+  function presentSymbol() {
     list($fg, $bg) = colorPairToCSS($this->object->color);
-    return sprintf("<span style=\"color: %s; background: %s\">%s</span> %s", 
+    return sprintf("<span style=\"color: %s; background: %s\">%s</span>", 
       $fg, $bg,
-      $this->object->symbol, 
-      ucfirst($this->object->name));
+      $this->object->symbol);
+  }
+
+  function presentNiceName() {
+    return ucfirst($this->object->name);
   }
 
   function presentFlags() {

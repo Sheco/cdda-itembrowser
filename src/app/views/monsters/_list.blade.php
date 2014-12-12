@@ -1,6 +1,7 @@
 <table class="table table-bordered tablesorter">
 <thead>
 <tr>
+  <th></th>
   <th>Name</th>
   <th>HP</th>
   <th>Dmg</th>
@@ -10,6 +11,7 @@
 </thead>
 @foreach ($data as $monster)
 <tr>
+  <td>{{ $monster->symbol }}</td>
   <td><a href="{{ route('monster.view', array($monster->id)) }}">{{ $monster->niceName }}</a></td>
   <td>{{{ $monster->hp }}}</td>
   <td>{{{ $monster->damage }}}</td>
@@ -21,7 +23,7 @@
 <script>
 $(function() {
       $(".tablesorter").tablesorter({
-            sortList: [[0,0]]
+            sortList: [[1,0]]
                     });
 });
 </script>

@@ -7,7 +7,7 @@ No matches found.
 <div class="row">
 
 <div class="col-md-6">
-  <a href="{{ route("item.view", array("id"=>$item->id)) }}">{{$item->name}}</a>
+  {{$item->symbol}} <a href="{{ route("item.view", array("id"=>$item->id)) }}">{{$item->name}}</a>
   {{ $item->featureLabels }}
 </div>
 

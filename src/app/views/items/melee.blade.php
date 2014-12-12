@@ -37,7 +37,7 @@ Items with bashing+cutting damage higher than 10 and to-hit bonus higher than -2
 <script>
 $(function() {
     $(".tablesorter").tablesorter({
-      sortList: [[3,1], [4,1]]
+      sortList: [[5,1], [6,1]]
       });
 });
 </script>

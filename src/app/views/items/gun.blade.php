@@ -11,6 +11,7 @@ Ranged weapons - Cataclysm: Dark Days Ahead
 <table class="table table-bordered table-hover tablesorter">
   <thead>
   <tr>
+    <th></th>
     <th>Name</th>
     <th><span title="Volume">V</span></th>
     <th><span title="Weight">W</span></th>
@@ -22,6 +23,7 @@ Ranged weapons - Cataclysm: Dark Days Ahead
 <tbody>
 @foreach($items as $item)
 <tr>
+  <td>{{ $item->symbol }}</td>
   <td><a href="{{route('item.view', $item->id)}}">{{ $item->name }}</a></td>
   <td>{{ $item->volume }}</td>
   <td>{{ $item->weight }}</td>
@@ -35,7 +37,7 @@ Ranged weapons - Cataclysm: Dark Days Ahead
 <script>
 $(function() {
     $(".tablesorter").tablesorter({
-      sortList: [[3,1]]
+      sortList: [[4,1]]
       });
 });
 </script>

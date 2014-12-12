@@ -10,6 +10,7 @@ Items with bashing+cutting damage higher than 10 and to-hit bonus higher than -2
 <table class="table table-bordered table-hover tablesorter">
   <thead>
   <tr>
+    <th></th>
     <th>Name</th>
     <th>Material</th>
     <th><span title="Volume">V</span></th>
@@ -21,6 +22,7 @@ Items with bashing+cutting damage higher than 10 and to-hit bonus higher than -2
 </thead>
 @foreach($items as $item)
 <tr>
+  <td>{{ $item->symbol }}</td>
   <td><a href="{{route('item.view', $item->id)}}">{{ $item->name }}</a></td>
   <td>{{ $item->materials }}</td>
   <td>{{ $item->volume }}</td>
@@ -35,7 +37,7 @@ Items with bashing+cutting damage higher than 10 and to-hit bonus higher than -2
 <script>
 $(function() {
     $(".tablesorter").tablesorter({
-      sortList: [[4,1], [5,1]]
+      sortList: [[3,1], [4,1]]
       });
 });
 </script>

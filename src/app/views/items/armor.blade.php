@@ -11,6 +11,7 @@ Armor - Cataclysm: Dark Days Ahead
 <table class="table table-bordered table-hover tablesorter">
   <thead>
   <tr>
+    <th></th>
     <th>Name</th>
     <th>Material</th>
     <th><span title="Volume">V</span></th>
@@ -25,6 +26,7 @@ Armor - Cataclysm: Dark Days Ahead
 <tbody>
 @foreach($items as $item)
 <tr>
+  <td>{{ $item->symbol }}</td>
   <td><a href="{{route('item.view', $item->id)}}">{{ $item->name }}</a></td>
   <td>{{ $item->materials }}</td>
   <td>{{ $item->volume }}</td>
@@ -41,7 +43,7 @@ Armor - Cataclysm: Dark Days Ahead
 <script>
 $(function() {
     $(".tablesorter").tablesorter({
-      sortList: [[2,0]]
+      sortList: [[1,0]]
       });
 });
 </script>

@@ -12,6 +12,7 @@ Consumables - Cataclysm: Dark Days Ahead
 <table class="table table-bordered table-hover tablesorter">
   <thead>
   <tr>
+    <th></th>
     <th>Name</th>
     <th>Quench</th>
     <th><span title="Nutrition">Nut</span></th>
@@ -24,6 +25,7 @@ Consumables - Cataclysm: Dark Days Ahead
 </thead>
 @foreach($items as $item)
 <tr>
+  <td>{{ $item->symbol }}</td>
   <td><a href="{{route('item.view', $item->id)}}">{{ $item->name }}</a></td>
   <td>{{ $item->quench }}</td>
   <td>{{ $item->nutrition }}</td>

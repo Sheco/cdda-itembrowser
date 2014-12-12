@@ -19,6 +19,7 @@ Please select an entry from the menu on the left.
 <table class="table table-bordered table-hover tablesorter">
   <thead>
   <tr>
+    <th></th>
     <th>Name</th>
     <th>Level</th>
     <th>Recipes</th>
@@ -26,6 +27,7 @@ Please select an entry from the menu on the left.
 </thead>
 @foreach($items as $item)
 <tr>
+  <td>{{ $item->symbol }}</td>
   <td><a href="{{route('item.view', $item->id)}}">{{ $item->name }}</a></td>
   <td>{{{ $item->qualityLevel($id) }}}</td>
   <td>{{{ $item->count("toolFor") }}}</td>
@@ -36,7 +38,7 @@ Please select an entry from the menu on the left.
 <script>
 $(function() {
     $(".tablesorter").tablesorter({
-      sortList: [[1,0]]
+      sortList: [[2,0]]
       });
 });
 </script>

@@ -12,6 +12,7 @@ Books - Cataclysm: Dark Days Ahead
 <table class="table table-bordered table-hover tablesorter">
   <thead>
   <tr>
+    <th></th>
     <th>Name</th>
     <th>Skill</th>
     <th><span title="Required Level">RL</span></th>
@@ -23,6 +24,7 @@ Books - Cataclysm: Dark Days Ahead
 </thead>
 @foreach($items as $item)
 <tr>
+  <td>{{ $item->symbol }}</td>
   <td><a href="{{route('item.view', $item->id)}}">{{ $item->name }}</a></td>
   <td>{{ $item->skill }}</td>
   <td>{{ $item->required_level }}</td>
@@ -37,7 +39,7 @@ Books - Cataclysm: Dark Days Ahead
 <script>
 $(function() {
     $(".tablesorter").tablesorter({
-      sortList: [[4,1]]
+      sortList: [[5,1]]
       });
 });
 </script>

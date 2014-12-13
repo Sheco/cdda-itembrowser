@@ -15,8 +15,6 @@ Items with bashing+cutting damage higher than 10 and to-hit bonus higher than -2
     <th>Material</th>
     <th><span title="Volume">V</span></th>
     <th><span title="Weight">W</span></th>
-    <th><span title="Bashing">B</span></th>
-    <th><span title="Cutting">C</span></th>
     <th><span title="Bashing+Cutting">B+C</span></th>
     <th><span title="To-Hit">H</span></th>
   </tr>
@@ -28,8 +26,6 @@ Items with bashing+cutting damage higher than 10 and to-hit bonus higher than -2
   <td>{{ $item->materials }}</td>
   <td>{{ $item->volume }}</td>
   <td>{{ $item->weight }}</td>
-  <td>{{ $item->bashing }}</td>
-  <td>{{ $item->cutting }}</td>
   <td>{{ $item->bashing+$item->cutting }}</td>
   <td>{{ $item->to_hit }}</td>
 </tr>

@@ -15,7 +15,7 @@ Items with bashing+cutting damage higher than 10 and to-hit bonus higher than -2
     <th>Material</th>
     <th><span title="Volume">V</span></th>
     <th><span title="Weight">W</span></th>
-    <th><span title="Bashing+Cutting">B+C</span></th>
+    <th><span title="Bashing+Cutting">Dmg</span></th>
     <th><span title="To-Hit">H</span></th>
   </tr>
 </thead>

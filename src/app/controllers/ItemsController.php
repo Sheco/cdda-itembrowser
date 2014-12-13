@@ -40,7 +40,7 @@ class ItemsController extends Controller
     $item = $this->repo->getObjectOrFail("Item", $id);
     $categories = $item->toolCategories;
 
-    if($category===null and !empty($categories)) {
+    if($category===null) {
       $category = key($categories);
       return Redirect::route(Route::currentRouteName(), array($id, $category));
     }

@@ -104,7 +104,10 @@ class Item implements Robbo\Presenter\PresentableInterface
 
   public function getToolCategories()
   {
-    return $this->repo->all("item.categories.{$this->id}");
+    $categories = $this->repo->all("item.categories.{$this->id}");
+    if(empty($categories))
+      return array("CC_NONE"=>"CC_NONE");
+    return $categories;
   }
 
   public function getToolForCategory($category)

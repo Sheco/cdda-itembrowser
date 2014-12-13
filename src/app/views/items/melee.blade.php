@@ -17,6 +17,7 @@ Items with bashing+cutting damage higher than 10 and to-hit bonus higher than -2
     <th><span title="Weight">W</span></th>
     <th><span title="Moves per attack">M/A</span></th>
     <th><span title="Bashing+Cutting">Dmg</span></th>
+    <th><span title="Damage per move">dps</span></th>
     <th><span title="To-Hit">H</span></th>
   </tr>
 </thead>
@@ -29,6 +30,7 @@ Items with bashing+cutting damage higher than 10 and to-hit bonus higher than -2
   <td>{{ $item->weight }}</td>
   <td>{{ $item->movesPerAttack }}</td>
   <td>{{ $item->bashing+$item->cutting }}</td>
+  <td>{{ $item->damagePerMove }}</td>
   <td>{{ $item->to_hit }}</td>
 </tr>
 </tr>
@@ -37,7 +39,7 @@ Items with bashing+cutting damage higher than 10 and to-hit bonus higher than -2
 <script>
 $(function() {
     $(".tablesorter").tablesorter({
-      sortList: [[6,1]]
+      sortList: [[7,1]]
       });
 });
 </script>

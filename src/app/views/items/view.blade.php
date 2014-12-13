@@ -23,6 +23,7 @@
       @endif
       To-hit bonus: {{{ $item->to_hit }}}<br>
       Moves per attack: {{{ $item->movesPerAttack }}}<br>
+      Damage per move: {{{ $item->damagePerMove }}}<br>
       Materials: {{ $item->materials }}<br>
       @if ($item->hasFlags)
       Flags: {{ $item->flags }}<br>

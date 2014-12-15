@@ -5,6 +5,7 @@
   <th>Name</th>
   <th>HP</th>
   <th>Dmg</th>
+  <th>MaxDmg</th>
   <th>Melee sk</th>
   <th>Dodge sk</th>
 </tr>
@@ -15,6 +16,7 @@
   <td><a href="{{ route('monster.view', array($monster->id)) }}">{{ $monster->niceName }}</a></td>
   <td>{{{ $monster->hp }}}</td>
   <td>{{{ $monster->damage }}}</td>
+  <td>{{{ $monster->maxDamage }}}</td>
   <td>{{{ $monster->melee_skill }}}</td>
   <td>{{{ $monster->dodge }}}</td>
 </tr>

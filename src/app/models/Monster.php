@@ -15,5 +15,9 @@ class Monster implements Robbo\Presenter\PresentableInterface
   {
     return new Presenters\Monster($this);
   }
+
+  public function getMaxDamage() {
+    return ($this->melee_dice*$this->melee_dice_sides)+$this->melee_cut;
+  }
 }
 

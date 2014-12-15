@@ -53,4 +53,8 @@ class Monster extends \Robbo\Presenter\Presenter
   function presentDescription() {
     return preg_replace("/\\n/", "<br>", htmlspecialchars($this->object->description));
   }
+
+  function presentAvgDamage() {
+    return number_format($this->object->avgDamage, 2);
+  }
 }

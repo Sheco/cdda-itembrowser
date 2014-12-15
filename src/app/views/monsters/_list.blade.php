@@ -6,6 +6,7 @@
   <th>HP</th>
   <th>Dmg</th>
   <th>MaxDmg</th>
+  <th>AvgDmg</th>
   <th>Melee sk</th>
   <th>Dodge sk</th>
 </tr>
@@ -17,6 +18,7 @@
   <td>{{{ $monster->hp }}}</td>
   <td>{{{ $monster->damage }}}</td>
   <td>{{{ $monster->maxDamage }}}</td>
+  <td>{{{ $monster->avgDamage }}}</td>
   <td>{{{ $monster->melee_skill }}}</td>
   <td>{{{ $monster->dodge }}}</td>
 </tr>

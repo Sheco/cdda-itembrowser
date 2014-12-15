@@ -15,12 +15,12 @@
 <tr>
   <td>{{ $monster->symbol }}</td>
   <td><a href="{{ route('monster.view', array($monster->id)) }}">{{ $monster->niceName }}</a></td>
-  <td>{{{ $monster->hp }}}</td>
-  <td>{{{ $monster->damage }}}</td>
-  <td>{{{ $monster->maxDamage }}}</td>
-  <td>{{{ $monster->avgDamage }}}</td>
-  <td>{{{ $monster->melee_skill }}}</td>
-  <td>{{{ $monster->dodge }}}</td>
+  <td class="text-right">{{{ $monster->hp }}}</td>
+  <td class="text-right">{{{ $monster->damage }}}</td>
+  <td class="text-right">{{{ $monster->maxDamage }}}</td>
+  <td class="text-right">{{{ $monster->avgDamage }}}</td>
+  <td class="text-right">{{{ $monster->melee_skill }}}</td>
+  <td class="text-right">{{{ $monster->dodge }}}</td>
 </tr>
 @endforeach
 </table>

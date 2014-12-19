@@ -132,6 +132,15 @@ class Item
     if ($object->type=="GUN") {
       $repo->addIndex("gun.$object->skill", $object->id, $object->repo_id);
     }
+
+    if ($object->type=="GUNMOD") {
+      foreach($object->mod_targets as $target) {
+        $repo->addIndex("gunmods.$target.$object->location", $object->id, $object->repo_id);
+        $repo->addIndex("gunmodSkills", $target, $target);
+      }
+      $repo->addIndex("gunmodParts", $object->location, $object->location);
+    }
+
     if ($object->type=="AMMO") {
       $repo->addIndex("ammo.$object->ammo_type", $object->id, $object->repo_id);
     }

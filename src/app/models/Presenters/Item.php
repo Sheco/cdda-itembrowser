@@ -140,4 +140,43 @@ class Item extends \Robbo\Presenter\Presenter
   {
     return ($this->object->stim*5)." mins";
   }
+
+  public function presentValidModLocations() 
+  {
+    $ret = array();
+    $parts = $this->object->valid_mod_locations;
+    foreach($parts as $part) {
+      $ret[] = "$part[1] ". link_to_route("item.gunmods", $part[0], array($this->object->skill, $part[0]));
+    }
+    return join("; ", $ret);
+  }
+
+  public function presentModSkills() 
+  {
+    $ret = array();
+    foreach($this->mod_targets as $target) {
+      $ret[] = link_to_route("item.guns", $target, $target);
+    }
+    return join(", ", $ret);
+  }
+
+  public function presentClipSizeModifier() 
+  {
+    return sprintf("%+d", $this->object->clip_size_modifier);
+  }
+
+  public function presentDamageModifier() 
+  {
+    return sprintf("%+d", $this->object->damage_modifier);
+  }
+
+  public function presentBurstModifier() 
+  {
+    return sprintf("%+d", $this->object->burst_modifier);
+  }
+
+  public function presentRecoilModifier() 
+  {
+    return sprintf("%+d", $this->object->recoil_modifier);
+  }
 }

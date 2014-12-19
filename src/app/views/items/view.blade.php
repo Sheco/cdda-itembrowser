@@ -95,9 +95,38 @@
     @else
     Burst size: {{{$item->burst}}}
     @endif
+    @if ($item->isModdable)
+      Mod Locations:<br>
+      {{ $item->validModLocations }}
+    @endif
+    @endif
+
+    @if ($item->isGunMod)
+    @if ($item->dispersion!=0)
+      Dispersion: {{$item->dispersion}}<br>
+    @endif
+
+    @if ($item->damageModifier!=0)
+      Damage: {{$item->damageModifier}}<br>
+    @endif
+
+    @if ($item->clipSizeModifier!=0)
+      Magazine: {{$item->clipSizeModifier}}%<br>
+    @endif
+    @if ($item->recoilModifier!=0)
+      Recoil: {{$item->recoilModifier}}<br>
+    @endif
+    @if ($item->burstModifier!=0)
+      Burst: {{$item->burstModifier}}<br>
+    @endif
+    @if ($item->ammo_modifier!="NULL")
+      Ammo: {{$item->ammo_modifier}}<br>
+    @endif
+      Used on: {{$item->modSkills}}<br>
+      Location: {{$item->location}}<br>
+    @endif
 
     <br>
-    @endif
     @if ($item->isConsumable)
       Phase: {{{ $item->phase }}}<br>
       Nutrition: {{{ $item->nutrition }}}<br>

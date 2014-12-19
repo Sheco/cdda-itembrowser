@@ -328,7 +328,23 @@ class Item implements Robbo\Presenter\PresentableInterface
     return count($this->flags)>0;
   }
 
-  public function getDamagePerMove() {
+  public function getDamagePerMove() 
+  {
     return number_format(($this->bashing+$this->cutting)/$this->movesPerAttack,2);
+  }
+
+  public function getIsModdable() 
+  {
+    return count($this->valid_mod_locations)>0;
+  }
+
+  public function getIsGunMod() 
+  {
+    return $this->type=="GUNMOD";
+  }
+
+  public function getModGuns() 
+  {
+    return $this->repo->allObjects("Item", "gunmodGuns.{$this->data->id}");
   }
 }

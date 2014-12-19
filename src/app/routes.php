@@ -158,6 +158,10 @@ Route::group(array('after'=>'theme:layouts.bootstrap'), function () {
     'uses'=>'MonsterController@view')
   );
 
+  Route::get('/gunmods/{skill?}/{part?}', array(
+    'as'=>'item.gunmods',
+    'uses'=>'ItemsController@gunmods')
+  );
 });
 
 Route::get('/sitemap.xml', 'ItemsController@sitemap');

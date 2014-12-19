@@ -192,6 +192,13 @@ class ItemsController extends Controller
     return View::make("items.skills", compact("items", "skills", "id", "level", "levels"));
   }
 
+  public function gunmods($skill=null, $part=null) {
+    $skills = $this->repo->all("gunmodSkills");
+    $parts = $this->repo->all("gunmodParts");
+    $mods = $this->repo->allObjects("Item", "gunmods.$skill.$part");
+    return View::make("items.gunmods", compact('skill', 'part', "skills", "parts", 'mods')); 
+  }
+
   public function wiki($id)
   {
     $item = $this->repo->getObjectOrFail("Item", $id);

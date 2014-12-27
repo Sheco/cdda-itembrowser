@@ -4,7 +4,7 @@
 VAGRANTFILE_API_VERSION = "2"
 
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
-  config.vm.box = "wheezy"
+  config.vm.box = "ubuntu/trusty32"
   config.vm.hostname = "cataclysm"
   config.vm.synced_folder ".", "/vagrant"
   config.vm.network :private_network, type: :dhcp

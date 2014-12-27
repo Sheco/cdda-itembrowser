@@ -1,15 +1,19 @@
 ## Cataclysm DDA Item/Recipe Browser
 
-### Instalation
 
-This is a vagrant environment, you only need to have a compatible debian box
-installed in your computer and run vagrant up. Edit Vagrantfile to 
-change the box name if needed.
 
-I downloaded debian 7.3 from Puppet Labs: 
-http://puppet-vagrant-boxes.puppetlabs.com/
 
-Everything should be up and running in a few minutes.
+### Installation
+
+This can be used in a [Vagrant](https://www.vagrantup.com/) environment. The current scripts provided have been tested on the official ubuntu/trusty32 vagrant box.
+
+To setup and run the environment, execute:
+
+```
+vagrant up
+```
+
+Everything should be up and running in a few minutes, you should be able to access the webapp at the appropiate address, it will probably be http://localhost:8000
 
 ### Manual instalation
 
@@ -20,8 +24,8 @@ have the appropiate dependencies.
 * php5.3 (with the mcrypt extension)
 * A webserver
 
-Then you can run the setup.sh script, it expects a single argument, a
-path to install the data files and variable files.
+Then you can run the setup.sh script, it expects a single argument, an
+absolute path to install the data files and variable files.
 
 The webserver should be able to read and write the files in the "storage"
 directory inside the data file path.

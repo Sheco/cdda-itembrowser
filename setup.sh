@@ -20,7 +20,7 @@ done
 chmod -R g+w "$DATA_PATH"
 
 # download the cataclysm dda's source code
-[ ! -e master.zip ] && wget https://github.com/CleverRaven/Cataclysm-DDA/archive/master.zip
+[ ! -e master.zip ] && wget -q https://github.com/CleverRaven/Cataclysm-DDA/archive/master.zip
 unzip -d "$DATA_PATH/storage" master.zip
 mv "$DATA_PATH/storage/Cataclysm-DDA-master" "$DATA_PATH/storage/Cataclysm-DDA"
 

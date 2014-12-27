@@ -29,7 +29,7 @@ If you don't want to run a vagrant setup, you only need to make sure you
 have the appropiate dependencies.
 
 * composer
-* php5.3 (with the mcrypt extension)
+* php5.4 (with the mcrypt extension)
 * A webserver
 
 Then you can run the setup.sh script, it expects a single argument, an

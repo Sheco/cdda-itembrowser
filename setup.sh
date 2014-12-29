@@ -14,9 +14,7 @@ DATA_PATH=$1
 cd "$BASE_PATH"
 # make storage paths
 mkdir -p "$DATA_PATH"/vendor
-for dir in cache logs meta sessions views database
-do mkdir -p "$DATA_PATH"/storage/$dir
-done
+mkdir -p "$DATA_PATH"/storage/{cache,logs,meta,sessions,views,database}
 chmod -R g+w "$DATA_PATH"
 
 # download the cataclysm dda's source code

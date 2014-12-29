@@ -42,7 +42,7 @@ On the top bar, there are two links, stable and development, each one points to 
 
 <hr>
 <p>
-If you have any requests or if you find a bug, please let me know at <a href="mailto:sduran@estilofusion.com">sduran@estilofusion.com</a>
+The source code for this item browser is available at <a href="https://github.com/Sheco/cdda-itembrowser">Github</a>.
 </p>
 </div>
 

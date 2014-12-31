@@ -1,7 +1,8 @@
 Cataclysm DDA Item/Recipe Browser
 =================================
 
-This is a simple tool to browse through the items and recipes available in Cataclysm: Dark Days Ahead, this is done by reading the game's data files and creating an optimized database linking everything together.
+This is a simple tool to browse through the items and recipes available in [Cataclysm: Dark Days Ahead](http://cataclysmdda.com), this is done by reading the game's data files and creating an optimized database linking everything together.
+
 
 ### Features
 

@@ -3,7 +3,7 @@ namespace Repositories\Indexers;
 
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 
-class Item
+class Item implements IndexerInterface
 {
   protected $types;
 
@@ -54,17 +54,9 @@ class Item
         "swimming"=>"survival",
         "none"=>"fun",
     );
-    \Event::listen("cataclysm.newObject", function ($repo, $object) {
-      $this->getIndexes($repo, $object);
-    });
-
-    \Event::listen("cataclysm.finishedLoading", function($repo)
-    {
-      $this->finishLoading($repo);
-    });
   }
 
-  private function finishLoading($repo)
+  public function finishedLoading($repo)
   {
     foreach ($repo->all(self::DEFAULT_INDEX) as $id=>$item) {
       $recipes = count($repo->all("item.toolFor.$id"));
@@ -84,7 +76,7 @@ class Item
     }
   }
 
-  private function getIndexes($repo, $object)
+  public function getIndexes($repo, $object)
   {
     // only index objects with valid item types.
     if (!isset($this->types[$object->type]))

@@ -5,6 +5,7 @@ use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Input\InputArgument;
 
 use Repositories\RepositoryInterface;
+use Repositories\Indexers;
 
 class CataclysmCache extends Command {
 
@@ -43,6 +44,9 @@ class CataclysmCache extends Command {
 	public function fire()
 	{
     $this->info("rebuilding database cache...");
+
+    $this->registerIndexers();
+
     $this->repo->compile($this->argument('path'), $this->option('adhesion'));
     \Cache::flush();
 	}
@@ -72,4 +76,23 @@ class CataclysmCache extends Command {
 		);
 	}
 
+    private function registerIndexers()
+    {
+        //TODO: find a way to find the indexers automatically
+        // instead of hardcoding them here.
+        $this->registerIndexer(new Indexers\Item);
+        $this->registerIndexer(new Indexers\Material);
+        $this->registerIndexer(new Indexers\Recipe);
+        $this->registerIndexer(new Indexers\Quality);
+        $this->registerIndexer(new Indexers\Monster);
+        $this->registerIndexer(new Indexers\MonsterGroup);
+    }
+
+    private function registerIndexer(Indexers\IndexerInterface $indexer) {
+        \Event::listen('cataclysm.newObject', 
+            array($indexer, 'getIndexes'));
+
+        \Event::listen('cataclysm.finishedLoading', 
+            array($indexer, 'finishedLoading'));
+    }
 }

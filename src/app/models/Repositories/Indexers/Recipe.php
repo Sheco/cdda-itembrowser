@@ -1,24 +1,12 @@
 <?php
 namespace Repositories\Indexers;
 
-class Recipe
+class Recipe implements IndexerInterface
 {
   const DEFAULT_INDEX = "recipe";
   const ID_FIELD = "repo_id";
 
-  public function __construct()
-  {
-    \Event::listen("cataclysm.newObject", function ($repo, $object) {
-      $this->getIndexes($repo, $object);
-    });
-
-    \Event::listen("cataclysm.finishedLoading", function($repo)
-    {
-      $this->finishLoading($repo);
-    });
-  }
-
-  private function finishLoading($repo)
+  public function finishedLoading($repo)
   {
     foreach($repo->all(self::DEFAULT_INDEX) as $id)
     {
@@ -79,7 +67,7 @@ class Recipe
     $repo->addIndex("item.$key.$id", $recipe->repo_id, $recipe->repo_id);
   }
 
-  private function getIndexes($repo, $object)
+  public function getIndexes($repo, $object)
   {
     if ($object->type=="recipe") {
       $recipe = $object;

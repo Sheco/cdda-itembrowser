@@ -109,6 +109,7 @@ return array(
         'Illuminate\View\ViewServiceProvider',
         'Illuminate\Workbench\WorkbenchServiceProvider',
         'Robbo\Presenter\PresenterServiceProvider',
+        'DataServiceProvider',
 
 	),
 

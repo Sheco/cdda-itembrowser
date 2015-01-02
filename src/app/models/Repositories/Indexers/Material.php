@@ -1,25 +1,22 @@
 <?php
 namespace Repositories\Indexers;
 
-class Material
+class Material implements IndexerInterface
 {
   protected $database;
 
   const DEFAULT_INDEX = "materials";
   const ID_FIELD = "ident";
 
-  public function __construct()
-  {
-    \Event::listen("cataclysm.newObject", function ($repo, $object) {
-      $this->getIndexes($repo, $object);
-    });
-  }
-
-  private function getIndexes($repo, $object)
+  public function getIndexes($repo, $object)
   {
     if ($object->type=="material") {
       $repo->addIndex(self::DEFAULT_INDEX, $object->ident, $object->repo_id);
     }
+  }
+
+  public function finishedLoading($repo)
+  {
   }
 
   public function model()

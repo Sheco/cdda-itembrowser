@@ -1,21 +1,14 @@
 <?php
 namespace Repositories\Indexers;
 
-class Monster
+class Monster implements IndexerInterface
 {
   protected $database;
 
   const DEFAULT_INDEX = "monsters";
   const ID_FIELD = "id";
 
-  public function __construct()
-  {
-    \Event::listen("cataclysm.newObject", function ($repo, $object) {
-      $this->getIndexes($repo, $object);
-    });
-  }
-
-  private function getIndexes($repo, &$object)
+  public function getIndexes($repo, $object)
   {
     if ($object->type=="MONSTER") {
       $repo->addIndex(self::DEFAULT_INDEX, $object->id, $object->repo_id);
@@ -26,6 +19,10 @@ class Monster
       }
       return;
     }
+  }
+
+  public function finishedLoading($repo)
+  {
   }
 
   public function model()

@@ -2,18 +2,17 @@
 
 class Material implements Robbo\Presenter\PresentableInterface
 {
-  use MagicModel;
+    use MagicModel;
 
-  protected $data;
+    protected $data;
 
-  public function load($data)
-  {
-    $this->data = $data;
-  }  
+    public function load($data)
+    {
+        $this->data = $data;
+    }
 
-  public function getPresenter()
-  {
-    return new Presenters\Material($this);
-  }
+    public function getPresenter()
+    {
+        return new Presenters\Material($this);
+    }
 }
-

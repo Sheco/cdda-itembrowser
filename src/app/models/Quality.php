@@ -2,19 +2,18 @@
 
 class Quality implements Robbo\Presenter\PresentableInterface
 {
-  use MagicModel;
+    use MagicModel;
 
-  protected $data;
+    protected $data;
 
-  public function load($data)
-  {
-    $data->name = str_replace(" quality", "", $data->name);
-    $this->data = $data;
-  }  
+    public function load($data)
+    {
+        $data->name = str_replace(" quality", "", $data->name);
+        $this->data = $data;
+    }
 
-  public function getPresenter()
-  {
-    return new Presenters\Quality($this);
-  }
+    public function getPresenter()
+    {
+        return new Presenters\Quality($this);
+    }
 }
-

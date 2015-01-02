@@ -3,25 +3,24 @@ namespace Repositories\Indexers;
 
 class Quality implements IndexerInterface
 {
-  protected $database;
+    protected $database;
 
-  const DEFAULT_INDEX = "tool_quality";
-  const ID_FIELD = "id";
+    const DEFAULT_INDEX = "tool_quality";
+    const ID_FIELD = "id";
 
-  public function getIndexes($repo, $object)
-  {
-    if ($object->type=="tool_quality")
+    public function getIndexes($repo, $object)
     {
-      $repo->addIndex(self::DEFAULT_INDEX, $object->id, $object->repo_id);
+        if ($object->type == "tool_quality") {
+            $repo->addIndex(self::DEFAULT_INDEX, $object->id, $object->repo_id);
+        }
     }
-  }
 
-  public function finishedLoading($repo)
-  {
-  }
+    public function finishedLoading($repo)
+    {
+    }
 
-  public function model()
-  {
-    return \App::make("Quality");
-  }
+    public function model()
+    {
+        return \App::make("Quality");
+    }
 }

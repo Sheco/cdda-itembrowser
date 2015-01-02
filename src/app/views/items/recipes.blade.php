@@ -24,7 +24,7 @@ var show_recipe = function(id)
 @include('items.menu', array('active'=>'recipes'))
 <h1>
   {{$item->symbol}} <a href="{{ route("item.view", array("id"=>$item->id)) }}">{{ $item->name }}</a>
-@if ($item->count("toolFor")) 
+@if ($item->count("toolFor"))
  can be used to craft following recipes:<br>
 @else
  can't be used to craft anything.
@@ -32,7 +32,7 @@ var show_recipe = function(id)
 </h1>
 <ul class="nav nav-tabs">
 @foreach ($categories as $cat)
-<li @if ($cat==$category) class="active" @endif>{{ link_to_route("item.recipes", substr($cat, 3), 
+<li @if ($cat==$category) class="active" @endif>{{ link_to_route("item.recipes", substr($cat, 3),
       array("id"=>$item->id, "category"=>$cat)) }}</li>
 @endforeach
 </ul>
@@ -48,8 +48,8 @@ var show_recipe = function(id)
 <div class="col-md-6">
 @foreach($recipes as $recipe_id=>$recipe)
 <div id="recipe{{$recipe_id}}" class="recipes" style="display: none;">
-{{$recipe->result->symbol}} {{ link_to_route("item.view", 
-$recipe->result->name, 
+{{$recipe->result->symbol}} {{ link_to_route("item.view",
+$recipe->result->name,
 array("id"=>$recipe->result->id)) }}<br>
   Category: {{{ $recipe->category }}}<br>
   SubCategory: {{{ $recipe->subcategory }}}<br>

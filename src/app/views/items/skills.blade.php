@@ -28,4 +28,3 @@ Please select an entry from the menu on the left and a level on the top.
 </div>
 </div>
 @stop
-

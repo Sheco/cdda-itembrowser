@@ -20,17 +20,17 @@ Crafting could be as simple as looking at your hammer and being able to know wha
 <h2>Common useful items</h2>
 It's always nice to make a {{link_to_route('item.recipes', 'fire', array("id"=>"fire")) }}. There are lots of things you can do with an {{link_to_route('item.view', 'integrated toolset', "toolset") }}.<br>
 <br>
-To repair your armor and clothes, you can cut some 
-{{ link_to_route("item.materials", "items made of wood", "wood") }} 
- to obtain 
-{{ link_to_route("item.view", "skewers", "skewer") }}, 
- with that you can 
-{{ link_to_route("item.craft", "craft a wooden needle", "needle_wood") }}, 
- then you need 
+To repair your armor and clothes, you can cut some
+{{ link_to_route("item.materials", "items made of wood", "wood") }}
+ to obtain
+{{ link_to_route("item.view", "skewers", "skewer") }},
+ with that you can
+{{ link_to_route("item.craft", "craft a wooden needle", "needle_wood") }},
+ then you need
 {{ link_to_route("item.view", "thread", "thread") }}
- so you will have to 
-{{ link_to_route("item.disassemble", "disassemble a rag", "rag") }}, 
- which can be obtained by cutting 
+ so you will have to
+{{ link_to_route("item.disassemble", "disassemble a rag", "rag") }},
+ which can be obtained by cutting
 {{ link_to_route("item.materials", "items made of cotton", "cotton") }}.
 <br>
 </p>

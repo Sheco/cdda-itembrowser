@@ -3,96 +3,95 @@
 use Illuminate\Console\Command;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Input\InputArgument;
-
-use Repositories\RepositoryInterface;
 use Repositories\Indexers;
 
-class CataclysmCache extends Command {
+class CataclysmCache extends Command
+{
+    /**
+     * The console command name.
+     *
+     * @var string
+     */
+    protected $name = 'cataclysm:rebuild';
 
-	/**
-	 * The console command name.
-	 *
-	 * @var string
-	 */
-	protected $name = 'cataclysm:rebuild';
+    /**
+     * The console command description.
+     *
+     * @var string
+     */
+    protected $description = 'Compile the database.';
 
-	/**
-	 * The console command description.
-	 *
-	 * @var string
-	 */
-	protected $description = 'Compile the database.';
+    protected $repo;
+    /**
+     * Create a new command instance.
+     *
+     * @return void
+     */
+    public function __construct(Repositories\CompiledReader $repo)
+    {
+        $this->repo = $repo;
+        parent::__construct();
+    }
 
+    /**
+     * Execute the console command.
+     *
+     * @return mixed
+     */
+    public function fire()
+    {
+        $this->info("rebuilding database cache...");
 
-  protected $repo;
-	/**
-	 * Create a new command instance.
-	 *
-	 * @return void
-	 */
-	public function __construct(Repositories\CompiledReader $repo)
-  {
-    $this->repo = $repo;
-		parent::__construct();
-	}
+        $this->registerIndexers();
 
-	/**
-	 * Execute the console command.
-	 *
-	 * @return mixed
-	 */
-	public function fire()
-	{
-    $this->info("rebuilding database cache...");
+        $this->repo->compile($this->argument('path'), $this->option('adhesion'));
+        \Cache::flush();
+    }
 
-    $this->registerIndexers();
+    /**
+     * Get the console command arguments.
+     *
+     * @return array
+     */
+    protected function getArguments()
+    {
+        $path = \Config::get('cataclysm.dataPath');
 
-    $this->repo->compile($this->argument('path'), $this->option('adhesion'));
-    \Cache::flush();
-	}
+        return array(
+      array('path', InputArgument::OPTIONAL, 'Path to the game files', $path),
+        );
+    }
 
-	/**
-	 * Get the console command arguments.
-	 *
-	 * @return array
-	 */
-	protected function getArguments()
-	{
-    $path = \Config::get('cataclysm.dataPath');
-		return array(
-      array('path', InputArgument::OPTIONAL, 'Path to the game files', $path)
-		);
-	}
-
-	/**
-	 * Get the console command options.
-	 *
-	 * @return array
-	 */
-	protected function getOptions()
-	{
-		return array(
-      array('adhesion', 'a', InputOption::VALUE_OPTIONAL, "Chunk adhesion, reduces the amount of files created", 100)
-		);
-	}
+    /**
+     * Get the console command options.
+     *
+     * @return array
+     */
+    protected function getOptions()
+    {
+        return array(
+      array('adhesion', 'a', InputOption::VALUE_OPTIONAL, "Chunk adhesion, reduces the amount of files created", 100),
+        );
+    }
 
     private function registerIndexers()
     {
         //TODO: find a way to find the indexers automatically
         // instead of hardcoding them here.
-        $this->registerIndexer(new Indexers\Item);
-        $this->registerIndexer(new Indexers\Material);
-        $this->registerIndexer(new Indexers\Recipe);
-        $this->registerIndexer(new Indexers\Quality);
-        $this->registerIndexer(new Indexers\Monster);
-        $this->registerIndexer(new Indexers\MonsterGroup);
+        $this->registerIndexer(new Indexers\Item());
+        $this->registerIndexer(new Indexers\Material());
+        $this->registerIndexer(new Indexers\Recipe());
+        $this->registerIndexer(new Indexers\Quality());
+        $this->registerIndexer(new Indexers\Monster());
+        $this->registerIndexer(new Indexers\MonsterGroup());
     }
 
-    private function registerIndexer(Indexers\IndexerInterface $indexer) {
-        \Event::listen('cataclysm.newObject', 
+    private function registerIndexer(Indexers\IndexerInterface $indexer)
+    {
+        \Event::listen('cataclysm.newObject',
             array($indexer, 'getIndexes'));
 
-        \Event::listen('cataclysm.finishedLoading', 
+        \Event::listen('cataclysm.finishedLoading',
             array($indexer, 'finishedLoading'));
     }
 }

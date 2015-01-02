@@ -2,7 +2,8 @@
 
 namespace Repositories\Indexers;
 
-interface IndexerInterface {
-    function getIndexes($repo, $object);
-    function finishedLoading($repo);
+interface IndexerInterface
+{
+    public function getIndexes($repo, $object);
+    public function finishedLoading($repo);
 }

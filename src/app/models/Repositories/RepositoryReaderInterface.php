@@ -2,10 +2,10 @@
 
 namespace Repositories;
 
-interface RepositoryReaderInterface 
+interface RepositoryReaderInterface
 {
-  public function read($path=null);
-  public function get($index, $id);
-  public function all($index);
-  public function version();
+    public function read($path = null);
+    public function get($index, $id);
+    public function all($index);
+    public function version();
 }

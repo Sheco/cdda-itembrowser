@@ -11,16 +11,12 @@
 |
 */
 
-
-App::before(function($request)
-{
-	//
+App::before(function ($request) {
+    //
 });
 
-
-App::after(function($request, $response)
-{
-	//
+App::after(function ($request, $response) {
+    //
 });
 
 /*
@@ -34,15 +30,14 @@ App::after(function($request, $response)
 |
 */
 
-Route::filter('auth', function()
-{
-	if (Auth::guest()) return Redirect::guest('login');
+Route::filter('auth', function () {
+    if (Auth::guest()) {
+        return Redirect::guest('login');
+    }
 });
 
-
-Route::filter('auth.basic', function()
-{
-	return Auth::basic();
+Route::filter('auth.basic', function () {
+    return Auth::basic();
 });
 
 /*
@@ -56,9 +51,10 @@ Route::filter('auth.basic', function()
 |
 */
 
-Route::filter('guest', function()
-{
-	if (Auth::check()) return Redirect::to('/');
+Route::filter('guest', function () {
+    if (Auth::check()) {
+        return Redirect::to('/');
+    }
 });
 
 /*
@@ -72,25 +68,23 @@ Route::filter('guest', function()
 |
 */
 
-Route::filter('csrf', function()
-{
-	if (Session::token() != Input::get('_token'))
-	{
-		throw new Illuminate\Session\TokenMismatchException;
-	}
+Route::filter('csrf', function () {
+    if (Session::token() != Input::get('_token')) {
+        throw new Illuminate\Session\TokenMismatchException();
+    }
 });
 
-
-Route::filter('theme', function($route, $request, $response,  $layout='layouts.default')
-{
+Route::filter('theme', function ($route, $request, $response,  $layout = 'layouts.default') {
     // Redirects have no content and errors should handle their own layout.
-    if ($response->getStatusCode() > 300) return;
+    if ($response->getStatusCode() > 300) {
+        return;
+    }
 
     //get original view object
     $view = $response->getOriginalContent();
 
     //we will render the view nested to the layout
-    $content = View::make($layout)->nest('_content',$view->getName(), $view->getData())->render();
+    $content = View::make($layout)->nest('_content', $view->getName(), $view->getData())->render();
 
     $response->setContent($content);
 });

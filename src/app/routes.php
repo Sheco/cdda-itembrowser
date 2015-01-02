@@ -11,75 +11,74 @@
 |
 */
 
-Route::group(array('after'=>'theme:layouts.bootstrap'), function () {
+Route::group(array('after' => 'theme:layouts.bootstrap'), function () {
   Route::get('/', 'ItemsController@index');
 
-
-  Route::get('/armor/{part?}', function($part="") {
+  Route::get('/armor/{part?}', function ($part = "") {
     return Redirect::route('item.armors', array($part), 301);
   });
 
   Route::get('/armors/{part?}', array(
-      'as'=>'item.armors',
-      'uses'=>'ItemsController@armor')
+      'as' => 'item.armors',
+      'uses' => 'ItemsController@armor', )
   );
 
-  Route::get('/gun/{skill?}', function($skill="") {
+  Route::get('/gun/{skill?}', function ($skill = "") {
     return Redirect::route('item.guns', array($skill), 301);
   });
 
   Route::get('/guns/{skill?}', array(
-      'as'=>'item.guns',
-      'uses'=>'ItemsController@gun')
+      'as' => 'item.guns',
+      'uses' => 'ItemsController@gun', )
   );
 
   Route::get('/melee', array(
-      'as'=>'item.melee',
-      'uses'=>'ItemsController@melee')
+      'as' => 'item.melee',
+      'uses' => 'ItemsController@melee', )
   );
 
   Route::get('/books/{type?}', array(
-      'as'=>'item.books',
-      'uses'=>'ItemsController@books')
+      'as' => 'item.books',
+      'uses' => 'ItemsController@books', )
   );
 
   Route::get('/qualities/{id?}', array(
-      'as'=>'item.qualities',
-      'uses'=>'ItemsController@qualities')
+      'as' => 'item.qualities',
+      'uses' => 'ItemsController@qualities', )
   );
 
   Route::get('/materials/{id?}', array(
-      'as'=>'item.materials',
-      'uses'=>'ItemsController@materials')
+      'as' => 'item.materials',
+      'uses' => 'ItemsController@materials', )
   );
 
   Route::get('/flags/{id?}', array(
-      'as'=>'item.flags',
-      'uses'=>'ItemsController@flags')
+      'as' => 'item.flags',
+      'uses' => 'ItemsController@flags', )
   );
 
   Route::get('/skills/{id?}/{level?}', array(
-      'as'=>'item.skills',
-      'uses'=>'ItemsController@skills')
+      'as' => 'item.skills',
+      'uses' => 'ItemsController@skills', )
   );
 
   Route::get('/containers', array(
-      'as'=>'item.containers',
-      'uses'=>'ItemsController@containers')
+      'as' => 'item.containers',
+      'uses' => 'ItemsController@containers', )
   );
 
   Route::get('consumables/{type?}', array(
-      'as'=>'item.consumables',
-      'uses'=>'ItemsController@consumables')
+      'as' => 'item.consumables',
+      'uses' => 'ItemsController@consumables', )
   );
 
-  Route::get('consumibles/{type?}', function($type="") {
+  Route::get('consumibles/{type?}', function ($type = "") {
     return Redirect::route('item.consumables', array($type), 301);
   });
 
   Route::get('/search', array(
-      'as'=>'item.search', 
-      'uses'=>'ItemsController@search')
+      'as' => 'item.search',
+      'uses' => 'ItemsController@search', )
   );
 
   View::composer('layouts.bootstrap', function ($view) {
@@ -89,78 +88,78 @@ Route::group(array('after'=>'theme:layouts.bootstrap'), function () {
 
   View::composer('items.menu', function ($view) {
     $view->with('areas', array(
-      "view"=>array(
-        "route"=>"item.view",
-        "label"=>"View item",
+      "view" => array(
+        "route" => "item.view",
+        "label" => "View item",
       ),
-      "craft"=>array(
-        "route"=>"item.craft",
-        "label"=>"Craft",
+      "craft" => array(
+        "route" => "item.craft",
+        "label" => "Craft",
       ),
-      "recipes"=>array(
-        "route"=>"item.recipes",
-        "label"=>"Recipes",
+      "recipes" => array(
+        "route" => "item.recipes",
+        "label" => "Recipes",
       ),
-      "disassemble"=>array(
-        "route"=>"item.disassemble",
-        "label"=>"Disassemble",
+      "disassemble" => array(
+        "route" => "item.disassemble",
+        "label" => "Disassemble",
       ),
-      "wiki"=>array(
-        "route"=>"item.wiki",
-        "label"=>"Wiki"
+      "wiki" => array(
+        "route" => "item.wiki",
+        "label" => "Wiki",
       ),
     ));
   });
 
   Route::get('/{id}/craft', array(
-      'as'=>'item.craft',
-      'uses'=>'ItemsController@craft')
+      'as' => 'item.craft',
+      'uses' => 'ItemsController@craft', )
   )
     ->where('id', '[A-Za-z0-9_-]+');
 
   Route::get('/{id}/recipes/{category?}', array(
-      'as'=>'item.recipes',
-      'uses'=>'ItemsController@recipes')
+      'as' => 'item.recipes',
+      'uses' => 'ItemsController@recipes', )
   )
     ->where('id', '[A-Za-z0-9_-]+')
     ->where('category', '[A-Z_]+');
 
   Route::get('/{id}', array(
-        'as'=>'item.view',
-        'uses'=>"ItemsController@view")
+        'as' => 'item.view',
+        'uses' => "ItemsController@view", )
   )
     ->where('id', '[A-Za-z0-9_-]+');
 
   Route::get('/{id}/disassemble', array(
-      'as'=>'item.disassemble',
-      'uses'=>'ItemsController@disassemble')
+      'as' => 'item.disassemble',
+      'uses' => 'ItemsController@disassemble', )
   )
     ->where('id', '[A-Za-z0-9_-]+');
 
   Route::get('/{id}/wiki', array(
-      'as'=>'item.wiki',
-      'uses'=>'ItemsController@wiki')
+      'as' => 'item.wiki',
+      'uses' => 'ItemsController@wiki', )
   )
     ->where('id', '[A-Za-z0-9_-]+');
 
   Route::get('/monsters/groups/{id?}', array(
-    'as'=>'monster.groups',
-    'uses'=>'MonsterController@groups')
+    'as' => 'monster.groups',
+    'uses' => 'MonsterController@groups', )
   );
 
   Route::get('/monsters/species/{id?}', array(
-    'as'=>'monster.species',
-    'uses'=>'MonsterController@species')
+    'as' => 'monster.species',
+    'uses' => 'MonsterController@species', )
   );
 
   Route::get('/monsters/{id}', array(
-    'as'=>'monster.view',
-    'uses'=>'MonsterController@view')
+    'as' => 'monster.view',
+    'uses' => 'MonsterController@view', )
   );
 
   Route::get('/gunmods/{skill?}/{part?}', array(
-    'as'=>'item.gunmods',
-    'uses'=>'ItemsController@gunmods')
+    'as' => 'item.gunmods',
+    'uses' => 'ItemsController@gunmods', )
   );
 });
 
@@ -169,8 +168,7 @@ Route::get('/sitemap.xml', 'ItemsController@sitemap');
 /////////
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 
-App::error(function(ModelNotFoundException $e)
-{
+App::error(function (ModelNotFoundException $e) {
   return Response::view("notfound", array(), 404);
 });
 

@@ -39,7 +39,7 @@
     @endif
 
     @if ($item->count("disassembledFrom"))
-    Can be obtained when disassembling: 
+    Can be obtained when disassembling:
     @foreach($item->disassembledFrom as $recipe)
     {{ link_to_route("item.disassemble", $recipe->result->name, $recipe->result->id) }},
     @endforeach
@@ -140,12 +140,12 @@
       Stimulant: {{{ $item->stim }}}<br>
       Addiction: {{{ $item->addiction_potential }}}<br>
     @endif
-    @if ($item->isArmor) 
+    @if ($item->isArmor)
       Covers: {{{ $item->covers }}}<br>
       Coverage: {{{ $item->coverage }}}%<br>
       Encumberment: {{{ $item->encumbrance }}}<br>
-      Protection: Bash: 
-      {{{ $item->protection('bash') }}}  
+      Protection: Bash:
+      {{{ $item->protection('bash') }}}
       Cut:  {{{  $item->protection('cut') }}}<br>
       Acid: {{{  $item->protection('acid') }}}
       &nbsp;&nbsp;&nbsp;
@@ -185,7 +185,7 @@
     @if ($item->hasFlag("FIT"))
     <br>This piece of clothing fits you perfectly.<br>
     @endif
-    @if ($item->hasFlag("OVERSIZE")) 
+    @if ($item->hasFlag("OVERSIZE"))
     <br>This piece of clothing is large enough to accommodate mutated anatomy.<br>
     @endif
     @if ($item->hasFlag("SKINTIGHT"))
@@ -229,6 +229,6 @@ $(function() {
   $(".tablesorter").tablesorter({
     sortList: [[1,0]]
   });
-}); 
+});
 </script>
 @stop

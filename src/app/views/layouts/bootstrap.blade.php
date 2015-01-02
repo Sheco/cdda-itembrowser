@@ -9,7 +9,7 @@
 
     <title>@yield('title', 'Cataclysm: Dark Days Ahead Item Browser')</title>
 
-    <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" /> 
+    <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
 
     <!-- Bootstrap core CSS -->
     <link href="/css/bootstrap.css" rel="stylesheet">

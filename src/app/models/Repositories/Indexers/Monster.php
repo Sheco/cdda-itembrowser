@@ -19,8 +19,8 @@ class Monster
   {
     if ($object->type=="MONSTER") {
       $repo->addIndex(self::DEFAULT_INDEX, $object->id, $object->repo_id);
-      $object->species = (array) $object->species;
-      foreach($object->species as $species) {
+      $objspecies = (array) $object->species;
+      foreach($objspecies as $species) {
         $repo->addIndex("monster.species.$species", $object->id, $object->repo_id);
         $repo->addIndex("monster.species", $species, $species);
       }

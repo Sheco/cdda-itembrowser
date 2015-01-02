@@ -27,5 +27,9 @@ class Monster implements Robbo\Presenter\PresentableInterface
   public function getAvgDamage() {
     return ($this->minDamage+$this->maxDamage)/2;
   }
+
+  public function getSpecies() {
+      return (array) $this->data->species;
+  }
 }
 

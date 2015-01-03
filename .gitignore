@@ -6,5 +6,4 @@ Thumbs.db
 .*.sw*
 .vagrant
 *.zip
-/.*
 /src/vendor

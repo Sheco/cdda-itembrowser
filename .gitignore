@@ -7,6 +7,4 @@ Thumbs.db
 .vagrant
 *.zip
 /.*
-/src/app/storage
 /src/vendor
-

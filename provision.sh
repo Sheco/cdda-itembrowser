@@ -12,7 +12,7 @@ set -e
 
 # download packages
 apt-get update
-apt-get -y install php5 php5-mcrypt php5-mysql avahi-daemon php-apc unzip
+apt-get -y install php5 php5-mcrypt php5-mysql avahi-daemon php-apc unzip dos2unix
 
 # setup php
 php5enmod mcrypt
@@ -28,7 +28,10 @@ ln -sf "$BASE_PATH"/src/public /var/www/html
 curl -sS https://getcomposer.org/installer | php -- --filename=composer --install-dir=/usr/local/bin
 
 chown $USER "$STORAGE_PATH"
+
+dos2unix "$BASE_PATH"/setup.sh
 sudo -u $USER "$BASE_PATH"/setup.sh
+
 echo "Giving access to the webserver"
 chgrp -R www-data "$STORAGE_PATH"/*
 chmod -R g+w "$STORAGE_PATH"/*

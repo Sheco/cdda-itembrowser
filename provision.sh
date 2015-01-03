@@ -5,7 +5,7 @@
 
 BASE_PATH=/vagrant
 USER=vagrant
-DATA_PATH=/var/cache/cataclysm
+STORAGE_PATH=/vagrant/src/app/storage
 
 # exit on error
 set -e
@@ -27,8 +27,8 @@ ln -sf "$BASE_PATH"/src/public /var/www/html
 # download composer
 curl -sS https://getcomposer.org/installer | php -- --filename=composer --install-dir=/usr/local/bin
 
-mkdir -p "$DATA_PATH"
-chown $USER "$DATA_PATH"
-sudo -u $USER "$BASE_PATH"/setup.sh "$DATA_PATH"
+chown $USER "$STORAGE_PATH"
+sudo -u $USER "$BASE_PATH"/setup.sh
 echo "Giving access to the webserver"
-chgrp -R www-data "$DATA_PATH"/storage/*
+chgrp -R www-data "$STORAGE_PATH"/*
+chmod -R g+w "$STORAGE_PATH"/*

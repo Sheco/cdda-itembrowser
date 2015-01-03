@@ -52,6 +52,6 @@ return array(
     |
     */
 
-    'storage' => '/var/cache/cataclysm/storage',
+    'storage' => __DIR__.'/../app/storage',
 
 );

@@ -14,7 +14,7 @@ define('LARAVEL_START', microtime(true));
 |
 */
 
-require '/var/cache/cataclysm/vendor/autoload.php';
+require __DIR__.'/../vendor/autoload.php';
 
 /*
 |--------------------------------------------------------------------------

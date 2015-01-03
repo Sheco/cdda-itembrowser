@@ -57,7 +57,8 @@ $app->bindInstallPaths(require __DIR__.'/paths.php');
 |
 */
 
-$framework = '/var/cache/cataclysm/vendor/laravel/framework/src';
+$framework = $app['path.base'].
+                 '/vendor/laravel/framework/src';
 
 require $framework.'/Illuminate/Foundation/start.php';
 

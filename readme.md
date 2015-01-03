@@ -17,6 +17,8 @@ A copy of this code currently hosted by Sergio Duran (Sheco) at [http://cdda.est
 
 This can be used in a [Vagrant](https://www.vagrantup.com/) environment. The current scripts provided have been tested on the official ubuntu/trusty32 vagrant box.
 
+On windows, you will need an appropiate rsync.exe and ssh.exe on the path, (msys gets the job done). rsync was used instead of the default shared folders, because the shared folders are very slow.
+
 To setup and run the environment, execute:
 
 ```
@@ -34,22 +36,11 @@ have the appropiate dependencies.
 * php5.4 (with the mcrypt extension)
 * A webserver
 
-Then you can run the setup.sh script, it expects a single argument, an
-absolute path to install the data files and variable files.
+Then you can run the setup.sh script, which will download the game's source
+code and composer dependencies.
 
 The webserver should be able to read and write the files in the "storage"
 directory inside the data file path.
-
-### Multiple instances
-
-If you need to run multiple instances on the same server, you can get a new
-copy of this repository and then call the setup.sh script as a regular user
-with an extra argument, the path to install the extra resources and data. 
-
-Remember to give the webserver read/write access to the storage directory
-in the data installation path.
-
-You then need to create a new apache virtualhost.
 
 ### License
 

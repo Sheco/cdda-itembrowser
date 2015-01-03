@@ -20,7 +20,7 @@ php5enmod mcrypt
 # setup apache2
 a2enmod rewrite
 sed -i 's/AllowOverride None/AllowOverride All/' /etc/apache2/apache2.conf
-service apache2 restart
+service apache2 reload
 rm -fr /var/www/html
 ln -sf "$BASE_PATH"/src/public /var/www/html
 

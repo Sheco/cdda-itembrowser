@@ -9,7 +9,12 @@ STORAGE_PATH="src/app/storage"
 cd "$BASE_PATH"
 
 # download the cataclysm dda's source code
-[ ! -e master.zip ] && wget -q https://github.com/CleverRaven/Cataclysm-DDA/archive/master.zip
+if [ ! -e master.zip ]
+then
+    echo "Downloading game source and data files..."
+    wget -q https://github.com/CleverRaven/Cataclysm-DDA/archive/master.zip
+fi
+
 unzip master.zip
 
 # download php dependencies

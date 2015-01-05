@@ -1,3 +1,6 @@
+@section('title')
+Searching for {{$search}} - Cataclysm: Dark Days Ahead Item Browser
+@stop
 <h3>Search: {{ $search }} </h3>
 @if (empty($items))
 No matches found.

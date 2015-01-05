@@ -203,7 +203,7 @@ class ItemsController extends BaseController
             return Redirect::route(Route::currentRouteName(), array(reset($skills), 1));
         }
         $items = $id ? $this->repo->allObjects("Item", "skill.$id.$level") : array();
-        $levels = array(1,2,3,4,5,6,7,8,9,10);
+        $levels = range(1,10);
 
         $this->layout->nest('content', "items.skills", compact("items", "skills", "id", "level", "levels"));
     }

@@ -8,8 +8,8 @@ class Monster extends \Robbo\Presenter\Presenter
         list($fg, $bg) = colorPairToCSS($this->object->color);
 
         return sprintf("<span style=\"color: %s; background: %s\">%s</span>",
-      $fg, $bg,
-      $this->object->symbol);
+            $fg, $bg,
+            $this->object->symbol);
     }
 
     public function presentNiceName()
@@ -40,8 +40,8 @@ class Monster extends \Robbo\Presenter\Presenter
         }
 
         array_walk($attacks, function (&$attack) {
-      $attack = "$attack[0]: $attack[1]";
-    });
+            $attack = "$attack[0]: $attack[1]";
+        });
 
         return implode(",<br>", $attacks);
     }
@@ -49,8 +49,8 @@ class Monster extends \Robbo\Presenter\Presenter
     public function presentSpecies()
     {
         $links = array_map(function ($species) {
-      return link_to_route('monster.species', $species, array($species));
-    }, $this->object->species);
+            return link_to_route('monster.species', $species, array($species));
+        }, $this->object->species);
 
         return implode(", ", $links);
     }

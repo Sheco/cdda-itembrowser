@@ -66,30 +66,30 @@ class LocalReader implements RepositoryReaderInterface
 
         if (!$this->get("item", "toolset")) {
             $this->newObject(json_decode('{
-        "id":"toolset",
-        "name":"integrated toolset",
-        "type":"_SPECIAL",
-        "description":"A fake item. If you are reading this it\'s a bug!"
-      }'));
+                "id":"toolset",
+                "name":"integrated toolset",
+                "type":"_SPECIAL",
+                "description":"A fake item. If you are reading this it\'s a bug!"
+            }'));
         }
         $this->newObject(json_decode('{
-      "id":"fire",
-      "name":"nearby fire",
-      "type":"_SPECIAL",
-      "description":"A fake item. If you are reading this it\'s a bug!"
-    }'));
+            "id":"fire",
+            "name":"nearby fire",
+            "type":"_SPECIAL",
+            "description":"A fake item. If you are reading this it\'s a bug!"
+            }'));
         $this->newObject(json_decode('{
-      "id":"cvd_machine",
-      "name":"cvd machine",
-      "type":"_SPECIAL",
-      "description":"A fake item. If you are reading this it\'s a bug!"
-    }'));
+            "id":"cvd_machine",
+            "name":"cvd machine",
+            "type":"_SPECIAL",
+            "description":"A fake item. If you are reading this it\'s a bug!"
+        }'));
         $this->newObject(json_decode('{
-      "id":"apparatus",
-      "name":"a smoking device and a source of flame",
-      "type":"_SPECIAL",
-      "description":"A fake item. If you are reading this it\'s a bug!"
-    }'));
+            "id":"apparatus",
+            "name":"a smoking device and a source of flame",
+            "type":"_SPECIAL",
+            "description":"A fake item. If you are reading this it\'s a bug!"
+        }'));
 
         $this->version = $this->getVersion($path);
 
@@ -98,11 +98,11 @@ class LocalReader implements RepositoryReaderInterface
         return array($this->database, $this->index);
     }
 
-  // save an index to an object
-  public function addIndex($index, $key, $value)
-  {
+    // save an index to an object
+    public function addIndex($index, $key, $value)
+    {
       $this->index[$index][$key] = $value;
-  }
+    }
 
     public function get($index, $id)
     {

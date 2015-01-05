@@ -22,7 +22,7 @@ class Recipe extends \Robbo\Presenter\Presenter
 
         return implode(", ", array_map(function ($i) use ($skills) {
             return "$i[0]($i[1])";
-    }, $skills));
+        }, $skills));
     }
 
     public function presentTools()

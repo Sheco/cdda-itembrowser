@@ -15,11 +15,11 @@ class CompiledReader implements RepositoryReaderInterface
     public function __construct(LocalReader $reader)
     {
         $this->repo = new \Illuminate\Cache\Repository(
-      new \Illuminate\Cache\FileStore(
-        new \Illuminate\Filesystem\FileSystem(),
-        storage_path()."/database"
-      )
-    );
+            new \Illuminate\Cache\FileStore(
+                new \Illuminate\Filesystem\FileSystem(),
+                storage_path()."/database"
+            )
+        );
 
         $this->dataChunks = array();
         $this->indexChunks = array();
@@ -46,8 +46,8 @@ class CompiledReader implements RepositoryReaderInterface
 
         $this->adhesion = $adhesion;
 
-    // clear all cache, this ensures searches are read again.
-    $this->repo->flush();
+        // clear all cache, this ensures searches are read again.
+        $this->repo->flush();
 
         list($database, $index) = $this->reader->read($path);
 

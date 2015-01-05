@@ -14,32 +14,32 @@ class Repository implements RepositoryInterface
         $this->loaded = false;
     }
 
-  // lazy load
-  private function load()
-  {
-      if ($this->loaded) {
-          return;
-      }
+    // lazy load
+    private function load()
+    {
+        if ($this->loaded) {
+            return;
+        }
 
-      $this->reader->read();
-      $this->loaded = true;
-  }
+        $this->reader->read();
+        $this->loaded = true;
+    }
 
-  // return a single raw entry
-  public function get($index, $id)
-  {
-      $this->load();
+    // return a single raw entry
+    public function get($index, $id)
+    {
+        $this->load();
 
-      return $this->reader->get($index, $id);
-  }
+        return $this->reader->get($index, $id);
+    }
 
-  // return all raw entries in the index
-  public function all($index)
-  {
-      $this->load();
+    // return all raw entries in the index
+    public function all($index)
+    {
+        $this->load();
 
-      return $this->reader->all($index);
-  }
+        return $this->reader->all($index);
+    }
 
     public function getObjectOrFail($repo, $id)
     {
@@ -82,9 +82,11 @@ class Repository implements RepositoryInterface
 
         $data = $this->all($index);
 
-        array_walk($data, function (&$value, $key) use ($repo) {
-      $value = $this->getObject($repo, $key);
-    });
+        array_walk($data, 
+            function (&$value, $key) use ($repo) {
+                $value = $this->getObject($repo, $key);
+            }
+        );
 
         return $data;
     }

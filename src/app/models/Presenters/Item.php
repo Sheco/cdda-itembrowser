@@ -66,22 +66,22 @@ class Item extends \Robbo\Presenter\Presenter
     public function presentRecipes()
     {
         return array_map(function ($recipe) {
-      return $recipe->getPresenter();
-    }, $this->object->recipes);
+            return $recipe->getPresenter();
+        }, $this->object->recipes);
     }
 
     public function presentDisassembly()
     {
         return array_map(function ($recipe) {
-      return $recipe->getPresenter();
-    }, $this->object->disassembly);
+            return $recipe->getPresenter();
+        }, $this->object->disassembly);
     }
 
     public function presentMaterials()
     {
         return implode(", ", array_map(function ($material) {
-      return link_to_route("item.materials", $material->name, $material->ident);
-    }, $this->object->materials));
+            return link_to_route("item.materials", $material->name, $material->ident);
+        }, $this->object->materials));
     }
 
     public function presentFlags()
@@ -93,8 +93,8 @@ class Item extends \Robbo\Presenter\Presenter
         }
 
         return implode(", ", array_map(function ($flag) {
-      return link_to_route("item.flags", $flag, $flag);
-    }, $invert));
+            return link_to_route("item.flags", $flag, $flag);
+        }, $invert));
     }
 
     public function presentFeatureLabels()

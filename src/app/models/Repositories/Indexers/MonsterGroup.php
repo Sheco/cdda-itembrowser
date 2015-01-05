@@ -20,8 +20,9 @@ class MonsterGroup implements IndexerInterface
         if ($object->type == "monstergroup") {
             $repo->addIndex(self::DEFAULT_INDEX, $object->name, $object->repo_id);
 
-      // create unique monsters array
-      $monsters = array();
+            // create unique monsters array
+            $monsters = array();
+
             foreach ($object->monsters as $monster) {
                 $monster = $monster->monster;
                 $monsters[$monster] = true;

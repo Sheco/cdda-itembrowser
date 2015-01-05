@@ -12,11 +12,11 @@ class MonsterGroup extends \Robbo\Presenter\Presenter
     {
         $monsters = $this->object->uniqueMonsters;
         array_walk($monsters, function (&$monster) {
-      $monster = new Monster($monster);
-    });
+            $monster = new Monster($monster);
+        });
         usort($monsters, function ($a, $b) {
-      return strcmp(strtolower($a->name), strtolower($b->name));
-    });
+            return strcmp(strtolower($a->name), strtolower($b->name));
+        });
 
         return $monsters;
     }

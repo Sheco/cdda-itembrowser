@@ -12,47 +12,47 @@ class Item implements IndexerInterface
     public function __construct()
     {
         // this is a hash with the valid item types
-    $this->types = array_flip(array(
-      "AMMO", "GUN", "ARMOR", "TOOL", "TOOL_ARMOR", "BOOK", "COMESTIBLE",
-      "CONTAINER", "GUNMOD", "GENERIC", "BIONIC_ITEM", "VAR_VEH_PART",
-      "_SPECIAL",
-    ));
+        $this->types = array_flip(array(
+            "AMMO", "GUN", "ARMOR", "TOOL", "TOOL_ARMOR", "BOOK", "COMESTIBLE",
+            "CONTAINER", "GUNMOD", "GENERIC", "BIONIC_ITEM", "VAR_VEH_PART",
+            "_SPECIAL",
+        ));
 
         $this->book_types = array(
-        "archery" => "range",
-        "handguns" => "range",
-        "markmanship" => "range",
-        "launcher" => "range",
-        "firearms" => "range",
-        "throw" => "range",
-        "rifle" => "range",
-        "shotgun" => "range",
-        "smg" => "range",
-        "pistol" => "range",
-        "gun" => "range",
-        "bashing" => "combat",
-        "cutting" => "combat",
-        "stabbing" => "combat",
-        "dodge" => "combat",
-        "melee" => "combat",
-        "unarmed" => "combat",
-        "computer" => "engineering",
-        "electronics" => "engineering",
-        "fabrication" => "engineering",
-        "mechanics" => "engineering",
-        "construction" => "engineering",
-        "carpentry" => "engineering",
-        "traps" => "engineering",
-        "tailor" => "crafts",
-        "firstaid" => "crafts",
-        "cooking" => "crafts",
-        "barter" => "social",
-        "speech" => "social",
-        "driving" => "survival",
-        "survival" => "survival",
-        "swimming" => "survival",
-        "none" => "fun",
-    );
+            "archery" => "range",
+            "handguns" => "range",
+            "markmanship" => "range",
+            "launcher" => "range",
+            "firearms" => "range",
+            "throw" => "range",
+            "rifle" => "range",
+            "shotgun" => "range",
+            "smg" => "range",
+            "pistol" => "range",
+            "gun" => "range",
+            "bashing" => "combat",
+            "cutting" => "combat",
+            "stabbing" => "combat",
+            "dodge" => "combat",
+            "melee" => "combat",
+            "unarmed" => "combat",
+            "computer" => "engineering",
+            "electronics" => "engineering",
+            "fabrication" => "engineering",
+            "mechanics" => "engineering",
+            "construction" => "engineering",
+            "carpentry" => "engineering",
+            "traps" => "engineering",
+            "tailor" => "crafts",
+            "firstaid" => "crafts",
+            "cooking" => "crafts",
+            "barter" => "social",
+            "speech" => "social",
+            "driving" => "survival",
+            "survival" => "survival",
+            "swimming" => "survival",
+            "none" => "fun",
+        );
     }
 
     public function finishedLoading($repo)
@@ -78,32 +78,32 @@ class Item implements IndexerInterface
     public function getIndexes($repo, $object)
     {
         // only index objects with valid item types.
-    if (!isset($this->types[$object->type])) {
-        return;
-    }
+        if (!isset($this->types[$object->type])) {
+            return;
+        }
 
         $repo->addIndex(self::DEFAULT_INDEX, $object->id, $object->repo_id);
 
-    // nearby fire and integrated toolset are "virtual" items
-    // they don't have anything special.
-    if ($object->type == "_SPECIAL") {
-        return;
-    }
-
-    // items with enough damage might be good melee weapons.
-    if ($object->bashing+$object->cutting>10 and $object->to_hit>-2) {
-        $repo->addIndex("melee", $object->id, $object->repo_id);
-    }
-
-    // create an index with armor for each body part they cover.
-    if ($object->type == "ARMOR" and !isset($object->covers)) {
-        $repo->addIndex("armor.none", $object->id, $object->repo_id);
-    } elseif ($object->type == "ARMOR" and isset($object->covers)) {
-        foreach ($object->covers as $part) {
-            $part = strtolower($part);
-            $repo->addIndex("armor.$part", $object->id, $object->repo_id);
+        // nearby fire and integrated toolset are "virtual" items
+        // they don't have anything special.
+        if ($object->type == "_SPECIAL") {
+            return;
         }
-    }
+
+        // items with enough damage might be good melee weapons.
+        if ($object->bashing+$object->cutting>10 and $object->to_hit>-2) {
+            $repo->addIndex("melee", $object->id, $object->repo_id);
+        }
+
+        // create an index with armor for each body part they cover.
+        if ($object->type == "ARMOR" and !isset($object->covers)) {
+            $repo->addIndex("armor.none", $object->id, $object->repo_id);
+        } elseif ($object->type == "ARMOR" and isset($object->covers)) {
+            foreach ($object->covers as $part) {
+                $part = strtolower($part);
+                $repo->addIndex("armor.$part", $object->id, $object->repo_id);
+            }
+        }
 
         if ($object->type == "CONTAINER") {
             $repo->addIndex("container", $object->id, $object->repo_id);
@@ -115,15 +115,15 @@ class Item implements IndexerInterface
             $repo->addIndex("tool", $object->id, $object->repo_id);
         }
 
-    // save books per skill
-    if ($object->type == "BOOK") {
-        if (isset($this->book_types[$object->skill])) {
-            $skill = $this->book_types[$object->skill];
-            $repo->addIndex("book.$skill", $object->id, $object->repo_id);
-        } else {
-            $repo->addIndex("book.other", $object->id, $object->repo_id);
+        // save books per skill
+        if ($object->type == "BOOK") {
+            if (isset($this->book_types[$object->skill])) {
+                $skill = $this->book_types[$object->skill];
+                $repo->addIndex("book.$skill", $object->id, $object->repo_id);
+            } else {
+                $repo->addIndex("book.other", $object->id, $object->repo_id);
+            }
         }
-    }
 
         if ($object->type == "GUN") {
             $repo->addIndex("gun.$object->skill", $object->id, $object->repo_id);

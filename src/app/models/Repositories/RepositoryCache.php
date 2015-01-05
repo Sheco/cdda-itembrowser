@@ -17,18 +17,20 @@ class RepositoryCache extends Repository
         $repoInstance = \App::make("Repositories\\Indexers\\$repo");
         $idField = $repoInstance::ID_FIELD;
 
-        $objects = \Cache::remember($key, $expiration, function () use ($repo, $search, $idField) {
-      $objects = parent::searchObjects($repo, $search);
-      array_walk($objects, function (&$object) use ($idField) {
-        $object = $object->$idField;
-      });
+        $objects = \Cache::remember($key, $expiration, 
+            function () use ($repo, $search, $idField) {
+                $objects = parent::searchObjects($repo, $search);
+                array_walk($objects, function (&$object) use ($idField) {
+                    $object = $object->$idField;
+                });
 
-      return $objects;
-    });
+            return $objects;
+        });
 
-        array_walk($objects, function (&$object) use ($repo) {
-      $object = $this->getObject($repo, $object);
-    });
+        array_walk($objects, 
+            function (&$object) use ($repo) {
+                $object = $this->getObject($repo, $object);
+            });
 
         return $objects;
     }

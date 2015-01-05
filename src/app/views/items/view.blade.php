@@ -4,7 +4,6 @@
 @section('description')
 {{{$item->rawName}}} has a volume of {{{ $item->volume }}} and a weight of {{{ $item->weight }}}. It does {{{ $item->bashing }}} bashing damage and {{{ $item->cutting }}} cutting damage. You can find more information here.
 @endsection
-@section('content')
 @include('items.menu', array('active'=>'view'))
 <div class="row">
   <div class="col-md-6">
@@ -231,4 +230,3 @@ $(function() {
   });
 });
 </script>
-@stop

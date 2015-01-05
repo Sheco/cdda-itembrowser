@@ -1,7 +1,6 @@
 @section('title')
 Qualities - Cataclysm: Dark Days Ahead
 @endsection
-@section('content')
 <h1>Qualities</h1>
 
 <div class="row">
@@ -45,4 +44,3 @@ $(function() {
 @endif
 </div>
 </div>
-@endsection

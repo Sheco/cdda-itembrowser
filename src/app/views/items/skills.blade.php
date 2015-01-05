@@ -1,7 +1,6 @@
 @section('title')
 Skills - Cataclysm: Dark Days Ahead
 @endsection
-@section('content')
 <div class="row">
   <div class="col-md-3">
 <ul class="nav nav-pills nav-stacked">
@@ -27,4 +26,3 @@ Please select an entry from the menu on the left and a level on the top.
 @endif
 </div>
 </div>
-@stop

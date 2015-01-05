@@ -8,7 +8,6 @@
 {{{$item->rawName}}} can't be crafted.
 @endif
 @endsection
-@section('content')
 @include('items.menu', array('active'=>'craft'))
 <h1>
   {{$item->symbol}} <a href="{{ route("item.view", array("id"=>$item->id)) }}">{{ $item->name }}</a>
@@ -52,4 +51,3 @@ This recipe can be found in the following books when {{$recipe->skill_used}} is 
 @endforeach
 </div>
 </div>
-@stop

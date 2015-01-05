@@ -4,7 +4,6 @@ Monster: {{{$monster->name}}} - Cataclysm: Dark Days Ahead
 @section('description')
 Monster: {{{$monster->name}}}
 @endsection
-@section('content')
 <div class="row">
 <div class="col-md-6">
 <h4>{{ $monster->symbol }} {{$monster->niceName}}</h4>
@@ -88,4 +87,3 @@ Monster: {{{$monster->name}}}
 </table>
 </div>
 </div>
-@endsection

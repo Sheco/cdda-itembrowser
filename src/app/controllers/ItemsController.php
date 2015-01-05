@@ -1,6 +1,6 @@
 <?php
 
-class ItemsController extends Controller
+class ItemsController extends BaseController
 {
     protected $item;
     protected $repo;
@@ -14,7 +14,7 @@ class ItemsController extends Controller
     {
         $version = $this->repo->version();
 
-        return View::make('items.index', compact('version'));
+        $this->layout->nest('content', "items.index", compact('version'));
     }
 
     public function search()
@@ -22,21 +22,21 @@ class ItemsController extends Controller
         $search = Input::get('q');
         $items = $this->repo->searchObjects("Item", $search);
 
-        return View::make('items.search', compact('items', 'search'));
+        $this->layout->nest('content', 'items.search', compact('items', 'search'));
     }
 
     public function view($id)
     {
         $item = $this->repo->getObjectOrFail("Item", $id);
 
-        return View::make('items.view', compact('item'));
+        $this->layout->nest('content', 'items.view', compact('item'));
     }
 
     public function craft($id)
     {
         $item = $this->repo->getObjectOrFail("Item", $id);
 
-        return View::make('items.craft', compact('item'));
+        $this->layout->nest('content', 'items.craft', compact('item'));
     }
 
     public function recipes($id, $category = null)
@@ -56,14 +56,14 @@ class ItemsController extends Controller
       return $a->difficulty-$b->difficulty;
     });
 
-        return View::make('items.recipes', compact('item', "category", "recipes", "categories"));
+        $this->layout->nest('content', 'items.recipes', compact('item', "category", "recipes", "categories"));
     }
 
     public function disassemble($id)
     {
         $item = $this->repo->getObjectOrFail("Item", $id);
 
-        return View::make('items.disassemble', compact('item'));
+        $this->layout->nest('content', 'items.disassemble', compact('item'));
     }
 
     public function armor($part = null)
@@ -86,7 +86,7 @@ class ItemsController extends Controller
 
         $items = $this->repo->allObjects("Item", "armor.$part");
 
-        return View::make('items.armor', compact('items', 'parts', 'part'));
+        $this->layout->nest('content', 'items.armor', compact('items', 'parts', 'part'));
     }
 
     public function gun($skill = null)
@@ -107,7 +107,7 @@ class ItemsController extends Controller
 
         $items = $this->repo->allObjects("Item", "gun.$skill");
 
-        return View::make('items.gun', compact('items', 'skills', 'skill'));
+        $this->layout->nest('content', 'items.gun', compact('items', 'skills', 'skill'));
     }
 
     public function books($type = null)
@@ -129,14 +129,14 @@ class ItemsController extends Controller
 
         $items = $this->repo->allObjects("Item", "book.$type");
 
-        return View::make('items.books', compact('items', 'type', 'types'));
+        $this->layout->nest('content', 'items.books', compact('items', 'type', 'types'));
     }
 
     public function melee()
     {
         $items = $this->repo->allObjects("Item", "melee");
 
-        return View::make("items.melee", compact('items'));
+        $this->layout->nest('content', "items.melee", compact('items'));
     }
 
     public function consumables($type = null)
@@ -153,7 +153,7 @@ class ItemsController extends Controller
 
         $items = $this->repo->allObjects("Item", "consumables.$type");
 
-        return View::make('items.consumables', compact('items', 'type', 'types'));
+        $this->layout->nest('content', 'items.consumables', compact('items', 'type', 'types'));
     }
 
     public function qualities($id = null)
@@ -166,7 +166,7 @@ class ItemsController extends Controller
 
         $items = $id ? $this->repo->allObjects("Item", "quality.$id") : array();
 
-        return View::make('items.qualities', compact('items', 'qualities', 'id'));
+        $this->layout->nest('content', 'items.qualities', compact('items', 'qualities', 'id'));
     }
 
     public function materials($id = null)
@@ -178,7 +178,7 @@ class ItemsController extends Controller
         }
         $items = $id ? $this->repo->allObjects("Item", "material.$id") : array();
 
-        return View::make('items.materials', compact('items', 'materials', 'id'));
+        $this->layout->nest('content', 'items.materials', compact('items', 'materials', 'id'));
     }
 
     public function flags($id = null)
@@ -191,7 +191,7 @@ class ItemsController extends Controller
         }
         $items = $id ? $this->repo->allObjects("Item", "flag.$id") : array();
 
-        return View::make("items.flags", compact("items", "flags", "id"));
+        $this->layout->nest('content', "items.flags", compact("items", "flags", "id"));
     }
 
     public function skills($id = null, $level = 1)
@@ -205,7 +205,7 @@ class ItemsController extends Controller
         $items = $id ? $this->repo->allObjects("Item", "skill.$id.$level") : array();
         $levels = array(1,2,3,4,5,6,7,8,9,10);
 
-        return View::make("items.skills", compact("items", "skills", "id", "level", "levels"));
+        $this->layout->nest('content', "items.skills", compact("items", "skills", "id", "level", "levels"));
     }
 
     public function gunmods($skill = null, $part = null)
@@ -214,7 +214,7 @@ class ItemsController extends Controller
         $parts = $this->repo->all("gunmodParts");
         $mods = $this->repo->allObjects("Item", "gunmods.$skill.$part");
 
-        return View::make("items.gunmods", compact('skill', 'part', "skills", "parts", 'mods'));
+        $this->layout->nest('content', "items.gunmods", compact('skill', 'part', "skills", "parts", 'mods'));
     }
 
     public function wiki($id)
@@ -228,6 +228,6 @@ class ItemsController extends Controller
     {
         $items = $this->repo->allObjects("Item");
 
-        return View::make('items.sitemap', compact('items'));
+        $this->layout->nest('content', 'items.sitemap', compact('items'));
     }
 }

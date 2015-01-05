@@ -1,7 +1,6 @@
 @section('title')
 Books - Cataclysm: Dark Days Ahead
 @endsection
-@section('content')
 <h1>Books</h1>
 
 <ul class="nav nav-tabs">
@@ -43,4 +42,3 @@ $(function() {
       });
 });
 </script>
-@endsection

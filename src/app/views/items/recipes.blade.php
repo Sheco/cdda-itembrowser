@@ -8,7 +8,6 @@
 {{{$item->rawName}}} can't be used to craft other items.
 @endif
 @endsection
-@section('content')
 <script>
 var show_recipe = function(id)
 {
@@ -77,4 +76,3 @@ array("id"=>$recipe->result->id)) }}<br>
 @endforeach
 </div>
 </div>
-@stop

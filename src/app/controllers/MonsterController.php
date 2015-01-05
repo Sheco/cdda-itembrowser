@@ -1,6 +1,6 @@
 <?php
 
-class MonsterController extends Controller
+class MonsterController extends BaseController
 {
     protected $repo;
 
@@ -20,7 +20,7 @@ class MonsterController extends Controller
         $group = $this->repo->getObject('MonsterGroup', $id);
         $data = $group->uniqueMonsters;
 
-        return View::make('monsters.groups', compact('groups', 'group', 'id', 'data'));
+        $this->layout->nest('content', 'monsters.groups', compact('groups', 'group', 'id', 'data'));
     }
 
     public function species($id = null)
@@ -33,13 +33,13 @@ class MonsterController extends Controller
         }
         $data = $this->repo->allObjects("Monster", "monster.species.$id");
 
-        return View::make('monsters.species', compact('species', 'id', 'data'));
+        $this->layout->nest('content', 'monsters.species', compact('species', 'id', 'data'));
     }
 
     public function view($id)
     {
         $monster = $this->repo->getObject('Monster', $id);
 
-        return View::make('monsters.view', compact('id', 'monster'));
+        $this->layout->nest('content', 'monsters.view', compact('id', 'monster'));
     }
 }

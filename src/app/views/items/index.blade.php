@@ -1,4 +1,3 @@
-@section('content')
 <div class="row">
   <div class="col-md-6">
 <h1>Item browser</h1>
@@ -67,4 +66,3 @@ The source code for this item browser is available at <a href="https://github.co
 </ul>
 </div>
 </div>
-@stop

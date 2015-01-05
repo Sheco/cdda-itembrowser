@@ -8,7 +8,6 @@
 {{{$item->rawName}}} can't be disassembled.
 @endif
 @endsection
-@section('content')
 @include('items.menu', array('active'=>'disassemble'))
 <h1>
   {{$item->symbol}} <a href="{{ route("item.view", array("id"=>$item->id)) }}">{{ $item->name }}</a>
@@ -44,4 +43,3 @@
 </div>
 
 </div>
-@stop

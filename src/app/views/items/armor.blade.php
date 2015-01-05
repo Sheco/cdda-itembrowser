@@ -1,7 +1,6 @@
 @section('title')
 Armor - Cataclysm: Dark Days Ahead
 @endsection
-@section('content')
 <h1>Armor</h1>
 <ul class="nav nav-tabs">
 @foreach($parts as $key=>$value)
@@ -48,4 +47,3 @@ $(function() {
 });
 </script>
 
-@endsection

@@ -1,7 +1,6 @@
 @section('title')
 Skills - Cataclysm: Dark Days Ahead
 @endsection
-@section('content')
 <div class="row">
   <div class="col-md-3">
 <ul class="nav nav-pills nav-stacked">
@@ -26,4 +25,3 @@ Skills - Cataclysm: Dark Days Ahead
   </div>
 </div>
 </div>
-@stop

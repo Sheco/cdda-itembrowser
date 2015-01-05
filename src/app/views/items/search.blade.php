@@ -1,4 +1,3 @@
-@section('content')
 <h3>Search: {{ $search }} </h3>
 @if (empty($items))
 No matches found.
@@ -13,4 +12,3 @@ No matches found.
 
 </div>
 @endforeach
-@stop

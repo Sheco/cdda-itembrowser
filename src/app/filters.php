@@ -74,17 +74,3 @@ Route::filter('csrf', function () {
     }
 });
 
-Route::filter('theme', function ($route, $request, $response,  $layout = 'layouts.default') {
-    // Redirects have no content and errors should handle their own layout.
-    if ($response->getStatusCode() > 300) {
-        return;
-    }
-
-    //get original view object
-    $view = $response->getOriginalContent();
-
-    //we will render the view nested to the layout
-    $content = View::make($layout)->nest('_content', $view->getName(), $view->getData())->render();
-
-    $response->setContent($content);
-});

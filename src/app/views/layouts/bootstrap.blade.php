@@ -65,7 +65,7 @@
 <script src="/js/jquery.tablesorter.min.js"></script>
 <script src="/js/jquery.tinysort.min.js"></script>
     <div class="container">
-@yield('content')
+        {{$content}}
 <br><br>
 @include('layouts.extra_footer')
 </div>

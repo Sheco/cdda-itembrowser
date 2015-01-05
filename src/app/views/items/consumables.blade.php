@@ -1,7 +1,6 @@
 @section('title')
 Consumables - Cataclysm: Dark Days Ahead
 @endsection
-@section('content')
 <h1>Consumables</h1>
 
 <ul class="nav nav-tabs">
@@ -51,4 +50,3 @@ $(function() {
       });
 });
 </script>
-@endsection

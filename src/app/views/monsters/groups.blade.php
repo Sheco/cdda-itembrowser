@@ -4,7 +4,6 @@ Monster Groups - Cataclysm: Dark Days Ahead
 @section('description')
 Monster groups
 @endsection
-@section('content')
 <div class="row">
 <div class="col-md-3">
 <ul class="nav nav-pills nav-stacked tsort">
@@ -22,4 +21,3 @@ $(function() {
   $(".tsort>li").tsort();
 });
 </script>
-@endsection

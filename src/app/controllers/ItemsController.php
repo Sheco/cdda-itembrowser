@@ -69,16 +69,16 @@ class ItemsController extends BaseController
     public function armors($part = null)
     {
         $parts = array(
-      "head" => "Head",
-      "eyes" => "Eyes",
-      "mouth" => "Mouth",
-      "torso" => "Torso",
-      "arms" => "Arms",
-      "hands" => "Hands",
-      "legs" => "Legs",
-      "feet" => "Feet",
-      "none" => "None",
-    );
+            "head" => "Head",
+            "eyes" => "Eyes",
+            "mouth" => "Mouth",
+            "torso" => "Torso",
+            "arms" => "Arms",
+            "hands" => "Hands",
+            "legs" => "Legs",
+            "feet" => "Feet",
+            "none" => "None",
+        );
 
         if ($part === null) {
             return Redirect::route(Route::currentRouteName(), array(key($parts)));
@@ -92,14 +92,14 @@ class ItemsController extends BaseController
     public function guns($skill = null)
     {
         $skills = array(
-      "archery" => "Archery",
-      "launcher" => "Launchers",
-      "pistol" => "Pistols",
-      "rifle" => "Rifles",
-      "shotgun" => "Shotguns",
-      "smg" => "SMGs",
-      "throw" => "Thrown",
-    );
+            "archery" => "Archery",
+            "launcher" => "Launchers",
+            "pistol" => "Pistols",
+            "rifle" => "Rifles",
+            "shotgun" => "Shotguns",
+            "smg" => "SMGs",
+            "throw" => "Thrown",
+        );
 
         if ($skill === null) {
             return Redirect::route(Route::currentRouteName(), array(key($skills)));
@@ -113,15 +113,15 @@ class ItemsController extends BaseController
     public function books($type = null)
     {
         $types = array(
-      "fun" => "Just for fun",
-      "range" => "Ranged",
-      "combat" => "Combat",
-      "engineering" => "Engineering",
-      "crafts" => "Crafts",
-      "social" => "Social",
-      "survival" => "Survival",
-      "other" => "Other",
-    );
+            "fun" => "Just for fun",
+            "range" => "Ranged",
+            "combat" => "Combat",
+            "engineering" => "Engineering",
+            "crafts" => "Crafts",
+            "social" => "Social",
+            "survival" => "Survival",
+            "other" => "Other",
+        );
 
         if ($type === null) {
             return Redirect::route(Route::currentRouteName(), array("combat"));
@@ -142,10 +142,10 @@ class ItemsController extends BaseController
     public function consumables($type = null)
     {
         $types = array(
-      "drink" => "Drinks",
-      "food" => "Food",
-      "med" => "Meds",
-    );
+            "drink" => "Drinks",
+            "food" => "Food",
+            "med" => "Meds",
+        );
 
         if ($type === null) {
             return Redirect::route(Route::currentRouteName(), array(key($types)));
@@ -163,7 +163,7 @@ class ItemsController extends BaseController
         if ($id === null) {
             return Redirect::route("item.qualities", array(reset($qualities)->id));
         }
-
+        
         $items = $id ? $this->repo->allObjects("Item", "quality.$id") : array();
 
         $this->layout->nest('content', 'items.qualities', compact('items', 'qualities', 'id'));
@@ -203,7 +203,7 @@ class ItemsController extends BaseController
             return Redirect::route(Route::currentRouteName(), array(reset($skills), 1));
         }
         $items = $id ? $this->repo->allObjects("Item", "skill.$id.$level") : array();
-        $levels = range(1,10);
+        $levels = range(1, 10);
 
         $this->layout->nest('content', "items.skills", compact("items", "skills", "id", "level", "levels"));
     }

@@ -20,7 +20,7 @@ Route::group(array('after' => 'theme:layouts.bootstrap'), function () {
 
   Route::get('/armors/{part?}', array(
       'as' => 'item.armors',
-      'uses' => 'ItemsController@armor', )
+      'uses' => 'ItemsController@armors', )
   );
 
   Route::get('/gun/{skill?}', function ($skill = "") {
@@ -29,7 +29,7 @@ Route::group(array('after' => 'theme:layouts.bootstrap'), function () {
 
   Route::get('/guns/{skill?}', array(
       'as' => 'item.guns',
-      'uses' => 'ItemsController@gun', )
+      'uses' => 'ItemsController@guns', )
   );
 
   Route::get('/melee', array(

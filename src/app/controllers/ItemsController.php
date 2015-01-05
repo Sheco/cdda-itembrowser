@@ -66,7 +66,7 @@ class ItemsController extends BaseController
         $this->layout->nest('content', 'items.disassemble', compact('item'));
     }
 
-    public function armor($part = null)
+    public function armors($part = null)
     {
         $parts = array(
       "head" => "Head",
@@ -89,7 +89,7 @@ class ItemsController extends BaseController
         $this->layout->nest('content', 'items.armor', compact('items', 'parts', 'part'));
     }
 
-    public function gun($skill = null)
+    public function guns($skill = null)
     {
         $skills = array(
       "archery" => "Archery",

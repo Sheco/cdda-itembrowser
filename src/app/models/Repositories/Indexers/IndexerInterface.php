@@ -4,6 +4,6 @@ namespace Repositories\Indexers;
 
 interface IndexerInterface
 {
-    public function getIndexes($repo, $object);
-    public function finishedLoading($repo);
+    public function onNewObject($repo, $object);
+    public function onFinishedLoading($repo);
 }

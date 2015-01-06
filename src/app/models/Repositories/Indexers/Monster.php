@@ -8,7 +8,7 @@ class Monster implements IndexerInterface
     const DEFAULT_INDEX = "monsters";
     const ID_FIELD = "id";
 
-    public function getIndexes($repo, $object)
+    public function onNewObject($repo, $object)
     {
         if ($object->type == "MONSTER") {
             $repo->addIndex(self::DEFAULT_INDEX, $object->id, $object->repo_id);
@@ -22,7 +22,7 @@ class Monster implements IndexerInterface
         }
     }
 
-    public function finishedLoading($repo)
+    public function onFinishedLoading($repo)
     {
     }
 

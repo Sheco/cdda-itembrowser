@@ -8,14 +8,14 @@ class Material implements IndexerInterface
     const DEFAULT_INDEX = "materials";
     const ID_FIELD = "ident";
 
-    public function getIndexes($repo, $object)
+    public function onNewObject($repo, $object)
     {
         if ($object->type == "material") {
             $repo->addIndex(self::DEFAULT_INDEX, $object->ident, $object->repo_id);
         }
     }
 
-    public function finishedLoading($repo)
+    public function onFinishedLoading($repo)
     {
     }
 

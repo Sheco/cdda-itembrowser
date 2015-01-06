@@ -55,7 +55,7 @@ class Item implements IndexerInterface
         );
     }
 
-    public function finishedLoading($repo)
+    public function onFinishedLoading($repo)
     {
         foreach ($repo->all(self::DEFAULT_INDEX) as $id => $item) {
             $recipes = count($repo->all("item.toolFor.$id"));
@@ -75,7 +75,7 @@ class Item implements IndexerInterface
         }
     }
 
-    public function getIndexes($repo, $object)
+    public function onNewObject($repo, $object)
     {
         // only index objects with valid item types.
         if (!isset($this->types[$object->type])) {

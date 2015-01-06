@@ -8,14 +8,14 @@ class MonsterGroup implements IndexerInterface
     const DEFAULT_INDEX = "monstergroups";
     const ID_FIELD = "name";
 
-    public function finishedLoading($repo)
+    public function onFinishedLoading($repo)
     {
         foreach ($repo->all(self::DEFAULT_INDEX) as $id) {
             $group = $repo->get(self::DEFAULT_INDEX, $id);
         }
     }
 
-    public function getIndexes($repo, $object)
+    public function onNewObject($repo, $object)
     {
         if ($object->type == "monstergroup") {
             $repo->addIndex(self::DEFAULT_INDEX, $object->name, $object->repo_id);

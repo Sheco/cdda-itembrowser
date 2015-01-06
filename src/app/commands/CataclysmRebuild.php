@@ -87,9 +87,9 @@ class CataclysmCache extends Command
     private function registerIndexer(Indexers\IndexerInterface $indexer)
     {
         \Event::listen('cataclysm.newObject',
-            array($indexer, 'getIndexes'));
+            array($indexer, 'onNewObject'));
 
         \Event::listen('cataclysm.finishedLoading',
-            array($indexer, 'finishedLoading'));
+            array($indexer, 'onFinishedLoading'));
     }
 }

@@ -6,7 +6,7 @@ class Recipe implements IndexerInterface
     const DEFAULT_INDEX = "recipe";
     const ID_FIELD = "repo_id";
 
-    public function finishedLoading($repo)
+    public function onFinishedLoading($repo)
     {
         foreach ($repo->all(self::DEFAULT_INDEX) as $id) {
             $recipe = $repo->get(self::DEFAULT_INDEX, $id);
@@ -69,7 +69,7 @@ class Recipe implements IndexerInterface
         $repo->addIndex("item.$key.$id", $recipe->repo_id, $recipe->repo_id);
     }
 
-    public function getIndexes($repo, $object)
+    public function onNewObject($repo, $object)
     {
         if ($object->type == "recipe") {
             $recipe = $object;

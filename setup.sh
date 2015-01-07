@@ -12,10 +12,11 @@ cd "$BASE_PATH"
 if [ ! -e master.zip ]
 then
     echo "Downloading game source and data files..."
-    wget -q https://github.com/CleverRaven/Cataclysm-DDA/archive/master.zip
+    curl -LOs https://github.com/CleverRaven/Cataclysm-DDA/archive/master.zip
 fi
 
-unzip master.zip
+echo "Unzipping..."
+unzip -qo master.zip
 
 # download php dependencies
 composer -d=src install

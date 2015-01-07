@@ -6,9 +6,9 @@ class CacheRepository extends Repository implements RepositoryInterface
     private $repo;
     private $source;
 
-    public function __construct()
+    public function __construct(\Illuminate\Cache\Repository $repo)
     {
-        $this->repo = \App::make('cache.store');
+        $this->repo = $repo;
     }
 
     public function setSource($source)

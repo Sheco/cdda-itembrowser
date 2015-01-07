@@ -46,7 +46,7 @@ class CataclysmCache extends Command
         $localrepo = new Repositories\LocalRepository;
         $localrepo->setSource($this->argument('path'));
 
-        $repo = new Repositories\CacheRepository;
+        $repo = $this->laravel->make('Repositories\RepositoryInterface');
         $repo->setSource($localrepo);
         $repo->read();
     }

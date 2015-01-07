@@ -8,3 +8,4 @@ Thumbs.db
 *.zip
 /src/vendor
 /src/app/storage
+Cataclysm-DDA*

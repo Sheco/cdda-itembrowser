@@ -9,8 +9,11 @@ class LocalRepository extends Repository implements RepositoryInterface
     private $version;
     private $source;
 
-    public function __construct()
+    private $events;
+
+    public function __construct(\Illuminate\Events\Dispatcher $events)
     {
+        $this->events = $events;
     }
 
     public function setSource($source)
@@ -22,7 +25,7 @@ class LocalRepository extends Repository implements RepositoryInterface
     {
         $object->repo_id = $this->id++;
 
-        \Event::fire("cataclysm.newObject", array($this, $object));
+        $this->events->fire("cataclysm.newObject", array($this, $object));
 
         $this->database[$object->repo_id] = $object;
     }
@@ -101,7 +104,7 @@ class LocalRepository extends Repository implements RepositoryInterface
 
         $this->version = $this->getVersion($path);
 
-        \Event::fire("cataclysm.finishedLoading", array($this));
+        $this->events->fire("cataclysm.finishedLoading", array($this));
 
         return array($this->database, $this->index);
     }

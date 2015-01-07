@@ -43,7 +43,7 @@ class CataclysmCache extends Command
 
         $this->registerIndexers();
 
-        $localrepo = new Repositories\LocalRepository;
+        $localrepo = $this->laravel->make('Repositories\LocalRepository');
         $localrepo->setSource($this->argument('path'));
 
         $repo = $this->laravel->make('Repositories\RepositoryInterface');

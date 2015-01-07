@@ -1,5 +1,5 @@
 #!/bin/sh
-# tested on a debian 7.3 box
+# tested on a ubuntu 14.04 box
 # this is script would normally be ran only once per server
 # it downloads the system dependencies needed for the app
 

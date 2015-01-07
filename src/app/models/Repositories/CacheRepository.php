@@ -1,7 +1,7 @@
 <?php
 namespace Repositories;
 
-class CacheRepository extends LocalRepository implements RepositoryInterface
+class CacheRepository extends Repository implements RepositoryInterface
 {
     private $repo;
 

@@ -6,6 +6,15 @@ class Recipe implements IndexerInterface
     const DEFAULT_INDEX = "recipe";
     const ID_FIELD = "repo_id";
 
+    private function itemQualityLevel($item, $quality)
+    {
+        foreach ($item->qualities as $q) {
+            if ($q[0] == $quality) {
+                return $q[1];
+            }
+        }
+    }
+
     public function onFinishedLoading($repo)
     {
         foreach ($repo->all(self::DEFAULT_INDEX) as $id) {
@@ -14,9 +23,8 @@ class Recipe implements IndexerInterface
             if (isset($recipe->qualities)) {
                 foreach ($recipe->qualities as $group) {
                     foreach ($repo->all("quality.$group->id") as $id => $item) {
-                        $item = \App::make("Item");
-                        $item->load($repo->get("item", $id));
-                        if ($item->qualityLevel($group->id)<$group->level) {
+                        $item = $repo->get("item", $id);
+                        if ($this->itemQualityLevel($item, $group->id)<$group->level) {
                             continue;
                         }
                         $this->linkIndexes($repo, 'toolFor', $id, $recipe);
@@ -28,8 +36,7 @@ class Recipe implements IndexerInterface
                 $skill = $recipe->skill_used;
                 $level = $recipe->difficulty;
 
-                $item = \App::make("Item");
-                $item->load($repo->get("item", $recipe->result));
+                $item = $repo->get("item", $recipe->result);
                 $repo->addIndex("skill.$skill.$level", $item->id, $item->repo_id);
                 $repo->addIndex("skills", $skill, $skill);
             }

@@ -5,6 +5,7 @@ use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 abstract class Repository implements RepositoryInterface 
 {
+    protected $app;
     public function getObjectOrFail($object, $id)
     {
         $repo = $this->app->make("Repositories\\Indexers\\$object");

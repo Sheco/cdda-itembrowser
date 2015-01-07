@@ -8,7 +8,6 @@ class LocalRepository extends Repository implements RepositoryInterface
     private $index;
     private $version;
     private $source;
-    protected $app;
 
     private $events;
 

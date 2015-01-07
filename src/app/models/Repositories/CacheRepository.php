@@ -3,7 +3,6 @@ namespace Repositories;
 
 class CacheRepository extends Repository implements RepositoryInterface
 {
-    protected $app;
     private $repo;
     private $source;
     private $expiration;

@@ -7,14 +7,14 @@ abstract class Repository implements RepositoryInterface
 {
     public function getObjectOrFail($object, $id)
     {
-        $repo = \App::make("Repositories\\Indexers\\$object");
+        $repo = $this->app->make("Repositories\\Indexers\\$object");
 
         $data = $this->get($repo::DEFAULT_INDEX, $id);
         if (!$data) {
             throw new ModelNotFoundException();
         }
 
-        $model = \App::make($object);
+        $model = $this->app->make($object);
         $model->load($data);
 
         return $model;
@@ -22,11 +22,11 @@ abstract class Repository implements RepositoryInterface
 
     public function getObject($object, $id)
     {
-        $repo = \App::make("Repositories\\Indexers\\$object");
+        $repo = $this->app->make("Repositories\\Indexers\\$object");
 
         $data = $this->get($repo::DEFAULT_INDEX, $id);
 
-        $model = \App::make($object);
+        $model = $this->app->make($object);
 
         if (!$data) {
             $model->loadDefault($id);
@@ -40,7 +40,7 @@ abstract class Repository implements RepositoryInterface
     public function allObjects($repo, $index = null)
     {
         if (!$index) {
-            $repoInstance = \App::make("Repositories\\Indexers\\$repo");
+            $repoInstance = $this->app->make("Repositories\\Indexers\\$repo");
             $index = $repoInstance::DEFAULT_INDEX;
         }
 

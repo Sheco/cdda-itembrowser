@@ -8,12 +8,17 @@ class LocalRepository extends Repository implements RepositoryInterface
     private $index;
     private $version;
     private $source;
+    protected $app;
 
     private $events;
 
-    public function __construct(\Illuminate\Events\Dispatcher $events)
+    public function __construct(
+        \Illuminate\Events\Dispatcher $events,
+        \Illuminate\Foundation\Application $app
+    )
     {
         $this->events = $events;
+        $this->app = $app;
     }
 
     public function setSource($source)

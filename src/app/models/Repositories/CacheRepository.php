@@ -10,13 +10,11 @@ class CacheRepository extends Repository implements RepositoryInterface
 
     public function __construct(
         \Illuminate\Cache\Repository $repo,
-        \Illuminate\Foundation\Application $app,
-        \Illuminate\Config\Repository $config
+        \Illuminate\Foundation\Application $app
     )
     {
         $this->repo = $repo;
         $this->app = $app;
-        $this->expiration = $config->get("cataclysm.searchCacheExpiration");
     }
 
     public function setSource($source)
@@ -71,7 +69,7 @@ class CacheRepository extends Repository implements RepositoryInterface
         $repoInstance = $this->app->make("Repositories\\Indexers\\$repo");
         $idField = $repoInstance::ID_FIELD;
 
-        $objects = $this->repo->remember($key, $this->expiration, 
+        $objects = $this->repo->rememberForever($key,
             function () use ($repo, $search, $idField) {
                 $objects = parent::searchObjects($repo, $search);
                 array_walk($objects, function (&$object) use ($idField) {

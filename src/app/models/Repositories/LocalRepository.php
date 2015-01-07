@@ -196,7 +196,7 @@ class LocalRepository implements RepositoryInterface
         return $results;
     }
 
-    public function getVersion($path)
+    private function getVersion($path)
     {
         $version_file = "$path/src/version.h";
         $data = @file_get_contents($version_file);

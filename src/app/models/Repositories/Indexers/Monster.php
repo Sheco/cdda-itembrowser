@@ -25,9 +25,4 @@ class Monster implements IndexerInterface
     public function onFinishedLoading($repo)
     {
     }
-
-    public function model()
-    {
-        return \App::make("Monster");
-    }
 }

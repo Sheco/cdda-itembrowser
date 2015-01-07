@@ -32,9 +32,4 @@ class MonsterGroup implements IndexerInterface
             return;
         }
     }
-
-    public function model()
-    {
-        return \App::make("MonsterGroup");
-    }
 }

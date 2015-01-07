@@ -164,9 +164,4 @@ class Item implements IndexerInterface
             }
         }
     }
-
-    public function model()
-    {
-        return \App::make("Item");
-    }
 }

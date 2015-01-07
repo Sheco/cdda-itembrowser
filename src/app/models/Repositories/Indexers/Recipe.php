@@ -117,9 +117,4 @@ class Recipe implements IndexerInterface
             }
         }
     }
-
-    public function model()
-    {
-        return \App::make("Recipe");
-    }
 }

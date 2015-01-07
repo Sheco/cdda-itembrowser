@@ -1,6 +1,8 @@
 <?php
 namespace Repositories;
 
+use Illuminate\Database\Eloquent\ModelNotFoundException;
+
 abstract class Repository implements RepositoryInterface 
 {
     public function getObjectOrFail($repo, $id)

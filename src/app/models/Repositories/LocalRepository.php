@@ -1,8 +1,6 @@
 <?php
 namespace Repositories;
 
-use Illuminate\Database\Eloquent\ModelNotFoundException;
-
 class LocalRepository extends Repository implements RepositoryInterface
 {
     private $id;

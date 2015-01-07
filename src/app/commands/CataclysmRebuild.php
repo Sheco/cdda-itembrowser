@@ -39,7 +39,7 @@ class CataclysmCache extends Command
     public function fire()
     {
         $this->info("rebuilding database cache...");
-        \Cache::flush();
+        $this->laravel['cache']->flush();
 
         $this->registerIndexers();
 
@@ -88,10 +88,10 @@ class CataclysmCache extends Command
 
     private function registerIndexer(Indexers\IndexerInterface $indexer)
     {
-        \Event::listen('cataclysm.newObject',
+        $this->laravel['events']->listen('cataclysm.newObject',
             array($indexer, 'onNewObject'));
 
-        \Event::listen('cataclysm.finishedLoading',
+        $this->laravel['events']->listen('cataclysm.finishedLoading',
             array($indexer, 'onFinishedLoading'));
     }
 }

@@ -61,8 +61,8 @@ class Item implements Robbo\Presenter\PresentableInterface
         }
         $color = str_replace("_", "", $this->data->color);
         $colorTable = array(
-      "lightred" => "indianred",
-    );
+            "lightred" => "indianred",
+        );
         if (isset($colorTable[$color])) {
             return $colorTable[$color];
         }
@@ -310,11 +310,11 @@ class Item implements Robbo\Presenter\PresentableInterface
     public function getQualities()
     {
         return array_map(function ($quality) {
-      return array(
-        "quality" => $this->repo->getObject("Quality", $quality[0]),
-        "level" => $quality[1],
-      );
-    }, $this->data->qualities);
+            return array(
+                "quality" => $this->repo->getObject("Quality", $quality[0]),
+                "level" => $quality[1],
+            );
+        }, $this->data->qualities);
     }
 
     public function qualityLevel($quality)
@@ -354,8 +354,8 @@ class Item implements Robbo\Presenter\PresentableInterface
     public function getMaterials()
     {
         $materials = array(
-      $this->material1,
-    );
+            $this->material1,
+        );
         if ($this->material2->ident != "null") {
             $materials[] = $this->material2;
         }

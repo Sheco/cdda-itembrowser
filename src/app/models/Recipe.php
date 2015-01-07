@@ -32,8 +32,8 @@ class Recipe implements Robbo\Presenter\PresentableInterface
         }
 
         return array_map(function ($i) use ($skills) {
-      return $i;
-    }, $skills);
+            return $i;
+        }, $skills);
     }
 
     public function getResult()
@@ -54,23 +54,23 @@ class Recipe implements Robbo\Presenter\PresentableInterface
     public function getTools()
     {
         return array_map(function ($group) {
-      return array_map(function ($tool) {
-        list($id, $amount) = $tool;
+            return array_map(function ($tool) {
+                list($id, $amount) = $tool;
 
-        return array($this->repo->getObject("Item", $id), $amount);
-      }, $group);
-    }, $this->data->tools);
+                return array($this->repo->getObject("Item", $id), $amount);
+            }, $group);
+        }, $this->data->tools);
     }
 
     public function getComponents()
     {
         return array_map(function ($group) {
-      return array_map(function ($component) {
-        list($id, $amount) = $component;
+            return array_map(function ($component) {
+                list($id, $amount) = $component;
 
-        return array($this->repo->getObject("Item", $id), $amount);
-      }, $group);
-    }, $this->data->components);
+                return array($this->repo->getObject("Item", $id), $amount);
+            }, $group);
+        }, $this->data->components);
     }
 
     public function getCanBeLearned()
@@ -81,8 +81,8 @@ class Recipe implements Robbo\Presenter\PresentableInterface
     public function getBooksTeaching()
     {
         return array_map(function ($book) {
-      return array($this->repo->getObject("Item", $book[0]), $book[1]);
-    }, $this->data->book_learn);
+            return array($this->repo->getObject("Item", $book[0]), $book[1]);
+        }, $this->data->book_learn);
     }
 
     public function getHasQualities()
@@ -93,12 +93,12 @@ class Recipe implements Robbo\Presenter\PresentableInterface
     public function getQualities()
     {
         return array_map(function ($quality) {
-      return array(
-        "quality" => $this->repo->getObject("Quality", $quality->id),
-        "level" => $quality->level,
-        "amount" => $quality->amount,
-      );
-    }, $this->data->qualities);
+            return array(
+                "quality" => $this->repo->getObject("Quality", $quality->id),
+                "level" => $quality->level,
+                "amount" => $quality->amount,
+            );
+        }, $this->data->qualities);
     }
 
     public function getPresenter()

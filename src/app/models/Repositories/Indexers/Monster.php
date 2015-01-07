@@ -1,6 +1,8 @@
 <?php
 namespace Repositories\Indexers;
 
+use Repositories\LocalRepository;
+
 class Monster implements IndexerInterface
 {
     protected $database;
@@ -8,7 +10,7 @@ class Monster implements IndexerInterface
     const DEFAULT_INDEX = "monsters";
     const ID_FIELD = "id";
 
-    public function onNewObject($repo, $object)
+    public function onNewObject(LocalRepository $repo, $object)
     {
         if ($object->type == "MONSTER") {
             $repo->addIndex(self::DEFAULT_INDEX, $object->id, $object->repo_id);
@@ -22,7 +24,7 @@ class Monster implements IndexerInterface
         }
     }
 
-    public function onFinishedLoading($repo)
+    public function onFinishedLoading(LocalRepository $repo)
     {
     }
 }

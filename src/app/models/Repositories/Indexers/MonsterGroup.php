@@ -1,6 +1,8 @@
 <?php
 namespace Repositories\Indexers;
 
+use Repositories\LocalRepository;
+
 class MonsterGroup implements IndexerInterface
 {
     protected $database;
@@ -8,14 +10,14 @@ class MonsterGroup implements IndexerInterface
     const DEFAULT_INDEX = "monstergroups";
     const ID_FIELD = "name";
 
-    public function onFinishedLoading($repo)
+    public function onFinishedLoading(LocalRepository $repo)
     {
         foreach ($repo->all(self::DEFAULT_INDEX) as $id) {
             $group = $repo->get(self::DEFAULT_INDEX, $id);
         }
     }
 
-    public function onNewObject($repo, $object)
+    public function onNewObject(LocalRepository $repo, $object)
     {
         if ($object->type == "monstergroup") {
             $repo->addIndex(self::DEFAULT_INDEX, $object->name, $object->repo_id);

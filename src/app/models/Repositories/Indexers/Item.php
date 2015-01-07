@@ -1,6 +1,7 @@
 <?php
 namespace Repositories\Indexers;
 
+use Repositories\LocalRepository;
 
 class Item implements IndexerInterface
 {
@@ -55,7 +56,7 @@ class Item implements IndexerInterface
         );
     }
 
-    public function onFinishedLoading($repo)
+    public function onFinishedLoading(LocalRepository $repo)
     {
         foreach ($repo->all(self::DEFAULT_INDEX) as $id => $item) {
             $recipes = count($repo->all("item.toolFor.$id"));
@@ -75,7 +76,7 @@ class Item implements IndexerInterface
         }
     }
 
-    public function onNewObject($repo, $object)
+    public function onNewObject(LocalRepository $repo, $object)
     {
         // only index objects with valid item types.
         if (!isset($this->types[$object->type])) {

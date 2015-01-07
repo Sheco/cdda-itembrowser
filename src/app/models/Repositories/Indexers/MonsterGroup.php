@@ -20,7 +20,7 @@ class MonsterGroup implements IndexerInterface
     public function onNewObject(LocalRepository $repo, $object)
     {
         if ($object->type == "monstergroup") {
-            $repo->addIndex(self::DEFAULT_INDEX, $object->name, $object->repo_id);
+            $repo->set(self::DEFAULT_INDEX, $object->name, $object->repo_id);
 
             // create unique monsters array
             $monsters = array();

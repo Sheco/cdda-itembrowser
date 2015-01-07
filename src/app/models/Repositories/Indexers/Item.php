@@ -60,19 +60,19 @@ class Item implements IndexerInterface
     {
         foreach ($repo->all(self::DEFAULT_INDEX) as $id => $item) {
             $recipes = count($repo->all("item.toolFor.$id"));
-            $repo->addIndex("item.count.$id", "toolFor", $recipes);
+            $repo->set("item.count.$id", "toolFor", $recipes);
 
             $recipes = count($repo->all("item.recipes.$id"));
-            $repo->addIndex("item.count.$id", "recipes", $recipes);
+            $repo->set("item.count.$id", "recipes", $recipes);
 
             $recipes = count($repo->all("item.learn.$id"));
-            $repo->addIndex("item.count.$id", "learn", $recipes);
+            $repo->set("item.count.$id", "learn", $recipes);
 
             $recipes = count($repo->all("item.disassembly.$id"));
-            $repo->addIndex("item.count.$id", "disassembly", $recipes);
+            $repo->set("item.count.$id", "disassembly", $recipes);
 
             $recipes = count($repo->all("item.disassembledFrom.$id"));
-            $repo->addIndex("item.count.$id", "disassembledFrom", $recipes);
+            $repo->set("item.count.$id", "disassembledFrom", $recipes);
         }
     }
 
@@ -83,7 +83,7 @@ class Item implements IndexerInterface
             return;
         }
 
-        $repo->addIndex(self::DEFAULT_INDEX, $object->id, $object->repo_id);
+        $repo->set(self::DEFAULT_INDEX, $object->id, $object->repo_id);
 
         // nearby fire and integrated toolset are "virtual" items
         // they don't have anything special.
@@ -93,75 +93,75 @@ class Item implements IndexerInterface
 
         // items with enough damage might be good melee weapons.
         if ($object->bashing+$object->cutting>10 and $object->to_hit>-2) {
-            $repo->addIndex("melee", $object->id, $object->repo_id);
+            $repo->set("melee", $object->id, $object->repo_id);
         }
 
         // create an index with armor for each body part they cover.
         if ($object->type == "ARMOR" and !isset($object->covers)) {
-            $repo->addIndex("armor.none", $object->id, $object->repo_id);
+            $repo->set("armor.none", $object->id, $object->repo_id);
         } elseif ($object->type == "ARMOR" and isset($object->covers)) {
             foreach ($object->covers as $part) {
                 $part = strtolower($part);
-                $repo->addIndex("armor.$part", $object->id, $object->repo_id);
+                $repo->set("armor.$part", $object->id, $object->repo_id);
             }
         }
 
         if ($object->type == "CONTAINER") {
-            $repo->addIndex("container", $object->id, $object->repo_id);
+            $repo->set("container", $object->id, $object->repo_id);
         }
         if ($object->type == "COMESTIBLE") {
-            $repo->addIndex("food", $object->id, $object->repo_id);
+            $repo->set("food", $object->id, $object->repo_id);
         }
         if ($object->type == "TOOL") {
-            $repo->addIndex("tool", $object->id, $object->repo_id);
+            $repo->set("tool", $object->id, $object->repo_id);
         }
 
         // save books per skill
         if ($object->type == "BOOK") {
             if (isset($this->book_types[$object->skill])) {
                 $skill = $this->book_types[$object->skill];
-                $repo->addIndex("book.$skill", $object->id, $object->repo_id);
+                $repo->set("book.$skill", $object->id, $object->repo_id);
             } else {
-                $repo->addIndex("book.other", $object->id, $object->repo_id);
+                $repo->set("book.other", $object->id, $object->repo_id);
             }
         }
 
         if ($object->type == "GUN") {
-            $repo->addIndex("gun.$object->skill", $object->id, $object->repo_id);
+            $repo->set("gun.$object->skill", $object->id, $object->repo_id);
         }
 
         if ($object->type == "GUNMOD") {
             foreach ($object->mod_targets as $target) {
-                $repo->addIndex("gunmods.$target.$object->location", $object->id, $object->repo_id);
-                $repo->addIndex("gunmodSkills", $target, $target);
+                $repo->set("gunmods.$target.$object->location", $object->id, $object->repo_id);
+                $repo->set("gunmodSkills", $target, $target);
             }
-            $repo->addIndex("gunmodParts", $object->location, $object->location);
+            $repo->set("gunmodParts", $object->location, $object->location);
         }
 
         if ($object->type == "AMMO") {
-            $repo->addIndex("ammo.$object->ammo_type", $object->id, $object->repo_id);
+            $repo->set("ammo.$object->ammo_type", $object->id, $object->repo_id);
         }
         if ($object->type == "COMESTIBLE") {
             $type = strtolower($object->comestible_type);
-            $repo->addIndex("consumables.$type", $object->id, $object->repo_id);
+            $repo->set("consumables.$type", $object->id, $object->repo_id);
         }
         if (isset($object->qualities)) {
             foreach ($object->qualities as $quality) {
-                $repo->addIndex("quality.$quality[0]", $object->id, $object->repo_id);
-                $repo->addIndex("qualities", $quality[0], $quality[0]);
+                $repo->set("quality.$quality[0]", $object->id, $object->repo_id);
+                $repo->set("qualities", $quality[0], $quality[0]);
             }
         }
 
         if (isset($object->material)) {
             $materials = (array) $object->material;
-            $repo->addIndex("material.$materials[0]", $object->id, $object->repo_id);
+            $repo->set("material.$materials[0]", $object->id, $object->repo_id);
         }
 
         if (isset($object->flags)) {
             $flags = (array) $object->flags;
             foreach ($flags as $flag) {
-                $repo->addIndex("flag.$flag", $object->id, $object->repo_id);
-                $repo->addIndex("flags", $flag, $flag);
+                $repo->set("flag.$flag", $object->id, $object->repo_id);
+                $repo->set("flags", $flag, $flag);
             }
         }
     }

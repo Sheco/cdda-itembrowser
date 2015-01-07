@@ -13,11 +13,11 @@ class Monster implements IndexerInterface
     public function onNewObject(LocalRepository $repo, $object)
     {
         if ($object->type == "MONSTER") {
-            $repo->addIndex(self::DEFAULT_INDEX, $object->id, $object->repo_id);
+            $repo->set(self::DEFAULT_INDEX, $object->id, $object->repo_id);
             $objspecies = (array) $object->species;
             foreach ($objspecies as $species) {
-                $repo->addIndex("monster.species.$species", $object->id, $object->repo_id);
-                $repo->addIndex("monster.species", $species, $species);
+                $repo->set("monster.species.$species", $object->id, $object->repo_id);
+                $repo->set("monster.species", $species, $species);
             }
 
             return;

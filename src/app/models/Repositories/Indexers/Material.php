@@ -13,7 +13,7 @@ class Material implements IndexerInterface
     public function onNewObject(LocalRepository $repo, $object)
     {
         if ($object->type == "material") {
-            $repo->addIndex(self::DEFAULT_INDEX, $object->ident, $object->repo_id);
+            $repo->set(self::DEFAULT_INDEX, $object->ident, $object->repo_id);
         }
     }
 

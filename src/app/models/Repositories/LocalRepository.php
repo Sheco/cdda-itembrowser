@@ -55,7 +55,6 @@ class LocalRepository extends Repository implements RepositoryInterface
 
     public function read()
     {
-        \Log::info("Reading data files...");
         $path = $this->source;
 
         $this->database = array();

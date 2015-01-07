@@ -7,11 +7,15 @@ class LocalRepository extends Repository implements RepositoryInterface
     private $database;
     private $index;
     private $version;
-    private $path;
+    private $source;
 
-    public function __construct($path)
+    public function __construct()
     {
-        $this->path = $path;
+    }
+
+    public function setSource($source)
+    {
+        $this->source = $source;
     }
 
     private function newObject($object)
@@ -49,7 +53,7 @@ class LocalRepository extends Repository implements RepositoryInterface
     public function read()
     {
         \Log::info("Reading data files...");
-        $path = $this->path;
+        $path = $this->source;
 
         $this->database = array();
         $this->id = 0;

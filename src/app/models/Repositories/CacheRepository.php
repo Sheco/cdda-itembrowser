@@ -4,19 +4,21 @@ namespace Repositories;
 class CacheRepository extends Repository implements RepositoryInterface
 {
     private $repo;
+    private $source;
 
     public function __construct()
     {
         $this->repo = \App::make('cache.store');
     }
 
-    public function read()
+    public function setSource($source)
     {
+        $this->source = $source;
     }
 
-    public function compile(LocalRepository $reader)
+    public function read()
     {
-        list($database, $index) = $reader->read();
+        list($database, $index) = $this->source->read();
 
         foreach ($database as $repo_id => $object) {
             $this->repo->forever("cdda:db:$repo_id", $object);
@@ -25,7 +27,8 @@ class CacheRepository extends Repository implements RepositoryInterface
         foreach ($index as $id => $data) {
             $this->repo->forever("cdda:index:$id", $data);
         }
-        $this->repo->forever("cdda:version", $reader->version());
+        $this->repo->forever("cdda:version", $this->source->version());
+        return [$database, $index];
     }
 
     public function get($index, $id)

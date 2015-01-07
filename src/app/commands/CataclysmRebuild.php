@@ -43,10 +43,12 @@ class CataclysmCache extends Command
 
         $this->registerIndexers();
 
-        $localreader = new Repositories\LocalRepository($this->argument('path'));
+        $localrepo = new Repositories\LocalRepository;
+        $localrepo->setSource($this->argument('path'));
 
         $repo = new Repositories\CacheRepository;
-        $repo->compile($localreader);
+        $repo->setSource($localrepo);
+        $repo->read();
     }
 
     /**

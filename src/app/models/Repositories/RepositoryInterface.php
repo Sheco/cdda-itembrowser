@@ -3,6 +3,9 @@ namespace Repositories;
 
 interface RepositoryInterface
 {
+    public function setSource($source);
+    public function read();
+
     public function get($index, $id);
     public function getObjectOrFail($repo, $id);
     public function getObject($repo, $id);

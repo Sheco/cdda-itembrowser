@@ -6,10 +6,7 @@ class DataServiceProvider extends ServiceProvider
 {
     public function register()
     {
-        $this->app->singleton('Repositories\RepositoryReaderInterface',
-            'Repositories\CompiledReader');
-
-        $this->app->singleton('Repositories\RepositoryInterface',
-            'Repositories\RepositoryCache');
+        $this->app->bind('Repositories\RepositoryInterface',
+            'Repositories\CacheRepository');
     }
 }

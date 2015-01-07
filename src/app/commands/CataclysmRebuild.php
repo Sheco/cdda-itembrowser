@@ -21,15 +21,13 @@ class CataclysmCache extends Command
      */
     protected $description = 'Compile the database.';
 
-    protected $repo;
     /**
      * Create a new command instance.
      *
      * @return void
      */
-    public function __construct(Repositories\CompiledReader $repo)
+    public function __construct()
     {
-        $this->repo = $repo;
         parent::__construct();
     }
 
@@ -41,11 +39,14 @@ class CataclysmCache extends Command
     public function fire()
     {
         $this->info("rebuilding database cache...");
+        \Cache::flush();
 
         $this->registerIndexers();
 
-        $this->repo->compile($this->argument('path'), $this->option('adhesion'));
-        \Cache::flush();
+        $localreader = new Repositories\LocalRepository($this->argument('path'));
+
+        $repo = new Repositories\CacheRepository;
+        $repo->compile($localreader);
     }
 
     /**
@@ -68,7 +69,6 @@ class CataclysmCache extends Command
     protected function getOptions()
     {
         return array(
-      array('adhesion', 'a', InputOption::VALUE_OPTIONAL, "Chunk adhesion, reduces the amount of files created", 100),
         );
     }
 

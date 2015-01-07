@@ -10,6 +10,7 @@ class Item implements Robbo\Presenter\PresentableInterface
     private $cut_pairs = array(
       "cotton" => "rag",
       "leather" => "leather",
+      "fur"=>"fur",
       "nomex" => "nomex",
       "plastic" => "plastic_chunk",
       "kevlar" => "kevlar_plate",

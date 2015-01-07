@@ -5,28 +5,28 @@ use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 abstract class Repository implements RepositoryInterface 
 {
-    public function getObjectOrFail($repo, $id)
+    public function getObjectOrFail($object, $id)
     {
-        $repo = \App::make("Repositories\\Indexers\\$repo");
+        $repo = \App::make("Repositories\\Indexers\\$object");
 
         $data = $this->get($repo::DEFAULT_INDEX, $id);
         if (!$data) {
             throw new ModelNotFoundException();
         }
 
-        $model = $repo->model();
+        $model = \App::make($object);
         $model->load($data);
 
         return $model;
     }
 
-    public function getObject($repo, $id)
+    public function getObject($object, $id)
     {
-        $repo = \App::make("Repositories\\Indexers\\$repo");
+        $repo = \App::make("Repositories\\Indexers\\$object");
 
         $data = $this->get($repo::DEFAULT_INDEX, $id);
 
-        $model = $repo->model();
+        $model = \App::make($object);
 
         if (!$data) {
             $model->loadDefault($id);

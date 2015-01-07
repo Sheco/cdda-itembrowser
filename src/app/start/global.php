@@ -48,6 +48,20 @@ Log::useDailyFiles(storage_path().'/logs/'.$logFile);
 |
 */
 
+use Illuminate\Database\Eloquent\ModelNotFoundException;
+
+App::error(function (ModelNotFoundException $e) {
+    $view =  View::make("layouts.bootstrap")
+        ->nest("content", "notfound");
+    return Response::make($view, 404);
+});
+
+App::missing(function ($exception) {
+    $view =  View::make("layouts.bootstrap")
+        ->nest("content", "notfound");
+    return Response::make($view, 404);
+});
+
 App::error(function (Exception $exception, $code) {
     Log::error($exception);
 });

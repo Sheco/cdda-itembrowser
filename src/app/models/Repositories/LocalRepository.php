@@ -1,7 +1,8 @@
 <?php
 namespace Repositories;
 
-class LocalRepository extends Repository implements RepositoryInterface
+class LocalRepository extends Repository implements RepositoryInterface,
+    RepositoryParserInterface
 {
     private $id;
     private $database;

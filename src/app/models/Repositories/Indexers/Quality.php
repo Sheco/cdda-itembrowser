@@ -7,13 +7,13 @@ class Quality implements IndexerInterface
 {
     protected $database;
 
-    const DEFAULT_INDEX = "tool_quality";
+    const DEFAULT_INDEX = "qualities";
     const ID_FIELD = "id";
 
     public function onNewObject(LocalRepository $repo, $object)
     {
         if ($object->type == "tool_quality") {
-            $repo->set(self::DEFAULT_INDEX, $object->id);
+            $repo->append(self::DEFAULT_INDEX, $object->id);
             $repo->set(self::DEFAULT_INDEX.".".$object->id, $object->repo_id);
         }
     }

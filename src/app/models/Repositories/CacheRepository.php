@@ -40,7 +40,6 @@ class CacheRepository extends Repository implements RepositoryInterface,
     public function get($index)
     {
         $repo_id = $this->repo->get("cdda:index:$index");
-        $repo_id = reset($repo_id);
 
         if (!isset($this->database[$repo_id])) {
             $this->database[$repo_id] = $this->repo->get("cdda:db:$repo_id");

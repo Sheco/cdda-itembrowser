@@ -48,8 +48,8 @@ abstract class Repository implements RepositoryInterface
         $data = $this->all($index);
 
         array_walk($data, 
-            function (&$value, $key) use ($model) {
-                $value = $this->getModel($model, $key);
+            function (&$value) use ($model) {
+                $value = $this->getModel($model, $value);
             }
         );
 

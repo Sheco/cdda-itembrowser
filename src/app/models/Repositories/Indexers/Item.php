@@ -83,7 +83,7 @@ class Item implements IndexerInterface
             return;
         }
 
-        $repo->set(self::DEFAULT_INDEX,  $object->id);
+        $repo->append(self::DEFAULT_INDEX,  $object->id);
         $repo->set(self::DEFAULT_INDEX.".".$object->id, $object->repo_id);
 
         // nearby fire and integrated toolset are "virtual" items
@@ -94,75 +94,81 @@ class Item implements IndexerInterface
 
         // items with enough damage might be good melee weapons.
         if ($object->bashing+$object->cutting>10 and $object->to_hit>-2) {
-            $repo->set("melee", $object->id);
+            $repo->append("melee", $object->id);
         }
 
         // create an index with armor for each body part they cover.
         if ($object->type == "ARMOR" and !isset($object->covers)) {
-            $repo->set("armor.none", $object->id);
+            $repo->append("armor.none", $object->id);
         } elseif ($object->type == "ARMOR" and isset($object->covers)) {
             foreach ($object->covers as $part) {
                 $part = strtolower($part);
-                $repo->set("armor.$part", $object->id);
+                $repo->append("armor.$part", $object->id);
             }
         }
 
         if ($object->type == "CONTAINER") {
-            $repo->set("container", $object->id);
+            $repo->append("container", $object->id);
         }
         if ($object->type == "COMESTIBLE") {
-            $repo->set("food", $object->id);
+            $repo->append("food", $object->id);
         }
         if ($object->type == "TOOL") {
-            $repo->set("tool", $object->id);
+            $repo->append("tool", $object->id);
         }
 
         // save books per skill
         if ($object->type == "BOOK") {
             if (isset($this->book_types[$object->skill])) {
                 $skill = $this->book_types[$object->skill];
-                $repo->set("book.$skill", $object->id);
+                $repo->append("book.$skill", $object->id);
             } else {
-                $repo->set("book.other", $object->id);
+                $repo->append("book.other", $object->id);
             }
         }
 
         if ($object->type == "GUN") {
-            $repo->set("gun.$object->skill", $object->id);
+            $repo->append("gun.$object->skill", $object->id);
         }
 
         if ($object->type == "GUNMOD") {
             foreach ($object->mod_targets as $target) {
-                $repo->set("gunmods.$target.$object->location", $object->id);
-                $repo->set("gunmodSkills", $target);
+                $repo->append("gunmods.$target.$object->location", $object->id);
+                $gunmodSkills = $repo->all("gunmodSkills", array());
+                $gunmodSkills[$target] = $target;
+                $repo->set("gunmodSkills", $gunmodSkills);
             }
-            $repo->set("gunmodParts", $object->location);
+            $gunmodParts = $repo->all("gunmodParts", array());
+            $gunmodParts[$object->location] = $object->location;
+            $repo->set("gunmodParts", $gunmodParts);
         }
 
         if ($object->type == "AMMO") {
-            $repo->set("ammo.$object->ammo_type", $object->id);
+            $repo->append("ammo.$object->ammo_type", $object->id);
         }
         if ($object->type == "COMESTIBLE") {
             $type = strtolower($object->comestible_type);
-            $repo->set("consumables.$type", $object->id);
+            $repo->append("consumables.$type", $object->id);
         }
         if (isset($object->qualities)) {
             foreach ($object->qualities as $quality) {
-                $repo->set("quality.$quality[0]", $object->id);
-                $repo->set("qualities", $quality[0]);
+                $repo->append("quality.$quality[0]", $object->id);
             }
         }
 
         if (isset($object->material)) {
             $materials = (array) $object->material;
-            $repo->set("material.$materials[0]", $object->id);
+            $repo->append("material.$materials[0]", $object->id);
         }
 
         if (isset($object->flags)) {
             $flags = (array) $object->flags;
             foreach ($flags as $flag) {
-                $repo->set("flag.$flag", $object->id);
-                $repo->set("flags", $flag);
+                $repo->append("flag.$flag", $object->id);
+
+                $flags = $repo->all('flags', array());
+                $flags[$flag] = $flag;
+                $repo->set("flags", $flags);
             }
         }
     }

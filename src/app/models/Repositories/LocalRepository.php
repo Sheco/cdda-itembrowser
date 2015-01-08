@@ -114,18 +114,15 @@ class LocalRepository extends Repository implements RepositoryInterface,
     }
 
     // save an index to an object
-    public function set($index, $key, $value)
+    public function set($index, $value)
     {
-      $this->index[$index][$key] = $value;
+      $this->index[$index][$value] = $value;
     }
 
     public function get($index, $id)
     {
-        $indexDb = $this->all($index);
-        if (!isset($indexDb[$id])) {
-            return;
-        }
-        $repo_id = $indexDb[$id];
+        $repo_id = $this->index["$index.$id"];
+        $repo_id = reset($repo_id);
 
         return $this->database[$repo_id];
     }

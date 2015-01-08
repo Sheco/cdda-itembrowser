@@ -13,8 +13,8 @@ class Quality implements IndexerInterface
     public function onNewObject(LocalRepository $repo, $object)
     {
         if ($object->type == "tool_quality") {
-            $repo->set(self::DEFAULT_INDEX, $object->id, $object->repo_id);
-            $repo->set(self::DEFAULT_INDEX.".".$object->id, $object->id, $object->repo_id);
+            $repo->set(self::DEFAULT_INDEX, $object->id);
+            $repo->set(self::DEFAULT_INDEX.".".$object->id, $object->repo_id);
         }
     }
 

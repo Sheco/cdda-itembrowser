@@ -24,7 +24,7 @@ class Recipe implements IndexerInterface
             // search for all the items with the apropiate qualities
             if (isset($recipe->qualities)) {
                 foreach ($recipe->qualities as $group) {
-                    foreach ($repo->all("quality.$group->id") as $id => $item) {
+                    foreach ($repo->all("quality.$group->id") as $id) {
                         $item = $repo->get("item", $id);
                         if ($this->itemQualityLevel($item, $group->id)<$group->level) {
                             continue;
@@ -39,8 +39,8 @@ class Recipe implements IndexerInterface
                 $level = $recipe->difficulty;
 
                 $item = $repo->get("item", $recipe->result);
-                $repo->set("skill.$skill.$level", $item->id, $item->repo_id);
-                $repo->set("skills", $skill, $skill);
+                $repo->set("skill.$skill.$level", $item->id);
+                $repo->set("skills", $skill);
             }
         }
     }
@@ -51,7 +51,7 @@ class Recipe implements IndexerInterface
         // they are not needed anywhere else.
         if ($key == "recipes"
             and $recipe->category == "CC_NONCRAFT") {
-            $repo->set("item.disassembly.$id", $recipe->repo_id, $recipe->repo_id);
+            $repo->set("item.disassembly.$id", $recipe->repo_id);
 
             return;
         }
@@ -61,21 +61,21 @@ class Recipe implements IndexerInterface
         if ($key == "recipes"
         and isset($recipe->reversible)
         and $recipe->reversible == "true") {
-            $repo->set("item.disassembly.$id", $recipe->repo_id, $recipe->repo_id);
+            $repo->set("item.disassembly.$id", $recipe->repo_id);
         }
 
         if ($key == "toolFor") {
             // create a list of recipe categories, excluding NONCRAFT.
             if ($recipe->category != "CC_NONCRAFT") {
-                $repo->set("item.categories.$id", $recipe->category, $recipe->category);
+                $repo->set("item.categories.$id", $recipe->category);
             }
 
             // create a list of tools per category for this object.
             $repo->set("item.toolForCategory.$id.$recipe->category",
-                $recipe->repo_id, $recipe->repo_id);
+                $recipe->repo_id);
         }
 
-        $repo->set("item.$key.$id", $recipe->repo_id, $recipe->repo_id);
+        $repo->set("item.$key.$id", $recipe->repo_id);
     }
 
     public function onNewObject(LocalRepository $repo, $object)
@@ -83,8 +83,8 @@ class Recipe implements IndexerInterface
         if ($object->type == "recipe") {
             $recipe = $object;
 
-            $repo->set(self::DEFAULT_INDEX, $recipe->repo_id, $recipe->repo_id);
-            $repo->set(self::DEFAULT_INDEX.".".$recipe->repo_id, $recipe->repo_id, $recipe->repo_id);
+            $repo->set(self::DEFAULT_INDEX, $recipe->repo_id);
+            $repo->set(self::DEFAULT_INDEX.".".$recipe->repo_id, $recipe->repo_id);
 
             if (isset($recipe->result)) {
                 $this->linkIndexes($repo, "recipes", $recipe->result, $recipe);
@@ -113,7 +113,7 @@ class Recipe implements IndexerInterface
                         if ($recipe->category == "CC_NONCRAFT"
               or (isset($recipe->reversible)
               and $recipe->reversible == "true")) {
-                            $repo->set("item.disassembledFrom.$id", $recipe->repo_id, $recipe->repo_id);
+                            $repo->set("item.disassembledFrom.$id", $recipe->repo_id);
                         }
                     }
                 }

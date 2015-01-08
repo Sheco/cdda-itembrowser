@@ -84,6 +84,7 @@ class Recipe implements IndexerInterface
             $recipe = $object;
 
             $repo->set(self::DEFAULT_INDEX, $recipe->repo_id, $recipe->repo_id);
+            $repo->set(self::DEFAULT_INDEX.".".$recipe->repo_id, $recipe->repo_id, $recipe->repo_id);
 
             if (isset($recipe->result)) {
                 $this->linkIndexes($repo, "recipes", $recipe->result, $recipe);

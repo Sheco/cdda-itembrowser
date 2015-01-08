@@ -14,6 +14,7 @@ class Material implements IndexerInterface
     {
         if ($object->type == "material") {
             $repo->set(self::DEFAULT_INDEX, $object->ident, $object->repo_id);
+            $repo->set(self::DEFAULT_INDEX.".".$object->ident, $object->ident, $object->repo_id);
         }
     }
 

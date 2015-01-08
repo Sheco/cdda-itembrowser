@@ -84,6 +84,7 @@ class Item implements IndexerInterface
         }
 
         $repo->set(self::DEFAULT_INDEX, $object->id, $object->repo_id);
+        $repo->set(self::DEFAULT_INDEX.".".$object->id, $object->id, $object->repo_id);
 
         // nearby fire and integrated toolset are "virtual" items
         // they don't have anything special.

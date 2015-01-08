@@ -14,6 +14,7 @@ class Monster implements IndexerInterface
     {
         if ($object->type == "MONSTER") {
             $repo->set(self::DEFAULT_INDEX, $object->id, $object->repo_id);
+            $repo->set(self::DEFAULT_INDEX.".".$object->id, $object->id, $object->repo_id);
             $objspecies = (array) $object->species;
             foreach ($objspecies as $species) {
                 $repo->set("monster.species.$species", $object->id, $object->repo_id);

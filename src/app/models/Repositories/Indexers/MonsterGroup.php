@@ -21,6 +21,7 @@ class MonsterGroup implements IndexerInterface
     {
         if ($object->type == "monstergroup") {
             $repo->set(self::DEFAULT_INDEX, $object->name, $object->repo_id);
+            $repo->set(self::DEFAULT_INDEX.".".$object->name, $object->name, $object->repo_id);
 
             // create unique monsters array
             $monsters = array();

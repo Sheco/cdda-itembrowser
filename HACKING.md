@@ -13,7 +13,7 @@ php src/artisan cataclysm:rebuild
 
 
 The code for this command is located in 
-[src/app/CataclysmRebuild.php](src/app/CataclsymRebuild.php).
+[src/app/commands/CataclysmRebuild.php](src/app/commands/CataclsymRebuild.php).
 
 When you run the console command, the fire() method is executed.
 
@@ -88,4 +88,4 @@ each one to the appropiate model.
 **Models** are an instance of a class found in [src/app/models](src/app/models), models have a special meaning for function calls starting with "get", they override the object's value with the return value of the function.
 
 **Presenters** are like a copy of the model, but can override the model values
-with escaped representations of it's former content. It can also provide new methods that are only available in the views.
+with escaped representations of it's former content. It can also provide new methods that are only available in the views, presenters have magic methods similar to the models, but start instead with "present".

@@ -39,7 +39,7 @@ class CacheRepository extends Repository implements RepositoryInterface,
 
     public function get($index, $default=null)
     {
-        $repo_id = $this->all($index, $default);
+        $repo_id = $this->raw($index, $default);
 
         if (!isset($this->database[$repo_id])) {
             $this->database[$repo_id] = $this->repo->get("cdda:db:$repo_id");
@@ -48,7 +48,7 @@ class CacheRepository extends Repository implements RepositoryInterface,
         return $this->database[$repo_id];
     }
 
-    public function all($index, $default=array())
+    public function raw($index, $default=array())
     {
         if (!isset($this->index[$index])) {
             $this->index[$index] = $this->repo->get("cdda:index:$index")?: $default;

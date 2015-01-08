@@ -19,12 +19,12 @@ class Recipe implements IndexerInterface
 
     public function onFinishedLoading(LocalRepository $repo)
     {
-        foreach ($repo->all(self::DEFAULT_INDEX) as $id) {
+        foreach ($repo->raw(self::DEFAULT_INDEX) as $id) {
             $recipe = $repo->get(self::DEFAULT_INDEX.".".$id);
             // search for all the items with the apropiate qualities
             if (isset($recipe->qualities)) {
                 foreach ($recipe->qualities as $group) {
-                    foreach ($repo->all("quality.$group->id") as $id) {
+                    foreach ($repo->raw("quality.$group->id") as $id) {
                         $item = $repo->get("item.$id");
                         if ($this->itemQualityLevel($item, $group->id)<$group->level) {
                             continue;
@@ -40,7 +40,7 @@ class Recipe implements IndexerInterface
 
                 $item = $repo->get("item.$recipe->result");
                 $repo->append("skill.$skill.$level", $item->id);
-                $skills = $repo->all("skills", array());
+                $skills = $repo->raw("skills", array());
                 $skills[$skill] = $skill;
                 $repo->set("skills", $skills);
             }
@@ -70,7 +70,7 @@ class Recipe implements IndexerInterface
             // create a list of recipe categories, excluding NONCRAFT.
             if ($recipe->category != "CC_NONCRAFT") {
                 $category = $recipe->category;
-                $categories = $repo->all("item.categories.$id");
+                $categories = $repo->raw("item.categories.$id");
                 $categories[$category] = $category;
                 $repo->set("item.categories.$id", $categories);
             }

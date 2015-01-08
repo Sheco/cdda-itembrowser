@@ -183,7 +183,7 @@ class ItemsController extends BaseController
 
     public function flags($id = null)
     {
-        $flags = $this->repo->all("flags");
+        $flags = $this->repo->raw("flags");
         sort($flags);
 
         if ($id === null) {
@@ -196,7 +196,7 @@ class ItemsController extends BaseController
 
     public function skills($id = null, $level = 1)
     {
-        $skills = $this->repo->all("skills");
+        $skills = $this->repo->raw("skills");
         sort($skills);
 
         if ($id === null) {
@@ -210,8 +210,8 @@ class ItemsController extends BaseController
 
     public function gunmods($skill = null, $part = null)
     {
-        $skills = $this->repo->all("gunmodSkills");
-        $parts = $this->repo->all("gunmodParts");
+        $skills = $this->repo->raw("gunmodSkills");
+        $parts = $this->repo->raw("gunmodParts");
         $mods = $this->repo->allModels("Item", "gunmods.$skill.$part");
 
         $this->layout->nest('content', "items.gunmods", compact('skill', 'part', "skills", "parts", 'mods'));

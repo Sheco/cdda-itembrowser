@@ -58,24 +58,24 @@ class Item implements IndexerInterface
 
     public function onFinishedLoading(LocalRepository $repo)
     {
-        foreach ($repo->all(self::DEFAULT_INDEX) as $id) {
-            $recipes = count($repo->all("item.toolFor.$id"));
+        foreach ($repo->raw(self::DEFAULT_INDEX) as $id) {
+            $recipes = count($repo->raw("item.toolFor.$id"));
             if($recipes>0)
                 $repo->set("item.count.$id.toolFor", $recipes);
 
-            $recipes = count($repo->all("item.recipes.$id"));
+            $recipes = count($repo->raw("item.recipes.$id"));
             if($recipes>0)
                 $repo->set("item.count.$id.recipes", $recipes);
 
-            $recipes = count($repo->all("item.learn.$id"));
+            $recipes = count($repo->raw("item.learn.$id"));
             if($recipes>0)
                 $repo->set("item.count.$id.learn", $recipes);
 
-            $recipes = count($repo->all("item.disassembly.$id"));
+            $recipes = count($repo->raw("item.disassembly.$id"));
             if($recipes>0)
                 $repo->set("item.count.$id.disassembly", $recipes);
 
-            $recipes = count($repo->all("item.disassembledFrom.$id"));
+            $recipes = count($repo->raw("item.disassembledFrom.$id"));
             if($recipes>0)
                 $repo->set("item.count.$id.disassembledFrom", $recipes);
         }
@@ -139,11 +139,11 @@ class Item implements IndexerInterface
         if ($object->type == "GUNMOD") {
             foreach ($object->mod_targets as $target) {
                 $repo->append("gunmods.$target.$object->location", $object->id);
-                $gunmodSkills = $repo->all("gunmodSkills", array());
+                $gunmodSkills = $repo->raw("gunmodSkills", array());
                 $gunmodSkills[$target] = $target;
                 $repo->set("gunmodSkills", $gunmodSkills);
             }
-            $gunmodParts = $repo->all("gunmodParts", array());
+            $gunmodParts = $repo->raw("gunmodParts", array());
             $gunmodParts[$object->location] = $object->location;
             $repo->set("gunmodParts", $gunmodParts);
         }
@@ -171,7 +171,7 @@ class Item implements IndexerInterface
             foreach ($flags as $flag) {
                 $repo->append("flag.$flag", $object->id);
 
-                $flags = $repo->all('flags', array());
+                $flags = $repo->raw('flags', array());
                 $flags[$flag] = $flag;
                 $repo->set("flags", $flags);
             }

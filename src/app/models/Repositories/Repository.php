@@ -45,7 +45,7 @@ abstract class Repository implements RepositoryInterface
             $index = $indexer::DEFAULT_INDEX;
         }
 
-        $data = $this->all($index);
+        $data = $this->raw($index);
 
         array_walk($data, 
             function (&$value) use ($model) {

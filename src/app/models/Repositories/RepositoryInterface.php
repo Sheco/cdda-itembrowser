@@ -7,7 +7,7 @@ interface RepositoryInterface
     public function getModelOrFail($model, $id);
     public function getModel($model, $id);
 
-    public function all($index);
+    public function raw($index);
     public function allModels($model, $index = null);
 
     public function searchModels($model, $search);

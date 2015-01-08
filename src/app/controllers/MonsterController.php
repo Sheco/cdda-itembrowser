@@ -25,7 +25,7 @@ class MonsterController extends BaseController
 
     public function species($id = null)
     {
-        $species = $this->repo->all("monster.species");
+        $species = $this->repo->raw("monster.species");
         if ($id === null) {
             $id = reset($species);
 

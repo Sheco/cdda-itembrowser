@@ -370,6 +370,9 @@ class Item implements Robbo\Presenter\PresentableInterface
 
     public function getDamagePerMove()
     {
+        if(!$this->movesPerAttack)
+            return 0;
+
         return number_format(($this->bashing+$this->cutting)/$this->movesPerAttack, 2);
     }
 

@@ -24,8 +24,14 @@ class MonsterGroup implements Robbo\Presenter\PresentableInterface
 
     public function getUniqueMonsters()
     {
+        $monsters = array();
+        foreach ($this->monsters as $monster) {
+            $monster = $monster->monster;
+            $monsters[$monster] = true;
+        }
+        $uniqueMonsters = array_keys($monsters);
         return array_map(function (&$monster) {
             return $this->repo->getModel('Monster', $monster);
-        }, $this->data->uniqueMonsters);
+        }, $uniqueMonsters);
     }
 }

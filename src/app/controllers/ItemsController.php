@@ -53,8 +53,8 @@ class ItemsController extends BaseController
         $recipes = $item->getToolForCategory($category);
 
         usort($recipes, function ($a, $b) {
-      return $a->difficulty-$b->difficulty;
-    });
+            return $a->difficulty-$b->difficulty;
+        });
 
         $this->layout->nest('content', 'items.recipes', compact('item', "category", "recipes", "categories"));
     }

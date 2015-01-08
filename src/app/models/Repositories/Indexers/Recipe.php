@@ -20,12 +20,12 @@ class Recipe implements IndexerInterface
     public function onFinishedLoading(LocalRepository $repo)
     {
         foreach ($repo->all(self::DEFAULT_INDEX) as $id) {
-            $recipe = $repo->get(self::DEFAULT_INDEX, $id);
+            $recipe = $repo->get(self::DEFAULT_INDEX.".".$id);
             // search for all the items with the apropiate qualities
             if (isset($recipe->qualities)) {
                 foreach ($recipe->qualities as $group) {
                     foreach ($repo->all("quality.$group->id") as $id) {
-                        $item = $repo->get("item", $id);
+                        $item = $repo->get("item.$id");
                         if ($this->itemQualityLevel($item, $group->id)<$group->level) {
                             continue;
                         }
@@ -38,7 +38,7 @@ class Recipe implements IndexerInterface
                 $skill = $recipe->skill_used;
                 $level = $recipe->difficulty;
 
-                $item = $repo->get("item", $recipe->result);
+                $item = $repo->get("item.$recipe->result");
                 $repo->set("skill.$skill.$level", $item->id);
                 $repo->set("skills", $skill);
             }

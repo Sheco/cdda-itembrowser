@@ -79,7 +79,7 @@ class LocalRepository extends Repository implements RepositoryInterface,
             }
         }
 
-        if (!$this->get("item", "toolset")) {
+        if (!$this->get("item.toolset")) {
             $this->newObject(json_decode('{
                 "id":"toolset",
                 "name":"integrated toolset",
@@ -119,9 +119,9 @@ class LocalRepository extends Repository implements RepositoryInterface,
       $this->index[$index][$value] = $value;
     }
 
-    public function get($index, $id)
+    public function get($index)
     {
-        $repo_id = $this->index["$index.$id"];
+        $repo_id = $this->index[$index];
         $repo_id = reset($repo_id);
 
         return $this->database[$repo_id];

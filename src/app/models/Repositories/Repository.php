@@ -10,7 +10,7 @@ abstract class Repository implements RepositoryInterface
     {
         $indexer = $this->app->make("Repositories\\Indexers\\$model");
 
-        $data = $this->get($indexer::DEFAULT_INDEX, $id);
+        $data = $this->get($indexer::DEFAULT_INDEX.".".$id);
         if (!$data) {
             throw new ModelNotFoundException();
         }
@@ -25,7 +25,7 @@ abstract class Repository implements RepositoryInterface
     {
         $indexer = $this->app->make("Repositories\\Indexers\\$model");
 
-        $data = $this->get($indexer::DEFAULT_INDEX, $id);
+        $data = $this->get($indexer::DEFAULT_INDEX.".".$id);
 
         $model = $this->app->make($model);
 

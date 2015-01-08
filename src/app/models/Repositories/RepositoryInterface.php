@@ -3,7 +3,7 @@ namespace Repositories;
 
 interface RepositoryInterface
 {
-    public function get($index, $id);
+    public function get($index);
     public function getModelOrFail($model, $id);
     public function getModel($model, $id);
 

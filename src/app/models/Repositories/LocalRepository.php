@@ -121,9 +121,7 @@ class LocalRepository extends Repository implements RepositoryInterface,
 
     public function get($index, $default=null)
     {
-        if(!isset($this->index[$index]))
-            return $default;
-        $repo_id = $this->index[$index];
+        $repo_id = $this->all($index, $default);
 
         return $this->database[$repo_id];
     }

@@ -62,7 +62,7 @@ class CacheRepository extends Repository implements RepositoryInterface,
         return $this->index[$index];
     }
 
-    public function searchObjects($repo, $search)
+    public function searchModels($repo, $search)
     {
         $key = "search:$repo:".str_replace(" ", "!", $search);
 
@@ -71,7 +71,7 @@ class CacheRepository extends Repository implements RepositoryInterface,
 
         $objects = $this->repo->rememberForever($key,
             function () use ($repo, $search, $idField) {
-                $objects = parent::searchObjects($repo, $search);
+                $objects = parent::searchModels($repo, $search);
                 array_walk($objects, function (&$object) use ($idField) {
                     $object = $object->$idField;
                 });
@@ -81,7 +81,7 @@ class CacheRepository extends Repository implements RepositoryInterface,
 
         array_walk($objects, 
             function (&$object) use ($repo) {
-                $object = $this->getObject($repo, $object);
+                $object = $this->getModel($repo, $object);
             });
 
         return $objects;

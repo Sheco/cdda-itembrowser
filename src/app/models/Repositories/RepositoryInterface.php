@@ -4,13 +4,13 @@ namespace Repositories;
 interface RepositoryInterface
 {
     public function get($index, $id);
-    public function getObjectOrFail($repo, $id);
-    public function getObject($repo, $id);
+    public function getModelOrFail($model, $id);
+    public function getModel($model, $id);
 
     public function all($index);
-    public function allObjects($repo, $index = null);
+    public function allModels($model, $index = null);
 
-    public function searchObjects($repo, $search);
+    public function searchModels($model, $search);
 
     public function version();
 }

@@ -20,28 +20,28 @@ class ItemsController extends BaseController
     public function search()
     {
         $search = Input::get('q');
-        $items = $this->repo->searchObjects("Item", $search);
+        $items = $this->repo->searchModels("Item", $search);
 
         $this->layout->nest('content', 'items.search', compact('items', 'search'));
     }
 
     public function view($id)
     {
-        $item = $this->repo->getObjectOrFail("Item", $id);
+        $item = $this->repo->getModelOrFail("Item", $id);
 
         $this->layout->nest('content', 'items.view', compact('item'));
     }
 
     public function craft($id)
     {
-        $item = $this->repo->getObjectOrFail("Item", $id);
+        $item = $this->repo->getModelOrFail("Item", $id);
 
         $this->layout->nest('content', 'items.craft', compact('item'));
     }
 
     public function recipes($id, $category = null)
     {
-        $item = $this->repo->getObjectOrFail("Item", $id);
+        $item = $this->repo->getModelOrFail("Item", $id);
         $categories = $item->toolCategories;
 
         if ($category === null) {
@@ -61,7 +61,7 @@ class ItemsController extends BaseController
 
     public function disassemble($id)
     {
-        $item = $this->repo->getObjectOrFail("Item", $id);
+        $item = $this->repo->getModelOrFail("Item", $id);
 
         $this->layout->nest('content', 'items.disassemble', compact('item'));
     }
@@ -84,7 +84,7 @@ class ItemsController extends BaseController
             return Redirect::route(Route::currentRouteName(), array(key($parts)));
         }
 
-        $items = $this->repo->allObjects("Item", "armor.$part");
+        $items = $this->repo->allModels("Item", "armor.$part");
 
         $this->layout->nest('content', 'items.armor', compact('items', 'parts', 'part'));
     }
@@ -105,7 +105,7 @@ class ItemsController extends BaseController
             return Redirect::route(Route::currentRouteName(), array(key($skills)));
         }
 
-        $items = $this->repo->allObjects("Item", "gun.$skill");
+        $items = $this->repo->allModels("Item", "gun.$skill");
 
         $this->layout->nest('content', 'items.gun', compact('items', 'skills', 'skill'));
     }
@@ -127,14 +127,14 @@ class ItemsController extends BaseController
             return Redirect::route(Route::currentRouteName(), array("combat"));
         }
 
-        $items = $this->repo->allObjects("Item", "book.$type");
+        $items = $this->repo->allModels("Item", "book.$type");
 
         $this->layout->nest('content', 'items.books', compact('items', 'type', 'types'));
     }
 
     public function melee()
     {
-        $items = $this->repo->allObjects("Item", "melee");
+        $items = $this->repo->allModels("Item", "melee");
 
         $this->layout->nest('content', "items.melee", compact('items'));
     }
@@ -151,32 +151,32 @@ class ItemsController extends BaseController
             return Redirect::route(Route::currentRouteName(), array(key($types)));
         }
 
-        $items = $this->repo->allObjects("Item", "consumables.$type");
+        $items = $this->repo->allModels("Item", "consumables.$type");
 
         $this->layout->nest('content', 'items.consumables', compact('items', 'type', 'types'));
     }
 
     public function qualities($id = null)
     {
-        $qualities = $this->repo->allObjects("Quality", "qualities");
+        $qualities = $this->repo->allModels("Quality", "qualities");
 
         if ($id === null) {
             return Redirect::route("item.qualities", array(reset($qualities)->id));
         }
         
-        $items = $id ? $this->repo->allObjects("Item", "quality.$id") : array();
+        $items = $id ? $this->repo->allModels("Item", "quality.$id") : array();
 
         $this->layout->nest('content', 'items.qualities', compact('items', 'qualities', 'id'));
     }
 
     public function materials($id = null)
     {
-        $materials = $this->repo->allObjects("Material", "materials");
+        $materials = $this->repo->allModels("Material", "materials");
 
         if ($id === null) {
             return Redirect::route(Route::currentRouteName(), array(reset($materials)->ident));
         }
-        $items = $id ? $this->repo->allObjects("Item", "material.$id") : array();
+        $items = $id ? $this->repo->allModels("Item", "material.$id") : array();
 
         $this->layout->nest('content', 'items.materials', compact('items', 'materials', 'id'));
     }
@@ -189,7 +189,7 @@ class ItemsController extends BaseController
         if ($id === null) {
             return Redirect::route(Route::currentRouteName(), array(reset($flags)));
         }
-        $items = $id ? $this->repo->allObjects("Item", "flag.$id") : array();
+        $items = $id ? $this->repo->allModels("Item", "flag.$id") : array();
 
         $this->layout->nest('content', "items.flags", compact("items", "flags", "id"));
     }
@@ -202,7 +202,7 @@ class ItemsController extends BaseController
         if ($id === null) {
             return Redirect::route(Route::currentRouteName(), array(reset($skills), 1));
         }
-        $items = $id ? $this->repo->allObjects("Item", "skill.$id.$level") : array();
+        $items = $id ? $this->repo->allModels("Item", "skill.$id.$level") : array();
         $levels = range(1, 10);
 
         $this->layout->nest('content', "items.skills", compact("items", "skills", "id", "level", "levels"));
@@ -212,21 +212,21 @@ class ItemsController extends BaseController
     {
         $skills = $this->repo->all("gunmodSkills");
         $parts = $this->repo->all("gunmodParts");
-        $mods = $this->repo->allObjects("Item", "gunmods.$skill.$part");
+        $mods = $this->repo->allModels("Item", "gunmods.$skill.$part");
 
         $this->layout->nest('content', "items.gunmods", compact('skill', 'part', "skills", "parts", 'mods'));
     }
 
     public function wiki($id)
     {
-        $item = $this->repo->getObjectOrFail("Item", $id);
+        $item = $this->repo->getModelOrFail("Item", $id);
 
         return Redirect::to("http://www.wiki.cataclysmdda.com/index.php?title=$item->slug");
     }
 
     public function sitemap()
     {
-        $items = $this->repo->allObjects("Item");
+        $items = $this->repo->allModels("Item");
 
         $this->layout->nest('content', 'items.sitemap', compact('items'));
     }

@@ -25,7 +25,7 @@ class MonsterGroup implements Robbo\Presenter\PresentableInterface
     public function getUniqueMonsters()
     {
         return array_map(function (&$monster) {
-            return $this->repo->getObject('Monster', $monster);
+            return $this->repo->getModel('Monster', $monster);
         }, $this->data->uniqueMonsters);
     }
 }

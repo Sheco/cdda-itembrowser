@@ -90,22 +90,22 @@ class Item implements Robbo\Presenter\PresentableInterface
 
     public function getRecipes()
     {
-        return $this->repo->allObjects("Recipe", "item.recipes.{$this->data->id}");
+        return $this->repo->allModels("Recipe", "item.recipes.{$this->data->id}");
     }
 
     public function getDisassembly()
     {
-        return $this->repo->allObjects("Recipe", "item.disassembly.{$this->id}");
+        return $this->repo->allModels("Recipe", "item.disassembly.{$this->id}");
     }
 
     public function getDisassembledFrom()
     {
-        return $this->repo->allObjects("Recipe", "item.disassembledFrom.$this->id");
+        return $this->repo->allModels("Recipe", "item.disassembledFrom.$this->id");
     }
 
     public function getToolFor()
     {
-        return $this->repo->allObjects("Item", "item.toolFor.$this->id");
+        return $this->repo->allModels("Item", "item.toolFor.$this->id");
     }
 
     public function count($type)
@@ -127,12 +127,12 @@ class Item implements Robbo\Presenter\PresentableInterface
 
     public function getToolForCategory($category)
     {
-        return $this->repo->allObjects("Recipe", "item.toolForCategory.{$this->data->id}.$category");
+        return $this->repo->allModels("Recipe", "item.toolForCategory.{$this->data->id}.$category");
     }
 
     public function getLearn()
     {
-        return $this->repo->allObjects("Recipe", "item.learn.{$this->data->id}");
+        return $this->repo->allModels("Recipe", "item.learn.{$this->data->id}");
     }
 
     public function getIsArmor()
@@ -236,12 +236,12 @@ class Item implements Robbo\Presenter\PresentableInterface
 
     public function getMaterial1()
     {
-        return $this->repo->getObject("Material", $this->data->material[0]);
+        return $this->repo->getModel("Material", $this->data->material[0]);
     }
 
     public function getMaterial2()
     {
-        return $this->repo->getObject("Material", $this->data->material[1]);
+        return $this->repo->getModel("Material", $this->data->material[1]);
     }
 
     public function getCanBeCut()
@@ -259,7 +259,7 @@ class Item implements Robbo\Presenter\PresentableInterface
         $material = $this->material1->ident;
         $count = $material == "wood" ? 2 : 1;
 
-        return array($this->volume*$count, $this->repo->getObject("Item", $this->cut_pairs[$material]));
+        return array($this->volume*$count, $this->repo->getModel("Item", $this->cut_pairs[$material]));
     }
 
     public function getIsResultOfCutting()
@@ -276,7 +276,7 @@ class Item implements Robbo\Presenter\PresentableInterface
 
     public function getAmmoTypes()
     {
-        return $this->repo->allObjects("Item", "ammo.$this->ammo");
+        return $this->repo->allModels("Item", "ammo.$this->ammo");
     }
 
     public function isMadeOf($material)
@@ -311,7 +311,7 @@ class Item implements Robbo\Presenter\PresentableInterface
     {
         return array_map(function ($quality) {
             return array(
-                "quality" => $this->repo->getObject("Quality", $quality[0]),
+                "quality" => $this->repo->getModel("Quality", $quality[0]),
                 "level" => $quality[1],
             );
         }, $this->data->qualities);
@@ -385,6 +385,6 @@ class Item implements Robbo\Presenter\PresentableInterface
 
     public function getModGuns()
     {
-        return $this->repo->allObjects("Item", "gunmodGuns.{$this->data->id}");
+        return $this->repo->allModels("Item", "gunmodGuns.{$this->data->id}");
     }
 }

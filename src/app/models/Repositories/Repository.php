@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\ModelNotFoundException;
 abstract class Repository implements RepositoryInterface 
 {
     protected $app;
-    public function getObjectOrFail($object, $id)
+    public function getModelOrFail($object, $id)
     {
         $repo = $this->app->make("Repositories\\Indexers\\$object");
 
@@ -21,7 +21,7 @@ abstract class Repository implements RepositoryInterface
         return $model;
     }
 
-    public function getObject($object, $id)
+    public function getModel($object, $id)
     {
         $repo = $this->app->make("Repositories\\Indexers\\$object");
 
@@ -38,7 +38,7 @@ abstract class Repository implements RepositoryInterface
         return $model;
     }
 
-    public function allObjects($repo, $index = null)
+    public function allModels($repo, $index = null)
     {
         if (!$index) {
             $repoInstance = $this->app->make("Repositories\\Indexers\\$repo");
@@ -49,14 +49,14 @@ abstract class Repository implements RepositoryInterface
 
         array_walk($data, 
             function (&$value, $key) use ($repo) {
-                $value = $this->getObject($repo, $key);
+                $value = $this->getModel($repo, $key);
             }
         );
 
         return $data;
     }
 
-    public function searchObjects($repo, $search)
+    public function searchModels($repo, $search)
     {
         \Log::info("searching for $search...");
 
@@ -65,7 +65,7 @@ abstract class Repository implements RepositoryInterface
             return $results;
         }
 
-        foreach ($this->allObjects($repo) as $obj) {
+        foreach ($this->allModels($repo) as $obj) {
             if ($obj->matches($search)) {
                 $results[] = $obj;
             }

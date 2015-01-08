@@ -60,19 +60,19 @@ class Item implements IndexerInterface
     {
         foreach ($repo->all(self::DEFAULT_INDEX) as $id => $item) {
             $recipes = count($repo->all("item.toolFor.$id"));
-            $repo->set("item.count.$id", "toolFor", $recipes);
+            $repo->set("item.count.$id.toolFor", 0, $recipes);
 
             $recipes = count($repo->all("item.recipes.$id"));
-            $repo->set("item.count.$id", "recipes", $recipes);
+            $repo->set("item.count.$id.recipes", 0, $recipes);
 
             $recipes = count($repo->all("item.learn.$id"));
-            $repo->set("item.count.$id", "learn", $recipes);
+            $repo->set("item.count.$id.learn", 0, $recipes);
 
             $recipes = count($repo->all("item.disassembly.$id"));
-            $repo->set("item.count.$id", "disassembly", $recipes);
+            $repo->set("item.count.$id.disassembly", 0, $recipes);
 
             $recipes = count($repo->all("item.disassembledFrom.$id"));
-            $repo->set("item.count.$id", "disassembledFrom", $recipes);
+            $repo->set("item.count.$id.disassembledFrom", 0, $recipes);
         }
     }
 

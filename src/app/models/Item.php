@@ -110,9 +110,9 @@ class Item implements Robbo\Presenter\PresentableInterface
 
     public function count($type)
     {
-        $counts = $this->repo->all("item.count.$this->id");
+        $counts = $this->repo->all("item.count.$this->id.$type");
 
-        return $counts[$type];
+        return reset($counts);
     }
 
     public function getToolCategories()

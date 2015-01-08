@@ -6,28 +6,28 @@ use Illuminate\Database\Eloquent\ModelNotFoundException;
 abstract class Repository implements RepositoryInterface 
 {
     protected $app;
-    public function getModelOrFail($object, $id)
+    public function getModelOrFail($model, $id)
     {
-        $repo = $this->app->make("Repositories\\Indexers\\$object");
+        $indexer = $this->app->make("Repositories\\Indexers\\$model");
 
-        $data = $this->get($repo::DEFAULT_INDEX, $id);
+        $data = $this->get($indexer::DEFAULT_INDEX, $id);
         if (!$data) {
             throw new ModelNotFoundException();
         }
 
-        $model = $this->app->make($object);
+        $model = $this->app->make($model);
         $model->load($data);
 
         return $model;
     }
 
-    public function getModel($object, $id)
+    public function getModel($model, $id)
     {
-        $repo = $this->app->make("Repositories\\Indexers\\$object");
+        $indexer = $this->app->make("Repositories\\Indexers\\$model");
 
-        $data = $this->get($repo::DEFAULT_INDEX, $id);
+        $data = $this->get($indexer::DEFAULT_INDEX, $id);
 
-        $model = $this->app->make($object);
+        $model = $this->app->make($model);
 
         if (!$data) {
             $model->loadDefault($id);
@@ -38,25 +38,25 @@ abstract class Repository implements RepositoryInterface
         return $model;
     }
 
-    public function allModels($repo, $index = null)
+    public function allModels($model, $index = null)
     {
         if (!$index) {
-            $repoInstance = $this->app->make("Repositories\\Indexers\\$repo");
-            $index = $repoInstance::DEFAULT_INDEX;
+            $indexer = $this->app->make("Repositories\\Indexers\\$model");
+            $index = $indexer::DEFAULT_INDEX;
         }
 
         $data = $this->all($index);
 
         array_walk($data, 
-            function (&$value, $key) use ($repo) {
-                $value = $this->getModel($repo, $key);
+            function (&$value, $key) use ($model) {
+                $value = $this->getModel($model, $key);
             }
         );
 
         return $data;
     }
 
-    public function searchModels($repo, $search)
+    public function searchModels($model, $search)
     {
         \Log::info("searching for $search...");
 
@@ -65,7 +65,7 @@ abstract class Repository implements RepositoryInterface
             return $results;
         }
 
-        foreach ($this->allModels($repo) as $obj) {
+        foreach ($this->allModels($model) as $obj) {
             if ($obj->matches($search)) {
                 $results[] = $obj;
             }

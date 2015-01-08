@@ -41,24 +41,39 @@ the database index.
 The index is hashtable, to add to it, you call $repo->set() like this:
 
 ```
-$repo->set("someName", "key", "value");
-$repo->set("someName", "id", "data");
-$repo->set("items", "toolset", 10);
-$repo->set("items", "fire", 12);
+$repo->set("someName.key", "value");
+$repo->set("someName.id", "data");
+$repo->set("items.toolset", 10);
+$repo->set("items.fire", 12);
 ```
 
 The database index will then have the following content:
 
 ```
 array(
-        "someName"=>array(
-            "key"=>"value",
-            "id"=>"data"
-        ),
-        "items"=>array(
-            "toolset"=>10,
-            "fire"=>12
-        ),
+    "someName.key"=>"value",
+    "someName.id"=>"data"
+    "item.toolset"=>10,
+    "item.fire"=>12
+)
+```
+
+There's also a $repo->append() method which makes the value of the 
+index an array and appends the value to the end, for example:
+
+```
+$repo->append("apps", "CDDA");
+$repo->append("apps", "Item Browser");
+```
+
+This will result in an index like this:
+
+```
+array(
+        "apps"=>array(
+            "CDDA",
+            "Item Browser"
+        )
 )
 ```
 

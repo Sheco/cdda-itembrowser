@@ -42,6 +42,13 @@ code and composer dependencies.
 The webserver should be able to read and write the files in the "storage"
 directory inside the data file path.
 
+### Contributing
+
+Please read the [hacking guide](HACKING.md) to get an idea about how to read
+the code so you can update it. 
+
+You should then follow regular github guidelines to clone, commit and create pull requests.
+
 ### License
 
 This application is open-sourced software licensed under the [MIT license](http://opensource.org/licenses/MIT)

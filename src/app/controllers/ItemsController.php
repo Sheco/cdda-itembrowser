@@ -164,7 +164,7 @@ class ItemsController extends BaseController
             return Redirect::route("item.qualities", array(reset($qualities)->id));
         }
         
-        $items = $id ? $this->repo->allModels("Item", "quality.$id") : array();
+        $items = $this->repo->allModels("Item", "quality.$id");
 
         $this->layout->nest('content', 'items.qualities', compact('items', 'qualities', 'id'));
     }
@@ -176,7 +176,7 @@ class ItemsController extends BaseController
         if ($id === null) {
             return Redirect::route(Route::currentRouteName(), array(reset($materials)->ident));
         }
-        $items = $id ? $this->repo->allModels("Item", "material.$id") : array();
+        $items = $this->repo->allModels("Item", "material.$id");
 
         $this->layout->nest('content', 'items.materials', compact('items', 'materials', 'id'));
     }
@@ -189,7 +189,7 @@ class ItemsController extends BaseController
         if ($id === null) {
             return Redirect::route(Route::currentRouteName(), array(reset($flags)));
         }
-        $items = $id ? $this->repo->allModels("Item", "flag.$id") : array();
+        $items = $this->repo->allModels("Item", "flag.$id");
 
         $this->layout->nest('content', "items.flags", compact("items", "flags", "id"));
     }
@@ -202,7 +202,7 @@ class ItemsController extends BaseController
         if ($id === null) {
             return Redirect::route(Route::currentRouteName(), array(reset($skills), 1));
         }
-        $items = $id ? $this->repo->allModels("Item", "skill.$id.$level") : array();
+        $items = $this->repo->allModels("Item", "skill.$id.$level");
         $levels = range(1, 10);
 
         $this->layout->nest('content', "items.skills", compact("items", "skills", "id", "level", "levels"));

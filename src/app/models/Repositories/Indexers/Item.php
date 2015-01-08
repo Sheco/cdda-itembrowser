@@ -58,21 +58,26 @@ class Item implements IndexerInterface
 
     public function onFinishedLoading(LocalRepository $repo)
     {
-        foreach ($repo->all(self::DEFAULT_INDEX) as $id => $item) {
+        foreach ($repo->all(self::DEFAULT_INDEX) as $id) {
             $recipes = count($repo->all("item.toolFor.$id"));
-            $repo->set("item.count.$id.toolFor", $recipes);
+            if($recipes>0)
+                $repo->set("item.count.$id.toolFor", $recipes);
 
             $recipes = count($repo->all("item.recipes.$id"));
-            $repo->set("item.count.$id.recipes", $recipes);
+            if($recipes>0)
+                $repo->set("item.count.$id.recipes", $recipes);
 
             $recipes = count($repo->all("item.learn.$id"));
-            $repo->set("item.count.$id.learn", $recipes);
+            if($recipes>0)
+                $repo->set("item.count.$id.learn", $recipes);
 
             $recipes = count($repo->all("item.disassembly.$id"));
-            $repo->set("item.count.$id.disassembly", $recipes);
+            if($recipes>0)
+                $repo->set("item.count.$id.disassembly", $recipes);
 
             $recipes = count($repo->all("item.disassembledFrom.$id"));
-            $repo->set("item.count.$id.disassembledFrom", $recipes);
+            if($recipes>0)
+                $repo->set("item.count.$id.disassembledFrom", $recipes);
         }
     }
 

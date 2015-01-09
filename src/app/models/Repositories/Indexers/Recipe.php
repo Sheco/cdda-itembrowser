@@ -19,6 +19,7 @@ class Recipe implements IndexerInterface
 
     public function onFinishedLoading(LocalRepository $repo)
     {
+        $skills = [];
         foreach ($repo->raw(self::DEFAULT_INDEX) as $id) {
             $recipe = $repo->get(self::DEFAULT_INDEX.".".$id);
             // search for all the items with the apropiate qualities
@@ -40,11 +41,12 @@ class Recipe implements IndexerInterface
 
                 $item = $repo->get("item.$recipe->result");
                 $repo->append("skill.$skill.$level", $item->id);
-                $skills = $repo->raw("skills", array());
                 $skills[$skill] = $skill;
-                $repo->set("skills", $skills);
             }
         }
+
+        sort($skills);
+        $repo->set("skills", $skills);
     }
 
     private function linkIndexes($repo, $key, $id, $recipe)

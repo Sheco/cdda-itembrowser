@@ -52,10 +52,6 @@ class ItemsController extends BaseController
 
         $recipes = $item->getToolForCategory($category);
 
-        usort($recipes, function ($a, $b) {
-            return $a->difficulty-$b->difficulty;
-        });
-
         $this->layout->nest('content', 'items.recipes', compact('item', "category", "recipes", "categories"));
     }
 
@@ -184,7 +180,6 @@ class ItemsController extends BaseController
     public function flags($id = null)
     {
         $flags = $this->repo->raw("flags");
-        sort($flags);
 
         if ($id === null) {
             return Redirect::route(Route::currentRouteName(), array(reset($flags)));
@@ -197,7 +192,6 @@ class ItemsController extends BaseController
     public function skills($id = null, $level = 1)
     {
         $skills = $this->repo->raw("skills");
-        sort($skills);
 
         if ($id === null) {
             return Redirect::route(Route::currentRouteName(), array(reset($skills), 1));

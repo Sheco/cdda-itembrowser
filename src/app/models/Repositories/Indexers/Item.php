@@ -78,7 +78,24 @@ class Item implements IndexerInterface
             $recipes = count($repo->raw("item.disassembledFrom.$id"));
             if($recipes>0)
                 $repo->set("item.count.$id.disassembledFrom", $recipes);
+
+            // sort item recipes, by difficulty
+            $categories = $repo->raw("item.categories.$id");
+            foreach($categories as $category) {
+                $recipes = $repo->raw("item.toolForCategory.$id.$category");
+                usort($recipes, function ($a, $b) use ($repo) {
+                    $a = $repo->get("recipe.$a");
+                    $b = $repo->get("recipe.$b");
+                    return $a->difficulty-$b->difficulty;
+                });
+                $repo->set("item.toolForCategory.$id.$category", $recipes);
+            }
         }
+
+        // sort flags
+        $flags = $repo->raw("flags");
+        sort($flags);
+        $repo->set("flags", $flags);
     }
 
     public function onNewObject(LocalRepository $repo, $object)

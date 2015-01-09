@@ -6,7 +6,7 @@ Monster groups
 @endsection
 <div class="row">
 <div class="col-md-3">
-<ul class="nav nav-pills nav-stacked tsort">
+<ul class="nav nav-pills nav-stacked">
 @foreach($groups as $_group)
 <li class="@if ($_group->name==$id) active @endif">{{ link_to_route(Route::currentRouteName(), $_group->niceName, array($_group->name)) }}</li>
 @endforeach
@@ -16,8 +16,3 @@ Monster groups
 @include("monsters/_list")
 </div>
 </div>
-<script>
-$(function() {
-  $(".tsort>li").tsort();
-});
-</script>

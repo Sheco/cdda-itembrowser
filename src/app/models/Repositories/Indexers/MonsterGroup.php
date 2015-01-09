@@ -12,6 +12,9 @@ class MonsterGroup implements IndexerInterface
 
     public function onFinishedLoading(LocalRepository $repo)
     {
+        $groups = $repo->raw(self::DEFAULT_INDEX);
+        sort($groups);
+        $repo->set(self::DEFAULT_INDEX, $groups);
     }
 
     public function onNewObject(LocalRepository $repo, $object)

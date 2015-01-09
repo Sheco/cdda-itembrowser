@@ -29,5 +29,8 @@ class Monster implements IndexerInterface
 
     public function onFinishedLoading(LocalRepository $repo)
     {
+        $allSpecies = $repo->raw("monster.species");
+        sort($allSpecies);
+        $repo->set("monster.species", $allSpecies);
     }
 }

@@ -13,6 +13,6 @@ Monster species: {{{$id}}}
 </ul>
 </div>
 <div class="col-md-9">
-@include("monsters/_list")
+@include("monsters/_list", array('data'=>$data)))
 </div>
 </div>

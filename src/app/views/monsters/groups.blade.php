@@ -13,6 +13,6 @@ Monster groups
 </ul>
 </div>
 <div class="col-md-9">
-@include("monsters/_list")
+@include("monsters/_list", array('data'=>$group->uniqueMonsters))
 </div>
 </div>

@@ -18,9 +18,8 @@ class MonsterController extends BaseController
             return Redirect::route("monster.groups", array($id));
         }
         $group = $this->repo->getModel('MonsterGroup', $id);
-        $data = $group->uniqueMonsters;
 
-        $this->layout->nest('content', 'monsters.groups', compact('groups', 'group', 'id', 'data'));
+        $this->layout->nest('content', 'monsters.groups', compact('groups', 'group', 'id'));
     }
 
     public function species($id = null)

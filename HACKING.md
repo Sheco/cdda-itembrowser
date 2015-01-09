@@ -92,8 +92,8 @@ and then sends those values to the right [view](src/app/views).
 
 The repository interface has a few available methods:
 
-* raw($index) fetches a single raw value from the index.
-* get($index) fetches an object from the database.
+* raw($index, $default=null) fetches a single raw value from the index, or $default if there is no match.
+* get($index, $default=null) fetches an object from the database, or $default if there is no match.
 * getModel($model, $id) fetches an object and returns a model.
 * getModelOrfail($model, $id) fetches an object and returns a model, if the 
 object doesn't exist, raises an exception.

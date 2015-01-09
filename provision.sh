@@ -33,4 +33,4 @@ sudo -u $USER "$BASE_PATH"/setup.sh
 
 echo "Giving access to the webserver"
 chgrp -R www-data "$STORAGE_PATH"/*
-chmod -R g+w "$STORAGE_PATH"/*
+chmod -R g+ws "$STORAGE_PATH"/*

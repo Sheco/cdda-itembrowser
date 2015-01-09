@@ -388,4 +388,9 @@ class Item implements Robbo\Presenter\PresentableInterface
     {
         return $this->repo->allModels("Item", "gunmodGuns.{$this->data->id}");
     }
+
+    public function getId() 
+    {
+        return $this->data->id;
+    }
 }

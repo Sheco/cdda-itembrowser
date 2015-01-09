@@ -35,4 +35,9 @@ class Monster implements Robbo\Presenter\PresentableInterface
     {
         return (array) $this->data->species;
     }
+
+    public function getId()
+    {
+        return $this->data->id;
+    }
 }

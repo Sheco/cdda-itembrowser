@@ -105,4 +105,9 @@ class Recipe implements Robbo\Presenter\PresentableInterface
     {
         return new Presenters\Recipe($this);
     }
+
+    public function getId() 
+    {
+        return $this->data->repo_id;
+    }
 }

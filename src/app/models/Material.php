@@ -15,4 +15,9 @@ class Material implements Robbo\Presenter\PresentableInterface
     {
         return new Presenters\Material($this);
     }
+
+    public function getId()
+    {
+        return $this->data->ident;
+    }
 }

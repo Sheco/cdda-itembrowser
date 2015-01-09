@@ -34,4 +34,9 @@ class MonsterGroup implements Robbo\Presenter\PresentableInterface
             return $this->repo->getModel('Monster', $monster);
         }, $uniqueMonsters);
     }
+
+    public function getId()
+    {
+        return $this->data->id;
+    }
 }

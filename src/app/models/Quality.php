@@ -16,4 +16,9 @@ class Quality implements Robbo\Presenter\PresentableInterface
     {
         return new Presenters\Quality($this);
     }
+
+    public function getId()
+    {
+        return $this->data->id;
+    }
 }

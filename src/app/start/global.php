@@ -63,7 +63,8 @@ App::missing(function ($exception) {
 });
 
 App::error(function (Exception $exception, $code) {
-    if($exception instanceof ModelNotFoundException)
+    if($exception instanceof ModelNotFoundException ||
+       $exception instanceof Symfony\Component\HttpKernel\Exception\NotFoundHttpException)
         return;
     Log::error($exception);
 });

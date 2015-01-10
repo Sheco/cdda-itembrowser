@@ -63,6 +63,8 @@ App::missing(function ($exception) {
 });
 
 App::error(function (Exception $exception, $code) {
+    if($exception instanceof ModelNotFoundException)
+        return;
     Log::error($exception);
 });
 

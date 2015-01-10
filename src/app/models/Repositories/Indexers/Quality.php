@@ -8,7 +8,6 @@ class Quality implements IndexerInterface
     protected $database;
 
     const DEFAULT_INDEX = "qualities";
-    const ID_FIELD = "id";
 
     public function onNewObject(LocalRepository $repo, $object)
     {

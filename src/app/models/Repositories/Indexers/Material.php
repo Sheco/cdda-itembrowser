@@ -8,7 +8,6 @@ class Material implements IndexerInterface
     protected $database;
 
     const DEFAULT_INDEX = "materials";
-    const ID_FIELD = "ident";
 
     public function onNewObject(LocalRepository $repo, $object)
     {

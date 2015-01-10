@@ -6,7 +6,6 @@ use Repositories\LocalRepository;
 class Recipe implements IndexerInterface
 {
     const DEFAULT_INDEX = "recipe";
-    const ID_FIELD = "repo_id";
 
     private function itemQualityLevel($item, $quality)
     {

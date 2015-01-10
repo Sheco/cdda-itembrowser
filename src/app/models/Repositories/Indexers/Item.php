@@ -8,7 +8,6 @@ class Item implements IndexerInterface
     protected $types;
 
     const DEFAULT_INDEX = "item";
-    const ID_FIELD = "id";
 
     public function __construct()
     {

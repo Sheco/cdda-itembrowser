@@ -8,7 +8,6 @@ class MonsterGroup implements IndexerInterface
     protected $database;
 
     const DEFAULT_INDEX = "monstergroups";
-    const ID_FIELD = "name";
 
     public function onFinishedLoading(LocalRepository $repo)
     {

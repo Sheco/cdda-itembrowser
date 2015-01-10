@@ -8,7 +8,6 @@ class Monster implements IndexerInterface
     protected $database;
 
     const DEFAULT_INDEX = "monsters";
-    const ID_FIELD = "id";
 
     public function onNewObject(LocalRepository $repo, $object)
     {

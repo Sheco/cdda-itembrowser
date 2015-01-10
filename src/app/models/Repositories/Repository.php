@@ -41,8 +41,8 @@ abstract class Repository implements RepositoryInterface
     public function allModels($model, $index = null)
     {
         if (!$index) {
-            $indexer = $this->app->make("Repositories\\Indexers\\$model");
-            $index = $indexer::DEFAULT_INDEX;
+            $class = "Repositories\Indexers\$model";
+            $index = $class::DEFAULT_INDEX;
         }
 
         $data = $this->raw($index);

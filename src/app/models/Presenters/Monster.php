@@ -72,7 +72,7 @@ class Monster extends \Robbo\Presenter\Presenter
 
     public function presentSpecialWhenHit()
     {
-        if(empty($this->object->special_when_hit))
+        if(!($this->object->special_when_hit))
             return "";
         return $this->object->special_when_hit[0]." (".$this->object->special_when_hit[1].")";
     }

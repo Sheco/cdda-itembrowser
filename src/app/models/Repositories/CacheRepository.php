@@ -59,6 +59,7 @@ class CacheRepository extends Repository implements RepositoryInterface,
 
     public function searchModels($model, $search)
     {
+        $search = strtolower($search);
         $key = "search:$model:".str_replace(" ", "!", $search);
 
         $objects = $this->repo->rememberForever($key,

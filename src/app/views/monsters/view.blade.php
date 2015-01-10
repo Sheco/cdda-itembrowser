@@ -65,7 +65,7 @@ Monster: {{{$monster->name}}}
   <td></td>
   <td></td>
   <td>When hit:</td>
-  <td>{{{$monster->special_when_hit}}}</td>
+  <td>{{{$monster->specialWhenHit}}}</td>
 </tr>
 <tr>
   <td colspan="4"><br><b>Other</b></td>

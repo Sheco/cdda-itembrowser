@@ -10,7 +10,7 @@ class Item extends \Robbo\Presenter\Presenter
             return "&nbsp;";
         }
 
-        return htmlspecialchars($symbol);
+        return "<span style=\"color: $this->color\">".htmlspecialchars($symbol)."</span>";
     }
 
     public function presentRawName()

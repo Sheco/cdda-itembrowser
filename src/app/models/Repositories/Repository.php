@@ -30,7 +30,10 @@ abstract class Repository implements RepositoryInterface
         $model = $this->app->make($model);
 
         if (!$data) {
-            $model->loadDefault($id);
+            if(method_exists($model, "loadDefault"))
+                $model->loadDefault($id);
+            else
+                throw new ModelNotFoundException;
         } else {
             $model->load($data);
         }

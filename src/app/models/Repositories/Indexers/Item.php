@@ -136,9 +136,7 @@ class Item implements IndexerInterface
             foreach ($object->covers as $part) {
                 $part = strtolower($part);
                 $repo->append("armor.$part", $object->id);
-                $parts = $repo->raw("armorParts");
-                $parts[$part] = $part;
-                $repo->set("armorParts", $parts);
+                $repo->addUnique("armorParts", $part);
             }
         }
 
@@ -160,30 +158,20 @@ class Item implements IndexerInterface
                 $skill = "other";
             }
             $repo->append("book.$skill", $object->id);
-
-            $bookSkills = $repo->raw("bookSkills");
-            $bookSkills[$skill] = $skill;
-            $repo->set("bookSkills", $bookSkills);
+            $repo->addUnique("bookSkills", $skill);
         }
 
         if ($object->type == "GUN") {
             $repo->append("gun.$object->skill", $object->id);
-
-            $gunSkills = $repo->raw("gunSkills");
-            $gunSkills[$object->skill] = $object->skill;
-            $repo->set("gunSkills", $gunSkills);
+            $repo->addUnique("gunSkills", $object->skill);
         }
 
         if ($object->type == "GUNMOD") {
             foreach ($object->mod_targets as $target) {
                 $repo->append("gunmods.$target.$object->location", $object->id);
-                $gunmodSkills = $repo->raw("gunmodSkills", array());
-                $gunmodSkills[$target] = $target;
-                $repo->set("gunmodSkills", $gunmodSkills);
+                $repo->addUnique("gunmodSkills", $target);
             }
-            $gunmodParts = $repo->raw("gunmodParts", array());
-            $gunmodParts[$object->location] = $object->location;
-            $repo->set("gunmodParts", $gunmodParts);
+            $repo->addUnique("gunmodParts", $object->location);
         }
 
         if ($object->type == "AMMO") {
@@ -192,10 +180,7 @@ class Item implements IndexerInterface
         if ($object->type == "COMESTIBLE") {
             $type = strtolower($object->comestible_type);
             $repo->append("consumables.$type", $object->id);
-
-            $types = $repo->raw("consumableTypes");
-            $types[$type] = $type;
-            $repo->set("consumableTypes", $types);
+            $repo->addUnique("consumableTypes", $type);
         }
         if (isset($object->qualities)) {
             foreach ($object->qualities as $quality) {
@@ -212,10 +197,7 @@ class Item implements IndexerInterface
             $flags = (array) $object->flags;
             foreach ($flags as $flag) {
                 $repo->append("flag.$flag", $object->id);
-
-                $flags = $repo->raw('flags', array());
-                $flags[$flag] = $flag;
-                $repo->set("flags", $flags);
+                $repo->addUnique("flags", $flag);
             }
         }
     }

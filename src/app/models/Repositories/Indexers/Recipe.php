@@ -71,9 +71,7 @@ class Recipe implements IndexerInterface
             // create a list of recipe categories, excluding NONCRAFT.
             if ($recipe->category != "CC_NONCRAFT") {
                 $category = $recipe->category;
-                $categories = $repo->raw("item.categories.$id");
-                $categories[$category] = $category;
-                $repo->set("item.categories.$id", $categories);
+                $repo->addUnique("item.categories.$id", $category);
             }
 
             // create a list of tools per category for this object.

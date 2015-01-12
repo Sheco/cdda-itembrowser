@@ -143,6 +143,10 @@ class LocalRepository extends Repository implements RepositoryInterface,
         $this->index[$index][] = $value;
     }
 
+    public function addUnique($index, $value)
+    {
+        $this->index[$index][$value] = $value;
+    }
 
     private function getVersion($path)
     {

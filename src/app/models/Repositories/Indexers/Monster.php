@@ -17,9 +17,7 @@ class Monster implements IndexerInterface
             $objspecies = (array) $object->species;
             foreach ($objspecies as $species) {
                 $repo->append("monster.species.$species", $object->id);
-                $allSpecies = $repo->raw("monster.species", array());
-                $allSpecies[$species] = $species;
-                $repo->set("monster.species", $allSpecies);
+                $repo->addUnique("monster.species", $species);
             }
 
             return;

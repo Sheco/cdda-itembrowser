@@ -9,11 +9,10 @@ class CacheRepository extends Repository implements RepositoryInterface,
     private $expiration;
 
     public function __construct(
-        \Illuminate\Cache\Repository $repo,
         \Illuminate\Foundation\Application $app
     )
     {
-        $this->repo = $repo;
+        $this->repo = $app['cache']->driver('file');
         $this->app = $app;
     }
 

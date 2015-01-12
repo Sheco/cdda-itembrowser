@@ -1,7 +1,7 @@
 <?php
 namespace Repositories\Indexers;
 
-use Repositories\LocalRepository;
+use Repositories\RepositoryWriterInterface;
 
 class Item implements IndexerInterface
 {
@@ -55,7 +55,7 @@ class Item implements IndexerInterface
         );
     }
 
-    public function onFinishedLoading(LocalRepository $repo)
+    public function onFinishedLoading(RepositoryWriterInterface $repo)
     {
         foreach ($repo->raw(self::DEFAULT_INDEX) as $id) {
             $recipes = count($repo->raw("item.toolFor.$id"));
@@ -100,7 +100,7 @@ class Item implements IndexerInterface
         $repo->sort("consumableTypes");
     }
 
-    public function onNewObject(LocalRepository $repo, $object)
+    public function onNewObject(RepositoryWriterInterface $repo, $object)
     {
         // only index objects with valid item types.
         if (!isset($this->types[$object->type])) {

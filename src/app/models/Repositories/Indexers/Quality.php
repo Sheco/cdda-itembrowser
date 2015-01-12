@@ -1,7 +1,7 @@
 <?php
 namespace Repositories\Indexers;
 
-use Repositories\LocalRepository;
+use Repositories\RepositoryWriterInterface;
 
 class Quality implements IndexerInterface
 {
@@ -9,7 +9,7 @@ class Quality implements IndexerInterface
 
     const DEFAULT_INDEX = "qualities";
 
-    public function onNewObject(LocalRepository $repo, $object)
+    public function onNewObject(RepositoryWriterInterface $repo, $object)
     {
         if ($object->type == "tool_quality") {
             $repo->append(self::DEFAULT_INDEX, $object->id);
@@ -17,7 +17,7 @@ class Quality implements IndexerInterface
         }
     }
 
-    public function onFinishedLoading(LocalRepository $repo)
+    public function onFinishedLoading(RepositoryWriterInterface $repo)
     {
     }
 }

@@ -1,7 +1,7 @@
 <?php
 namespace Repositories\Indexers;
 
-use Repositories\LocalRepository;
+use Repositories\RepositoryWriterInterface;
 
 class Recipe implements IndexerInterface
 {
@@ -16,7 +16,7 @@ class Recipe implements IndexerInterface
         }
     }
 
-    public function onFinishedLoading(LocalRepository $repo)
+    public function onFinishedLoading(RepositoryWriterInterface $repo)
     {
         $skills = [];
         foreach ($repo->raw(self::DEFAULT_INDEX) as $id) {
@@ -82,7 +82,7 @@ class Recipe implements IndexerInterface
         $repo->append("item.$key.$id", $recipe->repo_id);
     }
 
-    public function onNewObject(LocalRepository $repo, $object)
+    public function onNewObject(RepositoryWriterInterface $repo, $object)
     {
         if ($object->type == "recipe") {
             $recipe = $object;

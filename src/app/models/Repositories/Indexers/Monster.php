@@ -1,7 +1,7 @@
 <?php
 namespace Repositories\Indexers;
 
-use Repositories\LocalRepository;
+use Repositories\RepositoryWriterInterface;
 
 class Monster implements IndexerInterface
 {
@@ -9,7 +9,7 @@ class Monster implements IndexerInterface
 
     const DEFAULT_INDEX = "monsters";
 
-    public function onNewObject(LocalRepository $repo, $object)
+    public function onNewObject(RepositoryWriterInterface $repo, $object)
     {
         if ($object->type == "MONSTER") {
             $repo->append(self::DEFAULT_INDEX, $object->id);
@@ -24,7 +24,7 @@ class Monster implements IndexerInterface
         }
     }
 
-    public function onFinishedLoading(LocalRepository $repo)
+    public function onFinishedLoading(RepositoryWriterInterface $repo)
     {
         $repo->sort("monster.species");
     }

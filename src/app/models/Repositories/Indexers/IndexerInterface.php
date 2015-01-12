@@ -1,10 +1,10 @@
 <?php
 namespace Repositories\Indexers;
 
-use Repositories\LocalRepository;
+use Repositories\RepositoryWriterInterface;
 
 interface IndexerInterface
 {
-    public function onNewObject(LocalRepository $repo, $object);
-    public function onFinishedLoading(LocalRepository $repo);
+    public function onNewObject(RepositoryWriterInterface $repo, $object);
+    public function onFinishedLoading(RepositoryWriterInterface $repo);
 }

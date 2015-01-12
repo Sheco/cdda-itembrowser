@@ -1,7 +1,7 @@
 <?php
 namespace Repositories\Indexers;
 
-use Repositories\LocalRepository;
+use Repositories\RepositoryWriterInterface;
 
 class MonsterGroup implements IndexerInterface
 {
@@ -9,12 +9,12 @@ class MonsterGroup implements IndexerInterface
 
     const DEFAULT_INDEX = "monstergroups";
 
-    public function onFinishedLoading(LocalRepository $repo)
+    public function onFinishedLoading(RepositoryWriterInterface $repo)
     {
         $repo->sort(self::DEFAULT_INDEX);
     }
 
-    public function onNewObject(LocalRepository $repo, $object)
+    public function onNewObject(RepositoryWriterInterface $repo, $object)
     {
         if ($object->type == "monstergroup") {
             $repo->append(self::DEFAULT_INDEX, $object->name);

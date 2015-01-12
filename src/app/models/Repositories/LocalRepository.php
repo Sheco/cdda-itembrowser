@@ -2,7 +2,7 @@
 namespace Repositories;
 
 class LocalRepository extends Repository implements RepositoryInterface,
-    RepositoryParserInterface
+    RepositoryParserInterface, RepositoryWriterInterface
 {
     private $id;
     private $database;

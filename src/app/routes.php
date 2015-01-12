@@ -78,6 +78,7 @@ Route::group(array('after' => 'theme:layouts.bootstrap'), function () {
 
   Route::get('/search', array(
       'as' => 'item.search',
+      'before'=>'throttle:30,30',
       'uses' => 'ItemsController@search', )
   );
 

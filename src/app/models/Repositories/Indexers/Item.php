@@ -105,6 +105,7 @@ class Item implements IndexerInterface
         $this->sortList($repo, "armorParts");
         $this->sortList($repo, "gunSkills");
         $this->sortList($repo, "bookSkills");
+        $this->sortList($repo, "consumableTypes");
     }
 
     public function onNewObject(LocalRepository $repo, $object)
@@ -191,6 +192,10 @@ class Item implements IndexerInterface
         if ($object->type == "COMESTIBLE") {
             $type = strtolower($object->comestible_type);
             $repo->append("consumables.$type", $object->id);
+
+            $types = $repo->raw("consumableTypes");
+            $types[$type] = $type;
+            $repo->set("consumableTypes", $types);
         }
         if (isset($object->qualities)) {
             foreach ($object->qualities as $quality) {

@@ -4,8 +4,8 @@ Consumables - Cataclysm: Dark Days Ahead
 <h1>Consumables</h1>
 
 <ul class="nav nav-tabs">
-@foreach($types as $key=>$value)
-<li @if($key==$type) class="active" @endif><a href="{{ route(Route::currentRouteName(), $key) }}">{{{$value}}}</a></li>
+@foreach($types as $value)
+<li @if($value==$type) class="active" @endif><a href="{{ route(Route::currentRouteName(), $value) }}">{{{ucfirst($value)}}}</a></li>
 @endforeach
 </ul>
 <table class="table table-bordered table-hover tablesorter">

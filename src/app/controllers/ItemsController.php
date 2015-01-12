@@ -110,14 +110,10 @@ class ItemsController extends BaseController
 
     public function consumables($type = null)
     {
-        $types = array(
-            "drink" => "Drinks",
-            "food" => "Food",
-            "med" => "Meds",
-        );
+        $types = $this->repo->raw("consumableTypes");
 
         if ($type === null) {
-            return Redirect::route(Route::currentRouteName(), array(key($types)));
+            return Redirect::route(Route::currentRouteName(), array(reset($types)));
         }
 
         $items = $this->repo->allModels("Item", "consumables.$type");

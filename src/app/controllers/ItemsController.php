@@ -67,7 +67,7 @@ class ItemsController extends BaseController
         $parts = $this->repo->raw("armorParts"); 
 
         if ($part === null) {
-            return Redirect::route(Route::currentRouteName(), array(key($parts)));
+            return Redirect::route(Route::currentRouteName(), array(reset($parts)));
         }
 
         $items = $this->repo->allModels("Item", "armor.$part");

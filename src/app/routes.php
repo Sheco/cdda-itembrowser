@@ -12,7 +12,7 @@
 */
 
 Route::group(array('after' => 'theme:layouts.bootstrap'), function () {
-  Route::get('/', 'ItemsController@index');
+  Route::get('/', 'HomeController@index');
 
   Route::get('/armor/{part?}', function ($part = "") {
     return Redirect::route('item.armors', array($part), 301);
@@ -164,5 +164,5 @@ Route::group(array('after' => 'theme:layouts.bootstrap'), function () {
   );
 });
 
-Route::get('/sitemap.xml', 'ItemsController@sitemap');
+Route::get('/sitemap.xml', 'HomeController@sitemap');
 

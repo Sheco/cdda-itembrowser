@@ -10,13 +10,6 @@ class ItemsController extends BaseController
         $this->repo = $repo;
     }
 
-    public function index()
-    {
-        $version = $this->repo->version();
-
-        $this->layout->nest('content', "items.index", compact('version'));
-    }
-
     public function search()
     {
         $search = Input::get('q');
@@ -185,12 +178,5 @@ class ItemsController extends BaseController
         $item = $this->repo->getModelOrFail("Item", $id);
 
         return Redirect::to("http://www.wiki.cataclysmdda.com/index.php?title=$item->slug");
-    }
-
-    public function sitemap()
-    {
-        $items = $this->repo->allModels("Item");
-
-        $this->layout->nest('content', 'items.sitemap', compact('items'));
     }
 }

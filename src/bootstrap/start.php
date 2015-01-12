@@ -29,7 +29,7 @@ $app = new Illuminate\Foundation\Application();
 $env = $app->detectEnvironment(array(
 
   'local' => array('cataclysm'),
-  'production' => array('vps'),
+  'production' => array('vps.estilofusion.com'),
 
 ));
 

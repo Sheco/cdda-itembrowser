@@ -49,12 +49,19 @@ Log::useDailyFiles(storage_path().'/logs/'.$logFile);
 */
 
 use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Symfony\Component\HttpKernel\Exception\TooManyRequestsHttpException;
 
 App::error(function (Exception $exception, $code) {
     Log::error($exception);
 });
 
 App::error(function (ModelNotFoundException $e) {
+    $view =  View::make("layouts.bootstrap")
+        ->nest("content", "notfound");
+    return Response::make($view, 404);
+});
+
+App::error(function (TooManyRequestsHttpException $e) {
     $view =  View::make("layouts.bootstrap")
         ->nest("content", "notfound");
     return Response::make($view, 404);

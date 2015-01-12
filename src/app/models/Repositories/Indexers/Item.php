@@ -55,14 +55,6 @@ class Item implements IndexerInterface
         );
     }
 
-    private function sortList($repo, $name)
-    {
-        $data = $repo->raw($name);
-        sort($data);
-        $repo->set($name, $data);
-
-    }
-
     public function onFinishedLoading(LocalRepository $repo)
     {
         foreach ($repo->raw(self::DEFAULT_INDEX) as $id) {
@@ -99,13 +91,13 @@ class Item implements IndexerInterface
             }
         }
         
-        $this->sortList($repo, "flags");
-        $this->sortList($repo, "gunmodParts");
-        $this->sortList($repo, "gunmodSkills");
-        $this->sortList($repo, "armorParts");
-        $this->sortList($repo, "gunSkills");
-        $this->sortList($repo, "bookSkills");
-        $this->sortList($repo, "consumableTypes");
+        $repo->sort("flags");
+        $repo->sort("gunmodParts");
+        $repo->sort("gunmodSkills");
+        $repo->sort("armorParts");
+        $repo->sort("gunSkills");
+        $repo->sort("bookSkills");
+        $repo->sort("consumableTypes");
     }
 
     public function onNewObject(LocalRepository $repo, $object)

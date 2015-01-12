@@ -148,6 +148,13 @@ class LocalRepository extends Repository implements RepositoryInterface,
         $this->index[$index][$value] = $value;
     }
 
+    public function sort($index)
+    {
+        $data = $this->raw($index);
+        sort($data);
+        $this->set($index, $data);
+    }
+
     private function getVersion($path)
     {
         $version_file = "$path/src/version.h";

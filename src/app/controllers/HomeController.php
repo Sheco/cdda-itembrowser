@@ -27,11 +27,15 @@ class HomeController extends BaseController
         $flags = $this->repo->raw("flags");
         $skills = $this->repo->raw("skills");
         $consumables = $this->repo->raw("consumables");
+        $monsterGroups = $this->repo->allModels("MonsterGroup", "monstergroups");
+        $monsterSpecies = $this->repo->raw("monster.species");
+        $monsters = $this->repo->allModels("Monster", "monsters");
 
         $items = $this->repo->allModels("Item");
 
         $this->layout = View::make('sitemap', compact('items',
             'armorParts', 'gunSkills', 'bookTypes', 'qualities',
-            'materials', 'flags', 'skills', 'consumables'));
+            'materials', 'flags', 'skills', 'consumables',
+            'monsterGroups', 'monsterSpecies', 'monsters'));
     }
 }

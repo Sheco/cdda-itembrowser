@@ -64,4 +64,19 @@
     <loc>{{ route("item.consumables", array($i)) }}</loc>
   </url>
 @endforeach
+@foreach($monsterGroups as $i)
+  <url>
+    <loc>{{ route("monster.groups", array($i->name)) }}</loc>
+  </url>
+@endforeach
+@foreach($monsterSpecies as $i)
+  <url>
+    <loc>{{ route("monster.species", array($i)) }}</loc>
+  </url>
+@endforeach
+@foreach($monsters as $monster)
+  <url>
+    <loc>{{ route("monster.view", array($monster->id)) }}</loc>
+  </url>
+@endforeach
 </urlset>

@@ -102,6 +102,7 @@ class Item implements IndexerInterface
         $this->sortList($repo, "flags");
         $this->sortList($repo, "gunmodParts");
         $this->sortList($repo, "gunmodSkills");
+        $this->sortList($repo, "armorParts");
     }
 
     public function onNewObject(LocalRepository $repo, $object)
@@ -132,6 +133,9 @@ class Item implements IndexerInterface
             foreach ($object->covers as $part) {
                 $part = strtolower($part);
                 $repo->append("armor.$part", $object->id);
+                $parts = $repo->raw("armorParts");
+                $parts[$part] = $part;
+                $repo->set("armorParts", $parts);
             }
         }
 

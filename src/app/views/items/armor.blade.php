@@ -3,8 +3,8 @@ Armor - Cataclysm: Dark Days Ahead
 @endsection
 <h1>Armor</h1>
 <ul class="nav nav-tabs">
-@foreach($parts as $key=>$value)
-<li @if($key==$part) class="active" @endif><a href="{{ route(Route::currentRouteName(), $key) }}">{{{$value}}}</a></li>
+@foreach($parts as $value)
+<li @if($value==$part) class="active" @endif><a href="{{ route(Route::currentRouteName(), $value) }}">{{{ucfirst($value)}}}</a></li>
 @endforeach
 </ul>
 <table class="table table-bordered table-hover tablesorter">

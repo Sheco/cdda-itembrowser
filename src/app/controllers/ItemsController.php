@@ -64,17 +64,7 @@ class ItemsController extends BaseController
 
     public function armors($part = null)
     {
-        $parts = array(
-            "head" => "Head",
-            "eyes" => "Eyes",
-            "mouth" => "Mouth",
-            "torso" => "Torso",
-            "arms" => "Arms",
-            "hands" => "Hands",
-            "legs" => "Legs",
-            "feet" => "Feet",
-            "none" => "None",
-        );
+        $parts = $this->repo->raw("armorParts"); 
 
         if ($part === null) {
             return Redirect::route(Route::currentRouteName(), array(key($parts)));

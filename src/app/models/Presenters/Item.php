@@ -143,7 +143,9 @@ class Item extends \Robbo\Presenter\Presenter
             return "none";
         }
 
-        return implode(", ", $this->object->covers);
+        return implode(", ", array_map(function($cover) {
+            return link_to_route('item.armors', strtolower($cover), strtolower($cover));
+        }, $this->object->covers));
     }
 
     public function presentSpoilsIn()

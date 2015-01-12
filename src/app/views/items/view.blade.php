@@ -140,7 +140,7 @@
       Addiction: {{{ $item->addiction_potential }}}<br>
     @endif
     @if ($item->isArmor)
-      Covers: {{{ $item->covers }}}<br>
+      Covers: {{ $item->covers }}<br>
       Coverage: {{{ $item->coverage }}}%<br>
       Encumberment: {{{ $item->encumbrance }}}<br>
       Protection: Bash:

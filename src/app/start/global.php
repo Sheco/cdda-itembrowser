@@ -86,7 +86,9 @@ App::missing(function ($exception) {
 */
 
 App::down(function () {
-    return Response::view("brb", array(), 503);
+    $view =  View::make("layouts.bootstrap")
+        ->nest("content", "brb");
+    return Response::make($view, 503);
 });
 
 /*

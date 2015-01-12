@@ -77,18 +77,10 @@ class ItemsController extends BaseController
 
     public function guns($skill = null)
     {
-        $skills = array(
-            "archery" => "Archery",
-            "launcher" => "Launchers",
-            "pistol" => "Pistols",
-            "rifle" => "Rifles",
-            "shotgun" => "Shotguns",
-            "smg" => "SMGs",
-            "throw" => "Thrown",
-        );
+        $skills = $this->repo->raw("gunSkills");
 
         if ($skill === null) {
-            return Redirect::route(Route::currentRouteName(), array(key($skills)));
+            return Redirect::route(Route::currentRouteName(), array(reset($skills)));
         }
 
         $items = $this->repo->allModels("Item", "gun.$skill");

@@ -103,6 +103,7 @@ class Item implements IndexerInterface
         $this->sortList($repo, "gunmodParts");
         $this->sortList($repo, "gunmodSkills");
         $this->sortList($repo, "armorParts");
+        $this->sortList($repo, "gunSkills");
     }
 
     public function onNewObject(LocalRepository $repo, $object)
@@ -161,6 +162,10 @@ class Item implements IndexerInterface
 
         if ($object->type == "GUN") {
             $repo->append("gun.$object->skill", $object->id);
+
+            $gunSkills = $repo->raw("gunSkills");
+            $gunSkills[$object->skill] = $object->skill;
+            $repo->set("gunSkills", $gunSkills);
         }
 
         if ($object->type == "GUNMOD") {

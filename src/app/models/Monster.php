@@ -38,6 +38,8 @@ class Monster implements Robbo\Presenter\PresentableInterface
 
     public function getFlags()
     {
+        if(!isset($this->data->flags))
+            return array();
         return (array) $this->data->flags;
     }
 

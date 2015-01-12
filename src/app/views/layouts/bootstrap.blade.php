@@ -67,7 +67,9 @@
     <div class="container">
         {{$content}}
 <br><br>
-@include('layouts.extra_footer')
+@if(View::exists('layouts.extra_footer'))
+    @include('layouts.extra_footer')
+@endif
 </div>
 <script src="/js/bootstrap.min.js"></script>
   </body>

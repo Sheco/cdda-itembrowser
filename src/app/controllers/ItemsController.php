@@ -90,19 +90,10 @@ class ItemsController extends BaseController
 
     public function books($type = null)
     {
-        $types = array(
-            "fun" => "Just for fun",
-            "range" => "Ranged",
-            "combat" => "Combat",
-            "engineering" => "Engineering",
-            "crafts" => "Crafts",
-            "social" => "Social",
-            "survival" => "Survival",
-            "other" => "Other",
-        );
+        $types = $this->repo->raw("bookSkills"); 
 
         if ($type === null) {
-            return Redirect::route(Route::currentRouteName(), array("combat"));
+            return Redirect::route(Route::currentRouteName(), reset($types));
         }
 
         $items = $this->repo->allModels("Item", "book.$type");

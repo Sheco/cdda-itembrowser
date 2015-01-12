@@ -104,6 +104,7 @@ class Item implements IndexerInterface
         $this->sortList($repo, "gunmodSkills");
         $this->sortList($repo, "armorParts");
         $this->sortList($repo, "gunSkills");
+        $this->sortList($repo, "bookSkills");
     }
 
     public function onNewObject(LocalRepository $repo, $object)
@@ -154,10 +155,14 @@ class Item implements IndexerInterface
         if ($object->type == "BOOK") {
             if (isset($this->book_types[$object->skill])) {
                 $skill = $this->book_types[$object->skill];
-                $repo->append("book.$skill", $object->id);
             } else {
-                $repo->append("book.other", $object->id);
+                $skill = "other";
             }
+            $repo->append("book.$skill", $object->id);
+
+            $bookSkills = $repo->raw("bookSkills");
+            $bookSkills[$skill] = $skill;
+            $repo->set("bookSkills", $bookSkills);
         }
 
         if ($object->type == "GUN") {

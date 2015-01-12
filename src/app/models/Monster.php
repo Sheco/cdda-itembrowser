@@ -47,4 +47,13 @@ class Monster implements Robbo\Presenter\PresentableInterface
     {
         return $this->data->id;
     }
+
+    public function matches($search) 
+    {
+        $search = trim($search);
+        if($search == "")
+            return false;
+
+        return stristr($this->data->name, $search);
+    }
 }

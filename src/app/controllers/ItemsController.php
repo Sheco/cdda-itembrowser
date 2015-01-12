@@ -14,8 +14,10 @@ class ItemsController extends BaseController
     {
         $search = Input::get('q');
         $items = $this->repo->searchModels("Item", $search);
+        $monsters = $this->repo->searchModels("Monster", $search);
 
-        $this->layout->nest('content', 'items.search', compact('items', 'search'));
+        $this->layout->nest('content', 'items.search', compact('items', 
+            'search', 'monsters'));
     }
 
     public function view($id)

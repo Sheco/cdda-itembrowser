@@ -144,7 +144,7 @@ class Item extends \Robbo\Presenter\Presenter
         }
 
         return implode(", ", array_map(function($cover) {
-            return link_to_route('item.armors', strtolower($cover), strtolower($cover));
+            return link_to_route('item.armors', $cover, $cover);
         }, $this->object->covers));
     }
 

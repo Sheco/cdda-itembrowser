@@ -50,6 +50,10 @@ Log::useDailyFiles(storage_path().'/logs/'.$logFile);
 
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 
+App::error(function (Exception $exception, $code) {
+    Log::error($exception);
+});
+
 App::error(function (ModelNotFoundException $e) {
     $view =  View::make("layouts.bootstrap")
         ->nest("content", "notfound");
@@ -62,12 +66,6 @@ App::missing(function ($exception) {
     return Response::make($view, 404);
 });
 
-App::error(function (Exception $exception, $code) {
-    if($exception instanceof ModelNotFoundException ||
-       $exception instanceof Symfony\Component\HttpKernel\Exception\NotFoundHttpException)
-        return;
-    Log::error($exception);
-});
 
 /*
 |--------------------------------------------------------------------------

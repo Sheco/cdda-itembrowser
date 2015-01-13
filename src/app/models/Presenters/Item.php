@@ -198,4 +198,29 @@ class Item extends \Robbo\Presenter\Presenter
     {
         return sprintf("%+d", $this->object->recoil_modifier);
     }
+
+    public function presentRigid()
+    {
+        return $this->object->rigid? "t": "f";
+    }
+
+    public function presentSeals()
+    {
+        return $this->object->seals? "t": "f";
+    }
+
+    public function presentWatertight()
+    {
+        return $this->object->watertight? "t": "f";
+    }
+
+    public function presentPreserves()
+    {
+        return $this->object->preserves? "t": "f";
+    }
+
+    public function presentContains()
+    {
+        return number_format($this->object->contains, 2);
+    }
 }

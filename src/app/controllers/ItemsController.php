@@ -106,6 +106,13 @@ class ItemsController extends BaseController
         $this->layout->nest('content', 'items.consumables', compact('items', 'type', 'types'));
     }
 
+    public function containers()
+    {
+        $items = $this->repo->allModels("Item", "container");
+
+        $this->layout->nest('content', 'items.containers', compact('items'));
+    }
+
     public function qualities($id = null)
     {
         $qualities = $this->repo->allModels("Quality", "qualities");

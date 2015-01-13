@@ -154,6 +154,23 @@
       Warmth: {{{ $item->warmth }}}<br>
       Storage: {{{ $item->storage }}}<br>
     @endif
+
+    @if ($item->isContainer)
+    @if ($item->rigid=='t')
+      This item is rigid.<br>
+    @endif
+    @if ($item->seals=='t')
+      This container can be resealed.<br>
+    @endif
+    @if ($item->watertight=='t')
+      This container is watertight.<br>
+    @endif
+    @if ($item->preserves=='t')
+      This container preserves its contents from spoiling.<br>
+    @endif
+      This container can store {{ $item->contains }} liters.<br>
+    @endif
+
     @if ($item->isBook)
     --<br>
     @if ($item->skill=="none")

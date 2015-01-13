@@ -384,6 +384,11 @@ class Item implements Robbo\Presenter\PresentableInterface
         return $this->type == "GUNMOD";
     }
 
+    public function getIsContainer()
+    {
+        return $this->type == "CONTAINER";
+    }
+
     public function getModGuns()
     {
         return $this->repo->allModels("Item", "gunmodGuns.{$this->data->id}");
@@ -399,5 +404,10 @@ class Item implements Robbo\Presenter\PresentableInterface
         return array_map(function($cover) {
             return strtolower($cover);
         }, $this->data->covers);
+    }
+
+    public function getContains()
+    {
+        return $this->data->contains/4.0;
     }
 }

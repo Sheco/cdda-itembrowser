@@ -56,6 +56,7 @@ The source code for this item browser is available at <a href="https://github.co
 <li><a href="{{ route('item.books') }}">Books</a></li>
 <li><a href="{{ route('item.materials') }}">Materials</a></li>
 <li><a href="{{ route('item.qualities') }}">Qualities</a></li>
+<li><a href="{{ route("item.containers") }}">Containers</a></li>
 <li><a href="{{ route("item.flags") }}">Flags</a></li>
 <li><a href="{{ route("item.skills") }}">Skills</a></li>
 <li><a href="{{ route("item.gunmods", array("rifle", "sights")) }}">Gun mods</a></li>

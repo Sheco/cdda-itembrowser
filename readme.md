@@ -7,8 +7,8 @@ A copy of this code currently hosted by Sergio Duran (Sheco) at [http://cdda.est
 
 ### Features
 
-- Search for items
-- Show how an item can be crafted
+- Search for items and monsters.
+- Show how an item can be crafted.
 - Show recipes using each item.
 - Automatic item catalogs, clothing, melee, ranged weapons, consumables, books, materials, qualities, flags, skills and gun mods.
 - Monster catalogs.

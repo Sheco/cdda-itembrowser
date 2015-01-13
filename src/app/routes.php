@@ -77,9 +77,9 @@ Route::group(array('after' => 'theme:layouts.bootstrap'), function () {
   });
 
   Route::get('/search', array(
-      'as' => 'item.search',
+      'as' => 'search',
       'before'=>'throttle:30,30',
-      'uses' => 'ItemsController@search', )
+      'uses' => 'HomeController@search', )
   );
 
   View::composer('layouts.bootstrap', function ($view) {

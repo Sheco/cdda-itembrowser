@@ -46,7 +46,7 @@
 @endforeach
           </ul>
           <div class="col-sm-3 pull-right">
-          <form class="navbar-form" role="form" action="<?= action("ItemsController@search") ?>" >
+          <form class="navbar-form" role="form" action="<?= action("HomeController@search") ?>" >
 
             <div class="input-group">
               <input name="q" type="text" placeholder="Search..." class="form-control" value="{{{ $q }}}">

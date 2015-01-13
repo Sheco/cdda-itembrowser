@@ -16,6 +16,15 @@ class HomeController extends BaseController
         $this->layout->nest('content', "index", compact('version'));
     }
 
+    public function search()
+    {
+        $search = Input::get('q');
+        $items = $this->repo->searchModels("Item", $search);
+        $monsters = $this->repo->searchModels("Monster", $search);
+
+        $this->layout->nest('content', 'items.search', compact('items', 
+            'search', 'monsters'));
+    }
 
     public function sitemap()
     {

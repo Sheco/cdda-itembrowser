@@ -156,16 +156,16 @@
     @endif
 
     @if ($item->isContainer)
-    @if ($item->rigid=='t')
+    @if ($item->rigid=='y')
       This item is rigid.<br>
     @endif
-    @if ($item->seals=='t')
+    @if ($item->seals=='y')
       This container can be resealed.<br>
     @endif
-    @if ($item->watertight=='t')
+    @if ($item->watertight=='y')
       This container is watertight.<br>
     @endif
-    @if ($item->preserves=='t')
+    @if ($item->preserves=='y')
       This container preserves its contents from spoiling.<br>
     @endif
       This container can store {{ $item->contains }} liters.<br>

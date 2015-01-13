@@ -19,23 +19,26 @@ class HomeController extends BaseController
 
     public function sitemap()
     {
-        $armorParts = $this->repo->raw("armorParts");
-        $gunSkills = $this->repo->raw("gunSkills");
-        $bookTypes = $this->repo->raw("bookTypes");
-        $qualities = $this->repo->raw("qualities");
-        $materials = $this->repo->raw("materials");
-        $flags = $this->repo->raw("flags");
-        $skills = $this->repo->raw("skills");
-        $consumables = $this->repo->raw("consumables");
-        $monsterGroups = $this->repo->allModels("MonsterGroup", "monstergroups");
-        $monsterSpecies = $this->repo->raw("monster.species");
-        $monsters = $this->repo->allModels("Monster", "monsters");
+        $sitemap = Cache::rememberForever('sitemap', function() {
+            $armorParts = $this->repo->raw("armorParts");
+            $gunSkills = $this->repo->raw("gunSkills");
+            $bookTypes = $this->repo->raw("bookTypes");
+            $qualities = $this->repo->raw("qualities");
+            $materials = $this->repo->raw("materials");
+            $flags = $this->repo->raw("flags");
+            $skills = $this->repo->raw("skills");
+            $consumables = $this->repo->raw("consumables");
+            $monsterGroups = $this->repo->allModels("MonsterGroup", "monstergroups");
+            $monsterSpecies = $this->repo->raw("monster.species");
+            $monsters = $this->repo->allModels("Monster", "monsters");
 
-        $items = $this->repo->allModels("Item");
+            $items = $this->repo->allModels("Item");
 
-        $this->layout = View::make('sitemap', compact('items',
-            'armorParts', 'gunSkills', 'bookTypes', 'qualities',
-            'materials', 'flags', 'skills', 'consumables',
-            'monsterGroups', 'monsterSpecies', 'monsters'));
+            return gzcompress((string) View::make('sitemap', compact('items',
+                'armorParts', 'gunSkills', 'bookTypes', 'qualities',
+                'materials', 'flags', 'skills', 'consumables',
+                'monsterGroups', 'monsterSpecies', 'monsters')));
+        });
+        $this->layout = gzuncompress($sitemap);
     }
 }

@@ -34,6 +34,7 @@ have the appropiate dependencies.
 
 * composer
 * php5.4 (with the mcrypt extension)
+* memcached
 * A webserver
 
 Then you can run the setup.sh script, which will download the game's source

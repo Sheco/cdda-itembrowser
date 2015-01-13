@@ -12,7 +12,7 @@ set -e
 
 # download packages
 apt-get update
-apt-get -y install php5 php5-mcrypt php-apc unzip
+apt-get -y install php5 php5-mcrypt php-apc unzip memcached
 
 # setup php
 php5enmod mcrypt

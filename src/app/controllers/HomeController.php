@@ -22,7 +22,7 @@ class HomeController extends BaseController
         $items = $this->repo->searchModels("Item", $search);
         $monsters = $this->repo->searchModels("Monster", $search);
 
-        $this->layout->nest('content', 'items.search', compact('items', 
+        $this->layout->nest('content', 'search', compact('items', 
             'search', 'monsters'));
     }
 

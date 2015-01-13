@@ -3,7 +3,7 @@ Searching for {{$search}} - Cataclysm: Dark Days Ahead Item Browser
 @stop
 <h3>Search: {{ $search }} </h3>
 @if (!empty($items))
-<h3>Items matches:</h3>
+<h3>Item matches:</h3>
 @foreach ($items as $item)
 <div class="row">
 

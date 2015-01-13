@@ -164,5 +164,8 @@ Route::group(array('after' => 'theme:layouts.bootstrap'), function () {
   );
 });
 
-Route::get('/sitemap.xml', 'HomeController@sitemap');
+Route::get('/sitemap.xml', array(
+    'before'=>'throttle:5,60',
+    'uses'=>'HomeController@sitemap'
+));
 

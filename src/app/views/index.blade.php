@@ -64,6 +64,9 @@ The source code for this item browser is available at <a href="https://github.co
 <h2>Monster catalogs</h2>
 <li>{{ link_to_route('monster.groups', 'Groups') }}</li>
 <li>{{ link_to_route('monster.species', 'Species') }}</li>
+
+<h2>Construction</h2>
+<li>{{ link_to_route('construction.categories', 'Categories') }}</li>
 </ul>
 </div>
 </div>

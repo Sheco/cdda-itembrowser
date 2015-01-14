@@ -47,6 +47,12 @@ class ItemsController extends BaseController
         $this->layout->nest('content', 'items.disassemble', compact('item'));
     }
 
+    public function construction($id)
+    {
+        $item = $this->repo->getModelOrFail("Item", $id);
+        $this->layout->nest("content", "items.construction", compact('item'));
+    }
+
     public function armors($part = null)
     {
         $parts = $this->repo->raw("armorParts"); 

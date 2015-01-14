@@ -109,6 +109,9 @@ class Item extends \Robbo\Presenter\Presenter
         if ($this->count("recipes")) {
             $badges[] = '<a href="'.route("item.craft", $this->object->id).'"><span class="label label-default">craft</span></a>';
         }
+        if($this->count("construction")) {
+            $badges[] = '<a href="'.route("item.construction", $this->object->id).'"><span class="label label-warning">construction: '.$this->count("construction").'</span></a>';
+        }
 
         return implode(" ", $badges);
     }

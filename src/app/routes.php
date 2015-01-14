@@ -105,6 +105,10 @@ Route::group(array('after' => 'theme:layouts.bootstrap'), function () {
         "route" => "item.disassemble",
         "label" => "Disassemble",
       ),
+      'construction' => array(
+        'route' => 'item.construction',
+        'label' => 'Construction'
+      ),
       "wiki" => array(
         "route" => "item.wiki",
         "label" => "Wiki",
@@ -136,6 +140,22 @@ Route::group(array('after' => 'theme:layouts.bootstrap'), function () {
       'uses' => 'ItemsController@disassemble', )
   )
     ->where('id', '[A-Za-z0-9_-]+');
+
+  Route::get('/{id}/construction', array(
+      'as'=>'item.construction',
+      'uses'=>'ItemsController@construction',
+  ))
+  ->where('id', '[A-Za-z0-9_-]+');
+
+  Route::get("/construction/view/{id}", array(
+      "as"=>"construction.view",
+      "uses"=>"WorldController@construction"
+  ));
+
+  Route::get('/construction/categories/{id?}', array(
+      'as'=>'construction.categories',
+      'uses'=>'WorldController@constructionCategories'
+  ));
 
   Route::get('/{id}/wiki', array(
       'as' => 'item.wiki',

@@ -410,4 +410,9 @@ class Item implements Robbo\Presenter\PresentableInterface
     {
         return $this->data->contains/4.0;
     }
+
+    public function getConstructionUses()
+    {
+        return $this->repo->allModels('Construction', "construction.{$this->data->id}");
+    }
 }

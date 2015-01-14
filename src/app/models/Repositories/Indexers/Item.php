@@ -78,6 +78,11 @@ class Item implements IndexerInterface
             if($recipes>0)
                 $repo->set("item.count.$id.disassembledFrom", $recipes);
 
+            $count = count($repo->raw("construction.$id"));
+            if($count>0) {
+                $repo->set("item.count.$id.construction", $count);
+            }
+
             // sort item recipes, by difficulty
             $categories = $repo->raw("item.categories.$id");
             foreach($categories as $category) {

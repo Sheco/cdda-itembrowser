@@ -22,6 +22,7 @@ Please select an entry from the menu on the left.
     <th>Name</th>
     <th>Level</th>
     <th>Recipes</th>
+    <th>Construction</th>
   </tr>
 </thead>
 @foreach($items as $item)
@@ -30,6 +31,7 @@ Please select an entry from the menu on the left.
   <td><a href="{{route('item.view', $item->id)}}">{{ $item->name }}</a></td>
   <td>{{{ $item->qualityLevel($id) }}}</td>
   <td>{{{ $item->count("toolFor") }}}</td>
+  <td>{{{ $item->count("construction") }}}</td>
 </tr>
 </tr>
 @endforeach

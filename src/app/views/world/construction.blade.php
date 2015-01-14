@@ -9,14 +9,14 @@ Construction: Cataclysm Dark Days Ahead
 Category: {{ link_to_route("construction.categories", $data->category, $data->category) }}<br>
 Difficulty: {{$data->difficulty}} ({{$data->skill}})<br>
 Time: {{$data->time}} minutes<br>
-@if ($data->pre_terrain)
-Required terrain: {{$data->pre_terrain}}<br>
+@if ($data->has_pre_terrain)
+Required terrain: {{$data->pre_terrain->symbol}} {{$data->pre_terrain->name}}<br>
 @endif
 @if ($data->pre_flags)
 Required flags: {{$data->pre_flags}}<br>
 @endif
-@if ($data->post_terrain)
-Resulting terrain: {{$data->post_terrain}}<br>
+@if ($data->has_post_terrain)
+Result: {{$data->post_terrain->symbol}} {{$data->post_terrain->name}}<br>
 @endif
 @if ($data->requiresQualities)
 Tools required:<br>

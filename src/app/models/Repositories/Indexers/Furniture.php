@@ -3,13 +3,13 @@ namespace Repositories\Indexers;
 
 use Repositories\RepositoryWriterInterface;
 
-class Terrain implements IndexerInterface
+class Furniture implements IndexerInterface
 {
-    const DEFAULT_INDEX = "terrains";
+    const DEFAULT_INDEX = "furnitures";
 
     public function onNewObject(RepositoryWriterInterface $repo, $object)
     {
-        if($object->type!="terrain")
+        if($object->type!="furniture")
             return;
 
         $repo->append(self::DEFAULT_INDEX, $object->id);
@@ -21,3 +21,4 @@ class Terrain implements IndexerInterface
     {
     }
 }
+

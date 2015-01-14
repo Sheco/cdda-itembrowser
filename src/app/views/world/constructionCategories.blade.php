@@ -13,15 +13,31 @@ Construction categories - Cataclysm: Dark Days Ahead
   </div>
 
   <div class="col-md-9">
-<ul class="list-unstyled">
+<table class="table table-bordered">
+<thead>
+<tr>
+    <th>Construction</th>
+    <th></th>
+    <th>Result</th>
+</tr>
+</thead>
 @foreach($data as $d) 
- <li>{{ link_to_route("construction.view", $d->description, $d->repo_id); }}
+<tr>
+    <td>{{ link_to_route("construction.view", $d->description, $d->repo_id); }}
 @if($d->comment!="")
 ({{{$d->comment}}})
 @endif
-</li>
+    </td>
+@if ($d->has_post_terrain) 
+    <td>{{$d->post_terrain->symbol}}</td>
+    <td>{{$d->post_terrain->name}}</td>
+@else
+    <td></td>
+    <td></td>
+@endif
+</tr>
 @endforeach
-</ul>
+</table>
   </div>
 </div>
 

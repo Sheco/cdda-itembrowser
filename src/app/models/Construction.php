@@ -83,5 +83,25 @@ class Construction implements Robbo\Presenter\PresentableInterface
     {
         return isset($this->data->skill)?$this->data->skill:"construction";
     }
+
+    public function getHasPreTerrain()
+    {
+        return isset($this->data->pre_terrain);
+    }
+
+    public function getPreTerrain()
+    {
+        return $this->repo->getModelAuto($this->data->pre_terrain);
+    }
+
+    public function getHasPostTerrain()
+    {
+        return isset($this->data->post_terrain);
+    }
+
+    public function getPostTerrain()
+    {
+        return $this->repo->getModelAuto($this->data->post_terrain);
+    }
 }
 

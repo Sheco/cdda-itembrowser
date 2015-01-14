@@ -41,6 +41,27 @@ abstract class Repository implements RepositoryInterface
         return $model;
     }
 
+    public function getModelAuto($id)
+    {
+        $data = $this->get("all.$id");
+
+        \Log::info("auto", array($id, $data));
+        $model = ucfirst($data->type);
+        $model = $this->app->make($model);
+
+        if (!$data) {
+            if(method_exists($model, "loadDefault"))
+                $model->loadDefault($id);
+            else
+                throw new ModelNotFoundException;
+        } else {
+            $model->load($data);
+        }
+
+        return $model;
+
+    }
+
     public function allModels($model, $index = null)
     {
         if (!$index) {

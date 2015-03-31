@@ -150,7 +150,7 @@
       &nbsp;&nbsp;&nbsp;
       Fire: {{{  $item->protection('fire') }}}
       Elec: {{{  $item->protection('elec') }}}<br>
-      Environmental protection: {{{ $item->enviromental_protection }}}<br>
+      Environmental protection: {{{ $item->environmental_protection }}}<br>
       Warmth: {{{ $item->warmth }}}<br>
       Storage: {{{ $item->storage }}}<br>
     @endif

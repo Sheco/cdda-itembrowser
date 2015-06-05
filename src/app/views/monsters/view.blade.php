@@ -8,6 +8,8 @@ Monster: {{{$monster->name}}}
 <div class="col-md-6">
 <h4>{{ $monster->symbol }} {{$monster->niceName}}</h4>
 <p>{{$monster->description}}</p>
+Monster ID: {{{$monster->id}}}
+<br>
 <br>
 <table>
 <tr>

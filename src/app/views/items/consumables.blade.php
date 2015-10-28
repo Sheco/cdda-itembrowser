@@ -30,7 +30,7 @@ Consumables - Cataclysm: Dark Days Ahead
   <td>{{ $item->nutrition }}</td>
   <td>{{ $item->spoils_in }}</td>
   <td>{{ $item->stim }}</td>
-  <td>{{ $item->heal }}</td>
+  <td>{{ $item->healthy }}</td>
   <td>{{ $item->addiction_potential }}</td>
   <td>{{ $item->fun }}</td>
 </tr>

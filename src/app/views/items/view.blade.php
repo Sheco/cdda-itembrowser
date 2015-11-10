@@ -132,7 +132,7 @@
       Quench: {{{ $item->quench }}}<br>
       Enjoyability: {{{ $item->fun }}}<br>
       @if ($item->spoils_in>0)
-      Spoils in {{{ $item->spoils_in }}}<br>
+      Spoils in {{{ $item->spoils_in }}} days<br>
       @endif
       Charges: {{{ $item->charges }}}<br>
       Healthy: {{{ $item->healthy }}}<br>

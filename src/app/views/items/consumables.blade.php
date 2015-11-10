@@ -15,7 +15,7 @@ Consumables - Cataclysm: Dark Days Ahead
     <th>Name</th>
     <th>Quench</th>
     <th><span title="Nutrition">Nut</span></th>
-    <th><span title="Spoils">Spo</span></th>
+    <th><span title="Days to spoil">Spo</span></th>
     <th><span title="Stimulant">Sti</span></th>
     <th><span title="Health">Hea</span></th>
     <th><span title="Adiction">Adi</span></th>

@@ -153,7 +153,7 @@ class Item extends \Robbo\Presenter\Presenter
 
     public function presentSpoilsIn()
     {
-        return number_format($this->object->spoils_in/24, 2)." days";
+        return number_format($this->object->spoils_in/24, 2);
     }
 
     public function presentStim()

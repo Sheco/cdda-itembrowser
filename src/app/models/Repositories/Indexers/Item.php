@@ -189,7 +189,7 @@ class Item implements IndexerInterface
         if (isset($object->material)) {
             $materials = (array) $object->material;
             $repo->append("material.$materials[0]", $object->id);
-            if(count($object->material)>1 and $materials[1]!=null) {
+            if(count($object->material)>1 and $materials[1]!="null") {
                 $repo->append("material.$materials[1]", $object->id);
             }
         }

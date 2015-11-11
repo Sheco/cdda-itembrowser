@@ -126,10 +126,11 @@ class Item implements IndexerInterface
             $repo->append("melee", $object->id);
         }
 
+	$is_armor = in_array($object->type, ["ARMOR", "TOOL_ARMOR"]);
         // create an index with armor for each body part they cover.
-        if ($object->type == "ARMOR" and !isset($object->covers)) {
+        if ($is_armor and !isset($object->covers)) {
             $repo->append("armor.none", $object->id);
-        } elseif ($object->type == "ARMOR" and isset($object->covers)) {
+        } elseif ($is_armor and isset($object->covers)) {
             foreach ($object->covers as $part) {
                 $part = strtolower($part);
                 $repo->append("armor.$part", $object->id);

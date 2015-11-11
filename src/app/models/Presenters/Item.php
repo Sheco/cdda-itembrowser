@@ -116,20 +116,6 @@ class Item extends \Robbo\Presenter\Presenter
         return implode(" ", $badges);
     }
 
-    public function presentCutResultAmount()
-    {
-        $cutresult = $this->object->cutResult;
-
-        return $cutresult[0];
-    }
-
-    public function presentCutResultItem()
-    {
-        $cutresult = $this->object->cutResult;
-
-        return $cutresult[1];
-    }
-
     public function presentCraftingRecipes()
     {
         $recipes = array();

@@ -31,7 +31,10 @@
       Has level {{{ $quality["level"] }}} <a href="{{ route("item.qualities", $quality["quality"]->id) }}">{{{ $quality["quality"]->name }}}</a> quality.<br>
       @endforeach
     @if ($item->canBeCut)
-    Can be cut into: {{{ $item->cutResultAmount }}} <a href="{{ route('item.view', $item->cutResultItem->id) }}">{{ str_plural($item->cutResultItem->name) }}</a><br>
+    Can be cut into: 
+    @foreach($item->cutResult as $cutResult) {
+      {{{ $cutResult['amount'] }}} <a href="{{ route('item.view', $cutResult['item']->id) }}">{{ str_plural($cutResult['item']->name) }}</a>,
+    }
     @endif
     @if ($item->isResultOfCutting)
     Can be obtained if you cut items made of <a href="{{ route('item.materials', $item->materialToCut) }}">{{{ $item->materialToCut }}}</a><br>

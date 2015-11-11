@@ -254,10 +254,18 @@ class Item implements Robbo\Presenter\PresentableInterface
 
     public function getCutResult()
     {
-        $material = $this->material1->ident;
-        $count = $material == "wood" ? 2 : 1;
+	$results = [];
+	$materials = $this->materials;
 
-        return array($this->volume*$count, $this->repo->getModel("Item", $this->cut_pairs[$material]));
+        foreach($materials as $material) {
+	    $results[] = [
+                "amount"=>$this->volume/count($materials),
+                "item"=>$this->repo->getModel("Item", $this->cut_pairs[$material->ident])
+            ];
+        }
+	
+
+        return $results;
     }
 
     public function getIsResultOfCutting()

@@ -35,6 +35,7 @@
     @foreach($item->cutResult as $cutResult) {
       {{{ $cutResult['amount'] }}} <a href="{{ route('item.view', $cutResult['item']->id) }}">{{ str_plural($cutResult['item']->name) }}</a>,
     }
+    @endforeach
     @endif
     @if ($item->isResultOfCutting)
     Can be obtained if you cut items made of <a href="{{ route('item.materials', $item->materialToCut) }}">{{{ $item->materialToCut }}}</a><br>

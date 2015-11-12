@@ -135,7 +135,7 @@ class Item implements Robbo\Presenter\PresentableInterface
 
     public function getIsArmor()
     {
-        return $this->data->type == "ARMOR";
+        return in_array($this->data->type, ["ARMOR", "TOOL_ARMOR"]);
     }
 
     public function getIsConsumable()

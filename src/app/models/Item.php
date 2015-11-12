@@ -411,7 +411,7 @@ class Item implements Robbo\Presenter\PresentableInterface
     {
         return array_map(function($cover) {
             return strtolower($cover);
-        }, $this->data->covers);
+        }, isset($this->data->covers)?$this->data->covers: []);
     }
 
     public function getContains()

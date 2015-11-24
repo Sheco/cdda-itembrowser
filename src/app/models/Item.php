@@ -15,6 +15,7 @@ class Item implements Robbo\Presenter\PresentableInterface
       "plastic" => "plastic_chunk",
       "kevlar" => "kevlar_plate",
       "wood" => "skewer",
+      "iron" => "iron",
     );
 
     public function __construct(Repositories\RepositoryInterface $repo)

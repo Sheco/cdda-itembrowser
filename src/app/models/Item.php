@@ -15,7 +15,6 @@ class Item implements Robbo\Presenter\PresentableInterface
       "plastic" => "plastic_chunk",
       "kevlar" => "kevlar_plate",
       "wood" => "skewer",
-      "iron" => "iron",
     );
 
     public function __construct(Repositories\RepositoryInterface $repo)
@@ -248,9 +247,11 @@ class Item implements Robbo\Presenter\PresentableInterface
         if (!$this->volume) {
             return false;
         }
-        $material = $this->material1->ident;
+        $material1 = $this->material1->ident;
+        $material2 = $this->material2->ident;
 
-        return in_array($material, array_keys($this->cut_pairs));
+        return in_array($material1, array_keys($this->cut_pairs)) AND
+               in_array($material2, array_keys($this->cut_pairs));
     }
 
     public function getCutResult()

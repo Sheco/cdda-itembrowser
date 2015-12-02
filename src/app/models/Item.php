@@ -251,7 +251,7 @@ class Item implements Robbo\Presenter\PresentableInterface
         $material2 = $this->material2->ident;
 
         return in_array($material1, array_keys($this->cut_pairs)) AND
-               in_array($material2, array_keys($this->cut_pairs));
+               $material2=="null";
     }
 
     public function getCutResult()

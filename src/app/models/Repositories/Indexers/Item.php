@@ -15,7 +15,7 @@ class Item implements IndexerInterface
         $this->types = array_flip(array(
             "AMMO", "GUN", "ARMOR", "TOOL", "TOOL_ARMOR", "BOOK", "COMESTIBLE",
             "CONTAINER", "GUNMOD", "GENERIC", "BIONIC_ITEM", "VAR_VEH_PART",
-            "_SPECIAL",
+            "_SPECIAL", "MAGAZINE",
         ));
 
         $this->book_types = array(
@@ -122,7 +122,7 @@ class Item implements IndexerInterface
         }
 
         // items with enough damage might be good melee weapons.
-        if ($object->bashing+$object->cutting>10 and $object->to_hit>-2) {
+        if ((isset($object->bashing) and isset($object->cutting) and isset($object->to_hit)) and ($object->bashing+$object->cutting>10 and $object->to_hit>-2)) {
             $repo->append("melee", $object->id);
         }
 

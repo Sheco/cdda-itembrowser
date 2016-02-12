@@ -11,6 +11,12 @@ class Monster implements Robbo\Presenter\PresentableInterface
         $this->data = $data;
     }
 
+    public function loadDefault($id)
+    {
+        $data = json_decode('{"id":"'.$id.'","name":"'.$id.'?","type":"invalid"}');
+        $this->load($data);
+    }
+
     public function getPresenter()
     {
         return new Presenters\Monster($this);

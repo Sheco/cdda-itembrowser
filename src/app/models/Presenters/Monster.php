@@ -40,7 +40,10 @@ class Monster extends \Robbo\Presenter\Presenter
         }
 
         array_walk($attacks, function (&$attack) {
-            $attack = "$attack[0]: $attack[1]";
+            if(isset($attack->type)) 
+                $attack = "$attack->type: $attack->cooldown";
+            else 
+                $attack = "$attack[0]: $attack[1]";
         });
 
         return implode(",<br>", $attacks);

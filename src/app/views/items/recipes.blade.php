@@ -55,6 +55,8 @@ array("id"=>$recipe->result->id)) }}<br>
   Required skills: {{ $recipe->skillsRequired }} <br>
   Difficulty: {{{ $recipe->difficulty }}}<br>
   Time to complete: {{{ $recipe->time }}}<br>
+  Auto-learn: {{{ $recipe->autolearn? "Yes": "No" }}}<br>
+  <br>
 
   @if ($recipe->hasTools || $recipe->hasQualities)
   Tools required:<br>

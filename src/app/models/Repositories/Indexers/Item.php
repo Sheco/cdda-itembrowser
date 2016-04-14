@@ -108,7 +108,7 @@ class Item implements IndexerInterface
     public function onNewObject(RepositoryWriterInterface $repo, $object)
     {
         // only index objects with valid item types.
-        if (!isset($this->types[$object->type])) {
+        if (!isset($this->types[$object->type]) || !isset($object->id)) {
             return;
         }
 
@@ -160,6 +160,7 @@ class Item implements IndexerInterface
         }
 
         if ($object->type == "GUN") {
+            if(!isset($object->skill)) $object->skill = "none";
             $repo->append("gun.$object->skill", $object->id);
             $repo->addUnique("gunSkills", $object->skill);
         }
@@ -173,7 +174,9 @@ class Item implements IndexerInterface
         }
 
         if ($object->type == "AMMO") {
-            $repo->append("ammo.$object->ammo_type", $object->id);
+            if(isset($object->ammo_type)) { 
+                $repo->append("ammo.$object->ammo_type", $object->id);
+            }
         }
         if ($object->type == "COMESTIBLE") {
             $type = strtolower($object->comestible_type);

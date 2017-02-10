@@ -172,22 +172,43 @@ class Item implements IndexerInterface
         }
 
         if ($object->type == "GUNMOD") {
-            foreach ($object->mod_targets as $target) {
-                $repo->append("gunmods.$target.$object->location", $object->id);
-                $repo->addUnique("gunmodSkills", $target);
+            if(isset($object->mod_targets)) {
+                foreach ($object->mod_targets as $target) {
+
+                    if(isset($object->location)) {
+                        $repo->append("gunmods.$target.$object->location", $object->id);
+                    }
+                    $repo->addUnique("gunmodSkills", $target);
+                }
+            } else {
+                echo "$object->id is a gunmod but it does not have a target\n";
             }
-            $repo->addUnique("gunmodParts", $object->location);
+            if(isset($object->location)) {
+                $repo->addUnique("gunmodParts", $object->location);
+            } else {
+                echo "$object->id is a gunmod but it does not have a location\n";
+            }
         }
 
         if ($object->type == "AMMO") {
             if(isset($object->ammo_type)) { 
-                $repo->append("ammo.$object->ammo_type", $object->id);
+                $ammo_types = (array) $object->ammo_type;
+                foreach($ammo_types as $ammo_type) 
+                {
+                    $repo->append("ammo.$ammo_type", $object->id);
+                }
+            } else {
+                echo "$object->id is an ammo object but it does not have an ammo type\n";
             }
         }
         if ($object->type == "COMESTIBLE") {
-            $type = strtolower($object->comestible_type);
-            $repo->append("consumables.$type", $object->id);
-            $repo->addUnique("consumableTypes", $type);
+            if(isset($object->comestible_type)) {
+                $type = strtolower($object->comestible_type);
+                $repo->append("consumables.$type", $object->id);
+                $repo->addUnique("consumableTypes", $type);
+            } else {
+                echo "$object->id is a comestible but it does not have a type\n";
+            }
         }
         if (isset($object->qualities)) {
             foreach ($object->qualities as $quality) {

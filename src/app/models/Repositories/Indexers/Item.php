@@ -90,7 +90,9 @@ class Item implements IndexerInterface
                 usort($recipes, function ($a, $b) use ($repo) {
                     $a = $repo->get("recipe.$a");
                     $b = $repo->get("recipe.$b");
-                    return $a->difficulty-$b->difficulty;
+                    // sort by time instead of difficulty because
+                    // for some reason I can't find difficulty right now
+                    return $a->time-$b->time;
                 });
                 $repo->set("item.toolForCategory.$id.$category", $recipes);
             }

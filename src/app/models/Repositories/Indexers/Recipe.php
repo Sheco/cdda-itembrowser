@@ -35,11 +35,17 @@ class Recipe implements IndexerInterface
             }
 
             if (isset($recipe->skill_used)) {
-                $skill = $recipe->skill_used;
-                $level = $recipe->difficulty;
-
                 $item = $repo->get("item.$recipe->result");
-                $repo->append("skill.$skill.$level", $item->id);
+
+                $skill = $recipe->skill_used;
+                if(!isset($recipe->difficulty)) {
+                    echo "recipe for $recipe->result does not have a difficulty\n";
+                } elseif(!$item) {
+                    echo "recipe for $recipe->result does not map to an item\n";
+                } else {
+                    $level = $recipe->difficulty;
+                    $repo->append("skill.$skill.$level", $item->id);
+                }
                 $skills[$skill] = $skill;
             }
         }

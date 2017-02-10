@@ -28,6 +28,16 @@ class LocalRepository extends Repository implements RepositoryInterface,
 
     private function newObject($object)
     {
+        if(is_string($object)) {
+            echo "newObject($object) is not an object, ignoring.\n";
+            return;
+        }
+        if(!is_object($object)) {
+            echo "newObject() the following entry is not an object, ignoring.\n";
+            print_r($object);
+            return;
+        }
+
         $object->repo_id = $this->id++;
 
         $this->events->fire("cataclysm.newObject", array($this, $object));

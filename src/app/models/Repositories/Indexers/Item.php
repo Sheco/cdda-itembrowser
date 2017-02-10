@@ -152,13 +152,17 @@ class Item implements IndexerInterface
 
         // save books per skill
         if ($object->type == "BOOK") {
-            if (isset($this->book_types[$object->skill])) {
-                $skill = $this->book_types[$object->skill];
+            if(isset($object->skill)) {
+                if (isset($this->book_types[$object->skill])) {
+                    $skill = $this->book_types[$object->skill];
+                } else {
+                    $skill = "other";
+                }
+                $repo->append("book.$skill", $object->id);
+                $repo->addUnique("bookSkills", $skill);
             } else {
-                $skill = "other";
+                echo "$object->id is a book, but it does not have a skill\n";
             }
-            $repo->append("book.$skill", $object->id);
-            $repo->addUnique("bookSkills", $skill);
         }
 
         if ($object->type == "GUN") {

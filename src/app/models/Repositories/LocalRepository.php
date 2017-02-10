@@ -49,7 +49,8 @@ class LocalRepository extends Repository implements RepositoryInterface,
     {
         $mods = array_filter(glob("$path/data/mods/*"), "is_dir");
         foreach ($mods as $mod) {
-            $modinfo = json_decode(file_get_contents("$mod/modinfo.json"));
+            $modinfo = json_decode(file_get_contents("$mod/modinfo.json"))[0];
+
             if ($modinfo->ident == $id) {
                 return $mod;
             }
@@ -58,12 +59,14 @@ class LocalRepository extends Repository implements RepositoryInterface,
 
     private function dataPaths($path)
     {
-        $default_mods_data = json_decode(file_get_contents("$path/data/mods/dev-default-mods.json"));
+        $default_mods_data = json_decode(@file_get_contents("$path/data/mods/default.json"));
         $paths = array("$path/data/json");
 
-        foreach ($default_mods_data->dependencies as $mod) {
-            $paths[] = $this->modDirectory($path, $mod);
-        }
+	if($default_mods_data) {
+		foreach ($default_mods_data->dependencies as $mod) {
+		    $paths[] = $this->modDirectory($path, $mod);
+		}
+	}
 
         return $paths;
     }

@@ -49,6 +49,10 @@ class Construction implements IndexerInterface
 
             if(isset($object->qualities)) foreach($object->qualities as $group) {
                 foreach($group as $quality) {
+                    if(!is_object($quality))  {
+                        echo "$id has an unusual quality: $quality\n";
+                        continue;
+                    }
                     foreach($repo->raw("quality.$quality->id") as $item_id) {
                         $item = $repo->get("item.$item_id");
                         if($this->itemQualityLevel($item, $quality->id)<$quality->level)
